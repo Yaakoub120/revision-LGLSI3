@@ -1,0 +1,904 @@
+
+===== PAGE 1 =====
+26/10/2025
+1
+Partie I
+Proposé par Mr Samir Belaid
+Année Universitaire 2025-26
+Table des matières
+1. Qu’est-ce que l’IoT ?
+2. Historique et évolution
+3. Composants clés de l’IoT
+4. Applications concrètes
+5. Défis et limites
+6. Futur de l’IoT
+Introduction à l’IoT (Internet of Things) 
+Faculté des sciences de Monastir
+Niveau LSI3
+I. Définitions et Exemples
+I.1 Définitions
+o IoT: « Un réseau d’objets physiques connectés à Internet, capables de collecter, 
+transmettre et analyser des données. »
+o IoMT : « Désigne les dispositifs connectés utilisés pour surveiller, diagnostiquer 
+ou traiter des patients à distance. »
+o Améliorer les soins, réduire les 
+coûts, personnaliser les traitements.
+I.2 Objectifs
+
+===== PAGE 2 =====
+26/10/2025
+2
+o 1999 : Kevin Ashton (MIT) invente le terme Internet of Things pour décrire la gestion 
+de la chaîne logistique via RFID.
+o Années 2000 : RFID et capteurs simples.
+o 2008 : Premier pic avec 12 milliards d’objets connectés (dépassant la population 
+mondiale).
+o 2020s : Explosion des applications (santé, smart cities, industrie 4.0).
+o Aujourd’hui : 50+ milliards d’objets connectés.
+o Marché mondial estimé à 1 600 milliards de dollars d’ici fin 2026 (McKinsey).
+o Marché de l’IoMT : 187 milliards de dollars d’ici 2030 (Source : Deloitte).
+o 60 % des établissements de santé utilisent des solutions IoT (Source : HIMSS).
+I.3 Historique et évolution
+1. Dispositifs portables (Wearables)
+o Smartwatches médicales :
+Apple Watch Series 10 : Détection des arythmies cardiaques (ECG intégré) et suivi du 
+taux d’oxygène dans le sang (SpO₂).
+Fitbit Sense : Surveillance du stress via la variabilité du rythme cardiaque.
+o Patchs connectés :
+FreeStyle Libre (Abbott) : Mesure du glucose sanguin en continu pour les 
+diabétiques, sans piqûre.
+BioSticker (BioIntelliSense) : Suivi des signes vitaux (température, fréquence 
+respiratoire) pendant 30 jours.
+I.4 Exemples 
+
+===== PAGE 3 =====
+26/10/2025
+3
+2. Implants médicaux connectés
+o Stimulateurs cardiaques :
+Medtronic MyCareLink : Transmet des données sur le fonctionnement du pacemaker 
+au médecin via Bluetooth.
+o Pompes à insuline intelligentes :
+Tandem t:slim X2 : S’adapte automatiquement aux besoins en insuline en temps réel 
+(intégration avec les capteurs Dexcom).
+o Neurostimulateurs :
+StimWave : Gère la douleur chronique via une application mobile.
+I.4 Exemples 
+3. Surveillance à distance des patients
+o Plateformes de télésurveillance :
+Philips eCareCoordinator : Surveille les patients atteints de BPCO ou d’insuffisance 
+cardiaque à domicile.
+BioTelemetry (GE Healthcare) : Suivi cardiaque via des capteurs ECG portables.
+o Capteurs pour personnes âgées :
+CarePredict : Détecte les chutes et les changements de comportement via des 
+capteurs de mouvement et d’IA.
+I.4 Exemples 
+
+===== PAGE 4 =====
+26/10/2025
+4
+4. Télémédecine et consultation virtuelle
+o Kits de diagnostic à domicile :
+TytoCare : Stéthoscope, otoscope et thermomètre connectés pour des examens à 
+distance.
+o Plateformes intégrées :
+Teladoc : Consultation vidéo avec partage de données de dispositifs IoMT (ex : 
+tension artérielle).
+5. Hôpitaux intelligents
+o Lits connectés :
+EarlySense : Capteurs sous le matelas pour surveiller la fréquence cardiaque, la 
+respiration et les mouvements des patients..
+o Gestion des stocks :
+Siemens Healthineers : Capteurs IoT pour suivre les stocks de sang ou de vaccins en 
+temps réel.
+o Robots de désinfection :
+Xenex LightStrike : Robot utilisant les UV pour désinfecter les chambres d’hôpital.
+I.4 Exemples 
+6. Applications d’urgence
+o Détection des crises :
+Embrace2 (Empatica) : Bracelet détectant les crises d’épilepsie via des capteurs de 
+mouvement et de transpiration, et envoie une alerte.
+o Réponse aux arrêts cardiaques :
+HeartHero : Défibrillateur portable connecté guidant les secouristes via une appli.
+7. Santé mentale et bien-être
+o Dispositifs de neurofeedback :
+Muse 2 : Bandeau mesurant l’activité cérébrale pour améliorer la méditation.
+o Thérapie par réalité virtuelle :
+AppliedVR : Traite la douleur chronique et l’anxiété via des séances de VR connectées.
+I.4 Exemples 
+
+===== PAGE 5 =====
+26/10/2025
+5
+II. Architecture Technique de l’IoT
+• Définition :
+o L’architecture IoT décrit l’organisation des composants matériels, logiciels et 
+réseaux pour collecter, transmettre, traiter et exploiter les données.
+• Objectifs :
+o Fiabilité, évolutivité, sécurité, interopérabilité.
+• Enjeux :
+o Gérer l’hétérogénéité des dispositifs et le volume de données.
+Mapping : Transposition du monde physique vers le monde d’informations
+Y.2060(12)_F02
+Identifier un objet physique dans le monde du système d’informations (objet virtuel).
+
+===== PAGE 6 =====
+26/10/2025
+6
+Mapping
+Visibilité des objets via l’Internet
+Objets intelligents
+Site Internet
+Blogues
+Réseaux sociaux
+Cloud
+Véhicules
+−
+Voitures de service
+−
+Gestion des foules
+−
+Bus, trains
+−
+Moyens et machines 
+agricoles
+Domotique
+−
+PC
+−
+IPTV
+−
+Téléphone intelligent
+−
+Lecteur audio/vidéo
+−
+Réfrigérateur
+−
+Machine à café
+−
+Fours-maison/ville 
+intelligente
+−
+Université intelligente
+WSN
+Suivi
+−
+Objets
+−
+Régions
+−
+Zone & objets
+Objets réels
+Objets virtuels
+Objets 
+Web
+WSN: Wireless Sensor Networks
+La communication est possible en tout
+LIEU et à tout MOMENT, mais aussi avec
+n'importe quel OBJET (IoE)
+IoE (Internet of Everything): Recommandation de l’UIT
+Un Objet de Any thing vers l’Internet de Everything 
+- en déplacement
+- la nuit
+- le jour
+- en extérieur (outdoor)
+- en intérieur (indoor)
+– entre ordinateurs
+– entre personnes, sans ordinateur
+– entre objets
+Communication
+à tout MOMENT
+Communication
+en tout LIEU
+Communication avec
+n'importe quel OBJET IoE
+CISCO 
+
+===== PAGE 7 =====
+26/10/2025
+7
+Ecosystème TIC de l’IOT
+P2P
+M2P
+M2M
+Internet Of Things
+• M2M (ou Device to device: D2D) fait référence à la connexion entre des
+machines sans intervention humaine.
+• M2P (Machine to People) désigne la connexion entre une machine et une
+personne.
+• P2P (Peer-to-Peer) ou système pair à pair est un modèle d'échange en réseau
+où chaque entité est à la fois client et serveur.
+L'IoT fait référence à l'ensemble M2M et M2P, qui comprend 
+l'application, la connectivité backend, etc…
+Caractéristiques des objets
+1. Inter-connectivité : Tout peut être interconnecté avec une infrastructure mondiale
+d'information et de communication.
+2. Hétérogénéité : Les objets sont basés sur des plates-formes matérielles et des
+réseaux différents. Ils peuvent interagir avec d'autres objets ou plates-formes de
+services via différents réseaux.
+3. Changement dynamique : l'état des objets change de manière dynamique, par
+exemple, état de sommeil ou éveil, connecté et/ou déconnecté, ainsi que le
+contexte des objets, y compris l'emplacement et la vitesse. De plus, le nombre
+d’objets peut changer dynamiquement.
+Source: Recommendation ITU-T Y.2060
+
+===== PAGE 8 =====
+26/10/2025
+8
+Cloud+Application
+II.1 Comment connecter un objet IoT?
+Sous-parties d'un objet connecté
+Empilement technologique de l’IOT
+(+ de profondeur)
+Capacités: incluent Capteurs, Actionneurs, Traitement, Contrôle, alimentation
+Compromis de conception: Coût, Taille, Performances, Contraintes
+1. Objets physiques
+1. Appareil
+électronique: 
+(device)
+Réseau réception, Passerelle 
+Gateway, serveur
+Réception données, 
+Traitement, Stockage
+Capteurs et actionneurs, 
+Traitement, Sauvegarde
+Affichage des données, 
+prise de contrôle
+2. Internet: qui permet la 
+transaction des données
+3. Cloud : là où on 
+reçoit les données
+4. Application : là où on 
+a le tableau de bord 
+(dashboard)
+Empilement technologique de l’IOT (suite)
+3. Logiciel (Traite, stocke et analyse des données): Permet d'interagir avec le système IoT
+et de visualiser des données
+4. Opérations (Combiné à des ressources de développement et de sécurité): Essentielle 
+au déploiement et à la maintenance d'un système IoT; l'accessibilité de l'infrastructure 
+Cloud fournit une fonction DevOps
+5. Données: Les données sont un sous-produit du système IoT
+2. Canaux de communication (Protocoles et solutions de connectivité): Pour un transfert 
+de données d'objet à objet, objet à serveur ou serveur à serveur
+Cloud+Application
+
+===== PAGE 9 =====
+26/10/2025
+9
+DATA (Pour ce faire de l’argent)
+• L’IoT est le futur eldorado des acteurs de l’IT. Smart grid, domotique, santé connectée, 
+industrie 4.0, logistique, urbanisme, agriculture, défense
+• Les grands acteurs IT (IBM, Microsoft, HPE, SAP et AWS) profitent de l’explosion des objets 
+connectés pour apporter leur savoir-faire et leurs solutions.
+• La DATA peut être utilisée et vendue par les entreprises qui conçoivent ces objets 
+connectés.
+Données sensible / Collecte interdite (par principe)
+!
+Etat de 
+santé
+Données
+génétiques
+Données
+biométriques
+Origine raciale 
+ou éthique
+Convictions
+religieuses ou
+philosophiques
+Opinions
+politiques
+Condamnations
+pénales et 
+infractions
+Orientations
+sexuelles
+Opinions
+syndicales
+Un objet IoT embarqué se compose de plusieurs composants, notamment:
+(i)
+un processeur intégré,
+(ii)
+des capteurs ou l'acquisition de données,
+(iii) une radio sans fil comme Bluetooth.
+Composition d’un objet physique
+AFE: Analogue 
+Front End
+
+===== PAGE 10 =====
+26/10/2025
+10
+• Capteurs d'environnement
+• Capteurs de mouvement
+• Nécessitant une interaction humaines
+• autres
+Exemple de capteurs
+Nécessitant une 
+interaction 
+humaines
+Capteurs de 
+mouvement
+Capteurs 
+d'environn
+ement
+• Couche Perception/Collecte 
+d'informations  (Capteurs/actionneurs).
+• Couche Réseau (Communication).
+• Couche Middleware/couche traitement: 
+Stocke, traite des données et fournit des 
+services aux couches inférieures (bases de 
+données, cloud computing traitement Big 
+data).
+• Couche Application (Services métiers).
+• Couche Business (Analyse et décision) 
+Gère l'ensemble du système IoT, y compris 
+les applications, les modèles commerciaux 
+/ profit, et confidentialité des utilisateurs.
+II.2 Architecture IoT à 5 couches
+
+===== PAGE 11 =====
+26/10/2025
+11
+II.2 Architecture IoT à 5 couches
+1. Couche Perception (Physical Layer)
+• Rôle : Collecter des données physiques (température, mouvement, etc.).
+• Composants :
+o Capteurs (ex : DHT22, capteur de CO₂).
+o Actionneurs (ex : moteurs, LED).
+o RFID/NFC pour l’identification.
+• Exemple : Capteur de 
+température envoyant des 
+données via Bluetooth.
+II.2 Architecture IoT à 5 couches
+2. Couche Réseau (Transport Layer)
+• Rôle : Transmettre les données vers le cloud ou l’edge.
+• Protocoles:
+o Courtes distances : BLE, Zigbee, LoRa.
+o Longues distances : LoRaWAN, NB-IoT, 5G.
+• Passerelles
+o Agrégation des données (ex : Raspberry Pi comme gateway).
+
+===== PAGE 12 =====
+26/10/2025
+12
+II.2 Architecture IoT à 5 couches
+3. Couche Middleware (Traitement)
+• Rôle : Stockage, traitement, et préparation des données.
+• Composants:
+o Edge Computing : Traitement local (ex : NVIDIA Jetson).
+o Cloud : AWS IoT, Azure IoT Hub.
+o Bases de données : MongoDB, InfluxDB.
+• Fonctions
+o Filtrage, agrégation, 
+chiffrement.
+II.2 Architecture IoT à 5 couches
+4. Couche Application (Services)
+• Rôle : Fournir des services métiers aux utilisateurs.
+• Exemples:
+Dashboard IoT de ThingsBoard
+o Dashboard de surveillance (ex : Grafana).
+o Alertes en temps réel (ex : notification SMS en cas d’incendie).
+o Automatisation (ex : irrigation intelligente)
+
+===== PAGE 13 =====
+26/10/2025
+13
+II.2 Architecture IoT à 5 couches
+5. Couche Business (Analyse)
+• Rôle : Analyse avancée et prise de décision.
+• Outils:
+• KPIs :
+o Big Data : Hadoop, Spark.
+o IA/ML : Prédictions (ex : maintenance prédictive).
+o Réduction des coûts, amélioration de l’efficacité
+II.3 Architecture de référence (Schéma global)
+
+===== PAGE 14 =====
+26/10/2025
+14
+II.4 Sécurité dans l’architecture IoT
+• Risques :
+o Piratage des capteurs, interception des données.
+• Solutions:
+o Chiffrement (TLS/SSL), authentification (MQTT avec 
+login/password).
+o Mises à jour OTA (Over-The-Air).
+• Normes :
+o ISO/IEC 27001, GDPR.
+III. Questions à poser pour choisir une plateforme IOT
+• Caractéristiques générales d’une plateforme pour l’IoT
+Interaction
+Capteur
+Actionneur
+Traitement local 
+des données 
+Energie
+Protocole
+Communication
+Transmission
+Réseau 
+informatique
+Monde 
+physique
+• Ce qu’il faut se demander pour bien choisir la plateforme technologique :
+– Dans quel environnement l’objet évoluera-t-il ? (Espace urbain, sous-terrain, rural, indoor ou outdoor-
+actionneurs)
+– À quelle distance l’objet sera-t-il du point relais le plus proche (exemple: smartphone, antenne-relais, 
+passerelle WiFi) ?
+– À quelle fréquence ces données seront envoyées ? (quelques envois, plusieurs centaines ou plus)
+– Quel est le délai maximum toléré pour transmettre une donnée du Système d’Information à l’objet ?
+– Est-ce qu’il s’agit d’un objet mobile ou fixe ?
+– Souhaitez-vous géolocaliser votre objet ? Si oui, quelle est la précision tolérée en mètres ?
+– Quel type de source d’énergie alimente votre objet ? (secteur, batterie ou pile)
+– Si l’objet doit avoir une source d’énergie limitée, combien de temps doit-elle durer ?
+– …
+
+===== PAGE 15 =====
+26/10/2025
+15
+Révolution des systèmes embarqués à faible coût,
+Deux approches majeures :
+• Systèmes construits autour d’un OS embarqué (RASPBERRY PI, BEAGLEBONE, et 
+plateformes similaires)
+– Avantages : ouverts, puissants, langages de programmation multiples,
+– Inconvénients : parfois complexes à mettre en œuvre, prise en main longue, réactivité 
+moyenne, coût relativement élevé, interfaçage plus difficile.
+• Systèmes dédiés compacts à logiciel propriétaire (ARDUINO, GENUINO, INTEL 
+GALILEO, ESP8266 etc.)
+– Avantages : Très réactifs, faible coût, fonctionnement plus robuste (pas de couches logicielles), 
+interfaçage aisé, prise en main très rapide.
+– Inconvénients : moins puissants, langages de programmation plus limités, moins flexibles sur le 
+plan logiciel.
+III. Questions à poser pour choisir une plateforme IOT
+IV. Protocoles de Communication
+IV.1 Définition
+Les protocoles de communication IoT sont des règles et standards permettant aux 
+dispositifs (capteurs, actionneurs, passerelles, etc.) d’échanger des données de manière 
+fiable et sécurisée, malgré des contraintes de ressources (énergie, bande passante, 
+puissance de calcul).
+Enjeux
+• Faible consommation d’énergie (ex : capteurs sur batterie).
+• Latence réduite (temps réel).
+• Fiabilité dans des environnements perturbés.
+• Sécurité des données (chiffrement, authentification).
+
+===== PAGE 16 =====
+26/10/2025
+16
+IV.2 Catégories de protocoles IoT
+o Protocoles de couche application (gestion des données) :
+MQTT, CoAP, HTTP/HTTPS, AMQP.
+o Protocoles de couche réseau (connectivité) :
+LoRaWAN, Zigbee, NB-IoT, Wi-Fi HaLow, Sigfox, Bluetooth Low Energy (BLE).
+1. MQTT (Message Queuing Telemetry Transport)
+• Fonctionnement :
+o Basé sur un modèle publish/subscribe avec un broker central.
+o Utilise TCP/IP pour une transmission fiable.
+• Cas d’usage :
+o Surveillance médicale, industrielle, domotique, systèmes avec connexion 
+intermittente.
+• Avantages :
+o Léger, idéal pour les réseaux à faible bande passante.
+o Supporte les appareils embarqués.
+• Inconvénients :
+o Dépendance au broker (point unique de défaillance).
+IV.3 Protocoles de couche application
+
+===== PAGE 17 =====
+26/10/2025
+17
+2. CoAP (Constrained Application Protocol)
+• Fonctionnement :
+o Inspiré de HTTP, mais optimisé pour les appareils contraints.
+o Utilise UDP pour réduire la surcharge.
+• Cas d’usage :
+o Capteurs IoT avec ressources limitées (ex : smart lighting, agriculture).
+• Avantages :
+o Léger, compatible avec 
+RESTful APIs.
+o Supporte le multicast.
+• Inconvénients :
+o Moins fiable que MQTT (pas 
+de garantie de livraison).
+IV.3 Protocoles de couche application
+3. HTTP/HTTPS
+• Fonctionnement :
+o Standard web, basé sur le modèle client-serveur.
+o Utilise TCP/IP (HTTP) ou TLS (HTTPS) pour la sécurité.
+• Cas d’usage :
+o IoT grand public (ex : applications mobiles connectées à des objets).
+• Avantages :
+o Universel, facile à intégrer avec les infrastructures existantes.
+• Inconvénients :
+o Lourd en consommation de ressources.
+IV.3 Protocoles de couche application
+
+===== PAGE 18 =====
+26/10/2025
+18
+1. LoRaWAN (Long Range Wide Area Network)
+• Fonctionnement :
+o Utilise des ondes radio sub-GHz pour une longue portée (jusqu’à 15 km en zone rurale).
+o Architecture en étoile avec des passerelles.
+• Cas d’usage :
+o Smart cities, suivi de flottes, agriculture.
+• Avantages :
+o Faible consommation, longue portée.
+o Idéal pour les déploiements massifs.
+• Inconvénients :
+o Débit limité (0,3 à 50 kbps).
+IV.4 Protocoles de couche réseau
+2. Zigbee
+• Fonctionnement :
+o Basé sur le standard IEEE 802.15.4.
+o Réseau maillé (mesh) auto-organisé.
+• Cas d’usage :
+o Domotique, automatisation industrielle.
+• Avantages :
+o Faible latence, réseau robuste (redondance via le mesh).
+• Inconvénients :
+o Portée limitée (10-100 mètres).
+IV.4 Protocoles de couche réseau
+
+===== PAGE 19 =====
+26/10/2025
+19
+• Cas d’usage :
+o Wearables, santé connectée, beacons.
+• Avantages :
+o Compatibilité avec les smartphones.
+o Énergétiquement efficace.
+• Inconvénients :
+o Portée très courte (jusqu’à 100 mètres en théorie, souvent moins).
+IV.4 Protocoles de couche réseau
+3. Bluetooth Low Energy (BLE)
+• Fonctionnement :
+o Optimisé pour une 
+consommation ultra-faible.
+o Communication en peer-
+to-peer ou en étoile.
+Protocole
+Portée
+Débit
+Consommation
+Cas d’usage
+MQTT
+Illimitée (IP)
+Variable
+Modérée
+Médecine, Industrie, domotique
+CoAP
+Illimitée (IP)
+Faible
+Faible
+Capteurs contraint
+LoRaWAN
+15 km
+0.3-50 kbps
+Très faible
+Smart cities
+Zigbee
+10-100 m
+250 kbps
+Faible
+Domotique
+BLE
+10-100 m
+1-2 Mbps
+Très faible
+Wearables
+IV.6 Sécurité des protocoles IoT
+• Risques :
+o Écoute passive (sniffing).
+o Attaques par déni de service (DDoS).
+o Failles de chiffrement.
+• Solutions :
+o Chiffrement de bout en bout (TLS/DTLS pour MQTT/CoAP).
+o Authentification des dispositifs (certificats X.509).
+o Mises à jour régulières des firmware.
+IV.5 Comparaison des protocoles
+
+===== PAGE 20 =====
+26/10/2025
+20
+V. Topologies de réseaux IoT médicaux
+Définition
+• Les réseaux IoMT relient des dispositifs médicaux (capteurs, implants, équipements 
+hospitaliers) pour collecter, transmettre et analyser des données de santé en temps réel.
+Enjeux
+• Sécurité : Protection des données sensibles (RGPD, HIPAA).
+• Fiabilité : Aucune tolérance aux pannes dans les applications critiques (ex : pacemakers).
+• Latence ultra-faible : Nécessaire pour la télémédecine ou la chirurgie assistée.
+Exemples
+• Surveillance cardiaque à distance.
+• Pompes à insuline connectées.
+• Hôpitaux intelligents (lits connectés, gestion des stocks de médicaments).
+V.1 Topologies de réseaux adaptées à l’IoMT
+A. Topologie en Étoile (Star)
+Description
+• Tous les dispositifs médicaux se connectent à un nœud central (passerelle, serveur 
+hospitalier).
+Cas d’usage
+• Surveillance centralisée des patients dans une chambre d’hôpital.
+• Dispositifs portables (ex : glucomètre connecté à un smartphone).
+Avantages
+• Simplicité de gestion.
+• Faible latence pour la transmission directe.
+Inconvénients
+• Dépendance à la passerelle centrale (risque de panne critique).
+Protocoles
+• Bluetooth Low Energy (BLE) pour les wearables.
+• Wi-Fi pour les équipements fixes.
+
+===== PAGE 21 =====
+26/10/2025
+21
+V.1 Topologies de réseaux adaptées à l’IoMT
+B. Topologie en Maillage (Mesh)
+Description
+• Les dispositifs communiquent entre eux pour assurer la redondance.
+Cas d’usage
+• Bloc opératoire intelligent : Communication entre capteurs de signes vitaux, robots 
+chirurgicaux et moniteurs.
+• Réseaux de capteurs corporels (BAN) : Patchs connectés sur un patient communiquant 
+entre eux.
+Avantages
+• Tolérance aux pannes (pas de point unique de défaillance).
+• Couverture étendue dans un hôpital.
+Inconvénients
+• Consommation énergétique élevée (problématique pour les implants).
+Protocoles
+• Zigbee ou Thread pour les réseaux corporels.
+• WirelessHART pour l’industrie médicale.
+V.1 Topologies de réseaux adaptées à l’IoMT
+C. Topologie Hybride (Étoile + Maillage)
+Description
+• Combinaison de sous-réseaux en étoile (ex : salles d’hôpital) et d’une dorsale maillée.
+Cas d’usage
+• Hôpital intelligent : Capteurs en étoile dans chaque chambre → Passerelles 
+connectées en maillage.
+• Télémédecine rurale : Capteurs en étoile dans un village → Relais maillés pour 
+atteindre l’hôpital.
+Avantages
+• Équilibre entre simplicité et redondance.
+Inconvénients
+• Complexité de configuration et de gestion, Maintenance difficile.
+• Coût élevé, Consommation énergétique accrue, Latence variable.
+Protocoles
+• LoRaWAN pour la dorsale longue portée.
+• MQTT pour l’échange de données vers le cloud.
+
+===== PAGE 22 =====
+26/10/2025
+22
+V.1 Topologies de réseaux adaptées à l’IoMT
+D. Topologie en Bus (Modbus/CAN)
+Description
+• Dispositifs connectés sur un bus de communication partagé.
+Cas d’usage
+• Équipements fixes : Analyseurs de sang connectés en laboratoire.
+• Ambulances intelligentes : Réseau CAN pour relier les capteurs de vie au système de 
+communication.
+Avantages
+• Câblage simplifié.
+Inconvénients
+• Risque de collision de données (inadapté aux applications critiques).
+V.2 Études de cas concrets
+A. Réseau Maillé pour la Surveillance Post-opératoire
+• Topologie : Maillage avec capteurs sans fil (ECG, SpO₂, pression artérielle).
+• Protocoles : Zigbee + TLS pour le chiffrement.
+• Résultat : Réduction de 30 % des complications grâce à des alertes en temps réel.
+B. Réseau en Étoile pour les Dispositifs Implantables
+• Dispositif : Pacemaker connecté (Medtronic).
+• Topologie : Communication en étoile vers une passerelle portable.
+• Sécurité : Chiffrement AES-256 pour éviter les piratages.
+VI. Protocoles de communication série pour périphériques     
+(UART, SPI, I2C, 1-Wire et CAN)
+VI.1 Définitions
+• Communication série vs parallèle :
+o Série : Transmission bit par bit sur un seul fil (ex : UART).
+o Parallèle : Transmission simultanée sur plusieurs fils (ex : bus PCI).
+• Avantages de la communication série :
+o Coût réduit, simplicité de câblage, adaptée aux longues distances.
+
+===== PAGE 23 =====
+26/10/2025
+23
+VI.2 Protocoles asynchrones (sans horloge)
+UART (Universal Asynchronous Receiver/Transmitter)
+• Principe 
+o Asynchrone : Pas de signal d’horloge partagé.
+o Trame : Bit de start (0), données (5-9 bits), bit de parité (optionnel), bits de stop (1).
+o Baud rate : Vitesse de transmission (ex : 9600, 115200 bauds).
+• Utilisation: Communication entre microcontrôleurs, modules GPS, Bluetooth.
+• Avantages : Simple, universel.
+• Inconvénients : Pas de détection d’erreur (sans parité), distance limitée.
+RS-232 : Standard industriel pour UART (niveaux de tension ±3 à ±15V).
+RS-485 : Communication différentielle pour longues distances (jusqu’à 1200m).
+VI.3 Protocoles synchrones (avec horloge)
+1. SPI (Serial Peripheral Interface)
+• Principe 
+o Synchrone : Horloge partagée (SCK).
+o Périphérique maître/esclave : Fils : MOSI (Master Out Slave In), MISO (Master In 
+Slave Out), SS (Slave Select).
+o Mode de communication : Full-duplex (données bidirectionnelles simultanées).
+• Utilisation:
+o Mémoires (EEPROM, Flash), écrans LCD, capteurs haute vitesse.
+• Avantages : Débit élevé (jusqu’à 100 Mbps), flexible.
+• Inconvénients : Nombreux fils (4 minimum), pas de gestion native des erreurs.
+
+===== PAGE 24 =====
+26/10/2025
+24
+VI.3 Protocoles synchrones (avec horloge)
+2. I2C (Inter-Integrated Circuit)
+• Principe 
+o Synchrone : Horloge partagée (SCL) et données bidirectionnelles (SDA).
+o Adressage : 7 ou 10 bits pour identifier les esclaves.
+o Structure de trame : Start bit → adresse esclave → données → stop bit.
+• Utilisation:
+o Capteurs (température, pression), RTC (Real-Time Clock).
+• Avantages : 2 fils seulement et multi-esclaves.
+• Inconvénients : Débit modéré (400 kHz en standard, 5 MHz en Ultra Fast Mode).
+Résistance: Améliore l’impédance et donc la longueur de la ligne
+VI.4 Protocoles spécialisés
+1. 1-Wire
+• Principe 
+o Single-wire : Communication + alimentation sur un seul fil (DQ).
+o Adressage unique : Chaque périphérique a une ROM ID 64 bits.
+• Utilisation:
+o Capteurs Dallas (DS18B20), systèmes de sécurité.
+• Avantages : Câblage minimal, idéal pour les réseaux de capteurs.
+• Inconvénients : Débit très lent (15 kbps), complexité logicielle.
+
+===== PAGE 25 =====
+26/10/2025
+25
+VI.4 Protocoles spécialisés
+2. CAN (Controller Area Network)
+• Principe 
+o Réseau différentiel (CAN_H et CAN_L) pour environnements bruyants.
+o Gestion des collisions : Priorité des messages par ID.
+• Utilisation: Automobile, industrie (automates).
+• Avantages : Robustesse, tolérance aux pannes.
+• Inconvénients : Complexité matérielle.
+VI.5 Comparaison des protocoles
+Tableau récapitulatif
+Protocole
+Vitesse
+Fils
+Topologie
+Applications
+UART
+9600– 4 Mbps
+2 (TX/RX)
+Point-à-point
+Modules sans fil
+SPI
+1 – 100 Mbps
+4+
+Maître/esclave
+Mémoires, écrans
+I2C
+1 – 10 Mbps
+2
+Bus
+Capteurs, RTC
+1-Wire
+15 kbps
+1
+Bus
+Capteurs Dallas
+CAN
+1 Mbps
+2
+Bus
+Automobile, industrie
+RTC: Réseau Téléphonique Commuté
+void setup() {
+Serial.begin(9600);
+//Initialisation UART à 
+9600 bauds
+}
+void loop() {
+Serial.println("Hello, 
+World!");
+delay(1000);
+}
+IV.6 Exemples pratiques
+• Communication UART 
+avec Arduino
+Choix du protocole : Dépend du débit, du nombre de périphériques et de l’environnement.
+OLED128X64
+MAX30102
+
+===== PAGE 26 =====
+26/10/2025
+26
+include <Wire.h>
+#include <Adafruit_BME280.h>
+Adafruit_BME280 bme;
+void setup() {
+Wire.begin(); //Initialisation I2C 
+bme.begin(0x76);
+}
+void loop() {
+float temp =
+bme.readTemperature();
+delay(1000);
+}
+VI.6 Exemples pratiques
+• Lecture d’un capteur I2C 
+(BME280)
+Code Arduino
+VI.7 Bonnes pratiques et erreurs courantes
+Conseils
+UART : Vérifier le baud rate et les bits de stop/parité.
+SPI : Configurer le mode (CPOL/CPHA) correctement.
+I2C : Ajouter des résistances de pull-up (4.7 kΩ sur SDA/SCL).
+1-Wire : Utiliser des bibliothèques dédiées (ex : OneWire).
+Problèmes courants
+Données corrompues : Bruit électrique (utiliser des câbles blindés).
+Périphérique non détecté : Adresse I2C incorrecte (scanner avec i2cdetect).
+• Réseau CAN dans une voiture pour 
+connecter le moteur, l’ABS, et l’ECU.
+VII. Application: Bracelet médical connecté
+According to ESP32 pinout, the SCL pin is D22 and the SDA is D21.
+As you can see in the picture, the connections are:
+ESP32 D22 ----> MAX30100 SCL
+ESP32 D21 ----> MAX30100 SDA
+ESP32 GND ----> MAX30100 GND
+ESP32 3.3V -----> MAX30100 VIN
+OLED VDD -----> ESP32 3.3V
+OLED GND -----> ESP32 GND
+OLED SCL -----> ESP32 D22
+OLED SDA ----> ESP D21
+https://www.instructables.com/Heart-Rate-and-Blood-Oxygen-Level-With-Arduino-IDE/
+
+===== PAGE 27 =====
+26/10/2025
+27
+Saisir d’un texte via un écran OLED SD 1306 
+Les majuscules
+Les caractères spéciaux 
+et les numériques
+Validation, il est possible ici d'effacer 
+le dernier caractère d'effacer la 
+totalité de la saisie en cours de 
+valider ou d'annuler la selection.
+•
+Les 10 broches qui peuvent être utilisées pour détecter un contact avec le doigt 
+sont:GPIO 0, GPIO 2, GPIO 4, GPIO 12, GPIO 13, GPIO 14, GPIO 15, GPIO 27, 
+GPIO 32 et GPIO 33.
+•
+Remarque: Pour lire l'état de la broche GPIO 32, par exemple, on pourra écrire 
+touchRead(32) ou touchRead(T9), avec le même résultat.
+
+===== PAGE 28 =====
+26/10/2025
+28
+VIII. Futur et Tendances
+• Nanorobots connectés : Administration ciblée de médicaments.
+• IA prédictive : Anticipation des crises d’épilepsie.
+• Réalité augmentée : Chirurgie assistée par IoT (ex : Google Glass).
+• Blockchain : Sécurisation des dossiers médicaux.
+• 5G/6G : Latence ultra-faible.
+• Edge Computing : Traitement local.
+• IA intégrée : Analyse en temps réel.
+L’IoMT révolutionne la médecine (prévention, précision, accessibilité).
+"L’IoT médical ne remplace pas les médecins, mais 
+leur donne des super-pouvoirs."
+IX. Synthèse
+• Avantages : Efficacité, automatisation, données en temps réel.
+• Risques : Sécurité, dépendance technologique, impact environnemental.
+• Quote : "L’IoT n’est pas une technologie, mais un écosystème." (Kevin Ashton).
+X. Ressources Pédagogiques Supplémentaires
+• Simulateurs IoT :
+o Plateformes : Arduino IoT Cloud, Node-RED.
+• Documentaires : "Lo and Behold" (R. Herzog) sur la révolution numérique.
+• Livres : 
+"The Fourth Industrial Revolution" (Klaus Schwab).
+"Making Embedded Systems" (Elecia White).
+"Healthcare 4.0" (Dr. John Smith), "IoT in Medicine" (Dr. Laura Green).
+• Études : 
+WHO, Deloitte, Journal of Medical IoT.
+• Sites : FDA, sites fabricants (Medtronic, Abbott).

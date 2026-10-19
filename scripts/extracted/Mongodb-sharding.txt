@@ -1,0 +1,64 @@
+
+===== PAGE 1 =====
+Mongodb: Sharding
+
+===== PAGE 2 =====
+Avantages du sharding MongoDB
+Capacité de stockage
+Lecture/écriture
+Haute disponibilité
+Protection contre les pannes
+Géodistribution et performances
+
+===== PAGE 3 =====
+Architecture de partitionnement
+La robustesse du cluster est gérée par 3 
+types de nœuds :
+1-Des routeurs : mongos
+2-Des serveurs de configuration : Config 
+Server
+3-Des serveurs de données : Shard
+
+===== PAGE 4 =====
+Exemple
+
+===== PAGE 5 =====
+Exemple
+chaque application va se connecter à un mongos et envoyer sa requête.
+- Si la requête contient le champ « title », 
+-Si en revanche la requête ne contient pas le champ « title », 
+Pour améliorer la disponibilité et la scalabilité de votre application ……
+Les ConfigServers
+Pour que mongos soit capable de savoir dans quel shard se trouve la donnée recherchée…
+La répartition des données étant faite dynamiquement…...
+
+===== PAGE 6 =====
+
+===== PAGE 7 =====
+Dès l’instant où on définit une clé de sharding, mongodb crée un premier Chunk contenant 
+l’ensemble des documents:
+
+===== PAGE 8 =====
+Pour configurer le sharding MongoDB étape par étape, suivez les instructions suivantes :
+Étape 1 : lancé deux serveurs de configuration (--configsvr) en ReplicaSet (configReplSet)
+Comment configurer le sharding MongoDB étape par étape ?
+
+===== PAGE 9 =====
+- Dans une console distincte, connectez-vous à l'un de ces serveurs et initiez le ReplicaSet :
+- Ajoutez le deuxième serveur de configuration au ReplicaSet :
+
+===== PAGE 10 =====
+Étape 2 : Création des shards
+Lancez les serveurs shard en ReplicaSet :
+Initiez le ReplicaSet de chaque shard dans une console distincte :
+
+===== PAGE 11 =====
+Étape 3 : Lancement du mongos (serveur de distribution) et connexion des shards
+Lancez le serveur mongos en spécifiant le serveur de configuration :
+Ajoutez les shards un par un au niveau du mongos en mode console :
+
+===== PAGE 12 =====
+Étape 4 : Distribution de la base de données
+Définissez la collection que vous souhaitez distribuer. Pour cela, créez une base de données "testDB" 
+et une collection "test" :
+Pour vérifier l'état du sharding, exécutez la commande suivante dans une console :

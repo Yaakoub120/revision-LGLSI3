@@ -1,0 +1,870 @@
+     1→
+     2→===== PAGE 1 =====
+     3→18
+     4→Cours développement d’applications réparties
+     5→
+     6→===== PAGE 2 =====
+     7→Définition de la communication répartie
+     8→Dr. Mouna KARAJA
+     9→19
+    10→Cours développement d’applications réparties
+    11→La communication répartie désigne l’ensemble des mécanismes, protocoles et modèles permettant à deux
+    12→entités d’un système distribué (processus, objets, applications) d’échanger des données et de coordonner
+    13→leurs actions, malgré la séparation physique des machines.
+    14→Dans un système réparti, les composants logiciels et matériels sont situés sur des machines différentes
+    15→reliées par un réseau. Pour coopérer, ces composants doivent échanger des informations : c’est le rôle de la
+    16→communication répartie.
+    17→Elle peut se faire sous différentes formes : transmission de messages, appels de procédures distantes,
+    18→invocation de méthodes sur des objets distants, ou encore échanges via des middlewares spécialisés.
+    19→Objectif : donner l’illusion que les interactions à distance se déroulent aussi simplement qu’en local,
+    20→tout en masquant la complexité du réseau.
+    21→
+    22→===== PAGE 3 =====
+    23→Importance et rôle de la communication
+    24→Dr. Mouna KARAJA
+    25→20
+    26→Cours développement d’applications réparties
+    27→La communication constitue la colonne vertébrale
+    28→des applications réparties. Elle permet :
+    29→Sans communication fiable, les applications réparties perdraient leur sens :
+    30→elles ne seraient qu’un ensemble de composants isolés, incapables
+    31→d’interagir.
+    32→La coopération entre
+    33→composants : par
+    34→exemple, un client
+    35→envoie une requête à
+    36→un serveur pour
+    37→accéder à une base
+    38→de données distante.
+    39→Le
+    40→partage
+    41→de
+    42→ressources : fichiers,
+    43→services
+    44→web,
+    45→systèmes
+    46→d’information.
+    47→La coordination des
+    48→tâches
+    49→:
+    50→plusieurs
+    51→processus
+    52→répartis
+    53→sur
+    54→différentes
+    55→machines
+    56→peuvent
+    57→travailler
+    58→ensemble
+    59→pour
+    60→résoudre
+    61→un
+    62→problème complexe.
+    63→La
+    64→transparence
+    65→:
+    66→grâce
+    67→aux
+    68→mécanismes
+    69→de
+    70→communication,
+    71→l’utilisateur n’a pas
+    72→besoin de savoir où
+    73→se
+    74→trouvent
+    75→réellement
+    76→les
+    77→ressources
+    78→ou
+    79→comment elles sont
+    80→accessibles.
+    81→
+    82→===== PAGE 4 =====
+    83→Défis de la communication répartie
+    84→Dr. Mouna KARAJA
+    85→21
+    86→Cours développement d’applications réparties
+    87→Hétérogénéité :
+    88→1
+    89→Les nœuds d’un système réparti peuvent être très différents : PC, smartphones, serveurs, objets
+    90→IoT… avec des systèmes d’exploitation, langages et protocoles variés.
+    91→Défi : assurer une communication interopérable malgré ces différences.
+    92→Transparence de la localisation :
+    93→2
+    94→Dans un système réparti, un composant ne doit pas avoir à savoir où se trouve l’autre composant
+    95→(communication qui ressemble à un appel local alors que le serveur est à l’autre bout du monde).
+    96→Défi : masquer la localisation réelle (IP, port, machine) derrière une abstraction.
+    97→Latence et performance du réseau :
+    98→3
+    99→Les messages circulent sur des réseaux avec une certaine latence, vitesse de transmission limitée
+   100→et congestion possible (Exemple : 200ms de retard dans une visioconférence sont perceptibles).
+   101→Défi : assurer une communication efficace malgré des délais.
+   102→
+   103→===== PAGE 5 =====
+   104→Dr. Mouna KARAJA
+   105→22
+   106→Cours développement d’applications réparties
+   107→Défis de la communication répartie
+   108→Fiabilité et pannes :
+   109→4
+   110→Les réseaux sont peu fiables : messages perdus, dupliqués, corrompus, ou nœuds qui tombent
+   111→en panne (Exemple : en cas de panne réseau, il faut éviter qu’un virement soit débité deux fois).
+   112→Défi : garantir la cohérence et la tolérance aux fautes et concevoir des mécanismes de reprise,
+   113→de réplication et de redondance.
+   114→Concurrence et synchronisation :
+   115→5
+   116→Plusieurs nœuds peuvent accéder en même temps à la même ressource (Exemple : deux
+   117→utilisateurs modifient en même temps un même document collaboratif).
+   118→Défi : gérer les accès concurrents, éviter les conflits et maintenir la cohérence.
+   119→Sécurité :
+   120→6
+   121→La communication sur un réseau ouvert (comme Internet) peut être interceptée, modifiée ou
+   122→usurpée.
+   123→Défi : assurer authentification, confidentialité, intégrité et autorisation.
+   124→
+   125→===== PAGE 6 =====
+   126→Les intervenants de la communication répartie
+   127→Dr. Mouna KARAJA
+   128→23
+   129→Cours développement d’applications réparties
+   130→Ce sont les entités participant au système
+   131→réparti. Ils peuvent correspondre soit à
+   132→des
+   133→machines
+   134→physiques
+   135→(ordinateurs,
+   136→serveurs, smartphones, capteurs IoT, etc.),
+   137→soit à des unités logiques (processus,
+   138→services ou applications)
+   139→Ce sont les éléments accessibles ou
+   140→partagés dans le système (fichiers,
+   141→bases
+   142→de
+   143→données,
+   144→services,
+   145→périphériques, puissance de calcul…).
+   146→→C’est le contenu demandé/fourni
+   147→lors de la communication.
+   148→C’est
+   149→la
+   150→couche
+   151→logicielle
+   152→intermédiaire qui facilite la
+   153→communication
+   154→et
+   155→la
+   156→transparence
+   157→entre
+   158→nœuds
+   159→(CORBA, Java RMI, …).
+   160→C’est
+   161→le
+   162→support
+   163→de
+   164→transmission des données
+   165→(réseau
+   166→filaire,
+   167→Wi-Fi,
+   168→Internet,
+   169→protocoles
+   170→de
+   171→communication).
+   172→Noeuds
+   173→Ressources
+   174→Middleware
+   175→Canal de
+   176→communication
+   177→
+   178→===== PAGE 7 =====
+   179→Composition logique d’un noeud
+   180→Dr. Mouna KARAJA
+   181→24
+   182→Cours développement d’applications réparties
+   183→• Pour recevoir les
+   184→messages
+   185→venant
+   186→des autres nœuds.
+   187→Interface d’entrée
+   188→• Pour décider quoi
+   189→faire
+   190→avec
+   191→le
+   192→message reçu ou
+   193→quoi
+   194→produire
+   195→comme réponse.
+   196→Traitement
+   197→• Pour envoyer les
+   198→messages
+   199→ou
+   200→réponses
+   201→aux
+   202→autres nœuds.
+   203→Interface de sortie
+   204→Dans un système réparti, un nœud, quelque soit son type, correspond à un bloc logique avec trois fonctions :
+   205→recevoir, traiter, envoyer des informations.
+   206→
+   207→===== PAGE 8 =====
+   208→Les modes de communication
+   209→Dr. Mouna KARAJA
+   210→25
+   211→Cours développement d’applications réparties
+   212→L’émetteur envoie un message sans attendre
+   213→immédiatement la réponse. Le receveur peut
+   214→répondre plus tard.
+   215→→Cela permet à l’émetteur de continuer son
+   216→traitement sans blocage.
+   217→Communication synchrone
+   218→Communication asynchrone
+   219→Les modes définissent le comportement temporel de l’échange (temps réel ou différé). Ils peuvent
+   220→s’appliquer à plusieurs modèles de communication.
+   221→Dans ce mode, l’émetteur envoie une requête et
+   222→attend
+   223→la
+   224→réponse
+   225→avant
+   226→de
+   227→poursuivre
+   228→son
+   229→exécution.
+   230→→La communication se fait en temps réel entre
+   231→les deux parties, avec un blocage possible en
+   232→attente de la réponse.
+   233→Avantage : simplicité et rapidité de l’échange
+   234→direct.
+   235→Limite : dépendance temporelle forte, le client est
+   236→bloqué tant que la réponse n’arrive pas.
+   237→Avantage : meilleure tolérance aux délais et aux
+   238→interruptions.
+   239→Limite : complexité plus élevée pour gérer les
+   240→retours différés.
+   241→
+   242→===== PAGE 9 =====
+   243→Les mécanismes d’adressage et de diffusion
+   244→Communication Unicast
+   245→• communication entre un seul émetteur et un seul récepteur (un à un).
+   246→• Exemple : une requête d’un client vers un serveur.
+   247→Communication multicast
+   248→• un émetteur envoie un message à un groupe spécifique de récepteurs.
+   249→• Exemple : une visioconférence est diffusée uniquement aux participants.
+   250→Communication broadcast
+   251→• un émetteur diffuse le message à tous les nœuds d’un réseau.
+   252→• Exemple : un message envoyé simultanément à tous les abonnés du réseau mobile.
+   253→Dr. Mouna KARAJA
+   254→26
+   255→Cours développement d’applications réparties
+   256→
+   257→===== PAGE 10 =====
+   258→Les modèles de communication
+   259→Dr. Mouna KARAJA
+   260→27
+   261→Cours développement d’applications réparties
+   262→La communication dans un système réparti peut prendre plusieurs formes, selon la nature de l’échange
+   263→et le degré de synchronisation attendu entre les entités.
+   264→Les modèles de communication décrivent la structure, la dynamique ou la forme globale du processus de
+   265→communication. Ils précisent comment l’information est transmise entre les acteurs.
+   266→Communication
+   267→orientée
+   268→message
+   269→Communication
+   270→orientée appels
+   271→Communication
+   272→par objets
+   273→distribués
+   274→Communication
+   275→orientée flux
+   276→Communication
+   277→orientée
+   278→événements
+   279→On distingue principalement :
+   280→
+   281→===== PAGE 11 =====
+   282→Communication orientée message
+   283→Dr. Mouna KARAJA
+   284→28
+   285→Cours développement d’applications réparties
+   286→➢Une application bancaire envoie une requête de virement sous forme de message à un
+   287→service de paiement. Le service reçoit, traite, et renvoie une confirmation par message.
+   288→✓Les messages peuvent être synchrones ou asynchrones.
+   289→✓La communication se fait par des files de messages, où un message est envoyé par
+   290→un producteur et consommé par un consommateur.
+   291→✓Nécessite une adresse de destination.
+   292→✓Implémenté via des sockets réseau (TCP ou UDP)
+   293→Les nœuds (ou les entités) échangent des informations sous forme de messages
+   294→explicites (envoyer / recevoir).
+   295→Principe
+   296→Caractéristiques :
+   297→Avantages
+   298→Inconvénients
+   299→Exemple
+   300→concret
+   301→Découplage fort (les nœuds peuvent être écrits
+   302→dans
+   303→des
+   304→langages
+   305→différents,
+   306→être
+   307→sur
+   308→des
+   309→machines distantes, etc.)
+   310→Complexité
+   311→de
+   312→gestion
+   313→des
+   314→messages
+   315→(ordre,
+   316→duplication, erreurs…)
+   317→
+   318→===== PAGE 12 =====
+   319→Communication orientée appels
+   320→Dr. Mouna KARAJA
+   321→29
+   322→Cours développement d’applications réparties
+   323→Caractéristiques :
+   324→Avantages
+   325→Inconvénients
+   326→Exemple
+   327→concret
+   328→Principe
+   329→La communication par appel de procédure à distance (RPC - Remote Procedure Call)
+   330→consiste à appeler à distance une procédure ou une fonction sur un autre système
+   331→comme si elle était locale.
+   332→Simplicité
+   333→d’utilisation
+   334→(on
+   335→programme
+   336→comme si tout était local)
+   337→–
+   338→Forte dépendance au réseau (défaillances, latence, …)
+   339→–
+   340→Couplage fort : Chaque nœud doit connaître la signature
+   341→de la fonction distante (nom, paramètres, types de
+   342→retour)
+   343→Une application mobile appelle payerFacture() sur un serveur distant via RPC. Pour le
+   344→développeur, cela ressemble à un simple appel de fonction.
+   345→✓Le système cache la complexité réseau via des stubs (proxy local) qui transforment
+   346→les appels en messages et les réponses en résultats.
+   347→✓La communication est généralement synchrone
+   348→✓Le programmeur n’a pas à gérer l’envoi/réception de messages.
+   349→
+   350→===== PAGE 13 =====
+   351→Communication par objets distribués
+   352→Dr. Mouna KARAJA
+   353→30
+   354→Cours développement d’applications réparties
+   355→✓C’est une extension de l’idée du RPC, mais appliquée aux objets.
+   356→✓Un objet sur une machine peut invoquer une méthode sur un objet situé ailleurs.
+   357→✓Implémenté par des middlewares comme Java RMI et CORBA.
+   358→Caractéristiques :
+   359→Avantages
+   360→Inconvénients
+   361→Exemple
+   362→concret
+   363→Principe
+   364→Dans la communication par objets distribués (RMI - Remote Method Invocation), les
+   365→entités du système réparti sont représentées par des objets distants. Chaque objet
+   366→expose ses fonctionnalités au travers d’une interface distante, et les autres entités
+   367→peuvent invoquer ses méthodes de manière transparente comme s’il s’agissait
+   368→d’objets locaux.
+   369→Transparence de localisation; modularité et
+   370→réutilisation d’objets; orientation objet.
+   371→Forte
+   372→dépendance
+   373→technologique,
+   374→problème
+   375→de
+   376→compatibilité de versions
+   377→Dans un système de gestion d’hôtel réparti, l'objet Réservation appelle la méthode
+   378→confirmer() sur l'objet Chambre, qui réside sur un autre nœud du système.
+   379→
+   380→===== PAGE 14 =====
+   381→Communication orientée flux
+   382→Dr. Mouna KARAJA
+   383→31
+   384→Cours développement d’applications réparties
+   385→Caractéristiques :
+   386→Avantages
+   387→Inconvénients
+   388→Exemple
+   389→concret
+   390→Principe
+   391→✓Les données sont envoyées sous forme de flux (audio, vidéo).
+   392→✓Peut être unidirectionnel (ex : diffusion vidéo) ou bidirectionnel (ex : visioconférence).
+   393→–
+   394→Netflix ou YouTube utilisent un flux pour diffuser une vidéo à un utilisateur.
+   395→–
+   396→Zoom / Teams utilisent des flux audio/vidéo bidirectionnels pour une réunion.
+   397→La transmission orientée flux est un modèle de communication en temps réel basé
+   398→sur le transfert continu de données entre producteurs et consommateurs.
+   399→Nécessite la gestion de la latence, la synchronisation et
+   400→parfois la qualité de service (QoS).
+   401→Transmission continue et temps réel, ce qui
+   402→le rend idéal pour les flux multimédias.
+   403→
+   404→===== PAGE 15 =====
+   405→Communication orientée événements
+   406→Dr. Mouna KARAJA
+   407→32
+   408→Cours développement d’applications réparties
+   409→Caractéristiques :
+   410→Avantages
+   411→Inconvénients
+   412→Exemple
+   413→concret
+   414→Principe
+   415→– Difficulté à suivre les flux de données
+   416→– Complexité de gestion : Un même événement peut être reçu par
+   417→plusieurs services. Chacun peut réagir de manière différente.
+   418→Favorise un couplage faible, une grande
+   419→scalabilité, et une distribution flexible
+   420→des notifications.
+   421→Elle repose sur un modèle pub/sub (publication/abonnement) où les émetteurs
+   422→(publishers) publient des événements sans connaître les récepteurs, tandis que les
+   423→récepteurs (subscribers) s’abonnent à des types d’événements qui les intéressent.
+   424→✓Permet la diffusion à plusieurs récepteurs (multicast, broadcast).
+   425→✓Asynchrone par nature, adapté aux systèmes réactifs et distribués.
+   426→Un client passe une commande sur un site de vente en ligne. L'action "commande
+   427→confirmée" déclenche la publication d’un événement commande/nouvelle. Plusieurs
+   428→services abonnés réagissent : ✓Service de paiement : lance la procédure de transaction.
+   429→✓Service logistique : prépare l’emballage et l’expédition.
+   430→✓Service client : envoie un email de confirmation au client.
+   431→✓Module de fidélité : ajoute des points au compte du client.
+   432→
+   433→===== PAGE 16 =====
+   434→Dr. Mouna KARAJA
+   435→33
+   436→Cours développement d’applications réparties
+   437→Le rôle du réseau dans la communication
+   438→Une application répartie est souvent déployée sur plusieurs machines situées dans des zones
+   439→géographiques différentes. Ces composants doivent échanger des données à travers un réseau pour
+   440→fonctionner comme un tout cohérent.
+   441→Pour que les données puissent circuler correctement entre machines, il faut une organisation logique du
+   442→réseau. Cette organisation est décrite à l’aide de modèles en couches, qui indiquent comment les données
+   443→passent d’un nœud à un autre.
+   444→Le réseau devient alors le canal de transport des informations entre les différents noeuds.
+   445→Il existe deux modèles en couches de référence principaux :
+   446→✓Modèle OSI (Open Systems Interconnection) : Modèle théorique défini à la fin des années 1970 par
+   447→l’ISO (Organisation Internationale de Normalisation). Son but était de standardiser la communication
+   448→entre ordinateurs, en définissant 7 couches bien distinctes, chacune ayant un rôle précis.
+   449→✓Modèle Internet (TCP/IP : Transmission Control Protocol/Internet Protocol) : Modèle pratique
+   450→décrivant l’architecture réellement utilisée dans les réseaux actuels (Internet, intranets, etc.). Il simplifie
+   451→les 7 couches de l’OSI en 4 grandes couches fonctionnelles, plus faciles à gérer et à coder.
+   452→
+   453→===== PAGE 17 =====
+   454→Dr. Mouna KARAJA
+   455→34
+   456→Cours développement d’applications réparties
+   457→L’architecture en couches des réseaux
+   458→6. Présentation
+   459→5. Session
+   460→4. Transport
+   461→3. Réseau
+   462→2. Liaison de données
+   463→1. Physique
+   464→7. Application
+   465→4. Application
+   466→3. Transport
+   467→2. Internet
+   468→1. Accès au réseau
+   469→
+   470→===== PAGE 18 =====
+   471→Dr. Mouna KARAJA
+   472→35
+   473→Cours développement d’applications réparties
+   474→Le modèle OSI
+   475→C’est l’interface entre l’utilisateur et le réseau. Elle permet à l’utilisateur d’accéder
+   476→à des ressources à distance (page web, fichiers, mails...).
+   477→Les protocoles de communication de la couche d'application comprennent :
+   478→✓Le SMTP (Simple Mail Transfer Protocol) pour l’envoi des mails d'un serveur à
+   479→un autre.
+   480→✓Le HTTP (HyperText Transfer Protocol), qui est le protocole de communication
+   481→entre les navigateurs et les serveurs Web, basé sur une requête-réponse.
+   482→✓Et le FTP (File Transfer Protocol) spécifiquement conçu pour le transfert de
+   483→fichiers entre ordinateurs.
+   484→6. Présentation
+   485→5. Session
+   486→4. Transport
+   487→3. Réseau
+   488→2. Liaison de données
+   489→1. Physique
+   490→7. Application
+   491→La couche « Application » :
+   492→SMTP
+   493→HTTP
+   494→FTP
+   495→
+   496→===== PAGE 19 =====
+   497→Dr. Mouna KARAJA
+   498→36
+   499→Cours développement d’applications réparties
+   500→6. Présentation
+   501→5. Session
+   502→4. Transport
+   503→3. Réseau
+   504→2. Liaison de données
+   505→1. Physique
+   506→7. Application
+   507→La couche « Présentation » :
+   508→Cette couche s’occupe du format des données échangées.
+   509→Elle garantit que les données envoyées par une machine
+   510→sont comprises correctement par une autre.
+   511→✓Elle convertit les données d’un format interne à un format standard pour le
+   512→réseau, puis inversement à la reception (conversion du texte d’un encodage
+   513→UTF-8 vers ASCII, ou de JPEG vers BMP).
+   514→✓Réduit la taille des données avant l’envoi (gain de bande passante) et les
+   515→restaure à la réception (compression d’un fichier image ou d’un flux vidéo
+   516→avant transfert).
+   517→✓Protège la confidentialité des données échangées en les cryptant avant envoi,
+   518→puis en les décryptant à la réception (HTTPS chiffre les données avant de les
+   519→envoyer sur le réseau)..
+   520→Le modèle OSI
+   521→
+   522→===== PAGE 20 =====
+   523→Dr. Mouna KARAJA
+   524→37
+   525→Cours développement d’applications réparties
+   526→Le modèle OSI
+   527→6. Présentation
+   528→5. Session
+   529→4. Transport
+   530→3. Réseau
+   531→2. Liaison de données
+   532→1. Physique
+   533→7. Application
+   534→La couche « Session » :
+   535→La couche session s’occupe :
+   536→✓d’ouvrir la session au début de la communication,
+   537→✓de la maintenir active pendant le transfert des données,
+   538→✓puis de la fermer proprement une fois l’échange terminé.
+   539→Avant que deux applications puissent échanger des données, elles doivent établir
+   540→une session de communication. Cette session agit comme un canal logique entre
+   541→les deux appareils.
+   542→Lorsqu’un grand volume de données est transmis, cette couche veille à la
+   543→continuité de la session et à la reprise en cas d’interruption.
+   544→
+   545→===== PAGE 21 =====
+   546→Dr. Mouna KARAJA
+   547→38
+   548→Cours développement d’applications réparties
+   549→Le modèle OSI
+   550→6. Présentation
+   551→5. Session
+   552→4. Transport
+   553→3. Réseau
+   554→2. Liaison de données
+   555→1. Physique
+   556→7. Application
+   557→La couche « Transport » :
+   558→La couche transport a pour rôle d’assurer le transfert fiable et ordonné des données
+   559→entre deux machines. Elle découpe les données en petits morceaux appelés
+   560→segments, afin de faciliter leur envoi sur le réseau. Chaque segment contient un en-
+   561→tête (numéro du segment, numéro du port, …) permettant de réassembler
+   562→correctement le message à la réception.
+   563→La couche transport choisit la manière d’envoyer les informations selon le type de
+   564→communication souhaitée :
+   565→Elle intègre aussi des mécanismes de contrôle d’erreur : si certains segments sont
+   566→perdus ou endommagés, la couche transport demande à la couche « session » leur
+   567→réémission, garantissant ainsi une communication complète et fiable.
+   568→
+   569→===== PAGE 22 =====
+   570→Dr. Mouna KARAJA
+   571→39
+   572→Cours développement d’applications réparties
+   573→Le modèle OSI
+   574→6. Présentation
+   575→5. Session
+   576→4. Transport
+   577→3. Réseau
+   578→2. Liaison de données
+   579→1. Physique
+   580→7. Application
+   581→La couche « réseau » :
+   582→La couche réseau reçoit les segments de la couche transport et les encapsule dans
+   583→des paquets IP, contenant l’adresse IP source et destination. Elle a pour rôle
+   584→d’acheminer les paquets d’une machine à une autre, même si elles se trouvent sur
+   585→des réseaux différents.
+   586→Elle s’occupe aussi du routage, c’est-à-dire de trouver le meilleur chemin pour faire
+   587→circuler les paquets entre plusieurs réseaux.
+   588→Si un paquet est trop volumineux pour le réseau (au-delà de la MTU – Maximum
+   589→Transmission Unit), il est fragmenté en plusieurs parties plus petites, puis
+   590→réassemblé à la réception.
+   591→
+   592→===== PAGE 23 =====
+   593→Dr. Mouna KARAJA
+   594→40
+   595→Cours développement d’applications réparties
+   596→Le modèle OSI
+   597→6. Présentation
+   598→5. Session
+   599→4. Transport
+   600→3. Réseau
+   601→2. Liaison de données
+   602→1. Physique
+   603→7. Application
+   604→Adresse MAC
+   605→La couche liaison de données reçoit les paquets de la couche réseau et les
+   606→transforme en trames, prêtes à être envoyées physiquement.
+   607→La couche « liaison de données » :
+   608→Elle utilise les adresses MAC pour identifier l’émetteur et le destinataire sur le
+   609→réseau local, et veille à ce que les données soient bien reçues sans erreur.
+   610→Elle assure le transfert fiable des données entre deux machines situées sur le
+   611→même réseau local.
+   612→Une trame →C’est le conteneur (suite de bits 0 et 1) qui circule directement sur
+   613→le support physique (le câble, le Wi-Fi, etc.) entre deux machines reliées au même
+   614→réseau local (LAN).
+   615→
+   616→===== PAGE 24 =====
+   617→Dr. Mouna KARAJA
+   618→41
+   619→Cours développement d’applications réparties
+   620→Le modèle OSI
+   621→6. Présentation
+   622→5. Session
+   623→4. Transport
+   624→3. Réseau
+   625→2. Liaison de données
+   626→1. Physique
+   627→7. Application
+   628→Cette couche s’occupe de transmettre réellement les bits sur le support de
+   629→communication.
+   630→La couche « physique » :
+   631→Elle convertit ces bits en signaux :
+   632→➢signaux électriques si on utilise un câble en cuivre (Ethernet),
+   633→➢signaux lumineux si on utilise une fibre optique,
+   634→➢ondes radio si on utilise le Wi-Fi ou le Bluetooth.
+   635→Elle envoie ces signaux sur le support de transmission (câble, fibre, ondes…).
+   636→
+   637→===== PAGE 25 =====
+   638→Dr. Mouna KARAJA
+   639→42
+   640→Cours développement d’applications réparties
+   641→Le modèle OSI
+   642→Envoi
+   643→des
+   644→données
+   645→Réception
+   646→des
+   647→données
+   648→10110101110…01
+   649→10110101110…01
+   650→
+   651→===== PAGE 26 =====
+   652→Dr. Mouna KARAJA
+   653→43
+   654→Cours développement d’applications réparties
+   655→Le modèle TCP/IP (Internet)
+   656→6. Présentation
+   657→5. Session
+   658→4. Transport
+   659→3. Réseau
+   660→2. Liaison de données
+   661→1. Physique
+   662→7. Application
+   663→4. Application
+   664→3. Transport
+   665→2. Internet
+   666→1. Accès au réseau
+   667→Transmet les données sur le support physique
+   668→(câble, Wi-Fi...) au sein du réseau local.
+   669→Identifie les machines et achemine les paquets
+   670→entre réseaux.
+   671→TCP ou UDP
+   672→IP
+   673→MAC
+   674→Ethernet
+   675→WIFI, …
+   676→HTTP
+   677→HTTPS
+   678→DNS
+   679→SMTP
+   680→Fournit les services réseau aux applications
+   681→(messagerie, web, transfert de fichiers…).
+   682→Assure la communication de bout en bout entre
+   683→les applications, contrôle d’erreur et fiabilité.
+   684→
+   685→===== PAGE 27 =====
+   686→Dr. Mouna KARAJA
+   687→44
+   688→Cours développement d’applications réparties
+   689→Le modèle TCP/IP (Internet)
+   690→Encapsulation
+   691→Désencapsulation
+   692→10110101110…01
+   693→4. Application
+   694→3. Transport
+   695→2. Internet
+   696→1. Accès au réseau
+   697→4. Application
+   698→3. Transport
+   699→2. Internet
+   700→1. Accès au réseau
+   701→Message
+   702→Message + en-tête →Segment
+   703→Segment + IP →Paquet
+   704→Paquet + MAC →Trame →Bits
+   705→Bits
+   706→Message
+   707→Segment
+   708→Paquet
+   709→Trame
+   710→Chaque couche ajoute ses propres
+   711→informations aux données reçues
+   712→de la couche supérieure.
+   713→Chaque couche lit et retire ses
+   714→en-têtes pour ne garder que les
+   715→données destinées à la couche
+   716→supérieure.
+   717→Encapsulation
+   718→Désencapsulation
+   719→
+   720→===== PAGE 28 =====
+   721→Dr. Mouna KARAJA
+   722→45
+   723→Cours développement d’applications réparties
+   724→Les protocoles de transport des données
+   725→4. Application
+   726→3. Transport
+   727→2. Internet
+   728→1. Accès au réseau
+   729→La couche Transport occupe une place centrale dans la
+   730→communication réseau. Elle garantit un transfert de données
+   731→fiable et ordonné entre les applications situées sur des
+   732→machines distantes.
+   733→Les deux principaux protocoles utilisés à ce niveau sont :
+   734→✓TCP (Transmission Control Protocol)
+   735→✓UDP (User Datagram Protocol)
+   736→Elle découpe les données provenant de la couche Application
+   737→en segments, leur ajoute des en-têtes puis supervise l’envoi de
+   738→ces segments à travers le réseau.
+   739→Qu’est ce qu’un protocole ?
+   740→Un protocole en réseau informatique est un ensemble de règles et de normes qui définissent comment les
+   741→nœuds communiquent entre eux.
+   742→
+   743→===== PAGE 29 =====
+   744→Dr. Mouna KARAJA
+   745→46
+   746→Cours développement d’applications réparties
+   747→Le protocole TCP (Transmission Control Protocol)
+   748→TCP est un protocole de transport orienté connexion, c’est-à-dire qu’avant tout échange de données,
+   749→une connexion fiable est établie entre l’émetteur et le récepteur.
+   750→Il garantit que les données arrivent dans le bon ordre, sans perte, et sans duplication.
+   751→Etablissement de la connexion :
+   752→1
+   753→TCP utilise le mécanisme de handshake en trois étapes (3-
+   754→way handshake) :
+   755→1.
+   756→Le client envoie une demande de connexion (SYN).
+   757→2.
+   758→Le serveur répond (SYN-ACK).
+   759→3.
+   760→Le client confirme (ACK).
+   761→Une fois cette connexion établie, les deux parties peuvent
+   762→échanger des données.
+   763→SYN : Synchronize (commencer la synchronization)
+   764→ACK : Acknowledgement (accusé de réception)
+   765→
+   766→===== PAGE 30 =====
+   767→Dr. Mouna KARAJA
+   768→47
+   769→Cours développement d’applications réparties
+   770→Le protocole TCP (Transmission Control Protocol)
+   771→Transfert des données :
+   772→2
+   773→–
+   774→Les données sont découpées en segments.
+   775→–
+   776→Chaque segment reçoit un numéro de séquence pour garantir l’ordre d’arrivée.
+   777→–
+   778→Si un segment est perdu, il est retransmis.
+   779→–
+   780→Les accusés de réception (ACK) permettent de confirmer la bonne réception des données.
+   781→Fermeture de la connexion :
+   782→3
+   783→Après la transmission, la connexion est fermée proprement pour libérer les ressources.
+   784→✓Transmission fiable
+   785→✓Contrôle de flux et de congestion
+   786→✓Réassemblage automatique des segments
+   787→Avantages
+   788→Inconvénients
+   789→×
+   790→Lent à cause des mécanismes de contrôle et de
+   791→vérification
+   792→×
+   793→Consomme plus de ressources réseau
+   794→
+   795→===== PAGE 31 =====
+   796→Dr. Mouna KARAJA
+   797→48
+   798→Cours développement d’applications réparties
+   799→Le protocole TCP (Transmission Control Protocol)
+   800→✓Applications de messagerie et de communication : Des outils comme WhatsApp, iMessage ou Google
+   801→Chat exploitent TCP afin d’assurer la livraison complète et ordonnée des messages textuels.
+   802→✓Navigation Web (HTTP/HTTPS) : TCP garantit la transmission complète et sans erreur des pages,
+   803→images et ressources web, assurant une navigation fluide et fiable.
+   804→✓Courrier électronique (SMTP, IMAP, POP3) : Il veille à ce que les e-mails soient envoyés et reçus
+   805→exactement comme ils ont été produits, sans perte ni altération.
+   806→✓Transfert de fichiers (FTP, SFTP) : TCP assure une transmission fiable et intègre des fichiers lors des
+   807→téléchargements ou des envois.
+   808→✓Accès sécurisé à distance (SSH) : Les connexions SSH utilisent TCP pour garantir la fiabilité et l’intégrité
+   809→des données échangées de manière chiffrée.
+   810→✓Accès à des bases de données distantes : Les systèmes tels que MySQL ou PostgreSQL reposent sur
+   811→TCP pour des transactions cohérentes et sûres entre client et serveur.
+   812→
+   813→===== PAGE 32 =====
+   814→Dr. Mouna KARAJA
+   815→49
+   816→Cours développement d’applications réparties
+   817→Le protocole UDP (User Datagram Protocol)
+   818→UDP est un protocole de transport non orienté connexion. Il envoie les données sous forme de
+   819→datagrammes sans établir de connexion préalable et sans garantir leur livraison.
+   820→Fonctionnement
+   821→–
+   822→Aucune phase de connexion : les datagrammes sont envoyés directement.
+   823→–
+   824→Pas de numérotation ni d’accusé de réception.
+   825→–
+   826→Si un datagramme est perdu ou arrive en désordre, UDP ne tente pas de le corriger.
+   827→–
+   828→La vérification d’erreurs est minimale (calcul facultatif de la valeur checksum).
+   829→Un checksum (somme de contrôle) est une valeur calculée à partir du contenu d’un
+   830→message.
+   831→➢L’émetteur calcule une valeur de contrôle à partir des données du message.
+   832→➢Il place cette valeur dans le champ checksum de l’en-tête UDP.
+   833→➢Le récepteur recalcule le checksum à partir des données reçues.
+   834→➢Si les deux valeurs ne correspondent pas →Détection d’une erreur.
+   835→Pas de retransmission :
+   836→Si
+   837→une
+   838→erreur
+   839→est
+   840→détectée,
+   841→le
+   842→datagramme
+   843→est
+   844→simplement ignoré par
+   845→le récepteur.
+   846→
+   847→===== PAGE 33 =====
+   848→Dr. Mouna KARAJA
+   849→50
+   850→Cours développement d’applications réparties
+   851→Le protocole UDP (User Datagram Protocol)
+   852→Avantages
+   853→Inconvénients
+   854→✓Très rapide (pas de connexion, pas d’attente
+   855→d’ACK)
+   856→✓Moins de surcharge réseau
+   857→✓Idéal pour les applications temps réel
+   858→×
+   859→Aucune garantie de livraison
+   860→×
+   861→Pas de réordonnancement ni de retransmission
+   862→automatique
+   863→×
+   864→Risque de perte de paquets
+   865→✓Streaming audio/vidéo (YouTube, Netflix en temps réel)
+   866→✓Jeux en ligne
+   867→✓Appels VoIP (Skype, Zoom)
+   868→✓DNS (Domain Name System)
+   869→✓Diffusion broadcast ou multicast sur un réseau (viséoconférence, …)
+   870→

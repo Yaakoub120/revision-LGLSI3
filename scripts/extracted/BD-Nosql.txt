@@ -1,0 +1,59 @@
+
+===== PAGE 1 =====
+01/11/2025 
+1 
+BD Nosql 
+Introduction 
+Depuis les années 70, la BD relationnelle était l'incontournable référence pour gérer les 
+données d'un système d'information. 
+Comment gérer une énorme base de données et comment l'interroger efficacement ? 
+ Ces questions, on se les pose dès que le volume devient ingérable et que répondre à 
+de simples requêtes prend des heures. 
+Oubliez les SGBD traditionnels, ils peinent à passer à l'échelle ! Vous devez être 
+capable de choisir la bonne solution parmi les dizaines qui s'offrent à vous. 
+ 
+- "Not Only SQL". Cette approche propose de relâcher certaines contraintes lourdes du 
+relationnel pour favoriser la distribution  
+ 
+
+===== PAGE 2 =====
+01/11/2025 
+2 
+MongoDB 
+ 
+
+===== PAGE 3 =====
+01/11/2025 
+3 
+ 
+ 
+
+===== PAGE 4 =====
+01/11/2025 
+4 
+ 
+Replicatset et sharding 
+Comment résoudre le problème de la tolérance aux pannes? 
+   MongoDB utilise pour cela une architecture basée sur le principe « M/E». 
+ 
+Réplication en MongoDB 
+Assure le redondance et augmente la disponibilité des données. 
+offre un niveau de tolérance aux pannes contre la perte d’un seul serveur de base de 
+données. 
+Un réplicatset est un groupe d’instance mongod qui conservent le même jeu de données.  
+Un replicaSet contient plusieurs nœuds porteurs de données: 
+Parmi ces nœuds un seul membres est considéré comme le nœud principal et l’autre 
+secondaire 
+ 
+
+===== PAGE 5 =====
+01/11/2025 
+5 
+L’architecture du ReplicaSet 
+ 
+ 
+Le serveur primaire "Primary", à qui toutes les requêtes sont envoyées (lecture/écriture), 
+va s’occuper de gérer la cohérence des données. 
+ 
+Les serveurs secondaires: sont utilisés dans le processus de réplication des données lors 
+d'une mise à jour."  

@@ -1,0 +1,418 @@
+
+===== PAGE 1 =====
+Administration des 
+systèmes
+MODULE 1 – INTRODUCTION AU MÉTIER 
+D’ADMINISTRATEUR
+CODE : QU3JGK4W
+HÉDI NSIBI – FACULTÉ DES SCIENCES DE MONASTIR
+
+===== PAGE 2 =====
+Sommaire
+
+1. Domaines d’intervention d’un administrateur
+
+2. Activités liées à l’administration
+
+3. Compétences requises
+
+4. Droits et devoirs
+
+5. Intérêts de la certification
+
+6. Normes ISO & Textes de lois
+
+===== PAGE 3 =====
+Domaines d’intervention d’un 
+administrateur
+
+Installation, configuration, maintenance Systèmes (Linux, 
+Windows Server, Unix)
+
+Réseaux: supervision, sécurité, gestion des VLAN, VPN, pare-
+feu.
+
+Sécurité: sauvegarde, restauration, gestion des accès, 
+conformité RGPD.
+
+Bases de données: administration (SQL, Oracle)
+
+Virtualisation & Cloud (VMware, Docker, AWS, Azure)
+
+Support technique et maintenance: gestion des incidents, 
+helpdesk 
+
+===== PAGE 4 =====
+💡Exemple : Cas Pratique Surveillance et anticipation des 
+pannes d’un serveur web
+Contexte
+
+Une entreprise héberge son site vitrine et son 
+application interne sur un serveur web Apache
+(Linux).
+Les utilisateurs se plaignent parfois de lenteurs aux 
+heures de pointe.
+L’administrateur doit mettre en place une stratégie 
+de surveillance proactive afin d’anticiper les 
+problèmes et éviter une panne complète.
+
+===== PAGE 5 =====
+💡Exemple : Cas Pratique Surveillance et anticipation 
+des pannes d’un serveur web
+
+Objectifs pédagogiques
+•
+Mettre en place un outil de supervision.
+•
+Collecter et analyser les métriques critiques.
+•
+Définir des seuils d’alerte.
+•
+Proposer un plan d’action préventif.
+
+===== PAGE 6 =====
+💡Exemple : Cas Pratique Surveillance et anticipation 
+des pannes d’un serveur web
+
+Travail demandé
+1.
+Installer et configurer un outil de monitoring (ex. Nagios, Zabbix
+ou Grafana).
+2.
+Surveiller les métriques suivantes : CPU, RAM, Stockage, temps 
+de réponse du serveur en ms
+3.
+Définir des seuils d’alerte
+4.
+Mettre en place des notifications (email/SMS).
+5.
+Proposer un plan d’action préventif :
+1.
+Optimisation des logs et nettoyage disque.
+2.
+Augmentation des ressources serveur (RAM/CPU).
+3.
+Mise en place d’un load balancer si nécessaire.
+
+===== PAGE 7 =====
+💡Exemple : Cas Pratique Surveillance et anticipation 
+des pannes d’un serveur web
+
+===== PAGE 8 =====
+Activités liées à l’administration
+
+Installation et configuration des serveurs
+
+Supervision & monitoring (Nagios, Zabbix, Grafana)
+
+Gestion des utilisateurs et permissions (Active 
+Directory)
+
+Gestions des Sauvegardes & Plan de continuité et 
+reprise d’activité (PRA/PCA)
+
+Documentation et reporting
+
+===== PAGE 9 =====
+Tableau d’activités 
+hebdomadaires
+Jour
+Activités principales
+Outils utilisés
+Objectif
+Lundi
+Supervision des serveurs 
+et réseaux, vérification 
+des sauvegardes
+Nagios, Zabbix, Veeam
+Assurer la continuité de 
+service
+Mardi
+Gestion des utilisateurs 
+et droits (création, 
+suppression, mises à 
+jour)
+Active Directory, LDAP
+Sécurité et conformité
+Mercredi
+Mises à jour systèmes & 
+patchs de sécurité
+WSUS, Ansible, apt/yum
+Renforcer la sécurité
+Jeudi
+Documentation, 
+reporting mensuel, 
+analyse logs
+Grafana, ELK, Excel
+Traçabilité et suivi
+Vendredi
+Tests PRA/PCA (Plan de 
+reprise), audit interne 
+sécurité
+VMware, scripts 
+PowerShell
+Préparation aux 
+incidents
+Samedi
+Support technique 
+avancé & résolution 
+incidents
+Helpdesk, tickets GLPI
+Assistance utilisateurs
+Dimanche
+Astreinte ou veille 
+technologique
+Portails RSS, veille 
+cybersécurité
+Anticipation des 
+évolutions
+
+===== PAGE 10 =====
+Compétences requises
+
+Hard Skills:
+
+OS & Réseaux
+
+Sécurité (ISO 27001, RGPD) [1]
+
+Scripting (Bash, PowerShell, Python)
+
+Soft Skills:
+
+Rigueur, communication, organisation
+
+Veille technologique[2]
+
+Gestion du stress
+
+===== PAGE 11 =====
+Normes
+
+ISO 27001: La norme ISO 27001 est une norme internationale définissant les 
+revendications pour un Système de Management de la Sécurité de 
+l'Information (SMSI), permettant aux organisations de protéger leurs données 
+et de gérer les risques liés à la sécurité de l'information
+
+RGPD: Règlement Général sur la Protection des Données, un texte législatif 
+européen qui harmonise et renforce les règles de traitement des données 
+personnelles au sein de l'UE depuis mai 2018. 
+
+===== PAGE 12 =====
+Définition
+
+Veille technologique : processus stratégique continu de collecte, 
+d'analyse et de diffusion d'informations sur les innovations et les 
+tendances scientifiques et techniques d'un domaine donné, afin 
+d'anticiper les changements, de stimuler l'innovation et de maintenir la 
+compétitivité de l'entreprise
+
+===== PAGE 13 =====
+Droits et devoirs d’un 
+administrateur
+
+Droits:
+
+Accès aux systèmes
+
+Décision en matière de sécurité
+
+Devoirs:
+
+Confidentialité & respect des lois
+
+Éthique professionnelle
+
+Documentation claire
+
+===== PAGE 14 =====
+Intérêts de la certification
+
+Reconnaissance internationale
+
+Opportunités professionnelles
+
+Validation des compétences
+
+Exemples:
+
+Linux: LPIC-1, RHCSA
+
+Microsoft: Azure Admin
+
+Sécurité: Security+, CEH
+
+===== PAGE 15 =====
+Normes ISO & Textes de lois
+
+ISO/IEC 27001 : Sécurité des systèmes d’information
+
+ISO/IEC 20000 : Gestion des services IT
+
+RGPD (UE)
+
+Loi tunisienne 2004-63 (protection des données
+personnelles)
+
+===== PAGE 16 =====
+ISO/IEC 20000 – Gestion des services IT
+Norme internationale qui définit les exigences pour établir, mettre en œuvre, 
+maintenir et améliorer un système de gestion des services (SMS).
+Objectifs
+
+Aligner les services IT avec les besoins métiers.
+
+Améliorer la qualité et la continuité des services.
+
+Réduire les coûts liés aux incidents et interruptions
+Domaine couverts:
+
+Gestion des incidents et problèmes
+
+Gestion des changements et des configurations 
+
+Gestion de la continuité et disponibilité
+
+Amélioration continue.
+
+===== PAGE 17 =====
+RGPD (Règlement Général sur la 
+Protection des Données – UE 2016/679)
+
+“Le responsable du traitement et le sous-traitant mettent 
+en œuvre des mesures techniques et organisationnelles 
+appropriées afin de garantir un niveau de sécurité adapté 
+au risque.” (Art. 32 RGPD)
+
+Article 5: les données doivent être traitées de manière licite, 
+loyale et transparente.
+
+Article 32: obligation de mettre en place des mesures 
+techniques et organisationnelles pour assurer la sécurité 
+(chiffrement, sauvegarde, tests réguliers).
+
+Article 33: notification des violations de données 
+personnelles sous 72 heures.
+
+===== PAGE 18 =====
+Loi tunisienne n°2004-63 relative à la 
+protection des données personnelles
+
+Nécessité d’obtenir le consentement avant tout traitement de 
+données personnelles.
+
+Obligation de déclaration auprès de l’INPDP (Instance 
+Nationale de Protection des Données Personnelles).
+
+Interdiction de transférer des données personnelles vers un 
+pays n’assurant pas un niveau de protection adéquat.
+
+Sanctions pénales en cas de non-respect.
+
+===== PAGE 19 =====
+Étude de cas: panne serveur et plan 
+d’action
+
+Vendredi matin, le serveur principal d’une entreprise 
+(hébergeant la messagerie + ERP) tombe en panne 
+suite à une défaillance matérielle du disque dur.
+
+Impact :
+-
+80 utilisateurs bloqués.
+-
+Interruption de service critique.
+
+===== PAGE 20 =====
+Étude de cas: panne serveur et plan 
+d’action
+Plan d’action de l’administrateur
+
+Identification du problème
+-
+Vérifier les journaux systèmes.
+-
+Diagnostiquer la panne (hardware / software).
+
+Communication:
+-
+Informer la direction et les utilisateurs du problème et du délai estimé.
+
+Mise en place du Plan de Reprise d’Activité (PRA)
+-
+Activer le serveur de secours (réplication / virtualisation).
+-
+Restaurer les données depuis la dernière sauvegarde.
+
+Suivi et vérification
+-
+Contrôler l’intégrité des données restaurées.
+-
+Vérifier les accès utilisateurs et les performances.
+
+Documentation & retour d’expérience
+-
+Rédiger un rapport d’incident.
+-
+Mettre à jour les procédures pour éviter que cela se reproduise.
+
+===== PAGE 21 =====
+Étude de cas: Attaque ransomware
+
+Un lundi matin, plusieurs utilisateurs signalent qu’ils 
+n’arrivent plus à ouvrir leurs fichiers :
+-
+Tous les documents sont chiffrés.
+-
+Un message de rançon (demande de paiement en 
+cryptomonnaie) s’affiche.
+-
+Le serveur de fichiers de l’entreprise est impacté.
+
+===== PAGE 22 =====
+Étude de cas: Attaque ransomware 
+Plan d’action de l’administrateur
+
+Isolement immédiat
+-
+Déconnecter les machines infectées du réseau.
+-
+Diagnostiquer la panne (hardware / software).
+
+Analyse et identification:
+-
+Vérifier les journaux systèmes pour déterminer l’origine de l’attaque.
+-
+Identifier l’utilisateur et le vecteur d’infection (phishing, clé USB, etc.).
+
+Restauration et continuité
+-
+Ne pas payer la rançon.
+-
+Effacer les systèmes compromis et restaurer les données depuis les sauvegardes sécurisées (non connectées au 
+réseau).
+
+Communication
+-
+Informer la direction, l’équipe de sécurité et éventuellement les autorités compétentes.
+-
+Prévenir les utilisateurs et donner des consignes.
+
+Prévention future
+-
+Mettre à jour les correctifs de sécurité.
+-
+Renforcer la politique de sauvegarde (tests réguliers de restauration).
+-
+Sensibiliser les utilisateurs (campagnes anti-phishing).
+
+===== PAGE 23 =====
+Conclusion
+
+Métier stratégique et polyvalent
+
+Nécessite compétences techniques + éthiques
+
+Certifications et normes = valeur ajoutée
+
+Importance du respect des lois et de la sécurité

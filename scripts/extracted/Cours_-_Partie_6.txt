@@ -1,0 +1,429 @@
+
+===== PAGE 1 =====
+Kubernetes
+
+===== PAGE 2 =====
+Kubernetes
+252
+Orchestration des conteneurs
+Outils d’orcherstration des conteneurs
+Mot d'origine Grèque signifiant « Timonier », ce lui
+qui dirige le bateau.
+Inspiré du projet Borg dont google s’en sert depuis
+des années pour gérer ses conteneurs.
+Développé
+par
+google
+avec
+ses
+partenaires
+:
+Redhat,
+CoreOS,
+IBM,
+Microsoft,
+MesoSphere,
+Vmware, HP, etc.
+Ecrit en langage Go
+Peut tourner en:
+Local, Cloud (GCE, Azure, AWS, ..), Machines
+Physiques
+Kubernetes
+REST
+API
+pour
+exposer
+ses
+fonctionnalités.
+L'objectif est de gérer directement des applications
+et non pas de machines (gestion des applications
+indépendamment de l’infrastructure)
+
+===== PAGE 3 =====
+Qu’est ce qu’on peut faire avec Kubernetes?
+253
+Orchestration des conteneurs
+Déployer
+une
+application
+sous
+forme
+de
+conteneurs d’une manière très rapide et prévisible
+Automatiser le déploiement et la réplication des
+containers.
+Organiser les conteneurs en groupes et faire du
+Load balancing (équilibrage de charge)
+Déclarer l'architecture cible (Nombre de pods,
+contenu, stratégie de mise à jour, etc.) et laisser le
+système atteindre et à maintenir cette cible
+Faire des mises à jour sans interrompre le
+service
+Séparer
+l'application
+de
+l'architecture
+sous-
+jacente.
+Détecter les problèmes est les résoudre tout
+seul
+
+===== PAGE 4 =====
+Concepts de base
+254
+Orchestration des conteneurs
+Cluster : Ensemble de machines physiques
+ou virtuelles utilisées par Kubernetes pour
+faire tourner des applications.
+Node : Une machine physique ou virtuelle
+dans
+laquelle
+seront
+déployés
+des
+Pods.
+Chaque Node doit exécuter un Container
+Engine comme Docker.
+Pod:
+Groupe
+de
+containers
+déployés
+ensemble
+Namespace : Segmenter Pod, Volume,
+secrêts, …
+Kubectl
+:
+Application
+en
+ligne
+de
+commande
+permettant
+d’intérragir
+avec
+Kubernetes.
+
+===== PAGE 5 =====
+Architecture de Kubernetes
+255
+Orchestration des conteneurs
+Kubernetes
+suit
+l’architecture
+maitre/esclave.
+Les composants de kubernetes peuvent
+être divisés en ceux qui gèrent un nœud
+individuel et ceux qui font partie du plan de
+contrôle
+
+===== PAGE 6 =====
+Architecture de Kubernetes
+256
+Orchestration des conteneurs
+Kubernetes Master
+Unité de contrôle principale qui gère la
+charge
+de
+travail
+et
+dirige
+les
+communications dans le système.
+Le
+plan
+de
+contrôle
+de
+Kubernetes
+consiste en plusieurs composants, chacun
+ayant son propre processus, qui peuvent
+s'exécuter sur un seul Node maître ou sur
+plusieurs maîtres permettant de créer des
+clusters haute disponibilité.
+
+===== PAGE 7 =====
+Architecture de Kubernetes
+257
+Orchestration des conteneurs
+Kubernetes Master
+Les différents composants du plan de contrôle de
+Kubernetes sont décrits ci-dessous:
+Etcd : Unité de stockage Distribuée persistante
+et légère (la configuration, état du cluster, les
+événements qui se produisent …)
+API Server: API REST de communication avec
+les composants internes et externes
+Scheduler:
+L'ordonnanceur
+qui
+permet
+de
+sélectionner quel Node devrait faire tourner un
+Pod (récolter en temps réel des informations sur
+l’état des neuds: l’occupation mémoire, capacité
+disque, taux d’utilisation de cpu)
+Controller manager : processus dans lequel
+s'exécutent
+les
+contrôleurs
+principaux
+de
+Kubernetes
+tels
+que
+DaemonSet
+Controller
+(service principal) et le Replication Controller.
+
+===== PAGE 8 =====
+Architecture de Kubernetes
+258
+Orchestration des conteneurs
+Kubernetes Node
+Le Node aussi appelé Worker est une
+machine unique (ou une machine virtuelle)
+où des conteneurs (charges de travail)
+sont déployés.
+Chaque Node du cluster doit exécuter le
+programme
+de
+conteneurisation
+(par
+exemple Docker Engine), ainsi que les
+composants pour communiquer avec les
+composants du plan de contrôle du Master.
+
+===== PAGE 9 =====
+Architecture de Kubernetes
+259
+Orchestration des conteneurs
+Kubernetes Node
+Les composants d’un Worker Node de Kubernetes
+sont:
+Kubelet : Responsable de l'état d'exécution du
+nœud
+(c'est-à-dire,
+d'assurer
+que
+tous
+les
+conteneurs sur un nœud sont en bonne santé
+organisés en Pods sous la direction du plan de
+contrôle)
+Kube-proxy
+:
+Responsable
+d'effectuer
+le
+routage du trafic vers le conteneur approprié en
+se basant sur l'adresse IP et le numéro de port
+de la requête entrante
+cAdvisor : Agent qui surveille et récupère les
+données de consommation des ressources et
+des performances comme le processeur, la
+mémoire, ainsi que l'utilisation disque et réseau
+des conteneurs du Node.
+
+===== PAGE 10 =====
+Architecture de Kubernetes
+260
+Orchestration des conteneurs
+Pod
+Groupe de containers déployés ensemble
+Les containers du Pod :
+Sont toujours démarrés, arrêtés et répliqués en
+groupe
+Partagent le même Nework, Namespace, IP et
+Ports
+Peuvent communiquer ensemble (un conteneur
+peut contacter un autre sur le même pod) en
+utilisant localhost
+Peuvent partager des données via des shared
+volumes
+Le Pod est l'entité de base qu’on va répliquer et
+qu’on va mettre sur différents nœuds du cluster.
+
+===== PAGE 11 =====
+Architecture de Kubernetes
+261
+Orchestration des conteneurs
+Volume
+Espace de stockage
+qui peut être attaché
+à un conteneur
+à un groupe de conteneurs dans un même Pod,
+Peut persister indépendamment du conteneur
+Par exemple, il permet aux conteneurs de partager
+un même répertoire dans un même Pod.
+
+===== PAGE 12 =====
+Déploiement du contrôleur
+262
+Orchestration des conteneurs
+Elément central de Kubernetes
+C’est le fichier dans lequel on décrit l’architecture
+cible que l’on veut atteindre.
+Les conteneurs qu’on veut mettre dans le Pod
+Les détails de réplication
+Les stratégies qu'on va utiliser pour les mises à jour
+C'est le déploiement du contrôleur de Kubernetes
+qui va se charger de maintenir cet état.
+Par exemple, s’il y a un Pod qui plante, il va le
+désactiver et l’enlever du load balancer et créer un
+autre à coté pour démarrer sur un autre nœud pour
+que ça puisse continuer à fonctionner dans les
+mêmes conditions exigées dans le descripteur de
+déploiement.
+
+===== PAGE 13 =====
+Déploiement du contrôleur
+263
+Orchestration des conteneurs
+Dans cet exemple:
+Un déploiement nommé nginx est crée, indiqué par le champ
+metadata:name
+Le déploiement crée trois pods répliqués, indiqués par le
+champ replicas
+Le modèle de pod, ou le champ spec: template, indique que
+ses pods sont libellés app:nginx
+La spécification du modèle de pod, ou du champ template:
+spec, indique que les pods exécutent un contneur, nginx, qui
+exécute l’image nginx dans sa version 1.7.9
+Le déploiement ouvre le port 80 pour une utilisation par les
+pods
+En résumé, le modèle de pod contient les instructions suivantes
+pour les pods créées par ce déploiement:
+Chaque pod est libellé app:nginx
+Créez un conteneur et nommez-le nginx
+Exécutez l’image nginx dans la version 1.7.9
+Ouvrez le port 80 pour envoyer et recevoir du trafic
+
+===== PAGE 14 =====
+Service
+264
+Orchestration des conteneurs
+Permet d'accéder à un groupe de Pods avec une même adresse IP
+statique. Un peut plus que le load balancer
+On identifie les Pods par des labels (Selectors) qui seront les cibles du
+load balancer
+Peut faire du load balancing
+Différents Types :
+ClusterlP: expose le service à l'intérieur du cluster via une adresse
+IP interne
+Exemple : Un service de base de données accessible
+uniquement par d’autres applications dans le cluster.
+NodePort: expose le service via un port spécifique sur chaque
+nœud du cluster
+Exemple : Une application web simple accessible depuis votre
+réseau local.
+LoadBalancer: expose le service via un load balancer externe.
+Exemple : Une application web en production accessible
+publiquement avec plusieurs pods derrière le load balancer.
+
+===== PAGE 15 =====
+Installation de Kubernetes
+265
+Orchestration des conteneurs
+Kubectl est un outil en ligne de commande de kubernetes, kubectl, vous permet d'exécuter
+des commandes dans les clusters Kubernetes. Vous pouvez utiliser kubectl pour déployer des
+applications, inspecter et gérer les ressources du cluster et consulter les logs, ……
+Installer Kubectl:
+Minikube, qui est un outil qui fait tourner un cluster Kubernetes à un nœud unique dans une
+machine virtuelle sur votre machine. C’est une machine virtuelle qui avec l’essentiels des
+packages de Docker et Kubernetes
+Installer minikube:
+
+===== PAGE 16 =====
+Installation de Kubernetes
+267
+Orchestration des conteneurs
+Pour installer minikube, il faut disposer d’un hyperviseur
+de virtualisation
+Si la version de windows que vous avez ne dispose pas
+de l’hypervisuer Hyper-V, il est recommandé d'installer
+VirtualBox.
+Pour vérifier si votre système supporte la virtualisation
+utiliser la commande syteminfo.
+
+===== PAGE 17 =====
+Installation de Kubernetes
+268
+Orchestration des conteneurs
+La façon
+la plus simple d’installer Minikube sur
+windows est d’utiliser Chocolatey (exécuter avec les droits
+administrateur): https://chocolatey.org
+Une fois l’installation de Minikube terminée, fermez la
+session CLI en cours et redémarrez. Minikube devrait avoir
+été ajouté à votre path automatiquement
+Une façon de faire c’est de télécharger directement
+l’exécutable de Minikube du lien suivant:
+Cette opération téléchargera une image de la machine
+virtuelle légère (Boot2Docker) qui contient tous les outils
+docker et kubernetes, ensuite elle crée une configuration de
+démarrage et démarre le cluster kubernetes
+Une fois l’installation est terminée, exécuter
+la commande:
+
+===== PAGE 18 =====
+Installation de Kubernetes
+269
+Orchestration des conteneurs
+Configurer l’environnement local de docker client
+Pour connecter le client docker à Docker engine fourni par Minikube, nous avons besoin de change la
+variable d’environnement pour qu’elle pointe vers le host de la machine virtuelle Minikube.
+La commande minikube docker-env retourne les variables d’environnement nécessaires à configurer
+l’environnement local pour utiliser le Docker daemon à l’intérieur de Minikube.
+
+===== PAGE 19 =====
+Installation de Kubernetes
+270
+Orchestration des conteneurs
+Cet exemple vous montre comment exécuter une simple application Hello
+wolrd Node.js sur Kubernetes en utilisant Minikube.
+L’image de conteneur est construite à partir des fichiers suivants:
+Server.js
+Dockerfile
+
+===== PAGE 20 =====
+Installation de Kubernetes
+271
+Orchestration des conteneurs
+Construire l’image docker de l’application
+
+===== PAGE 21 =====
+Installation de Kubernetes
+272
+Orchestration des conteneurs
+Déployer un conteneur de app-test dans un pod kubernetes
+
+===== PAGE 22 =====
+Installation de Kubernetes
+273
+Orchestration des conteneurs
+Exposer le port 8080 de l’application pour un accès au pod de l’extérieur
+
+===== PAGE 23 =====
+Installation de Kubernetes
+274
+Orchestration des conteneurs
+Consulter le service app-test à distance
+
+===== PAGE 24 =====
+Installation de Kubernetes
+275
+Orchestration des conteneurs
+Consulter le service app-test en local
+
+===== PAGE 25 =====
+Installation de Kubernetes
+276
+Orchestration des conteneurs
+Consulter le service app-test en local
+
+===== PAGE 26 =====
+Installation de Kubernetes
+277
+Orchestration des conteneurs
+Nettoyage

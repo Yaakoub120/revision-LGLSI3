@@ -1,0 +1,193 @@
+
+===== PAGE 1 =====
+Traitement des Données Massives
+
+===== PAGE 2 =====
+Traitement des Données Massives
+
+===== PAGE 3 =====
+Traitement des Données Massives
+
+===== PAGE 4 =====
+Traitement des Données Massives
+
+===== PAGE 5 =====
+BIG DATA: Acteurs et Solutions 
+
+===== PAGE 6 =====
+BIG DATA: Acteurs et Solutions 
+
+===== PAGE 7 =====
+BIG DATA: Acteurs et Solutions 
+
+===== PAGE 8 =====
+BIG DATA: Acteurs et Solutions 
+
+===== PAGE 9 =====
+Exemples: plateforme-technologies-outils
+
+===== PAGE 10 =====
+Exemples: plateforme-technologies-outils
+
+===== PAGE 11 =====
+Chapitre 2: Hadoop : Un standard de gestion des 
+données et applications distribuées
+Problématiques du calcul distribué
+La solution : Apache Hadoop
+L’écosystème Hodoop
+Partie1:   HDFS : Hadoop Distributed File System
+Présentation
+Architecture
+Ecriture / Lecture d’un ﬁchier
+Partie2: MapReduce
+Présentation 
+Modèle de programmation
+Exemples
+
+===== PAGE 12 =====
+Problématiques du calcul distribué
+La solution : Apache Hadoop
+L’écosystème Hodoop
+Chapitre 2: Hadoop : Un standard de gestion des données et 
+applications distribuées
+
+===== PAGE 13 =====
+
+===== PAGE 14 =====
+L’équation Hadoop
+Hadoop = excellent équilibre coût / performance / stockage / flexibilité 
+
+===== PAGE 15 =====
+Map Reduce
+Pour pouvoir traiter un grand volume de données sur un cluster de 
+machines, il faut découper le problème en plusieurs problèmes de taille 
+réduite à exécuter sur différentes machines (stratégie « diviser pour régner 
+»). 
+De multiples approches existent et ont existé pour cette division d'un 
+problème en plusieurs « sous-tâches ». 
+MapReduce est un paradigme (modèle) de programmation distribuée 
+popularisé par Google
+
+===== PAGE 16 =====
+Map Reduce
+Les 4 étapes du traitement MapReduce : 
+●
+Split
+●
+Mapper
+●
+Shuffle
+●
+Reduce
+
+===== PAGE 17 =====
+Map Reduce (exemple Word Count)
+Objectif: compter le nombre d'occurrence de chaque mot dans un texte 
+1ere étape “Split”:
+Première étape: déterminer une manière de découper (split) les données 
+d'entrée pour que chacune des machines puisse travailler sur une partie du 
+texte. 
+Notre problème est ici très simple – on peut par exemple décider de 
+découper les données d'entrée ligne par ligne. Chacune des lignes du texte 
+sera un fragment de nos données d'entrée.
+
+===== PAGE 18 =====
+Map Reduce (exemple Word Count)
+Nos données d'entrée (le texte): 
+
+===== PAGE 19 =====
+Map Reduce (exemple Word Count)
+Ce qui donne, après découpage:
+on obtient 4 fragments depuis nos données d'entrée.
+
+===== PAGE 20 =====
+Map Reduce (exemple Word Count)
+Le code de notre opération MAP sera donc (ici en pseudo code): 
+Pour chacun de nos fragments, les couples (clef; valeur) générés seront 
+donc:
+
+===== PAGE 21 =====
+Map Reduce (exemple Word Count)
+3eme étape “SHUFFLE”:
+
+===== PAGE 22 =====
+Map Reduce (exemple Word Count)
+4eme étape “REDUCE”:
+
+===== PAGE 23 =====
+Map Reduce (exemple Word Count)
+Une fois l'opération REDUCE effectuée, on obtiendra donc une valeur unique
+pour chaque clef distincte. En l’occurrence, notre résultat sera:
+
+===== PAGE 24 =====
+Map Reduce (exemple Word Count)
+Récapitulatif :
+
+===== PAGE 25 =====
+
+===== PAGE 26 =====
+Exemple2 : la longueur moyenne des mots
+
+===== PAGE 27 =====
+
+===== PAGE 28 =====
+Exemple3 : le nombre de voyelles et consonnes
+
+===== PAGE 29 =====
+
+===== PAGE 30 =====
+HDFS
+●
+HDFS = Hadoop Distributed File System 
+●
+HDFS =Système de fichiers (FileSystem) d’Hadoop par défaut 
+●
+HDFS est inspiré de GFS – « The Google File System », 2003 
+●
+Principales caractéristiques : 
+○
+Distribué : les données sont réparties sur les machines du cluster 
+○
+Répliqué : les données sont répliquées (par défaut 3) pour palier la défaillance 
+d’une machine 
+●
+HDFS est « taillé » pour les fortes volumétries
+
+===== PAGE 31 =====
+HDFS
+●
+Dans HDFS, les données sont découpées en « blocks » - 128Mo par 
+défaut 
+●
+HDFS s’appuie sur : 
+○
+Le NameNode : 2 NameNodes par Cluster (Hadoop 2), et 3 NameNodes par 
+cluster (Hadoop 3)
+○
+Le DataNode : 1 DataNode par machine du Cluster 
+●
+Namenode = stocke les métadonnées des blocks (leur localisation, taille, 
+date de création, …)
+
+===== PAGE 32 =====
+HDFS : écriture d’un fichier
+
+===== PAGE 33 =====
+HDFS : lecture d’un fichier
+
+===== PAGE 34 =====
+HDFS : quelques commandes
+hdfs dfs -ls /user
+hdfs dfs -mkdir nom_dossier_hdfs
+hdfs dfs -put fichier_en_local destination_sur_hdfs
+hdfs dfs -copyToLocal fichier_hdfs destination_en_local
+hdfs dfs -cat fichier_sur_hdfs
+
+===== PAGE 35 =====
+HDFS : quelques commandes
+hdfs dfs -cp fichier_sur_hdfs destination_sur_hdfs
+hdfs dfs -mv fichier_sur_hdfs destination_sur_hdfs
+hdfs dfs -rm fichier_sur_hdfs
+hdfs dfs -du -h dos
+sier_sur_hdfs
+hdfs dfs -setrep -R -w 3 fichier_sur_hdfs

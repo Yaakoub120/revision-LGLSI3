@@ -1,0 +1,1560 @@
+
+===== PAGE 1 =====
+Dr. Mouna KARAJA
+51
+Cours développement d’applications réparties
+Les protocoles de la couche « application »
+La couche « application » est la plus haute du modèle TCP/IP. Elle permet la communication directe entre les
+programmes utilisateurs (navigateur, client mail, messagerie instantanée, etc.).
+Elle définit les protocoles applicatifs, c’est-à-dire les règles de dialogue entre applications sur deux machines.
+Chaque protocole utilise un numéro de port pour être identifié par la couche transport (TCP/UDP).
+Qu’est ce qu’un numéro de port ?
+Un numéro de port est un identifiant logique (un nombre) utilisé par le système d’exploitation pour
+distinguer les applications qui communiquent sur le réseau.
+→Il sert à diriger les messages vers le bon programme à l’intérieur de ton ordinateur.
+
+===== PAGE 2 =====
+Dr. Mouna KARAJA
+52
+Cours développement d’applications réparties
+Les protocoles de la couche « application »
+Protocole
+Service assuré
+Port par
+défaut
+Fonction principale
+HTTP / HTTPS
+Web
+80 / 443
+Transfert de pages web
+FTP
+Transfert de fichiers
+21
+Envoyer / recevoir des fichiers
+SMTP
+Courrier électronique (envoi)
+25
+Envoi de mails
+POP3 / IMAP
+Courrier électronique (réception) 110 / 143
+Récupérer les mails
+DNS
+Résolution de noms
+53
+Convertir un nom de domaine en adresse
+IP
+DHCP
+Attribution d’adresses IP
+67-68
+Donner dynamiquement une IP à un poste
+SSH / Telnet
+Accès distant
+22 / 23
+Contrôler un ordinateur à distance par un
+administrateur (avec/sans chiffrement)
+SNMP
+Supervision de réseau
+161
+Gérer et surveiller les équipements réseau
+(routeurs, commutateurs, …)
+
+===== PAGE 3 =====
+Dr. Mouna KARAJA
+53
+Cours développement d’applications réparties
+Schéma illustratif
+IP locale : 192.168.1.10
+Adresse MAC : AA:AA:AA:AA:AA:AA
+Interface LAN : 192.168.1.1
+MAC : BB:BB:BB:BB:BB:BB
+Interface WAN (vers Internet) : 102.45.60.10
+Interface WAN : 165.30.22.5
+Interface LAN : 10.0.0.1
+MAC : DD:DD:DD:DD:DD:DD
+IP locale : 10.0.0.5
+Adresse MAC : EE:EE:EE:EE:EE:EE
+Application utilisée : HTTP (port 80)
+→donc TCP est le protocole de transport.
+Client
+Serveur
+Routeur Emetteur
+Routeur Récepteur
+
+===== PAGE 4 =====
+Dr. Mouna KARAJA
+54
+Cours développement d’applications réparties
+Schéma illustratif
+IP locale : 192.168.1.10
+Adresse MAC : AA:AA:AA:AA:AA:AA
+Client
+4. Application
+- Le client écrit une URL dans la barre d’adresse, comme :
+http://www.exemple.com/index.html
+- Le navigateur traduit cette URL en une requête HTTP de ce type :
+GET /index.html HTTP/1.1
+Host: www.exemple.com
+
+===== PAGE 5 =====
+Dr. Mouna KARAJA
+55
+Cours développement d’applications réparties
+Schéma illustratif
+IP locale : 192.168.1.10
+Adresse MAC : AA:AA:AA:AA:AA:AA
+4. Application
+3. Transport
+Segmentation :
+−création d’un segment TCP
+−Ajout du port source (ex : 50500) et du port destination (80)
+−Ajout du numéro du segment
+→Résultat : Segment TCP
+Client
+
+===== PAGE 6 =====
+Dr. Mouna KARAJA
+56
+Cours développement d’applications réparties
+Schéma illustratif
+IP locale : 192.168.1.10
+Adresse MAC : AA:AA:AA:AA:AA:AA
+4. Application
+3. Transport
+2. Internet
+−Ajout de l’adresse IP source locale : 192.168.1.10
+−Ajout de l’adresse IP destination : 10.0.0.5 (IP du serveur final)
+Client
+IP locale : 10.0.0.5
+Adresse MAC : EE:EE:EE:EE:EE:EE
+Serveur
+→Résultat : Paquet IP
+
+===== PAGE 7 =====
+Dr. Mouna KARAJA
+57
+Cours développement d’applications réparties
+Schéma illustratif
+IP locale : 192.168.1.10
+Adresse MAC : AA:AA:AA:AA:AA:AA
+4. Application
+3. Transport
+2. Internet
+1. Accès au réseau
+Client
+−Ajout de l’adresse MAC source : AA:AA:AA:AA:AA:AA
+−Ajout de l’adresse MAC destination : BB:BB:BB:BB:BB:BB (MAC du routeur)
+→Résultat : Trame
+Interface LAN : 192.168.1.1
+MAC : BB:BB:BB:BB:BB:BB
+Interface WAN (vers Internet) : 102.45.60.10
+Routeur Emetteur
+
+===== PAGE 8 =====
+Dr. Mouna KARAJA
+58
+Cours développement d’applications réparties
+Schéma illustratif
+IP locale : 192.168.1.10
+Adresse MAC : AA:AA:AA:AA:AA:AA
+Client
+Interface LAN : 192.168.1.1
+MAC : BB:BB:BB:BB:BB:BB
+Interface WAN (vers Internet) : 102.45.60.10
+Routeur Emetteur
+1. Accès au réseau
+−Le routeur reçoit la trame.
+−Il désencapsule (retire la trame) pour lire les adresses IP.
+
+===== PAGE 9 =====
+Dr. Mouna KARAJA
+59
+Cours développement d’applications réparties
+Schéma illustratif
+IP locale : 192.168.1.10
+Adresse MAC : AA:AA:AA:AA:AA:AA
+Client
+Interface LAN : 192.168.1.1
+MAC : BB:BB:BB:BB:BB:BB
+Interface WAN (vers Internet) : 102.45.60.10
+Routeur Emetteur
+2. Internet
+1. Accès au réseau
+Le routeur remplace :
+−Adresse IP source →102.45.60.10 (adresse publique du routeur)
+−Adresse IP destinataire →165.30.22.5
+Interface WAN : 165.30.22.5
+Interface LAN : 10.0.0.1
+MAC : DD:DD:DD:DD:DD:DD
+Routeur Récepteur
+➔grâce au mécanisme NAT (Network Adress Translation)
+
+===== PAGE 10 =====
+Dr. Mouna KARAJA
+60
+Cours développement d’applications réparties
+Schéma illustratif
+IP locale : 192.168.1.10
+Adresse MAC : AA:AA:AA:AA:AA:AA
+Client
+Interface LAN : 192.168.1.1
+MAC : BB:BB:BB:BB:BB:BB
+Interface WAN (vers Internet) : 102.45.60.10
+Routeur Emetteur
+2. Internet
+1. Accès au réseau
+Le routeur remplace :
+−Adresse MAC source →MAC du routeur (BB:BB:BB:BB:BB:BB)
+−Adresse MAC destination →MAC du routeur suivant (DD:DD:DD:DD:DD:DD)
+Interface WAN : 165.30.22.5
+Interface LAN : 10.0.0.1
+MAC : DD:DD:DD:DD:DD:DD
+Routeur Récepteur
+
+===== PAGE 11 =====
+Dr. Mouna KARAJA
+61
+Cours développement d’applications réparties
+Schéma illustratif
+IP locale : 192.168.1.10
+Adresse MAC : AA:AA:AA:AA:AA:AA
+Client
+Interface LAN : 192.168.1.1
+MAC : BB:BB:BB:BB:BB:BB
+Interface WAN : 102.45.60.10
+Interface WAN : 165.30.22.5
+Interface LAN : 10.0.0.1
+MAC : DD:DD:DD:DD:DD:DD
+Routeur
+Emetteur
+Routeur
+Récepteur
+1. Accès au réseau
+IP locale : 10.0.0.5
+Adresse MAC : EE:EE:EE:EE:EE:EE
+Serveur
+−Le routeur reçoit la trame.
+−Il désencapsule pour lire les adresses IP.
+
+===== PAGE 12 =====
+Dr. Mouna KARAJA
+62
+Cours développement d’applications réparties
+Schéma illustratif
+IP locale : 192.168.1.10
+Adresse MAC : AA:AA:AA:AA:AA:AA
+Client
+Interface LAN : 192.168.1.1
+MAC : BB:BB:BB:BB:BB:BB
+Interface WAN : 102.45.60.10
+Interface WAN : 165.30.22.5
+Interface LAN : 10.0.0.1
+MAC : DD:DD:DD:DD:DD:DD
+Routeur
+Emetteur
+Routeur
+Récepteur
+2. Internet
+IP locale : 10.0.0.5
+Adresse MAC : EE:EE:EE:EE:EE:EE
+Serveur
+1. Accès au réseau
+La couche internet fait la traduction NAT inverse :
+−IP destination devient 10.0.0.5 (machine du
+réseau local)
+
+===== PAGE 13 =====
+Dr. Mouna KARAJA
+63
+Cours développement d’applications réparties
+Schéma illustratif
+IP locale : 192.168.1.10
+Adresse MAC : AA:AA:AA:AA:AA:AA
+Client
+Interface LAN : 192.168.1.1
+MAC : BB:BB:BB:BB:BB:BB
+Interface WAN : 102.45.60.10
+Interface WAN : 165.30.22.5
+Interface LAN : 10.0.0.1
+MAC : DD:DD:DD:DD:DD:DD
+Routeur
+Emetteur
+Routeur
+Récepteur
+2. Internet
+IP locale : 10.0.0.5
+Adresse MAC : EE:EE:EE:EE:EE:EE
+Serveur
+1. Accès au réseau
+La couche accès au réseau change les adresses MAC :
+−MAC source : DD:DD:DD:DD:DD:DD (MAC du routeur)
+−MAC destination : EE:EE:EE:EE:EE:EE (MAC du serveur)
+4. Application
+3. Transport
+2. Internet
+1. Accès au réseau
+Désencapsulation
+
+===== PAGE 14 =====
+Dr. Mouna KARAJA
+64
+Cours développement d’applications réparties
+Mécanismes de communication bas niveau
+Quand deux applications veulent échanger des données à travers un réseau, elles doivent :
+1.
+s’identifier (adresse IP, port),
+2.
+établir un lien de communication fiable,
+3.
+envoyer et recevoir des messages sous une forme compréhensible par la couche transport.
+Rappel du contexte :
+Mais ni l’application ni la couche transport ne peuvent communiquer directement !
+C’est là qu’intervient la socket.
+Application
+Transport
+Application
+Transport
+Client
+Serveur
+Socket
+client
+Socket
+serveur
+Internet
+
+===== PAGE 15 =====
+Dr. Mouna KARAJA
+65
+Cours développement d’applications réparties
+Mécanismes de communication bas niveau
+Un socket est le couple (adresse IP, port) →il identifie une application précise sur une machine.
+Les communications TCP ou UDP sont identifiées par le quadruplet
+(IP_client, Port_client, IP_serveur, Port_serveur).
+➢Une socket est une interface logicielle (un point d’accès) entre l’application (couche
+application) et le protocole de transport (TCP ou UDP).
+Qu’est ce
+qu’une
+socket ?
+➢Elle permet à un programme d’envoyer et de recevoir des données comme s’il écrivait
+dans un canal de communication.
+➢La socket est la “porte” par laquelle les données d’une application sortent pour entrer
+dans le réseau (et inversement).
+→Ce couple forme un socket endpoint unique sur une machine.
+Il faut distinguer deux types principaux de sockets, selon le protocole de transport utilisé :
+✓les sockets TCP,
+✓et les sockets UDP, basées sur l’échange de datagrammes.
+
+===== PAGE 16 =====
+Dr. Mouna KARAJA
+66
+Cours développement d’applications réparties
+Mécanismes de communication bas niveau
+Principe de base des sockets :
+Application
+Client
+Socket
+client
+Etape 1 :
+L’application (par exemple un client
+HTTP) veut envoyer un message.
+Elle crée une socket et demande à
+la couche transport d’envoyer les
+données.
+Source IP : 192.168.1.15
+Source Port : 53000 (port éphémère)
+Destination IP : 142.250.185.78
+Destination Port : 80 (HTTP)
+
+===== PAGE 17 =====
+Dr. Mouna KARAJA
+67
+Cours développement d’applications réparties
+Mécanismes de communication bas niveau
+Principe de base des sockets :
+Application
+Transport
+Client
+Socket
+client
+Etape 2 :
+La couche transport encapsule les
+données
+dans
+des
+segments,
+ajoute les en-têtes de contrôle et
+les transmet ensuite à la couche
+suivante.
+
+===== PAGE 18 =====
+Dr. Mouna KARAJA
+68
+Cours développement d’applications réparties
+Mécanismes de communication bas niveau
+Principe de base des sockets :
+Application
+Transport
+Client
+Socket
+client
+Internet
+Internet
+Réseau
+Internet
+Réseau
+Etape 3 :
+Les couches internet et accès au
+réseau s’occupent d’acheminer les
+paquets
+jusqu’à
+la
+machine
+destinataire.
+
+===== PAGE 19 =====
+Dr. Mouna KARAJA
+69
+Cours développement d’applications réparties
+Mécanismes de communication bas niveau
+Principe de base des sockets :
+Application
+Transport
+Client
+Socket
+client
+Socket
+serveur
+Internet
+Internet
+Réseau
+Transport
+Internet
+Réseau
+Etape 4 :
+La
+couche
+transport
+du
+destinataire
+reçoit
+le
+paquet, le redirige vers la
+socket
+identifiée
+par
+le
+port.
+Source IP : 192.168.1.15
+Source Port : 53000 (port éphémère)
+Destination IP : 142.250.185.78
+Destination Port : 80 (HTTP)
+
+===== PAGE 20 =====
+Dr. Mouna KARAJA
+70
+Cours développement d’applications réparties
+Mécanismes de communication bas niveau
+Principe de base des sockets :
+Application
+Transport
+Application
+Client
+Serveur
+Socket
+client
+Internet
+Internet
+Réseau
+Transport
+Internet
+Réseau
+Etape 5 :
+La
+socket
+transmet
+les
+données
+à
+l’application
+(serveur HTTP par exemple)
+→
+L’application
+lit
+les
+données depuis sa socket
+Socket
+serveur
+Pourquoi les sockets sont indispensables ?
+✓Une application ne pourrait pas accéder au réseau,
+✓Les couches basses ne sauraient pas à quelle application
+livrer les données,
+✓Il n’y aurait pas de moyen simple pour établir ou maintenir
+une communication bidirectionnelle.
+
+===== PAGE 21 =====
+Dr. Mouna KARAJA
+71
+Cours développement d’applications réparties
+Les sockets TCP
+Le protocole TCP est orienté connexion. Avant tout échange, une connexion fiable est établie entre le client
+et le serveur. Les données circulent ensuite sous forme de flux continus, garantissant :
+✓la livraison des données sans perte,
+✓le respect de l’ordre d’envoi,
+✓et la fiabilité de la communication.
+1.
+Le serveur crée un objet ServerSocket et se met en attente d’un client sur un port précis.
+2.
+Le client crée un objet Socket et tente de se connecter à ce port.
+3.
+Une fois la connexion acceptée, les deux programmes peuvent échanger des données en utilisant des
+flux (InputStream et OutputStream).
+4.
+À la fin, les sockets sont fermées.
+En java, les classes utilisées sont :
+✓ServerSocket : utilisée côté serveur pour écouter les connexions entrantes sur un port donné.
+✓Socket : utilisée côté client (et aussi côté serveur après acceptation) pour établir la connexion et
+échanger les données (lecture/écriture via des flux).
+Fonctionnement :
+
+===== PAGE 22 =====
+Dr. Mouna KARAJA
+72
+Cours développement d’applications réparties
+Les sockets TCP
+
+===== PAGE 23 =====
+Dr. Mouna KARAJA
+73
+Cours développement d’applications réparties
+Les sockets UDP
+Le protocole UDP est non orienté connexion. Il n’établit aucune connexion préalable entre le client et le
+serveur. Les données sont envoyées sous forme de datagrammes indépendants : chaque paquet circule
+séparément dans le réseau, sans garantie d’ordre ni de réception.
+1.
+Le serveur UDP crée un DatagramSocket et attend la réception d’un paquet.
+2.
+Le client UDP crée également un DatagramSocket et envoie un DatagramPacket vers l’adresse et le port
+du serveur.
+3.
+Chaque message envoyé est indépendant des autres →il n’existe aucune session ni connexion
+persistante.
+4.
+Après réception, le serveur peut répondre via un autre datagramme.
+Fonctionnement :
+En java, les classes utilisées sont :
+✓DatagramSocket : représente la « prise » de communication pour envoyer ou recevoir des datagrammes.
+✓DatagramPacket : représente le paquet de données à transmettre (il contient les données, l’adresse IP
+du destinataire et le port).
+
+===== PAGE 24 =====
+Dr. Mouna KARAJA
+74
+Cours développement d’applications réparties
+Les sockets UDP
+
+===== PAGE 25 =====
+Dr. Mouna KARAJA
+75
+Cours développement d’applications réparties
+Bas niveau VS. Haut niveau
+Avec la complexité croissante des applications distribuées, les développeurs ont cherché à :
+✓Simplifier la programmation réseau,
+✓Automatiser la gestion des échanges (marshalling, transport, erreurs),
+✓Rendre la communication transparente (comme un appel local),
+✓Assurer l’interopérabilité entre systèmes et langages.
+Rappel : mécanismes de communication bas niveau (les sockets)
+Avantage : contrôle total, performance.
+Inconvénient : code complexe, risque d’erreurs, couplage fort entre client et serveur.
+Le programmeur gère : •
+la création de la connexion (adresse IP, port) ;
+•
+l’envoi/réception de flux d’octets ;
+•
+le format des messages (encodage, protocole applicatif).
+D’où la naissance des mécanismes de communication haut niveau.
+
+===== PAGE 26 =====
+Dr. Mouna KARAJA
+76
+Cours développement d’applications réparties
+Bas niveau VS. Haut niveau
+Aspect
+Bas niveau (Sockets)
+Haut niveau (RPC, RMI, ...)
+Niveau d’abstraction
+Très bas : Le programmeur manipule les
+paquets, adresses, ports, flux.
+Élevé : Le programmeur appelle simplement
+une fonction ou méthode distante.
+Unité d’échange
+Flux d’octets
+Appel de fonction / méthode / service
+Gestion du protocole
+Manuelle
+Automatisée
+Format des données
+Défini par le programmeur
+Structuré (JSON, XML, Protobuf...)
+Complexité du code
+Élevée (il faut gérer la communication
+réseau manuellement).
+Réduite (les détails réseau sont cachés).
+Contrôle sur les détails
+réseau
+Total : La communication réseau est
+explicite.
+Transparence partielle : on a l’impression
+d’un appel local.
+Objectif
+Performance,
+flexibilité
+(Le
+programmeur contrôle tout)
+Productivité
+(facilité
+et
+la
+rapidité
+de
+développement), simplicité, concentration
+sur
+la
+logique
+métier,
+pas
+sur
+la
+communication.
+
+===== PAGE 27 =====
+Dr. Mouna KARAJA
+77
+Cours développement d’applications réparties
+Historique et évolution
+Époque
+Contexte technique et besoins
+Mécanismes
+dominants
+Caractéristiques principales
+Années 1970
+– début 1980
+Début
+des
+réseaux
+informatiques
+:
+besoin
+d’envoyer des données entre
+machines.
+Sockets
+Mécanisme bas niveau :
+✓Communication via des flux d’octets.
+✓Programmation
+manuelle
+(adresses
+IP,
+ports, protocole TCP/UDP).
+✓Très flexible mais complexe.
+Milieu – fin
+des
+années
+1980
+Complexité de programmation
+avec sockets : les développeurs
+veulent
+rendre
+la
+communication transparente.
+RPC
+(Remote
+Procedure
+Call)
+(Sun RPC, ONC RPC)
+Première abstraction haut niveau :
+✓appel de procédure distante.
+✓Sérialisation automatique des arguments.
+✓Masque le transport réseau.
+Années 1990
+Montée de la programmation
+orientée
+objet
+→
+besoin
+d’appels de méthodes sur des
+objets distants.
+CORBA, Java RMI,
+DCOM
+Extension du principe RPC aux objets distants:
+✓Gestion des références d’objets et des
+exceptions à distance.
+✓Communication
+entre
+langages
+et
+plateformes différentes (CORBA).
+
+===== PAGE 28 =====
+Dr. Mouna KARAJA
+78
+Cours développement d’applications réparties
+Historique et évolution
+Époque
+Contexte technique et besoins
+Mécanismes
+dominants
+Caractéristiques principales
+Années 2000
+Explosion du Web →besoin
+d’interopérabilité
+et
+de
+communication
+entre
+applications hétérogènes.
+SOAP, XML-RPC, Web
+Services
+✓Communication via HTTP + XML.
+✓Standardisation (WSDL, UDDI).
+✓Largement utilisé dans les entreprises
+et systèmes interconnectés.
+Années 2010 Généralisation du Web, besoin
+de légèreté et de scalabilité.
+REST, JSON-RPC, gRPC,
+Thrift
+✓Communication
+via
+HTTP
++
+JSON
+(REST) ou via binaire (gRPC, Thrift).
+✓APIs simples, typées et performantes.
+✓Adaptées aux microservices et aux
+applications cloud.
+Années
+2020+
+Environnements cloud, mobiles
+et temps réel.
+GraphQL, WebSockets,
+Async APIs
+✓Communication flexible et dynamique.
+✓Support
+du
+streaming,
+de
+la
+communication bidirectionnelle.
+✓Forte orientation vers la performance
+et la résilience.
+
+===== PAGE 29 =====
+Dr. Mouna KARAJA
+79
+Cours développement d’applications réparties
+Mécanismes de communication haut niveau
+Un mécanisme de communication haut niveau est une abstraction logicielle qui permet à des composants
+répartis de communiquer sans gérer directement les détails bas niveau du réseau (sockets, ports, formats
+binaires, etc.).
+C’est une abstraction qui masque la complexité des communications réseau en fournissant des modèles de
+programmation plus intuitifs et plus proches des concepts métier. →Le programmeur interagit via des
+objets, des procédures, des services, ou des messages structurés au lieu de manipuler des flux d’octets.
+Les grandes familles de mécanismes haut niveau :
+RPC (Remote
+Procedure Call)
+• appeler une fonction
+distante comme une
+fonction locale.
+RMI (Remote Method
+Invocation)
+• Extension orientée
+objet du RPC
+Services Web (SOAP,
+REST, gRPC)
+Mécanismes orientés
+message
+(communication
+asynchrone) : Basés sur
+des files de messages
+ou des brokers (ex.
+JMS, RabbitMQ, Kafka).
+
+===== PAGE 30 =====
+Dr. Mouna KARAJA
+80
+Cours développement d’applications réparties
+RPC (Remote Procedure Call)
+Les RPC apparaissent comme une abstraction qui permet au développeur d’appeler une procédure (ou
+méthode) située sur une autre machine comme s’il l’appelait localement. L’objectif est de masquer la
+complexité du réseau et de rendre la programmation distribuée plus proche de la programmation locale.
+Pourquoi RPC ?
+Abstraction
+Productivité
+Lisibilité et
+maintenance
+Interopérabilité
+Principe de base du RPC :
+1.
+Le client appelle une fonction “comme d’habitude”.
+2.
+Le système RPC prépare l’appel et l’envoie au serveur.
+3.
+Le serveur reçoit la demande, exécute la fonction demandée.
+4.
+Le résultat est renvoyé automatiquement au client.
+5.
+Le client récupère le résultat comme s’il venait d’une fonction locale.
+
+===== PAGE 31 =====
+Dr. Mouna KARAJA
+81
+Cours développement d’applications réparties
+Composants clés et vocabulaire
+→Conversion des données à envoyer et à recevoir
+C’est un fichier qui décrit les fonctions accessibles à distance (leurs noms, leurs paramètres, leurs types
+de retour, etc.). →C’est le développeur du service (serveur) qui écrit le fichier IDL.
+Stub client / Stub Serveur →Les intermédiaires qui transmettent l’appel
+Marshalling / Unmarshalling
+✓Stub client (proxy) : code généré côté client qui remplace l’appel réel et s’occupe du marshalling +
+envoi.
+✓Skeleton (stub serveur) : code côté serveur qui reçoit les messages, fait l’unmarshalling et appelle la
+procédure réelle.
+✓Marshalling / Serialization : conversion des paramètres en une représentation binaire (Protobuf,
+Thrift) ou textuelle (JSON, XML) pour transport.
+✓Unmarshalling / Deserialization : reconstitution des paramètres à l’autre bout.
+IDL (Interface Definition Language) →Langage de description de l’interface
+
+===== PAGE 32 =====
+Dr. Mouna KARAJA
+82
+Cours développement d’applications réparties
+Fonctionnement détaillé du RPC
+Définition de
+l’interface
+Génération
+du code
+Exécution
+côté serveur
+Appel côté
+client
+Traitement
+côté serveur
+Retour côté
+client
+1
+La signature de la fonction distante (types d’arguments, types de retour) est écrite dans l’IDL.
+
+===== PAGE 33 =====
+Dr. Mouna KARAJA
+83
+Cours développement d’applications réparties
+Fonctionnement détaillé du RPC
+Définition de
+l’interface
+Génération
+du code
+Exécution
+côté serveur
+Appel côté
+client
+Traitement
+côté serveur
+Retour côté
+client
+2
+Des outils spéciaux (qui dépendent de la technologie
+RPC)
+lisent
+le
+fichier
+d’interface
+et
+génèrent
+automatiquement au moment de la compilation ou
+du déploiement :
+✓un stub côté client (qui remplace la fonction
+distante),
+✓un squelette côté serveur (qui reçoit la
+requête et appelle la vraie fonction).
+Technologie RPC
+Outil de génération
+ONC RPC (Sun RPC)
+rpcgen
+DCE
+RPC
+(Distributed
+Computing Environment)
+idl (compilateur IDL DCE)
+CORBA
+(Common
+Object
+Request Broker Architecture)
+idl compiler (souvent idltojava,
+omniidl, etc.)
+Microsoft RPC (Windows)
+MIDL (Microsoft IDL Compiler)
+
+===== PAGE 34 =====
+Dr. Mouna KARAJA
+84
+Cours développement d’applications réparties
+Fonctionnement détaillé du RPC
+Définition de
+l’interface
+Génération
+du code
+Exécution
+côté serveur
+Appel côté
+client
+Traitement
+côté serveur
+Retour côté
+client
+3
+✓Le serveur implémente la logique (fonctions réelles).
+✓Il enregistre son service dans un annuaire (optionnel) ou écoute sur un port connu.
+
+===== PAGE 35 =====
+Dr. Mouna KARAJA
+85
+Cours développement d’applications réparties
+Fonctionnement détaillé du RPC
+Définition de
+l’interface
+Génération
+du code
+Exécution
+côté serveur
+Appel côté
+client
+Traitement
+côté serveur
+Retour côté
+client
+4
+✓Le programme client appelle la fonction sur le stub.
+✓Le stub exécute le marshalling : transforme les arguments en message.
+✓Le message est envoyé via le transport (socket TCP).
+✓Le stub attend une réponse (s’il s’agit d’un RPC synchrone).
+
+===== PAGE 36 =====
+Dr. Mouna KARAJA
+86
+Cours développement d’applications réparties
+Fonctionnement détaillé du RPC
+Définition de
+l’interface
+Génération
+du code
+Exécution
+côté serveur
+Appel côté
+client
+Traitement
+côté serveur
+Retour côté
+client
+5
+✓Le skeleton reçoit le message, effectue l’unmarshalling.
+✓Il appelle la fonction réelle.
+✓Il récupère le résultat (ou gère l’exception).
+✓Il envoie la réponse marshallée.
+
+===== PAGE 37 =====
+Dr. Mouna KARAJA
+87
+Cours développement d’applications réparties
+Fonctionnement détaillé du RPC
+Définition de
+l’interface
+Génération
+du code
+Exécution
+côté serveur
+Appel côté
+client
+Traitement
+côté serveur
+Retour côté
+client
+6
+Le stub client reçoit la réponse, effectue l’unmarshalling et retourne la valeur au programme appelant.
+
+===== PAGE 38 =====
+Dr. Mouna KARAJA
+88
+Cours développement d’applications réparties
+Fonctionnement détaillé du RPC
+RPC runtime : C’est le
+mécanisme
+sous-jacent
+de communication.
+→Une couche logicielle
+interne
+fournie
+par
+la
+bibliothèque RPC
+Il envoie les messages via
+le réseau (souvent avec
+des
+sockets
+TCP/UDP).
+Il gère la transmission,
+l’attente de réponse, et la
+réception.
+
+===== PAGE 39 =====
+Dr. Mouna KARAJA
+89
+Cours développement d’applications réparties
+Question de reflexion
+Il y a plusieurs cas possibles selon la technologie utilisée :
+Contexte
+Comment le client découvre le service ?
+Même entreprise / même projet
+Le développeur reçoit le fichier IDL ou l’interface Java. C’est
+souvent documenté en interne.
+Environnement
+distribué
+(ex
+:
+CORBA, RMI Registry, gRPC)
+Le client interroge un annuaire de services (naming service).
+Cet annuaire dit sur quelle machine/port se trouve le service.
+Web moderne (SOAP, REST, gRPC)
+Il existe une description publique (ex : fichier WSDL ou .proto)
+que
+le
+client
+télécharge
+pour
+générer
+son
+stub
+automatiquement.
+Comment le client « sait » que la fonction existe ?
+
+===== PAGE 40 =====
+Dr. Mouna KARAJA
+90
+Cours développement d’applications réparties
+Pseudocode RPC synchrone (vue logique)
+service Calculator {
+int add(int a, int b);
+int sub(int a, int b);
+}
+IDL (Interface Definition Language)
+public class CalculatorImpl implements Calculator {
+@Override
+public int add(int a, int b) {
+System.out.println("Reçu une requête RPC: add(" + a + ", " + b + ")");
+return a + b; // traitement réel
+}
+// méthode sub
+}
+Implémentation réelle du service coté serveur
+public static void main(String[] args) {
+Calculator service = new CalculatorImpl();
+registerService("Calculator", service); // rendu disponible via RPC
+System.out.println("Service Calculator prêt.");
+}
+Enregistrement du service par le serveur auprès du système RPC
+
+===== PAGE 41 =====
+Dr. Mouna KARAJA
+91
+Cours développement d’applications réparties
+Pseudocode RPC synchrone (vue logique)
+public class CalculatorServerStub {
+private Calculator impl;
+// référence vers l’implémentation réelle
+public CalculatorServerStub(Calculator impl) {
+this.impl = impl;
+}
+// appelé quand une requête RPC arrive
+public String handleRequest(String requestJson) {
+// Exemple : requestJson =
+{"method":"add","args":[3,4]}
+JSONObject req = new JSONObject(requestJson);
+String method = req.getString("method");
+JSONArray args = req.getJSONArray("args");
+int result = 0;
+switch (method) {
+case "add":
+result = impl.add(args.getInt(0), args.getInt(1));
+break;
+case "sub":
+result = impl.sub(args.getInt(0), args.getInt(1));
+break;
+default:
+throw new RuntimeException("Méthode
+inconnue: " + method);
+}
+// renvoyer la réponse JSON
+return "{\"result\": " + result + "}";
+}
+}
+Skeleton coté serveur
+
+===== PAGE 42 =====
+Dr. Mouna KARAJA
+92
+Cours développement d’applications réparties
+Pseudocode RPC synchrone (vue logique)
+public class CalculatorClientStub implements Calculator {
+private NetworkChannel channel;
+// abstraction de la connexion réseau
+public CalculatorClientStub(NetworkChannel channel) {
+this.channel = channel;
+}
+public int add(int a, int b) {
+String req = "{\"method\":\"add\",\"args\":[" + a + ","
++ b + "]}";
+String resp = channel.sendRequest(req); // envoie au
+serveur
+JSONObject json = new JSONObject(resp);
+return json.getInt("result");
+}
+public int sub(int a, int b) {
+String req = "{\"method\":\"sub\",\"args\":[" + a + ","
++ b + "]}";
+String resp = channel.sendRequest(req);
+JSONObject json = new JSONObject(resp);
+return json.getInt("result");
+}
+}
+Stub coté client (proxy)
+
+===== PAGE 43 =====
+Dr. Mouna KARAJA
+93
+Cours développement d’applications réparties
+Pseudocode RPC synchrone (vue logique)
+Ce qui se produit en coulisse :
+1.
+stub.client.marshall(3,4) →message
+2.
+transport.send(message)
+3.
+server.receive →skeleton.unmarshall
+→server.add(3,4) →7
+4.
+server.marshall(7) →transport.send
+5.
+client.receive →stub.unmarshall →
+retourne 7
+calculator remoteService = getRemoteService("Calculator");
+result = remoteService.add(3, 4) // semble local
+print(result) // 7
+Appel coté client
+public class RpcRuntime {
+public static Object getRemoteService(String name) {
+if (name.equals("Calculator")) {
+return new CalculatorClientStub(new
+NetworkChannel("localhost", 5000));
+}
+throw new RuntimeException("Service inconnu : " +
+name);
+}
+}
+RPC runtime
+
+===== PAGE 44 =====
+Dr. Mouna KARAJA
+94
+Cours développement d’applications réparties
+Avantages du RPC
+Facilite le développement
+• Code plus proche du modèle local.
+Encapsulation de la communication
+• Développeur focalisé sur l’API métier
+IDL + génération de code
+• Cohérence des interfaces, moins d’erreurs manuelles.
+Support de différents paradigmes
+• sync/asych, streaming
+Interopérabilité
+• Avec SOAP/gRPC, on peut connecter des services écrits dans
+différents langages.
+
+===== PAGE 45 =====
+Dr. Mouna KARAJA
+95
+Cours développement d’applications réparties
+Inconvénients du RPC
+01
+02
+03
+04
+05
+06
+Fausse impression de transparence : un appel
+distant n’est pas un appel local — latence,
+pannes, variabilité.
+Sérialisation coûteuse : conversion/validation
+des objets peut être lourde.
+Couplage sémantique : changements d’interface
+peuvent casser les clients si versioning absent.
+Scalabilité : un nombre élevé d’appels RPC
+synchrones
+peut
+créer
+des
+goulots
+d’étranglement.
+Sécurité : exposition de services via le réseau
+nécessite authentification, chiffrement, contrôle
+d’accès.
+Debug et traçabilité : plus difficile que pour
+des appels locaux — nécessité d’outils de
+tracing distribué.
+
+===== PAGE 46 =====
+Dr. Mouna KARAJA
+96
+Cours développement d’applications réparties
+Transition historique : RPC →CORBA →RMI
+Lorsque le RPC (Remote Procedure Call) a été inventé dans les années 1980, la majorité des langages
+utilisés (comme C, Pascal, Ada) étaient procéduraux.
+Avant que Java n’existe (1995), l’OMG (Object Management Group) a conçu un standard appelé :
+CORBA – Common Object Request Broker Architecture (début des années 1990).
+Permettre à des programmes écrits dans différents langages (C++, etc.) de communiquer entre eux, en
+appelant des méthodes d’objets distants de manière transparente.
+Les systèmes distribués devaient eux aussi évoluer pour permettre l’appel de méthodes sur des
+objets distants, pas seulement de fonctions.
+On appelait donc à distance des fonctions ou procédures, pas des objets.
+Mais à la fin des années 1980 et au début des années 1990, la programmation orientée objet (POO) s’est
+imposée (C++, Smalltalk, puis Java).
+Objectif de CORBA :
+
+===== PAGE 47 =====
+Dr. Mouna KARAJA
+97
+Cours développement d’applications réparties
+Transition historique : RPC →CORBA →RMI
+CORBA est une extension orientée objet du RPC :
+1.
+Définition des interfaces dans un langage neutre appelé IDL (Interface Definition Language).
+2.
+Compilation de l’IDL pour générer automatiquement les stubs (côté client) et les squelettes (côté
+serveur).
+3.
+Le client appelle une méthode sur l’objet distant via le stub, comme s’il s’agissait d’un objet local.
+4.
+L’ORB (Object Request Broker) se charge de transporter la requête au serveur et de gérer la
+communication réseau.
+5.
+Le serveur reçoit l’appel via le squelette, exécute la méthode et renvoie le résultat au client à
+travers l’ORB.
+CORBA a eu un grand succès dans les années 1990, étant donné qu’il visait une interopérabilité multi-
+langages, mais :
+✓Il était complexe à configurer ;
+✓Il nécessitait beaucoup de fichiers et de couches pour faire de simples appels.
+L’ORB joue exactement le même rôle que le RPC Runtime dans un système RPC classique. il est
+l’intermédiaire qui s’occupe de toute la mécanique réseau entre le client et le serveur.
+Limites de CORBA :
+
+===== PAGE 48 =====
+Dr. Mouna KARAJA
+98
+Cours développement d’applications réparties
+La naissance de RMI (Remote Method Invocation)
+Le but du RMI est donc :
+✓de permettre la communication entre objets Java distribués sur un réseau,
+✓tout en conservant les principes de la programmation orientée objet (encapsulation, héritage,
+polymorphisme…),
+✓et en cachant complètement la complexité du réseau au développeur.
+Les ingénieurs de Sun Microsystems se sont inspirés du modèle CORBA, mais ont voulu un système :
+✓Plus léger,
+✓Spécifique à Java,
+✓Utilisant la sérialisation native des objets Java.
+RMI : Un mécanisme purement Java, inspiré de CORBA, qui permet d’invoquer une méthode sur un
+objet situé sur une autre machine Java, comme si l’objet était local.
+Quand Java est apparu (vers 1995), il a apporté un modèle objet simple et uniforme, et une machine
+virtuelle (JVM) garantissant la portabilité.
+C’est ainsi qu’est né RMI
+(Remote Method Invocation)
+
+===== PAGE 49 =====
+Dr. Mouna KARAJA
+99
+Cours développement d’applications réparties
+Les composants RMI
+Programme qui invoque les
+méthodes distantes à travers
+une référence obtenue via le
+registre RMI.
+Client
+Héberge les objets distants et
+les enregistre dans le registre
+RMI.
+Serveur
+Service de nommage qui
+associe un nom logique à un
+objet distant pour permettre au
+client de le localiser.
+Registre RMI
+Contient le code de ces
+méthodes. Elle étend
+UnicastRemoteObject.
+Classe d’implémentation
+Définit les méthodes
+accessibles à distance. Elle
+hérite de java.rmi.Remote.
+Interface distante
+Définit les méthodes
+accessibles à distance. Elle
+hérite de java.rmi.Remote.
+Stub client
+* Skeleton serveur : Initialement, le compilateur RMI (RMIC) générait stubs et skeletons via compilation, mais
+le skeleton, depuis java 5, est créé dynamiquement sans nécessiter de compilation manuelle
+Rend un objet disponible
+et accessible à distance
+Marqueur : Pour indiquer que les méthodes
+qu’elle définit peuvent être appelées à distance
+
+===== PAGE 50 =====
+Dr. Mouna KARAJA
+100
+Cours développement d’applications réparties
+Etapes de fonctionnement RMI
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+// Interface distante
+public interface Hello extends Remote {
+String direBonjour(String nom) throws RemoteException;
+}
+Étape 1 : Définir l’interface distante
+L’interface distante définit les méthodes qui peuvent être appelées depuis une autre JVM.
+Elle doit :
+✓étendre java.rmi.Remote
+✓déclarer toutes ses méthodes avec throws RemoteException.
+Exemple : Code Interface distante : Hello.java
+2
+3
+4
+5
+1
+
+===== PAGE 51 =====
+Dr. Mouna KARAJA
+101
+Cours développement d’applications réparties
+Etapes de fonctionnement RMI
+import java.rmi.server.UnicastRemoteObject;
+import java.rmi.RemoteException;
+public class HelloImpl extends UnicastRemoteObject implements Hello {
+public HelloImpl() throws RemoteException {
+super();
+}
+@Override
+public String direBonjour(String nom) throws RemoteException {
+return "Bonjour, " + nom + " !";
+}
+}
+Étape 2 : Créer la classe d’implémentation distante
+Cette classe :
+Exemple : Code Implémentation : HelloImpl.java
+Définition de la
+méthode distante
+Constructeur qui peut lever
+une RemoteException
+Classe qui implémente
+l'interface distante
+✓implémente l’interface distante,
+✓hérite de UnicastRemoteObject,
+✓fournit le code concret de chaque méthode distante.
+1
+3
+4
+5
+2
+
+===== PAGE 52 =====
+Dr. Mouna KARAJA
+102
+Cours développement d’applications réparties
+Etapes de fonctionnement RMI
+import java.rmi.Naming;
+import java.rmi.registry.LocateRegistry;
+public class ServeurRMI {
+public static void main(String[] args) {
+try {
+LocateRegistry.createRegistry(1099);
+HelloImpl obj = new HelloImpl();
+Naming.rebind("rmi://localhost/HelloService", obj);
+System.out.println("Serveur RMI prêt et en attente
+des requêtes...");
+} catch (Exception e) { e.printStackTrace(); }
+}
+}
+Étape 3 : Mettre en place le serveur RMI
+Le serveur : ✓crée et exporte l’objet distant,
+✓démarre le registre RMI (service de nommage),
+✓enregistre l’objet dans le registre sous un nom logique (via Naming.rebind).
+Exemple : Code serveur : ServeurRMI.java
+Démarrage du registre RMI
+souvent sur le port 1099
+Création de
+l’objet distant
+Enregistrement de l’objet
+dans le registre RMI
+1
+2
+4
+5
+3
+
+===== PAGE 53 =====
+Dr. Mouna KARAJA
+103
+Cours développement d’applications réparties
+Etapes de fonctionnement RMI
+1. localise l’objet distant via le registre RMI (Naming.lookup()),
+2. obtient une référence distante (le stub),
+3. appelle les méthodes distantes comme si elles étaient locales.
+import java.rmi.Naming;
+public class ClientRMI {
+public static void main(String[] args) {
+try {
+Hello obj = (Hello) Naming.lookup("rmi://localhost/HelloService");
+String reponse = obj.direBonjour("Mouna");
+System.out.println("Réponse du serveur : " + reponse);
+} catch (Exception e) { e.printStackTrace(); }
+}
+}
+Affichage du résultat
+retourné par le serveur
+Invocation de la
+méthode distante
+Localisation de
+l’objet distant
+Exemple : Code client : ClientRMI.java
+Étape 4 : Ecrire le client RMI
+Le client :
+1
+2
+3
+5
+4
+
+===== PAGE 54 =====
+Dr. Mouna KARAJA
+104
+Cours développement d’applications réparties
+Etapes de fonctionnement RMI
+Étape 5 : Compilation et exécution
+1. Compiler tous les fichiers Java :
+javac *.java
+2. Démarrer le registre RMI (dans un terminal séparé) :
+rmiregistry
+➔Ce service écoute par défaut sur le port 1099.
+➔Il faut le lancer dans le même répertoire que les classes compilées.
+3. Démarrer le serveur :
+java ServeurRMI
+→Message attendu : Serveur RMI prêt et en attente des requêtes...
+4. Lancer le client :
+java ClientRMI
+→Réponse du serveur : Bonjour, Mouna !
+1
+2
+3
+4
+5
+
+===== PAGE 55 =====
+Dr. Mouna KARAJA
+105
+Cours développement d’applications réparties
+L’architecture générale RMI
+Client
+Stub
+Server
+Skeleton
+Return Client Stub
+Registre
+des
+objets distants :
+stocke
+les
+références
+d’objets distants
+exportés
+définit le contrat entre client et serveur (la méthode que le client peut appeler).
+Remote interface
+Remote interface
+
+===== PAGE 56 =====
+Dr. Mouna KARAJA
+106
+Cours développement d’applications réparties
+Avantages et inconvénients du RMI
+Peu adapté
+pour les
+systèmes
+distribués
+hétérogènes.
+Dépendance
+forte à la JVM
+(pas utilisable
+avec d’autres
+langages)
+Spécifique à
+Java (pas
+interopérable)
+Les inconvénients
+Les avantages
+Simple à utiliser
+dans des
+environnements
+purement Java.
+Permet de passer
+des objets
+complets
+Masque
+totalement la
+communication
+réseau
+Intégration
+native à Java
+
+===== PAGE 57 =====
+Dr. Mouna KARAJA
+107
+Cours développement d’applications réparties
+RPC vs. RMI
+Aspect
+RPC
+RMI
+Paradigme
+Procédural
+Orienté Objet
+Langage
+Multi-langages (C, C++, etc.)
+Spécifique à Java
+Ce qu’on appelle
+Des fonctions (procédures)
+Des
+méthodes
+d’objets
+distants
+Type de données transmis
+Types simples (int, string, etc.)
+Objets Java (via sérialisation)
+Interface
+Définie via un fichier IDL
+Interface
+Java
+qui
+étend
+Remote
+Interopérabilité
+Forte
+(langages
+différents
+possibles)
+Limitée à Java
+Outil de génération
+idlj, protoc, etc.
+rmic
+Squelette
+Toujours présent
+Automatique depuis Java 5

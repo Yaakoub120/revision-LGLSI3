@@ -1,0 +1,509 @@
+
+===== PAGE 1 =====
+Administration des
+Systèmes
+MODULE 3 : MAINTENANCE, VÉRIFICATION ET
+MÉMOIRE VIRTUELLE
+HÉDI NSIBI – FACULTÉ DES SCIENCES DE MONASTIR
+
+===== PAGE 2 =====
+1. Vérification et réparation
+des systèmes de fichiers
+
+Objectif :
+Détecter et corriger les erreurs de structure des systèmes de fichiers
+(FS)
+Ces erreurs peuvent apparaître après :
+-
+une coupure d’électricité ⚡
+-
+un arrêt brutal du système 
+-
+un démontage non propre du disque 
+
+===== PAGE 3 =====
+1. Vérification et réparation
+des systèmes de fichiers
+
+Outil principal: Fsck(File System Check)
+Fsck est l’utilitaire standard Linux pour vérifier et réparer l’intégrité
+d’un système de fichier
+
+Commande de base :
+Sudo fsck /dev/sda1
+
+Signification :
+Fsck analyse les inodes, blocks, lien et superblocs
+Corrige automatiquement les incohérences si on ajoute l’option -y
+
+===== PAGE 4 =====
+1. Vérification et réparation
+des systèmes de fichiers
+
+Systèmes de fichiers compatibles
+Type de FS
+Description
+ext2, ext3, ext4
+Systèmes Linux les plus courants
+xfs
+Utilise xfs_repair à la place de fsck
+btrfs
+Outils spécifiques : btrfs check
+vfat, ntfs
+Support partiel (autres outils possibles)
+
+===== PAGE 5 =====
+1. Vérification et réparation
+des systèmes de fichiers
+
+Toujours démonter une partition avant vérification :
+sudo umount /dev/sda1
+
+Pour forcer une vérification au prochain démarrage :
+sudo tune2fs -c 1 /dev/sda1
+
+Vérifier sans corriger :
+sudo fsck -n /dev/sda1
+
+===== PAGE 6 =====
+2. Diagnostic et monitoring du
+disque
+
+Objectif :
+Surveiller l’état, l’espace et les performance des disques afin de :
+Repérer des erreurs matérielles(secteur défectueux)
+-
+Détecter une saturation( espace presque plein)
+-
+Identifier des lenteurs anormales d’accès disque
+
+But Final: anticiper les pannes et maintenir la performance du
+système.
+
+===== PAGE 7 =====
+2. Diagnostic et monitoring du
+disque
+
+Outils essentiels du diagnostic
+Commande
+Fonction principale
+Exemple
+df -h
+Affiche l’espace disque utilisé / libre (par
+partition)
+df -h /home
+du -sh
+Affiche la taille d’un dossier ou fichier
+spécifique
+du -sh /var/log
+lsblk
+Liste les périphériques de stockage et leurs
+points de montage
+lsblk -f
+smartctl
+Analyse l’état matériel SMART du disque
+(santé, erreurs)
+sudo smartctl -a /dev/sda
+iostat
+Mesure les entrées/sorties (I/O) et les temps
+d’attente disque
+iostat -x 5
+iotop
+Affiche en temps réel les processus utilisant le
+plus le disque
+sudo iotop
+
+===== PAGE 8 =====
+Surveillance de l’espace
+disque
+
+df -h : Disk Free
+-
+Vue globale de l’utilisation des partitions %
+-
+Détecte les volumes presque pleins : risque de blocage
+
+du -sh /home : Disk Usage
+-
+Analyse la taille de répertoires précis
+-
+Utile pour savoir quels dossiers consomment le plus d’espace
+
+lsblk : List Block Devices
+-
+Affiche la hiérarchie des disques et partitions
+-
+Montre aussi le type, le point de montage, le système de fichiers (FS)
+
+Smartctl: SMART Monitoring
+-
+Vérifie la santé physique du disque dur (ou SSD)
+-
+Sudo smartctl –a /dev/sda
+-
+Affiche le nombre d’heures de fonctionnement, secteurs réalloués(signe d’usure), température du
+disque ..
+
+===== PAGE 9 =====
+Surveillance matérielle et
+erreurs disque
+
+Objectif :
+Surveiller l’état matériel des disques et détecter les erreurs
+d’entrées/sorties (I/O) ou les processus trop gourmands en activité
+disque.
+
+===== PAGE 10 =====
+Surveillance matérielle et
+erreurs disque
+
+Commandes essentielles
+Commande
+Fonction
+Exemple de résultat / Utilité
+Dmesg
+grep sda
+Analyse les messages du noyau relatifs au disque
+/dev/sda
+smartctl -a /dev/sda
+Vérifie la santé physique du disque via le
+système SMART
+✅Donne la température, les heures d’utilisation, les
+erreurs et les secteurs réalloués.
+iostat -x 2
+Affiche les statistiques d’E/S disque toutes les 2
+secondes
+Analyse les performances : %utilisation, temps moyen
+de lecture/écriture, latence.
+iotop
+Surveille en temps réel les processus les plus
+gourmands en I/O
+Utile pour repérer un processus qui monopolise le
+disque (ex : apt, rsync, mysqld, etc.)
+
+===== PAGE 11 =====
+Surveillance matérielle et
+erreurs disque
+
+Interprétation
+Problème détecté
+Commande utile
+Action recommandée
+Erreurs d’E/S ou secteurs
+défectueux
+dmesg, smartctl
+Sauvegarder les données,
+prévoir remplacement
+disque
+Activité disque anormale
+iostat, iotop
+Identifier le processus,
+limiter les accès ou
+planifier les tâches
+Ralentissements soudains
+iostat -x, iotop
+Vérifier l’utilisation du
+disque et la file d’attente
+d’E/S
+
+===== PAGE 12 =====
+Script Bash
+
+disk_diagnostic.sh
+
+===== PAGE 13 =====
+Script Bash
+
+disk_diagnostic.sh
+Afficher les 10 dernier lignes des
+messages de kernel
+$ pour utiliser la valeur de la variable DISK
+Puis filtre étendu –E
+Affiche les statistiques détaillées d’entrées/sorties du disque.
+exécute 3 cycles avec un intervalle de 1 seconde.
+Surveille les processus les plus gourmands en I/O -b →mode batch
+(pour script ou log). -n 3 →3 itérations. head -n 15 →affiche
+uniquement les 15 premières lignes pour lisibilité.
+
+===== PAGE 14 =====
+Script Bash
+
+disk_diagnostic.sh
+•
+Donner les droit d’execution:
+sudo chmod +x disk_diagnostic.sh
+•
+Lancer le script :
+Sudo ./disk_diagnotic.sg
+•
+Consulter le rapport :
+Cat /var/log/disk_diagnostic.log
+-q pas de sortie a l’ecran –i ignore la casse
+
+===== PAGE 15 =====
+Interprétation et analyse des
+performances
+
+Vérifier les taux d’I/O élevés →possible goulot d’étranglement
+
+Disque saturé →ralentissement général
+
+Températures ou erreurs SMART →disque à remplacer
+
+Importance de la surveillance proactive.
+
+===== PAGE 16 =====
+3. Mémoire virtuelle et swap
+
+Objectif:
+Comprendre comment Linux utilise la mémoire virtuelle pour
+compléter la RAM physique et gérer les pages mémoire inactives.
+
+Pourquoi utiliser la mémoire virtuelle ?
+-
+Permet au système de continuer à fonctionner lorsque la RAM
+est saturée.
+-
+Permet la mise en veille ou hibernation sur certains systèmes.
+-
+Facilite la gestion multitâche et l’allocation dynamique de
+mémoire.
+
+===== PAGE 17 =====
+3. Mémoire virtuelle et swap
+
+Concepts Clés
+Élément
+Description
+Mémoire virtuelle
+Extension de la RAM sur le disque. Permet à Linux de gérer plus de mémoire que la
+RAM physique disponible.
+Swap
+Zone spécifique (partition ou fichier) utilisée pour stocker les pages mémoire
+inactives afin de libérer de la RAM pour les processus actifs.
+Partition swap
+Ex. /dev/sda5 : espace disque réservé exclusivement pour le swap.
+Fichier swap
+Ex. /swapfile : fichier standard créé sur une partition existante pour le swap.
+
+===== PAGE 18 =====
+3. Mémoire virtuelle et swap
+
+⚙️
+Exemples de gestion du swap
+-
+swapon –show →liste toutes les partitions/fichiers
+swap actifs
+-
+free –h →montre la RAM et le swap en utilisation et
+libre
+
+===== PAGE 19 =====
+3. Mémoire virtuelle et swap
+
+Créer un fichier swap :
+-
+sudo fallocate -l 2G /swapfile
+# crée un fichier swap de 2 Go
+-
+Sudo chmod 600 /swapfile
+# permissions strictes
+-
+sudo mkswap /swapfile
+# formate le fichier en swap
+-
+sudo swapon /swapfile
+# active le swap
+
+Rendre le swap permanent (ajouter à /etc/fstab)
+-
+/swafile none swap sw 0 0
+
+===== PAGE 20 =====
+Paramétrage du swappiness
+
+Objectif:
+Contrôler la fréquence d’utilisation du swap par le noyau Linux afin
+d’optimiser les performances de la mémoire
+
+Concept clé : vm.swappiness
+Valeur
+Comportement
+0
+Évite au maximum l’utilisation du swap →privilégie la RAM.
+60
+Valeur par défaut sur la plupart des distributions Linux →équilibre RAM /
+swap.
+100
+Utilisation agressive du swap →le noyau déplace plus tôt les pages
+inactives sur disque.
+
+===== PAGE 21 =====
+Paramétrage du swappiness
+
+Vérifier le swappiness actuel :
+cat /proc/sys/vm/swappiness
+-
+Affiche un nombre souvent 60 par défaut
+-
+Permet de savoir à quel point le système utilise le swap
+
+Modifier temporairement le swappiness
+Sudo sysctl vm.swappiness=20
+-
+Change la valeur immédiatement jusqu’au prochain redémarrage
+-
+Exemple: 20 →préfère fortement la RAM, swap seulement si nécessaire.
+
+Modifier définitivement :
+Sudo nano /etc/sysctl.conf
+-
+Ajouter la ligne vm.swappiness=20
+-
+Appliquer les changement sans redémarrer : sudo sysctl -p
+lecture / kernel runtime
+Modification Temps réel
+Sauvegarde pour les
+démarrage futurs
+
+===== PAGE 22 =====
+4. Gestion proactive et
+maintenance automatique
+
+Objectif:
+Mettre en place des mécanismes automatiques de surveillance et
+de nettoyage pour maintenir un système Linux performant et stable.
+Outil
+Rôle / Fonction
+Exemple
+cron
+Planifier des tâches répétitives
+automatiquement
+sudo crontab -e →planifier un fsck ou un script de
+nettoyage chaque semaine
+logrotate
+Rotation et archivage
+automatique des logs
+/etc/logrotate.conf →limite la taille des fichiers log
+et supprime ou compresse les anciens logs
+tmpwatch /
+systemd-tmpfiles
+Nettoyage automatique des
+fichiers temporaires
+tmpwatch 24 /tmp →supprime les fichiers non
+utilisés depuis 24h, ou configurer systemd-tmpfiles
+pour automatiser au démarrage
+
+===== PAGE 23 =====
+4. 1 Commande Crontab
+
+sudo crontab -e
+0 2 * * 0 /sbin/fsck -AR –y
+-
+0 2 * * 0 : exécuter à 2h du matin chaque dimanche
+-
+minute heure jour_du_mois mois jour_de_la_semaine
+-
+/sbin/ →dossier où se trouvent les commandes systèmes essentielles
+-
+Fsck →File System Check, c’est-à-dire l’outil de vérification des systèmes de
+fichiers Linux.
+-
+A →Vérifie tous les systèmes de fichiers listés dans /etc/fstab
+-
+R →Ignore la racine / pour éviter de bloquer le système
+-
+Y →répond automatiquement oui a toutes les corrections
+
+===== PAGE 24 =====
+4. 2 Commande logrotate
+
+Fichier global : /etc/logrotate/conf
+-
+C’est la configuration principale de logrotate pour tous les logs du système
+
+Fichier spécifiques: /etc/logrotate.d/
+-
+Chaque service(apache, syslog…) peut avoir son propre fichier dans ce dossier
+
+Edition : sudo nano /etc/logrotate.d/syslog
+-
+Dans nano Ctrl + O puis Ctrl + X
+-
+Dans vim :wq
+
+Mode Test:
+Sudo logrotate –d /etc/logrotate.conf
+
+Forcer la rotation maintenant
+Sudo logrotate –f /etc/logrotate.conf
+
+===== PAGE 25 =====
+4. 3 Commande tmpwatch
+
+Supprimer automatiquement les fichiers temporaires anciens
+
+Les fichiers temporaires sont souvent stockés dans /tmp, /var/tmp ..
+
+Sans nettoyage, il peuvent s’accumuler et saturer le disque
+
+sudo tmpwatch [options] <durée_en_heures> <répertoire>
+-
+Durée_en_heures →supprimer les fichiers non modifiés depuis cette durée
+-
+Répertoire →dossier à nettoyer
+-
+sudo tmpwatch 24 /tmp
+
+On peut programmer ça avec cron :
+-
+0 3 * * * /usr/sbin/tmpwatch 24 /tmp
+-
+Pour nettoyer /tmp tous les jours à 3h du matin
+
+===== PAGE 26 =====
+4. 4 Commande systemd-
+tmpfiles
+
+Gérer automatiquement les fichiers temporaire et autres fichiers systèmes
+qui doivent étre crées, néttoyers ou supprimés
+
+Remplace et compète tmpwatch sur les sytemes modernes utilisant
+systemd
+
+Nettoyer les fichier temporaire : sudo systemd-tmpfiles –clean
+- Supprime les fichier temporaire selon les règles définies dans /etc/tmpfiles.d
+et /usr/lib/tmpfiles.d/
+
+===== PAGE 27 =====
+Cas pratique : analyse d’un FS
+défectueux
+
+Etapes à suivre
+Étape
+Commande / Action
+Explication
+Identifier le disque
+Sudo dmesg
+grep -i sdb ou journalctl -k
+Démonter la partition
+sudo umount /dev/sdb1
+La partition doit être non
+montée pour que fsck puisse
+corriger les erreurs
+Vérifier et réparer
+sudo fsck -y /dev/sdb1
+Vérifie le système de fichiers et
+corrige automatiquement les
+erreurs (-y)
+Vérifier les logs et remonter
+dmesg ou journalctl puis sudo
+mount /dev/sdb1 /mnt/data
+Assurer que le disque est sain
+avant de le remettre en service
+Restaurer les fichiers si
+nécessaire
+Copier depuis une sauvegarde
+Si des fichiers étaient corrompus
+ou supprimés, les restaurer à
+partir d’une sauvegarde

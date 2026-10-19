@@ -1,0 +1,869 @@
+
+===== PAGE 1 =====
+18
+Cours développement d’applications réparties
+
+===== PAGE 2 =====
+Définition de la communication répartie
+Dr. Mouna KARAJA
+19
+Cours développement d’applications réparties
+La communication répartie désigne l’ensemble des mécanismes, protocoles et modèles permettant à deux
+entités d’un système distribué (processus, objets, applications) d’échanger des données et de coordonner
+leurs actions, malgré la séparation physique des machines.
+Dans un système réparti, les composants logiciels et matériels sont situés sur des machines différentes
+reliées par un réseau. Pour coopérer, ces composants doivent échanger des informations : c’est le rôle de la
+communication répartie.
+Elle peut se faire sous différentes formes : transmission de messages, appels de procédures distantes,
+invocation de méthodes sur des objets distants, ou encore échanges via des middlewares spécialisés.
+Objectif : donner l’illusion que les interactions à distance se déroulent aussi simplement qu’en local,
+tout en masquant la complexité du réseau.
+
+===== PAGE 3 =====
+Importance et rôle de la communication
+Dr. Mouna KARAJA
+20
+Cours développement d’applications réparties
+La communication constitue la colonne vertébrale
+des applications réparties. Elle permet :
+Sans communication fiable, les applications réparties perdraient leur sens :
+elles ne seraient qu’un ensemble de composants isolés, incapables
+d’interagir.
+La coopération entre
+composants : par
+exemple, un client
+envoie une requête à
+un serveur pour
+accéder à une base
+de données distante.
+Le
+partage
+de
+ressources : fichiers,
+services
+web,
+systèmes
+d’information.
+La coordination des
+tâches
+:
+plusieurs
+processus
+répartis
+sur
+différentes
+machines
+peuvent
+travailler
+ensemble
+pour
+résoudre
+un
+problème complexe.
+La
+transparence
+:
+grâce
+aux
+mécanismes
+de
+communication,
+l’utilisateur n’a pas
+besoin de savoir où
+se
+trouvent
+réellement
+les
+ressources
+ou
+comment elles sont
+accessibles.
+
+===== PAGE 4 =====
+Défis de la communication répartie
+Dr. Mouna KARAJA
+21
+Cours développement d’applications réparties
+Hétérogénéité :
+1
+Les nœuds d’un système réparti peuvent être très différents : PC, smartphones, serveurs, objets
+IoT… avec des systèmes d’exploitation, langages et protocoles variés.
+Défi : assurer une communication interopérable malgré ces différences.
+Transparence de la localisation :
+2
+Dans un système réparti, un composant ne doit pas avoir à savoir où se trouve l’autre composant
+(communication qui ressemble à un appel local alors que le serveur est à l’autre bout du monde).
+Défi : masquer la localisation réelle (IP, port, machine) derrière une abstraction.
+Latence et performance du réseau :
+3
+Les messages circulent sur des réseaux avec une certaine latence, vitesse de transmission limitée
+et congestion possible (Exemple : 200ms de retard dans une visioconférence sont perceptibles).
+Défi : assurer une communication efficace malgré des délais.
+
+===== PAGE 5 =====
+Dr. Mouna KARAJA
+22
+Cours développement d’applications réparties
+Défis de la communication répartie
+Fiabilité et pannes :
+4
+Les réseaux sont peu fiables : messages perdus, dupliqués, corrompus, ou nœuds qui tombent
+en panne (Exemple : en cas de panne réseau, il faut éviter qu’un virement soit débité deux fois).
+Défi : garantir la cohérence et la tolérance aux fautes et concevoir des mécanismes de reprise,
+de réplication et de redondance.
+Concurrence et synchronisation :
+5
+Plusieurs nœuds peuvent accéder en même temps à la même ressource (Exemple : deux
+utilisateurs modifient en même temps un même document collaboratif).
+Défi : gérer les accès concurrents, éviter les conflits et maintenir la cohérence.
+Sécurité :
+6
+La communication sur un réseau ouvert (comme Internet) peut être interceptée, modifiée ou
+usurpée.
+Défi : assurer authentification, confidentialité, intégrité et autorisation.
+
+===== PAGE 6 =====
+Les intervenants de la communication répartie
+Dr. Mouna KARAJA
+23
+Cours développement d’applications réparties
+Ce sont les entités participant au système
+réparti. Ils peuvent correspondre soit à
+des
+machines
+physiques
+(ordinateurs,
+serveurs, smartphones, capteurs IoT, etc.),
+soit à des unités logiques (processus,
+services ou applications)
+Ce sont les éléments accessibles ou
+partagés dans le système (fichiers,
+bases
+de
+données,
+services,
+périphériques, puissance de calcul…).
+→C’est le contenu demandé/fourni
+lors de la communication.
+C’est
+la
+couche
+logicielle
+intermédiaire qui facilite la
+communication
+et
+la
+transparence
+entre
+nœuds
+(CORBA, Java RMI, …).
+C’est
+le
+support
+de
+transmission des données
+(réseau
+filaire,
+Wi-Fi,
+Internet,
+protocoles
+de
+communication).
+Noeuds
+Ressources
+Middleware
+Canal de
+communication
+
+===== PAGE 7 =====
+Composition logique d’un noeud
+Dr. Mouna KARAJA
+24
+Cours développement d’applications réparties
+• Pour recevoir les
+messages
+venant
+des autres nœuds.
+Interface d’entrée
+• Pour décider quoi
+faire
+avec
+le
+message reçu ou
+quoi
+produire
+comme réponse.
+Traitement
+• Pour envoyer les
+messages
+ou
+réponses
+aux
+autres nœuds.
+Interface de sortie
+Dans un système réparti, un nœud, quelque soit son type, correspond à un bloc logique avec trois fonctions :
+recevoir, traiter, envoyer des informations.
+
+===== PAGE 8 =====
+Les modes de communication
+Dr. Mouna KARAJA
+25
+Cours développement d’applications réparties
+L’émetteur envoie un message sans attendre
+immédiatement la réponse. Le receveur peut
+répondre plus tard.
+→Cela permet à l’émetteur de continuer son
+traitement sans blocage.
+Communication synchrone
+Communication asynchrone
+Les modes définissent le comportement temporel de l’échange (temps réel ou différé). Ils peuvent
+s’appliquer à plusieurs modèles de communication.
+Dans ce mode, l’émetteur envoie une requête et
+attend
+la
+réponse
+avant
+de
+poursuivre
+son
+exécution.
+→La communication se fait en temps réel entre
+les deux parties, avec un blocage possible en
+attente de la réponse.
+Avantage : simplicité et rapidité de l’échange
+direct.
+Limite : dépendance temporelle forte, le client est
+bloqué tant que la réponse n’arrive pas.
+Avantage : meilleure tolérance aux délais et aux
+interruptions.
+Limite : complexité plus élevée pour gérer les
+retours différés.
+
+===== PAGE 9 =====
+Les mécanismes d’adressage et de diffusion
+Communication Unicast
+• communication entre un seul émetteur et un seul récepteur (un à un).
+• Exemple : une requête d’un client vers un serveur.
+Communication multicast
+• un émetteur envoie un message à un groupe spécifique de récepteurs.
+• Exemple : une visioconférence est diffusée uniquement aux participants.
+Communication broadcast
+• un émetteur diffuse le message à tous les nœuds d’un réseau.
+• Exemple : un message envoyé simultanément à tous les abonnés du réseau mobile.
+Dr. Mouna KARAJA
+26
+Cours développement d’applications réparties
+
+===== PAGE 10 =====
+Les modèles de communication
+Dr. Mouna KARAJA
+27
+Cours développement d’applications réparties
+La communication dans un système réparti peut prendre plusieurs formes, selon la nature de l’échange
+et le degré de synchronisation attendu entre les entités.
+Les modèles de communication décrivent la structure, la dynamique ou la forme globale du processus de
+communication. Ils précisent comment l’information est transmise entre les acteurs.
+Communication
+orientée
+message
+Communication
+orientée appels
+Communication
+par objets
+distribués
+Communication
+orientée flux
+Communication
+orientée
+événements
+On distingue principalement :
+
+===== PAGE 11 =====
+Communication orientée message
+Dr. Mouna KARAJA
+28
+Cours développement d’applications réparties
+➢Une application bancaire envoie une requête de virement sous forme de message à un
+service de paiement. Le service reçoit, traite, et renvoie une confirmation par message.
+✓Les messages peuvent être synchrones ou asynchrones.
+✓La communication se fait par des files de messages, où un message est envoyé par
+un producteur et consommé par un consommateur.
+✓Nécessite une adresse de destination.
+✓Implémenté via des sockets réseau (TCP ou UDP)
+Les nœuds (ou les entités) échangent des informations sous forme de messages
+explicites (envoyer / recevoir).
+Principe
+Caractéristiques :
+Avantages
+Inconvénients
+Exemple
+concret
+Découplage fort (les nœuds peuvent être écrits
+dans
+des
+langages
+différents,
+être
+sur
+des
+machines distantes, etc.)
+Complexité
+de
+gestion
+des
+messages
+(ordre,
+duplication, erreurs…)
+
+===== PAGE 12 =====
+Communication orientée appels
+Dr. Mouna KARAJA
+29
+Cours développement d’applications réparties
+Caractéristiques :
+Avantages
+Inconvénients
+Exemple
+concret
+Principe
+La communication par appel de procédure à distance (RPC - Remote Procedure Call)
+consiste à appeler à distance une procédure ou une fonction sur un autre système
+comme si elle était locale.
+Simplicité
+d’utilisation
+(on
+programme
+comme si tout était local)
+–
+Forte dépendance au réseau (défaillances, latence, …)
+–
+Couplage fort : Chaque nœud doit connaître la signature
+de la fonction distante (nom, paramètres, types de
+retour)
+Une application mobile appelle payerFacture() sur un serveur distant via RPC. Pour le
+développeur, cela ressemble à un simple appel de fonction.
+✓Le système cache la complexité réseau via des stubs (proxy local) qui transforment
+les appels en messages et les réponses en résultats.
+✓La communication est généralement synchrone
+✓Le programmeur n’a pas à gérer l’envoi/réception de messages.
+
+===== PAGE 13 =====
+Communication par objets distribués
+Dr. Mouna KARAJA
+30
+Cours développement d’applications réparties
+✓C’est une extension de l’idée du RPC, mais appliquée aux objets.
+✓Un objet sur une machine peut invoquer une méthode sur un objet situé ailleurs.
+✓Implémenté par des middlewares comme Java RMI et CORBA.
+Caractéristiques :
+Avantages
+Inconvénients
+Exemple
+concret
+Principe
+Dans la communication par objets distribués (RMI - Remote Method Invocation), les
+entités du système réparti sont représentées par des objets distants. Chaque objet
+expose ses fonctionnalités au travers d’une interface distante, et les autres entités
+peuvent invoquer ses méthodes de manière transparente comme s’il s’agissait
+d’objets locaux.
+Transparence de localisation; modularité et
+réutilisation d’objets; orientation objet.
+Forte
+dépendance
+technologique,
+problème
+de
+compatibilité de versions
+Dans un système de gestion d’hôtel réparti, l'objet Réservation appelle la méthode
+confirmer() sur l'objet Chambre, qui réside sur un autre nœud du système.
+
+===== PAGE 14 =====
+Communication orientée flux
+Dr. Mouna KARAJA
+31
+Cours développement d’applications réparties
+Caractéristiques :
+Avantages
+Inconvénients
+Exemple
+concret
+Principe
+✓Les données sont envoyées sous forme de flux (audio, vidéo).
+✓Peut être unidirectionnel (ex : diffusion vidéo) ou bidirectionnel (ex : visioconférence).
+–
+Netflix ou YouTube utilisent un flux pour diffuser une vidéo à un utilisateur.
+–
+Zoom / Teams utilisent des flux audio/vidéo bidirectionnels pour une réunion.
+La transmission orientée flux est un modèle de communication en temps réel basé
+sur le transfert continu de données entre producteurs et consommateurs.
+Nécessite la gestion de la latence, la synchronisation et
+parfois la qualité de service (QoS).
+Transmission continue et temps réel, ce qui
+le rend idéal pour les flux multimédias.
+
+===== PAGE 15 =====
+Communication orientée événements
+Dr. Mouna KARAJA
+32
+Cours développement d’applications réparties
+Caractéristiques :
+Avantages
+Inconvénients
+Exemple
+concret
+Principe
+– Difficulté à suivre les flux de données
+– Complexité de gestion : Un même événement peut être reçu par
+plusieurs services. Chacun peut réagir de manière différente.
+Favorise un couplage faible, une grande
+scalabilité, et une distribution flexible
+des notifications.
+Elle repose sur un modèle pub/sub (publication/abonnement) où les émetteurs
+(publishers) publient des événements sans connaître les récepteurs, tandis que les
+récepteurs (subscribers) s’abonnent à des types d’événements qui les intéressent.
+✓Permet la diffusion à plusieurs récepteurs (multicast, broadcast).
+✓Asynchrone par nature, adapté aux systèmes réactifs et distribués.
+Un client passe une commande sur un site de vente en ligne. L'action "commande
+confirmée" déclenche la publication d’un événement commande/nouvelle. Plusieurs
+services abonnés réagissent : ✓Service de paiement : lance la procédure de transaction.
+✓Service logistique : prépare l’emballage et l’expédition.
+✓Service client : envoie un email de confirmation au client.
+✓Module de fidélité : ajoute des points au compte du client.
+
+===== PAGE 16 =====
+Dr. Mouna KARAJA
+33
+Cours développement d’applications réparties
+Le rôle du réseau dans la communication
+Une application répartie est souvent déployée sur plusieurs machines situées dans des zones
+géographiques différentes. Ces composants doivent échanger des données à travers un réseau pour
+fonctionner comme un tout cohérent.
+Pour que les données puissent circuler correctement entre machines, il faut une organisation logique du
+réseau. Cette organisation est décrite à l’aide de modèles en couches, qui indiquent comment les données
+passent d’un nœud à un autre.
+Le réseau devient alors le canal de transport des informations entre les différents noeuds.
+Il existe deux modèles en couches de référence principaux :
+✓Modèle OSI (Open Systems Interconnection) : Modèle théorique défini à la fin des années 1970 par
+l’ISO (Organisation Internationale de Normalisation). Son but était de standardiser la communication
+entre ordinateurs, en définissant 7 couches bien distinctes, chacune ayant un rôle précis.
+✓Modèle Internet (TCP/IP : Transmission Control Protocol/Internet Protocol) : Modèle pratique
+décrivant l’architecture réellement utilisée dans les réseaux actuels (Internet, intranets, etc.). Il simplifie
+les 7 couches de l’OSI en 4 grandes couches fonctionnelles, plus faciles à gérer et à coder.
+
+===== PAGE 17 =====
+Dr. Mouna KARAJA
+34
+Cours développement d’applications réparties
+L’architecture en couches des réseaux
+6. Présentation
+5. Session
+4. Transport
+3. Réseau
+2. Liaison de données
+1. Physique
+7. Application
+4. Application
+3. Transport
+2. Internet
+1. Accès au réseau
+
+===== PAGE 18 =====
+Dr. Mouna KARAJA
+35
+Cours développement d’applications réparties
+Le modèle OSI
+C’est l’interface entre l’utilisateur et le réseau. Elle permet à l’utilisateur d’accéder
+à des ressources à distance (page web, fichiers, mails...).
+Les protocoles de communication de la couche d'application comprennent :
+✓Le SMTP (Simple Mail Transfer Protocol) pour l’envoi des mails d'un serveur à
+un autre.
+✓Le HTTP (HyperText Transfer Protocol), qui est le protocole de communication
+entre les navigateurs et les serveurs Web, basé sur une requête-réponse.
+✓Et le FTP (File Transfer Protocol) spécifiquement conçu pour le transfert de
+fichiers entre ordinateurs.
+6. Présentation
+5. Session
+4. Transport
+3. Réseau
+2. Liaison de données
+1. Physique
+7. Application
+La couche « Application » :
+SMTP
+HTTP
+FTP
+
+===== PAGE 19 =====
+Dr. Mouna KARAJA
+36
+Cours développement d’applications réparties
+6. Présentation
+5. Session
+4. Transport
+3. Réseau
+2. Liaison de données
+1. Physique
+7. Application
+La couche « Présentation » :
+Cette couche s’occupe du format des données échangées.
+Elle garantit que les données envoyées par une machine
+sont comprises correctement par une autre.
+✓Elle convertit les données d’un format interne à un format standard pour le
+réseau, puis inversement à la reception (conversion du texte d’un encodage
+UTF-8 vers ASCII, ou de JPEG vers BMP).
+✓Réduit la taille des données avant l’envoi (gain de bande passante) et les
+restaure à la réception (compression d’un fichier image ou d’un flux vidéo
+avant transfert).
+✓Protège la confidentialité des données échangées en les cryptant avant envoi,
+puis en les décryptant à la réception (HTTPS chiffre les données avant de les
+envoyer sur le réseau)..
+Le modèle OSI
+
+===== PAGE 20 =====
+Dr. Mouna KARAJA
+37
+Cours développement d’applications réparties
+Le modèle OSI
+6. Présentation
+5. Session
+4. Transport
+3. Réseau
+2. Liaison de données
+1. Physique
+7. Application
+La couche « Session » :
+La couche session s’occupe :
+✓d’ouvrir la session au début de la communication,
+✓de la maintenir active pendant le transfert des données,
+✓puis de la fermer proprement une fois l’échange terminé.
+Avant que deux applications puissent échanger des données, elles doivent établir
+une session de communication. Cette session agit comme un canal logique entre
+les deux appareils.
+Lorsqu’un grand volume de données est transmis, cette couche veille à la
+continuité de la session et à la reprise en cas d’interruption.
+
+===== PAGE 21 =====
+Dr. Mouna KARAJA
+38
+Cours développement d’applications réparties
+Le modèle OSI
+6. Présentation
+5. Session
+4. Transport
+3. Réseau
+2. Liaison de données
+1. Physique
+7. Application
+La couche « Transport » :
+La couche transport a pour rôle d’assurer le transfert fiable et ordonné des données
+entre deux machines. Elle découpe les données en petits morceaux appelés
+segments, afin de faciliter leur envoi sur le réseau. Chaque segment contient un en-
+tête (numéro du segment, numéro du port, …) permettant de réassembler
+correctement le message à la réception.
+La couche transport choisit la manière d’envoyer les informations selon le type de
+communication souhaitée :
+Elle intègre aussi des mécanismes de contrôle d’erreur : si certains segments sont
+perdus ou endommagés, la couche transport demande à la couche « session » leur
+réémission, garantissant ainsi une communication complète et fiable.
+
+===== PAGE 22 =====
+Dr. Mouna KARAJA
+39
+Cours développement d’applications réparties
+Le modèle OSI
+6. Présentation
+5. Session
+4. Transport
+3. Réseau
+2. Liaison de données
+1. Physique
+7. Application
+La couche « réseau » :
+La couche réseau reçoit les segments de la couche transport et les encapsule dans
+des paquets IP, contenant l’adresse IP source et destination. Elle a pour rôle
+d’acheminer les paquets d’une machine à une autre, même si elles se trouvent sur
+des réseaux différents.
+Elle s’occupe aussi du routage, c’est-à-dire de trouver le meilleur chemin pour faire
+circuler les paquets entre plusieurs réseaux.
+Si un paquet est trop volumineux pour le réseau (au-delà de la MTU – Maximum
+Transmission Unit), il est fragmenté en plusieurs parties plus petites, puis
+réassemblé à la réception.
+
+===== PAGE 23 =====
+Dr. Mouna KARAJA
+40
+Cours développement d’applications réparties
+Le modèle OSI
+6. Présentation
+5. Session
+4. Transport
+3. Réseau
+2. Liaison de données
+1. Physique
+7. Application
+Adresse MAC
+La couche liaison de données reçoit les paquets de la couche réseau et les
+transforme en trames, prêtes à être envoyées physiquement.
+La couche « liaison de données » :
+Elle utilise les adresses MAC pour identifier l’émetteur et le destinataire sur le
+réseau local, et veille à ce que les données soient bien reçues sans erreur.
+Elle assure le transfert fiable des données entre deux machines situées sur le
+même réseau local.
+Une trame →C’est le conteneur (suite de bits 0 et 1) qui circule directement sur
+le support physique (le câble, le Wi-Fi, etc.) entre deux machines reliées au même
+réseau local (LAN).
+
+===== PAGE 24 =====
+Dr. Mouna KARAJA
+41
+Cours développement d’applications réparties
+Le modèle OSI
+6. Présentation
+5. Session
+4. Transport
+3. Réseau
+2. Liaison de données
+1. Physique
+7. Application
+Cette couche s’occupe de transmettre réellement les bits sur le support de
+communication.
+La couche « physique » :
+Elle convertit ces bits en signaux :
+➢signaux électriques si on utilise un câble en cuivre (Ethernet),
+➢signaux lumineux si on utilise une fibre optique,
+➢ondes radio si on utilise le Wi-Fi ou le Bluetooth.
+Elle envoie ces signaux sur le support de transmission (câble, fibre, ondes…).
+
+===== PAGE 25 =====
+Dr. Mouna KARAJA
+42
+Cours développement d’applications réparties
+Le modèle OSI
+Envoi
+des
+données
+Réception
+des
+données
+10110101110…01
+10110101110…01
+
+===== PAGE 26 =====
+Dr. Mouna KARAJA
+43
+Cours développement d’applications réparties
+Le modèle TCP/IP (Internet)
+6. Présentation
+5. Session
+4. Transport
+3. Réseau
+2. Liaison de données
+1. Physique
+7. Application
+4. Application
+3. Transport
+2. Internet
+1. Accès au réseau
+Transmet les données sur le support physique
+(câble, Wi-Fi...) au sein du réseau local.
+Identifie les machines et achemine les paquets
+entre réseaux.
+TCP ou UDP
+IP
+MAC
+Ethernet
+WIFI, …
+HTTP
+HTTPS
+DNS
+SMTP
+Fournit les services réseau aux applications
+(messagerie, web, transfert de fichiers…).
+Assure la communication de bout en bout entre
+les applications, contrôle d’erreur et fiabilité.
+
+===== PAGE 27 =====
+Dr. Mouna KARAJA
+44
+Cours développement d’applications réparties
+Le modèle TCP/IP (Internet)
+Encapsulation
+Désencapsulation
+10110101110…01
+4. Application
+3. Transport
+2. Internet
+1. Accès au réseau
+4. Application
+3. Transport
+2. Internet
+1. Accès au réseau
+Message
+Message + en-tête →Segment
+Segment + IP →Paquet
+Paquet + MAC →Trame →Bits
+Bits
+Message
+Segment
+Paquet
+Trame
+Chaque couche ajoute ses propres
+informations aux données reçues
+de la couche supérieure.
+Chaque couche lit et retire ses
+en-têtes pour ne garder que les
+données destinées à la couche
+supérieure.
+Encapsulation
+Désencapsulation
+
+===== PAGE 28 =====
+Dr. Mouna KARAJA
+45
+Cours développement d’applications réparties
+Les protocoles de transport des données
+4. Application
+3. Transport
+2. Internet
+1. Accès au réseau
+La couche Transport occupe une place centrale dans la
+communication réseau. Elle garantit un transfert de données
+fiable et ordonné entre les applications situées sur des
+machines distantes.
+Les deux principaux protocoles utilisés à ce niveau sont :
+✓TCP (Transmission Control Protocol)
+✓UDP (User Datagram Protocol)
+Elle découpe les données provenant de la couche Application
+en segments, leur ajoute des en-têtes puis supervise l’envoi de
+ces segments à travers le réseau.
+Qu’est ce qu’un protocole ?
+Un protocole en réseau informatique est un ensemble de règles et de normes qui définissent comment les
+nœuds communiquent entre eux.
+
+===== PAGE 29 =====
+Dr. Mouna KARAJA
+46
+Cours développement d’applications réparties
+Le protocole TCP (Transmission Control Protocol)
+TCP est un protocole de transport orienté connexion, c’est-à-dire qu’avant tout échange de données,
+une connexion fiable est établie entre l’émetteur et le récepteur.
+Il garantit que les données arrivent dans le bon ordre, sans perte, et sans duplication.
+Etablissement de la connexion :
+1
+TCP utilise le mécanisme de handshake en trois étapes (3-
+way handshake) :
+1.
+Le client envoie une demande de connexion (SYN).
+2.
+Le serveur répond (SYN-ACK).
+3.
+Le client confirme (ACK).
+Une fois cette connexion établie, les deux parties peuvent
+échanger des données.
+SYN : Synchronize (commencer la synchronization)
+ACK : Acknowledgement (accusé de réception)
+
+===== PAGE 30 =====
+Dr. Mouna KARAJA
+47
+Cours développement d’applications réparties
+Le protocole TCP (Transmission Control Protocol)
+Transfert des données :
+2
+–
+Les données sont découpées en segments.
+–
+Chaque segment reçoit un numéro de séquence pour garantir l’ordre d’arrivée.
+–
+Si un segment est perdu, il est retransmis.
+–
+Les accusés de réception (ACK) permettent de confirmer la bonne réception des données.
+Fermeture de la connexion :
+3
+Après la transmission, la connexion est fermée proprement pour libérer les ressources.
+✓Transmission fiable
+✓Contrôle de flux et de congestion
+✓Réassemblage automatique des segments
+Avantages
+Inconvénients
+×
+Lent à cause des mécanismes de contrôle et de
+vérification
+×
+Consomme plus de ressources réseau
+
+===== PAGE 31 =====
+Dr. Mouna KARAJA
+48
+Cours développement d’applications réparties
+Le protocole TCP (Transmission Control Protocol)
+✓Applications de messagerie et de communication : Des outils comme WhatsApp, iMessage ou Google
+Chat exploitent TCP afin d’assurer la livraison complète et ordonnée des messages textuels.
+✓Navigation Web (HTTP/HTTPS) : TCP garantit la transmission complète et sans erreur des pages,
+images et ressources web, assurant une navigation fluide et fiable.
+✓Courrier électronique (SMTP, IMAP, POP3) : Il veille à ce que les e-mails soient envoyés et reçus
+exactement comme ils ont été produits, sans perte ni altération.
+✓Transfert de fichiers (FTP, SFTP) : TCP assure une transmission fiable et intègre des fichiers lors des
+téléchargements ou des envois.
+✓Accès sécurisé à distance (SSH) : Les connexions SSH utilisent TCP pour garantir la fiabilité et l’intégrité
+des données échangées de manière chiffrée.
+✓Accès à des bases de données distantes : Les systèmes tels que MySQL ou PostgreSQL reposent sur
+TCP pour des transactions cohérentes et sûres entre client et serveur.
+
+===== PAGE 32 =====
+Dr. Mouna KARAJA
+49
+Cours développement d’applications réparties
+Le protocole UDP (User Datagram Protocol)
+UDP est un protocole de transport non orienté connexion. Il envoie les données sous forme de
+datagrammes sans établir de connexion préalable et sans garantir leur livraison.
+Fonctionnement
+–
+Aucune phase de connexion : les datagrammes sont envoyés directement.
+–
+Pas de numérotation ni d’accusé de réception.
+–
+Si un datagramme est perdu ou arrive en désordre, UDP ne tente pas de le corriger.
+–
+La vérification d’erreurs est minimale (calcul facultatif de la valeur checksum).
+Un checksum (somme de contrôle) est une valeur calculée à partir du contenu d’un
+message.
+➢L’émetteur calcule une valeur de contrôle à partir des données du message.
+➢Il place cette valeur dans le champ checksum de l’en-tête UDP.
+➢Le récepteur recalcule le checksum à partir des données reçues.
+➢Si les deux valeurs ne correspondent pas →Détection d’une erreur.
+Pas de retransmission :
+Si
+une
+erreur
+est
+détectée,
+le
+datagramme
+est
+simplement ignoré par
+le récepteur.
+
+===== PAGE 33 =====
+Dr. Mouna KARAJA
+50
+Cours développement d’applications réparties
+Le protocole UDP (User Datagram Protocol)
+Avantages
+Inconvénients
+✓Très rapide (pas de connexion, pas d’attente
+d’ACK)
+✓Moins de surcharge réseau
+✓Idéal pour les applications temps réel
+×
+Aucune garantie de livraison
+×
+Pas de réordonnancement ni de retransmission
+automatique
+×
+Risque de perte de paquets
+✓Streaming audio/vidéo (YouTube, Netflix en temps réel)
+✓Jeux en ligne
+✓Appels VoIP (Skype, Zoom)
+✓DNS (Domain Name System)
+✓Diffusion broadcast ou multicast sur un réseau (viséoconférence, …)

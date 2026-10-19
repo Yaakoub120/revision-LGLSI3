@@ -1,0 +1,1390 @@
+     1→
+     2→===== PAGE 1 =====
+     3→Virtualisation
+     4→& Cloud
+     5→Spécialité
+     6→Niveau
+     7→Département
+     8→Licence
+     9→LGLSI3
+    10→Informatique
+    11→2025-2026
+    12→Leila GHORBEL
+    13→
+    14→===== PAGE 2 =====
+    15→Introduction
+    16→Un peu d’histoire !
+    17→•
+    18→Les systèmes distribués ont parcouru un long chemin depuis leur
+    19→création.
+    20→•
+    21→Au tout début, un ordinateur ne pouvait effectuer qu'une tâche à la
+    22→fois.
+    23→•
+    24→Si plusieurs tâches doivent être effectuées en parallèle, plusieurs
+    25→ordinateurs doivent fonctionner en parallèle.
+    26→•
+    27→Mais leur exécution en parallèle ne suffisait pas pour construire un
+    28→système véritablement distribué, car elle nécessite un mécanisme
+    29→pour communiquer entre différents ordinateurs (ou programmes
+    30→exécutés sur ces ordinateurs).
+    31→13
+    32→
+    33→===== PAGE 3 =====
+    34→Introduction
+    35→Un peu d’histoire !
+    36→La communication:
+    37→•
+    38→Cette nécessité d’échanger (partager) des données sur
+    39→plusieurs
+    40→ordinateurs
+    41→a
+    42→suscité
+    43→l'idée
+    44→d'une
+    45→communication orientée message, dans laquelle deux
+    46→ordinateurs partagent des données a l'aide d'un message
+    47→qui les encapsule.
+    48→• Il y avait peu d'autres mécanismes comme le partage de
+    49→fichiers et le partage de base de données.
+    50→14
+    51→
+    52→===== PAGE 4 =====
+    53→Introduction
+    54→Un peu d’histoire !
+    55→Les architectures orientées service SOA:
+    56→• L’invention des OS multitâches, tels que Windows et Unix, a
+    57→permis aux développeurs de créer et d’exécuter des
+    58→systèmes distribués complets .
+    59→• Cela a conduit à l'architecture SOA, dans laquelle chaque
+    60→système distribué pourrait être construit en intégrant un
+    61→ensemble
+    62→de
+    63→services
+    64→exécutés
+    65→sur
+    66→un
+    67→ou
+    68→plusieurs
+    69→ordinateurs .
+    70→• Les interfaces de service ont été correctement définies via
+    71→un WSDL (pour SOAP) ou un WADL (pour
+    72→REST) et les
+    73→consommateurs de service ont utilisé ces interfaces pour
+    74→leurs implémentations côté client.
+    75→15
+    76→
+    77→===== PAGE 5 =====
+    78→Introduction
+    79→Un peu d’histoire !
+    80→La popularité des APIs REST :
+    81→• Avec la popularité d'Internet et la simplicité du modèle, la
+    82→communication
+    83→basée
+    84→sur
+    85→REST
+    86→est
+    87→devenue
+    88→plus
+    89→populaire que le modèle de communication basé sur
+    90→SOAP .
+    91→• Cela a conduit a l’évolution de la communication basée
+    92→sur l'interface de programmation d'application (API) sur le
+    93→modèle REST.
+    94→• Vous pouvez vous représenter une API comme un
+    95→médiateur
+    96→entre
+    97→les
+    98→utilisateurs
+    99→ou
+   100→clients
+   101→et
+   102→les
+   103→ressources ou services web auxquels ils souhaitent
+   104→accéder.
+   105→• Pour une entreprise, c'est aussi une solution pour
+   106→partager des ressources et des informations, tout en
+   107→maintenant un certain niveau de sécurité
+   108→16
+   109→
+   110→===== PAGE 6 =====
+   111→Introduction
+   112→Un peu d’histoire !
+   113→Les machines virtuelles :
+   114→• Puis vient le grand moment des systèmes distribués
+   115→• L’importance des entreprises basées sur Internet telles
+   116→que Facebook, Google, Amazon, Netflix, LinkedIn et
+   117→Twitter est suite à ce qu’elles voulaient créer des
+   118→systèmes
+   119→distribués
+   120→couvrant
+   121→plusieurs
+   122→zones
+   123→géographiques et plusieurs centres de données.
+   124→•
+   125→Les ingénieurs ont commencé à réfléchir au concept
+   126→d'un seul ordinateur .
+   127→• Au
+   128→lieu
+   129→de
+   130→considérer
+   131→un
+   132→ordinateur
+   133→comme
+   134→un
+   135→ordinateur unique, ils réfléchissent à un moyen de créer
+   136→plusieurs ordinateurs virtuels sur le même ordinateur .
+   137→• Cela conduit a l'idée de machines virtuelles ou un
+   138→même
+   139→ordinateur
+   140→peut
+   141→agir
+   142→comme
+   143→plusieurs
+   144→ordinateurs et les exécuter tous en parallèle.
+   145→17
+   146→
+   147→===== PAGE 7 =====
+   148→Introduction
+   149→Un peu d’histoire !
+   150→Le cloud computing :
+   151→• La technologie de virtualisation rend possible le cloud
+   152→computing.
+   153→• Les fournisseurs de cloud computing mettent en place
+   154→et entretiennent leurs propres datacenters.
+   155→• Ils créent différents environnements virtuels qui utilisent
+   156→les ressources matérielles de base.
+   157→•
+   158→Vous pouvez ensuite programmer votre système pour
+   159→qu'il accède à ces ressources en cloud à l'aide des
+   160→APIs.
+   161→18
+   162→
+   163→===== PAGE 8 =====
+   164→Introduction
+   165→Un peu d’histoire !
+   166→Vue sur un datacenter
+   167→Amazon
+   168→Déploiement des datacenters
+   169→de google dans le monde
+   170→19
+   171→
+   172→===== PAGE 9 =====
+   173→Introduction
+   174→Retour en arrière sur le fonctionnement d’un ordinateur
+   175→20
+   176→
+   177→===== PAGE 10 =====
+   178→Introduction
+   179→Retour en arrière sur le fonctionnement d’un ordinateur
+   180→21
+   181→
+   182→===== PAGE 11 =====
+   183→Introduction
+   184→Retour en arrière sur le fonctionnement d’un ordinateur: Hardware
+   185→ROM (Read Only Memory):
+   186→•
+   187→Il s'agit d'un type de mémoire non volatile qui stocke un logiciel appelé BIOS
+   188→•
+   189→Ce type de logiciel est responsable au démarrage du matériel
+   190→•
+   191→La ROM ne s'efface jamais lorsque vous éteignez l'ordinateur
+   192→Carte mère:
+   193→PCB (Printed Circuit Board) qui contient le processeur, la RAM, la ROM, le réseau et les ports I/O (Input/Output),
+   194→ainsi que d'autres composants.
+   195→Stockage:
+   196→Un dispositif de stockage persistant (non volatile) tel qu'un disque dur (HDD) ou un disque SSD (Solid State Drive).
+   197→RAM (Random Access Memory):
+   198→Contient les programmes à exécuter et les données actuellement utilisées par le processeur.
+   199→Processeur:
+   200→•
+   201→CPU (Computer Processing Unit), le processeur est la partie de l'ordinateur qui exécute les programmes logiciels
+   202→en effectuant des opérations mathématiques, logiques et d'entrée/sortie.
+   203→•
+   204→C'est la partie du matériel informatique qui résout les problèmes
+   205→22
+   206→
+   207→===== PAGE 12 =====
+   208→Introduction
+   209→Retour en arrière sur le fonctionnement d’un ordinateur: Software (Logiciel)
+   210→Logiciel système:
+   211→•
+   212→sert d'interface entre le logiciel d'application et le matériel de l'ordinateur.
+   213→•
+   214→est conçu pour gérer les ressources système et fournit également une plate-forme à l'exécution du logiciel d'application
+   215→Logiciel d'application:
+   216→•
+   217→constitue une interface entre l'utilisateur et le logiciel système.
+   218→•
+   219→conçu pour que les utilisateurs puissent effectuer leurs tâches spécifiques
+   220→Logiciel d'application
+   221→Logiciel système
+   222→Base de comparaison
+   223→exécute des tâches spécifiques pour lesquelles ils
+   224→ont été conçus.
+   225→gère les ressources système et fournit une plate-forme pour l'exécution
+   226→du logiciel d'application.
+   227→De base
+   228→est écrit dans un langage évolué tel que Java, C ++,
+   229→.net, VB, etc.
+   230→est écrit dans un langage de bas niveau, c'est-à-dire un langage
+   231→d'assemblage.
+   232→La langue
+   233→s'exécute au fur et à mesure des demandes de
+   234→l'utilisateur.
+   235→commence à s'exécuter lorsque le système est allumé et s'exécute jusqu'à
+   236→ce que le système soit arrêté.
+   237→Exécution
+   238→n'est même pas nécessaire pour exécuter le
+   239→système; c'est spécifique à l'utilisateur.
+   240→Un système ne peut pas fonctionner sans logiciel système.
+   241→Exigence
+   242→est spécifique.
+   243→est polyvalent.
+   244→Objectif
+   245→Microsoft Office, Photoshop, logiciel d'animation,
+   246→etc.
+   247→Système d’exploitation.
+   248→Exemples
+   249→23
+   250→
+   251→===== PAGE 13 =====
+   252→Introduction
+   253→Qu’est ce qu’un serveur?
+   254→De nos jours, les utilisateurs (tel que les entreprises) investissent beaucoup plus dans leurs
+   255→infrastructures informatiques afin d'améliorer leur efficacité et fiabilité.
+   256→Il existe des solutions traditionnelles et virtuelles
+   257→serveurs physiques représentent les puissants déploiements de centres de données traditionnels
+   258→serveurs virtuels offrent aux entreprises des services innovants, centrés sur le cloud computing,
+   259→adaptés aux besoins du futur.
+   260→24
+   261→
+   262→===== PAGE 14 =====
+   263→Introduction
+   264→Qu’est ce qu’un serveur?
+   265→Serveur physique:
+   266→très similaire à un ordinateur conventionnel, possède une mémoire, un processeur, une connexion réseau et
+   267→un disque dur ainsi qu'un système d'exploitation (OS) pour exécuter des programmes et des applications.
+   268→est mis à disposition d'un seul client (ex. accessible que par les membres d’une entreprise)
+   269→il existe différents types de serveurs physiques qui varient en fonction de leur rôle dans le réseau :
+   270→Serveur Web : utilisé pour enregistrer des contenus Web et assurer l'accessibilité aux utilisateurs de
+   271→manière sûre.
+   272→Serveur Proxy : utilisé comme une interface de communication dans des réseaux d’ordinateurs pour
+   273→filtrer les communications et contrôler la bande passante.
+   274→Serveur de fichiers : utilisé pour le stockage de fichiers de données pour plusieurs clients.
+   275→Serveur de bases de données : fonctionne comme un programme informatique permettant à
+   276→d’autres programmes d'accéder à un ou plusieurs systèmes de bases de données sur un réseau.
+   277→Serveur d'impression : plusieurs ordinateurs peuvent être connectés à distance à ce type de serveur
+   278→pour imprimer des fichiers.
+   279→Serveur email : utilisé pour recevoir et expédier des courriers électroniques.
+   280→25
+   281→
+   282→===== PAGE 15 =====
+   283→Introduction
+   284→Qu’est ce qu’un serveur?
+   285→Serveur physique:
+   286→26
+   287→
+   288→===== PAGE 16 =====
+   289→Introduction
+   290→Qu’est ce qu’un serveur?
+   291→Serveur physique:
+   292→La puissance de calcul, la capacité de stockage et la performance d'un serveur dépend de nombreux
+   293→critères y compris le format : tour, rack, ou lame
+   294→27
+   295→
+   296→===== PAGE 17 =====
+   297→Introduction
+   298→Qu’est ce qu’un serveur?
+   299→Serveur physique:
+   300→Format tour :
+   301→−ressemble de près à une unité centrale d'ordinateur fixe.
+   302→−il peut être installé dans n'importe quelle pièce de l'entreprise, contrairement aux serveurs
+   303→racks ou lames, qui nécessitent une baie pour fonctionner.
+   304→28
+   305→
+   306→===== PAGE 18 =====
+   307→Introduction
+   308→Qu’est ce qu’un serveur?
+   309→Serveur physique:
+   310→Format rack
+   311→est conçu pour être disposé dans des baies, c'est à dire des armoires équipées pour installer les
+   312→différents matériels informatiques.
+   313→29
+   314→
+   315→===== PAGE 19 =====
+   316→Introduction
+   317→Qu’est ce qu’un serveur?
+   318→Serveur physique:
+   319→Format lame (ou blade)
+   320→sont les derniers nés des formats de serveur. Compact, et mince... comme une lame, ils se
+   321→glissent verticalement dans un casier dédié.
+   322→30
+   323→
+   324→===== PAGE 20 =====
+   325→Introduction
+   326→Qu’est ce qu’un serveur?
+   327→Serveur virtuel:
+   328→ne fonctionne pas sur un ordinateur physique mais sur un logiciel spécialisé, également appelé hyperviseur.
+   329→est un système permettant de convertir un serveur physique en plusieurs machines virtuelles (VM)
+   330→indépendantes qui agissent de manière autonome comme un dispositif physique.
+   331→est capable d'exécuter son propre système d'exploitation (OS), en utilisant des techniques de virtualisation.
+   332→peut être migré facilement vers l'environnement cloud
+   333→31
+   334→
+   335→===== PAGE 21 =====
+   336→Virtualisation
+   337→Pourquoi virtualiser: Architecture classique
+   338→32
+   339→
+   340→===== PAGE 22 =====
+   341→Virtualisation
+   342→Pourquoi virtualiser?
+   343→Les serveurs sont de plus en plus accessibles
+   344→Hardware de plus en plus performant
+   345→+
+   346→Les éditeurs (Microsoft, distribution Linux) recommandent une application/service par système d’exploitation
+   347→Un serveur pour le DNS
+   348→Un serveur pour le mail
+   349→Un serveur pour NFS
+   350→Etc.
+   351→=>
+   352→Une multiplicité de serveurs dans les datacenters (ou salles serveurs dans les entreprises)
+   353→80% ont une utilisation moyenne inférieure à 10%
+   354→Des coûts d’exploitation/maintenance (personnel du service informatique) qui croissent avec le nombre de serveurs
+   355→Des coûts en place: les salles serveurs ne sont pas indéfiniment extensibles
+   356→Des coûts en climatisation/électricité élevés
+   357→Ne jamais négliger ces coûts
+   358→33
+   359→
+   360→===== PAGE 23 =====
+   361→Virtualisation
+   362→Qu'est-ce que la virtualisation ?
+   363→L’ensemble des techniques qui permet de faire tourner plusieurs systèmes d’exploitation sur une machine
+   364→simultanément comme s’ils fonctionnaient sur des ordinateurs distincts
+   365→De la même façon que l'on fait fonctionner plusieurs programmes sur un même OS (multi-tâches) nous savons faire
+   366→fonctionner plusieurs OS sur un même hardware (virtualisation)
+   367→C’est pas du multi-boot
+   368→34
+   369→
+   370→===== PAGE 24 =====
+   371→Virtualisation
+   372→Qu'est-ce que la virtualisation ?
+   373→Simulation, Emulation, d’un environnement réel de façon virtuelle, logique, etc. en ayant recours à des outils logiciel
+   374→(VLAN: Un réseau local virtuel, Machine virtuelle, etc.)
+   375→La virtualisation est un ensemble de techniques matérielles et/ou logicielles qui autorisent l’exécution de plusieurs
+   376→applications (Systèmes) indépendantes sur une même machine hôte.
+   377→On parle souvent d’environnement virtuel (Virtual Environment – VE) ou de serveur privé virtuel (Virtual Private Server
+   378→– VPS) lorsqu’une machine exploite la virtualisation.
+   379→Pour bénéficier de cette technologie, il suffit d’équiper une machine d’un logiciel de virtualisation permettant d’ajouter
+   380→une couche de virtualisation, appelée hyperviseur.
+   381→L’hyperviseur masque les véritables ressources physiques de la machine.
+   382→Propose des ressources différentes et spécifiques en fonction des applications qui tournent (nouvelle
+   383→configuration).
+   384→Il y a indépendance entre le matériel et les applications.
+   385→35
+   386→
+   387→===== PAGE 25 =====
+   388→Virtualisation
+   389→Qu'est-ce que la virtualisation ?
+   390→Principes:
+   391→Le cloisonnement : chaque système d’exploitation a un fonctionnement indépendant, et ne peut interférer avec les
+   392→autres en aucune manière.
+   393→La transparence : le fait de fonctionner en mode virtualisé ne change rien au fonctionnement du système
+   394→d’exploitation.
+   395→=>La transparence implique la compatibilité : toutes les applications peuvent tourner sur un système virtualisé, et leur
+   396→fonctionnement n’est en rien modifié.
+   397→36
+   398→
+   399→===== PAGE 26 =====
+   400→Virtualisation
+   401→Qu'est-ce que la virtualisation ?
+   402→tester un OS sans l'installer sur votre machine physique
+   403→s’assurer de la compatibilité d’une application avec différents OS
+   404→utiliser une application dans un environnement particulier
+   405→utiliser les fonctionnalités spécifiques d’un OS
+   406→simuler une 2e machine et faire des tests de communication simples
+   407→créer un petit réseau de plusieurs machines
+   408→simuler des environnements multi-OS
+   409→partager un serveur physique en plusieurs serveurs virtuels
+   410→rendre une architecture hautement disponible (HA) en améliorant sensiblement sa tolérance aux pannes
+   411→migrer des serveurs virtuels sur de nouveaux serveurs physiques
+   412→faciliter les opérations de maintenance
+   413→Cas d’utilisation:
+   414→37
+   415→
+   416→===== PAGE 27 =====
+   417→Virtualisation
+   418→Qu'est-ce que la virtualisation ?
+   419→Moins de serveurs physiques
+   420→Économie sur le matériel
+   421→Usage optimale des ressources
+   422→De meilleures performances
+   423→Une meilleure sécurité
+   424→Un gain dans les coûts
+   425→La portabilité
+   426→Un monitoring simplifié
+   427→De la haute disponibilité
+   428→Réduction de l’impact environnemental
+   429→(moins
+   430→de
+   431→consommation
+   432→d’énergie,
+   433→allongement du cycle de vie du matériels,
+   434→etc.)
+   435→Avantages
+   436→Inconvénients
+   437→Plusieurs environnements virtuels s’exécutent sur une
+   438→unique machine physique
+   439→Machine physique en panne=> suspension de tous les
+   440→services
+   441→Le recours à des machines puissantes.
+   442→Les
+   443→outils
+   444→de
+   445→virtualisations
+   446→sont
+   447→généralement
+   448→gourmands en ressources.
+   449→Bien
+   450→qu’elle
+   451→soit
+   452→implémentée
+   453→sur
+   454→des
+   455→machines
+   456→puissantes, la virtualisation peut réduire les performances
+   457→des applications.
+   458→Suivant le type de virtualisation envisagé, cette perte de
+   459→performances peut ou non être significative.
+   460→38
+   461→
+   462→===== PAGE 28 =====
+   463→Virtualisation
+   464→Composants d’un système virtuel
+   465→Le système hôte (host) est l’OS principal de l’ordinateur.
+   466→Le système invité (guest) est l’OS installé à l’intérieur d’une machine virtuelle.
+   467→Une machine virtuelle (VM) est un ordinateur virtuel qui utilise un système invité.
+   468→Hyperviseur est un composant essentiel entre le matériel et les machines virtuelles.
+   469→39
+   470→
+   471→===== PAGE 29 =====
+   472→Virtualisation
+   473→Composants d’un système virtuel
+   474→La machine virtuelle
+   475→un système informatique virtuel conteneur de logiciels parfaitement isolé intégrant un système
+   476→d’exploitation et des applications.
+   477→chaque VM autonome est entièrement indépendante.
+   478→l’installation de plusieurs VM sur un ordinateur permet d’exécuter différents systèmes d’exploitation et
+   479→applications sur un seul et même serveur physique, ou « hôte ».
+   480→L’hyperviseur, une fine couche logicielle dissocie les machines virtuelles de l’hôte, et alloue
+   481→dynamiquement des ressources informatiques à chaque machine selon les besoins.
+   482→Quelque soit la technologie utilisée, une machine virtuelle se compose de deux éléments :
+   483→ressources : part de CPU alloués, mémoire vive autorisée, nombre de cartes réseau virtuelles.
+   484→données : comme un serveur normal, on doit disposer d’un système d’exploitation, de bibliothèques,
+   485→d’outils, d’applications et de leurs données.
+   486→40
+   487→
+   488→===== PAGE 30 =====
+   489→Virtualisation
+   490→Composants d’un système virtuel
+   491→La machine virtuelle: les fichiers
+   492→Description
+   493→Nom du fichier
+   494→Type de fichier
+   495→Conserve un journal de l'activité de la VM et est utilisé pour le dépannage.
+   496→<vmname>.log
+   497→Log file
+   498→Il s'agit du fichier qui stocke l'état du BIOS de la machine virtuelle.
+   499→<vmname>.nvram
+   500→BIOS file
+   501→Stocke le contenu de l'unité de disque de la VM. Un disque virtuel est
+   502→composé d'un ou plusieurs fichiers .vmdk. Le nombre de fichiers .vmdk
+   503→dépend de la taille du disque virtuel.
+   504→<vmname>.vmdk
+   505→Virtual disk file
+   506→Il s'agit d'un fichier centralisé permettant de stocker des informations et des
+   507→métadonnées sur les instantanés.
+   508→<vmname>.vmsd
+   509→<vmname>.vmsn
+   510→Snapshot file
+   511→Il s'agit du fichier d'état suspendu, qui stocke l'état d'une machine virtuelle
+   512→suspendue.
+   513→<vmname>.vmss
+   514→Suspend state
+   515→file
+   516→Stocke des informations, telles que le nom de la VM, les informations du
+   517→BIOS, le type de système d'exploitation invité et la taille de la mémoire.
+   518→<vmname>.vmx
+   519→Configuration file
+   520→Lorsqu'une machine virtuelle est créée, elle apparaît sur l'ordinateur hôte sous la forme d'un ensemble de fichiers.
+   521→Elle est généralement stockée dans un répertoire, créé par l'hyperviseur
+   522→41
+   523→Exemple: fichiers d’une machine virtuelle créée sur VMware
+   524→
+   525→===== PAGE 31 =====
+   526→Virtualisation
+   527→Composants d’un système virtuel
+   528→La machine virtuelle: Snapshots
+   529→42
+   530→Capture de l’état exact d’une VM à un instant donné.
+   531→•Utilité :
+   532→• Revenir rapidement à un état précédent en cas d’erreur ou de test.
+   533→• Sauvegarder la configuration avant une mise à jour ou une modification critique.
+   534→•Caractéristiques :
+   535→• Ne crée pas une copie complète du disque, mais stocke les changements
+   536→depuis le snapshot.
+   537→• Rapide à créer et à restaurer, mais ne remplace pas une sauvegarde complète.
+   538→
+   539→===== PAGE 32 =====
+   540→Virtualisation
+   541→Composants d’un système virtuel
+   542→La machine virtuelle: Snapshots
+   543→43
+   544→
+   545→===== PAGE 33 =====
+   546→Virtualisation
+   547→Composants d’un système virtuel
+   548→La machine virtuelle: Clone
+   549→44
+   550→Création d’une copie complète et indépendante d’une VM existante.
+   551→• Utilité :
+   552→• Déployer rapidement de nouvelles VM identiques.
+   553→• Tester des modifications sans risquer la VM originale.
+   554→• Fournir une VM de secours pour remplacer rapidement une VM
+   555→défaillante.
+   556→• Caractéristiques : Clonage complet ou lié (linked clone) :
+   557→• Clonage complet : copie totale, indépendant de l’original.
+   558→• Clonage lié : dépend de l’original, économise de l’espace mais nécessite
+   559→la VM source.
+   560→
+   561→===== PAGE 34 =====
+   562→Virtualisation
+   563→Composants d’un système virtuel
+   564→La machine virtuelle: Clone complet
+   565→45
+   566→
+   567→===== PAGE 35 =====
+   568→Virtualisation
+   569→Composants d’un système virtuel
+   570→La machine virtuelle: Clone lié
+   571→46
+   572→
+   573→===== PAGE 36 =====
+   574→Virtualisation
+   575→Composants d’un système virtuel
+   576→La machine virtuelle: Exportation
+   577→Créer un fichier ou ensemble de fichiers qui représente toute la machine virtuelle (configuration, disques,
+   578→snapshots, etc.) pour pouvoir la déplacer ou sauvegarder.
+   579→•
+   580→Utilité
+   581→•
+   582→Déplacer une VM d’un serveur/hyperviseur à un autre.
+   583→•
+   584→Archiver une VM pour restauration ultérieure.
+   585→•
+   586→Partager une VM pré-configurée avec d’autres utilisateurs ou laboratoires.
+   587→47
+   588→Exportation
+   589→Clonage
+   590→Aspect
+   591→Fichier exporté pouvant être importé
+   592→ailleurs
+   593→Nouvelle VM sur le même
+   594→hyperviseur
+   595→Création
+   596→Fichier indépendant de l’original
+   597→Peut être lié ou complet
+   598→Dépendance
+   599→Déplacement, sauvegarde ou partage
+   600→Déployer rapidement une copie
+   601→Objectif
+   602→Différence avec le clonage
+   603→
+   604→===== PAGE 37 =====
+   605→Virtualisation
+   606→Composants d’un système virtuel
+   607→La machine virtuelle: Exportation
+   608→Formats d’exportation:
+   609→•
+   610→OVF (Open Virtualization Format)
+   611→•
+   612→C’est un format standard pour enregistrer une machine virtuelle.
+   613→•
+   614→Il contient plusieurs fichiers : la configuration (.ovf), les disques
+   615→virtuels (.vmdk ou .vhd) et parfois un fichier de vérification (.mf).
+   616→•
+   617→Il
+   618→est
+   619→compatible
+   620→avec
+   621→plusieurs
+   622→hyperviseurs
+   623→(VirtualBox,
+   624→VMware, etc.).
+   625→•
+   626→OVA (Open Virtual Appliance)
+   627→•
+   628→C’est la version compressée du format OVF.
+   629→•
+   630→Tous les fichiers OVF sont regroupés dans un seul fichier .ova.
+   631→•
+   632→Plus simple à déplacer ou à partager.
+   633→•
+   634→La plupart des hyperviseurs modernes l’acceptent (VMware,
+   635→VirtualBox),
+   636→mais
+   637→certains
+   638→hyperviseurs
+   639→peuvent
+   640→préférer
+   641→décompresser le fichier avant import.
+   642→48
+   643→
+   644→===== PAGE 38 =====
+   645→Virtualisation
+   646→Hyperviseur
+   647→Pour créer des machines virtuelles (guest machines) sur une machine physique
+   648→(host machine), nous avons besoin d’un logiciel hyperviseur.
+   649→Un logiciel hyperviseur émule ou virtualise les composants de la machine physique
+   650→en divisant le CPU, RAM, Disque dur et les cartes réseaux, et assigner ces
+   651→ressources aux machines virtuelles (guest).
+   652→La couche logicielle rendant la virtualisation possible
+   653→S’exécute au dessous de toutes les VMs pour les gérer
+   654→Assure le contrôle des processeurs et des ressources de la machine physique
+   655→Hôte
+   656→Alloue à chaque MV les ressources dont elle a besoin
+   657→S’assure que les MV ne s’interférent pas (assurer l'isolation et la sécurité entre les
+   658→MV)
+   659→Les
+   660→hyperviseurs
+   661→sont
+   662→divisés
+   663→en
+   664→deux
+   665→types
+   666→indiquant
+   667→leur
+   668→mode
+   669→de
+   670→fonctionnement: Hyperviseur type 1 (Bare metal) et Hyperviseur Type 2 (Host metal)
+   671→49
+   672→
+   673→===== PAGE 39 =====
+   674→Virtualisation
+   675→Hyperviseur
+   676→Hyperviseur type 1 : Bare metal
+   677→s’exécuter directement sur le hardware
+   678→est un noyau hôte allégé et optimisé pour ne faire tourner initialement que des noyaux de
+   679→systèmes d’exploitation invités adaptés et optimisés à cette architecture spécifique.
+   680→pour des processeurs ayant les instructions de virtualisation matérielle (AMD -V et Intel VT),
+   681→le système d’exploitation invité n’a plus besoin d’être modifié pour pouvoir être exécuté dans
+   682→un hyperviseur de type 1
+   683→le modèle d’hyperviseur le plus répondu en entreprise
+   684→exemples : XEN, Oracle VM, Microsoft Hyper-V, VMware ESX
+   685→50
+   686→
+   687→===== PAGE 40 =====
+   688→Virtualisation
+   689→Hyperviseur
+   690→Hyperviseur type 2 : Host metal
+   691→S’exécute à l’intérieur d’un OS Hôte
+   692→s’exécute en troisième niveau au dessus du matériel
+   693→C’est le modèle préféré souvent par les utilisateurs de machines Lap Top ou DeskTop
+   694→exemples : VMware Workstation, VMware Fusion, l’hyperviseur open source QEMU, les
+   695→produits Microsoft Virtual PC et Virtual Server, VirtualBox d’Oracle, de même que Parallels
+   696→Workstation de SWsoft et Parallels Desktop
+   697→51
+   698→
+   699→===== PAGE 41 =====
+   700→Virtualisation
+   701→Hyperviseur
+   702→Rôle d’un OS
+   703→Partage le processeur entre plusieurs processus
+   704→Partage la mémoire entre plusieurs processus
+   705→Partage les I/O des périphériques entre plusieurs processus
+   706→Rôle de l’hyperviseur
+   707→Permettre ces mécanismes pour chaque OS invité, lui
+   708→permettant de croire qu’il est le seul sur la machine
+   709→Intercepter les communications avec les interruptions et
+   710→simuler de façon logicielle les interfaces
+   711→52
+   712→
+   713→===== PAGE 42 =====
+   714→Virtualisation
+   715→Techniques de virtualisation
+   716→Virtualisation complète
+   717→La
+   718→virtualisation
+   719→est
+   720→dite
+   721→complète
+   722→lorsque
+   723→le
+   724→système d'exploitation invité n'a pas conscience d'être
+   725→virtualisé.
+   726→L'OS qui est virtualisé n'a aucun moyen de savoir
+   727→qu'il partage le matériel avec d'autres OS.
+   728→Ainsi,
+   729→l'ensemble
+   730→des
+   731→systèmes
+   732→d'exploitation
+   733→virtualisés
+   734→s'exécutant
+   735→sur
+   736→un
+   737→unique
+   738→ordinateur,
+   739→peuvent
+   740→fonctionner
+   741→de
+   742→manière
+   743→totalement
+   744→indépendante les uns des autres et être vu comme
+   745→des ordinateurs à part entière sur un réseau.
+   746→53
+   747→
+   748→===== PAGE 43 =====
+   749→Virtualisation
+   750→Techniques de virtualisation
+   751→Paravirtualisation
+   752→Par opposition à la virtualisation complète, on parle
+   753→de
+   754→paravirtualisation
+   755→lorsque
+   756→les
+   757→systèmes
+   758→d'exploitation doivent être modifiés pour fonctionner
+   759→sur un hyperviseur de paravirtualisation.
+   760→Les modifications sont en fait des insertions de
+   761→drivers permettant de rediriger les appels système au
+   762→lieu de les traduire.
+   763→Elle
+   764→nécessite
+   765→une
+   766→collaboration
+   767→étroite
+   768→entre
+   769→l'hyperviseur et les systèmes d'exploitation invités
+   770→pour fonctionner correctement
+   771→54
+   772→
+   773→===== PAGE 44 =====
+   774→Virtualisation
+   775→Techniques de virtualisation
+   776→Paravirtualisation
+   777→Le mécanisme de redirection des appels système est expliqué ici:
+   778→Des drivers backend et frontend sont installés dans les OS para-
+   779→virtualisés.
+   780→Ils permettent, au lieu de traduire les appels système comme dans la
+   781→virtualisation complète, de ne faire que de la redirection (ce qui est
+   782→beaucoup plus rapide).
+   783→Il est donc intelligent d'utiliser un tel mécanisme pour accéder au
+   784→matériel potentiellement très sollicité (disque dur, interface réseau...).
+   785→En fait, ce qu'il se passe dans une telle technologie, c'est que le contrôle
+   786→d'un ou plusieurs matériel(s) est donné à un des OS virtualisé (celui qui
+   787→contient le driver backend), ici le système d'exploitation 1.
+   788→il sera simple d'imaginer que l'OS 2, qui souhaite accéder au hardware,
+   789→devra passé par son driver front end qui redirigera les appels système vers
+   790→l'OS 1.
+   791→L'inconvénient de cette technique est donc la dépendance d'un OS
+   792→virtualisé vis à vis d'un autre qui se créé par ce mécanisme de driver.
+   793→Si l'OS 1 tombe en panne, l'OS 2 ne pourra plus accéder au
+   794→matériel.
+   795→55
+   796→
+   797→===== PAGE 45 =====
+   798→Virtualisation
+   799→Types de virtualisation
+   800→La virtualisation peut prendre de nombreuses formes en fonction du type d'utilisation de l'application et de
+   801→l'utilisation du matériel
+   802→Virtualisation de l’OS
+   803→Virtualisation de serveurs
+   804→Virtualisation des postes de travail:
+   805→Virtual Desk Top Infrastructure (VDI)
+   806→Streaming d’OS
+   807→Virtualisation des applications
+   808→Virtualisation de sessions
+   809→Virtualisation par isolation ou Bulles Applications
+   810→(Conteneurs d’application)
+   811→Virtualisation de réseaux
+   812→Virtualisation de stockage
+   813→56
+   814→
+   815→===== PAGE 46 =====
+   816→Virtualisation
+   817→Types de virtualisation
+   818→Virtualisation de l’OS
+   819→
+   820→dans un même serveur, on peut créer plusieurs serveurs virtuels et plusieurs
+   821→postes de travails
+   822→Virtualisation de serveurs
+   823→
+   824→C’est le fait de faire fonctionner simultanément, sur un seul serveur
+   825→physique, plusieurs serveurs virtuels.
+   826→
+   827→Meilleur utilisation de la capacité de chaque serveur
+   828→
+   829→réduire la surface au sol, les équipements matériels, le besoin
+   830→de climatisation et le nombre d'administrateurs ;
+   831→
+   832→réaliser
+   833→des
+   834→économies
+   835→(locaux,
+   836→consommation
+   837→électrique,
+   838→personnel) ;
+   839→
+   840→réduire les délais de mise à disposition de nouveaux serveurs
+   841→
+   842→simplifier l’administration et la gestion
+   843→
+   844→améliorer le niveau de service et la disponibilité des applications
+   845→
+   846→simplifier
+   847→la
+   848→migration
+   849→des
+   850→applications
+   851→sur
+   852→de
+   853→nouveaux
+   854→serveurs
+   855→57
+   856→
+   857→===== PAGE 47 =====
+   858→Virtualisation
+   859→Types de virtualisation
+   860→Virtualisation de l’OS
+   861→Virtualisation de serveurs
+   862→Virtualisation des postes de travail
+   863→
+   864→Virtual Desk Top Infrastructure (VDI)
+   865→Principe : Dans une architecture VDI, des environnements de bureau complets (OS + applications) sont
+   866→hébergés sur des machines virtuelles centralisées sur des serveurs. Les utilisateurs accèdent à ces
+   867→machines virtuelles à distance à partir de leurs appareils.
+   868→Fonctionnement :
+   869→
+   870→L'OS complet (comme Windows ou Linux) tourne sur une machine virtuelle sur un serveur.
+   871→
+   872→Les utilisateurs interagissent avec cette machine virtuelle via un protocole de bureau à distance (par
+   873→exemple, RDP, Citrix ICA).
+   874→
+   875→Tout est exécuté côté serveur : calcul, stockage, gestion des applications.
+   876→Avantages :
+   877→
+   878→Flexibilité et accès à distance : les utilisateurs peuvent accéder à leur bureau virtuel depuis n'importe
+   879→quel appareil.
+   880→
+   881→Sécurité centralisée : les données et les applications restent dans le centre de données.
+   882→
+   883→Simplification de la gestion : les mises à jour, les correctifs, et la gestion des applications sont
+   884→centralisés.
+   885→58
+   886→
+   887→===== PAGE 48 =====
+   888→Virtualisation
+   889→Types de virtualisation
+   890→Virtualisation de l’OS
+   891→Virtualisation de serveurs
+   892→Virtualisation des postes de travail
+   893→
+   894→Streaming d’OS
+   895→Principe : Le streaming d'OS consiste à diffuser un système d'exploitation directement depuis un serveur
+   896→vers une machine physique ou virtuelle sans installer le système d'exploitation localement.
+   897→Fonctionnement :
+   898→
+   899→Le système d'exploitation est stocké et géré sur un serveur central.
+   900→
+   901→Lorsqu'un utilisateur démarre un appareil client, l'OS est envoyé en temps réel (streamé) sur le client,
+   902→où il est exécuté en mémoire.
+   903→
+   904→Le poste client peut être un PC léger ou un autre appareil capable de recevoir le flux de l’OS.
+   905→Avantages :
+   906→
+   907→Temps de déploiement rapide : il n'est pas nécessaire d'installer ou de cloner des systèmes
+   908→d'exploitation sur chaque poste.
+   909→
+   910→Moins de stockage local : l'OS n'a pas besoin d'être stocké sur le périphérique client.
+   911→
+   912→Gestion simplifiée : comme le système est streamé à chaque démarrage, les mises à jour et les
+   913→correctifs peuvent être appliqués facilement.
+   914→59
+   915→
+   916→===== PAGE 49 =====
+   917→Virtualisation
+   918→Types de virtualisation
+   919→Virtualisation d’applications
+   920→Virtualisation de sessions
+   921→est une
+   922→méthode de virtualisation où
+   923→plusieurs
+   924→utilisateurs
+   925→se
+   926→connectent
+   927→simultanément à un serveur, et chacun
+   928→d'entre
+   929→eux
+   930→obtient
+   931→une
+   932→session
+   933→indépendante
+   934→sur
+   935→un
+   936→système
+   937→d'exploitation partagé.
+   938→Contrairement à la virtualisation VDI, où
+   939→chaque
+   940→utilisateur
+   941→a
+   942→son
+   943→propre
+   944→environnement de machine virtuelle (VM)
+   945→avec un système d'exploitation dédié, la
+   946→virtualisation de session fait en sorte que
+   947→tous les utilisateurs partagent le même OS,
+   948→mais dans des sessions isolées.
+   949→60
+   950→
+   951→===== PAGE 50 =====
+   952→Virtualisation
+   953→Types de virtualisation
+   954→Virtualisation d’applications
+   955→Virtualisation de sessions
+   956→Fonctionnement:
+   957→Serveur
+   958→central
+   959→:
+   960→Il
+   961→exécute
+   962→un
+   963→système
+   964→d'exploitation
+   965→unique,
+   966→souvent
+   967→un
+   968→Windows
+   969→Server ou un OS Linux. Le serveur héberge les
+   970→applications
+   971→et
+   972→les
+   973→bureaux
+   974→auxquels
+   975→les
+   976→utilisateurs se connectent.
+   977→Sessions utilisateur : Lorsque les utilisateurs se
+   978→connectent, ils ouvrent une session distante sur
+   979→ce
+   980→serveur.
+   981→Ils
+   982→obtiennent
+   983→leur
+   984→propre
+   985→environnement de bureau ou d'application, mais
+   986→ils partagent les ressources du serveur (CPU,
+   987→RAM, stockage) avec les autres utilisateurs.
+   988→61
+   989→
+   990→===== PAGE 51 =====
+   991→Virtualisation
+   992→Types de virtualisation
+   993→Virtualisation d’applications
+   994→Virtualisation
+   995→par
+   996→isolation
+   997→ou
+   998→Bulles
+   999→Applications
+  1000→(Conteneurs
+  1001→d’applications)
+  1002→également
+  1003→appelées
+  1004→conteneurs
+  1005→d'applications:
+  1006→est
+  1007→une
+  1008→méthode
+  1009→de
+  1010→virtualisation
+  1011→légère
+  1012→qui
+  1013→permet
+  1014→d'exécuter
+  1015→des
+  1016→applications
+  1017→dans
+  1018→des
+  1019→environnements isolés les uns des autres, tout en partageant le même système
+  1020→d'exploitation sous-jacent.
+  1021→Contrairement à la virtualisation traditionnelle qui nécessite des machines
+  1022→virtuelles avec leur propre OS, cette technique se concentre sur l’encapsulation
+  1023→et l'isolement des applications.
+  1024→Exemples : UNIX chariot, Unix LXC (voir l’historique de docker)
+  1025→62
+  1026→
+  1027→===== PAGE 52 =====
+  1028→Virtualisation
+  1029→Types de virtualisation
+  1030→Virtualisation de réseaux
+  1031→est
+  1032→un
+  1033→processus
+  1034→qui
+  1035→permet
+  1036→de
+  1037→créer
+  1038→des
+  1039→versions virtuelles de ressources réseau, offrant
+  1040→une abstraction et une gestion améliorées des
+  1041→infrastructures réseau physiques.
+  1042→Elle consiste à découpler (séparer) les fonctions
+  1043→et les services réseau de l'infrastructure physique
+  1044→sous-jacente, permettant ainsi une flexibilité, une
+  1045→scalabilité et une gestion simplifiée des réseaux.
+  1046→63
+  1047→
+  1048→===== PAGE 53 =====
+  1049→Virtualisation
+  1050→Types de virtualisation
+  1051→Virtualisation de réseaux
+  1052→Les réseaux virtuels sont isolés les uns des autres, assurant que le trafic
+  1053→d’un réseau n’interfère pas avec un autre, ce qui renforce la sécurité des
+  1054→données.
+  1055→Des équipements comme VMware vSwitch et Open vSwitch facilitent cette
+  1056→abstraction, tandis que des pare-feu virtuels tels que Cisco ASA Virtual
+  1057→Firewall protègent les flux de trafic.
+  1058→Les ressources réseau, comme les routeurs et les commutateurs, peuvent
+  1059→être découpées logiquement pour une gestion plus granulaire et une allocation
+  1060→dynamique.
+  1061→Par exemple, des routeurs virtuels comme Cisco CSR 1000V permettent de
+  1062→créer des instances configurables sur un seul appareil physique.
+  1063→64
+  1064→=> la virtualisation de réseaux améliore la flexibilité, la sécurité et l'optimisation
+  1065→des ressources pour les entreprises.
+  1066→
+  1067→===== PAGE 54 =====
+  1068→Virtualisation
+  1069→Types de virtualisation
+  1070→Virtualisation de stockage
+  1071→65
+  1072→est
+  1073→un
+  1074→concept
+  1075→qui permet
+  1076→à
+  1077→plusieurs périphériques
+  1078→de
+  1079→stockage physique qui sont regroupés d’apparaître comme un
+  1080→seul et unique périphérique de stockage
+  1081→Cet espace de stockage regroupé sera présenté aux hôtes qui
+  1082→les verront comme un pool de stockage lié (data Store) (leur
+  1083→propre disque).
+  1084→
+  1085→===== PAGE 55 =====
+  1086→Virtualisation
+  1087→Types de virtualisation
+  1088→Virtualisation de stockage
+  1089→66
+  1090→Avantages:
+  1091→Homogénéisation du stockage sur des périphériques de
+  1092→stockage de capacité et de vitesses différentes
+  1093→Temps d’arrêt réduits
+  1094→Meilleure optimisation des performances et de la vitesse
+  1095→avec disponibilité très élevée (High Availability)
+  1096→Migration automatique et à chaud des données vers une
+  1097→autre machine virtuelle (Vmotion)
+  1098→Automatisation de l’extension de capacité de stockage par
+  1099→réduction du besoin de provisionnement manuel
+  1100→
+  1101→===== PAGE 56 =====
+  1102→Virtualisation
+  1103→Types de virtualisation
+  1104→Virtualisation de stockage: Architectures
+  1105→67
+  1106→DAS
+  1107→(Direct
+  1108→Attached
+  1109→Storage):
+  1110→Stockage
+  1111→à
+  1112→connexion
+  1113→directe, fait référence à un système de stockage informatique
+  1114→qui est directement connecté au serveur ou ordinateur au
+  1115→lieu de transiter par un réseau
+  1116→1) SCSI (Small Computer System Interface),
+  1117→2) SATA (Serial Advanced Technology Attachment)
+  1118→3) SAS (Serial Attached SCSI)
+  1119→
+  1120→===== PAGE 57 =====
+  1121→DAS (Direct Attached Storage):
+  1122→Avantages
+  1123→
+  1124→Solution la plus économique, très simple et rapide à mettre en place
+  1125→
+  1126→Architecture est envisageable en environnement de production mais il faut
+  1127→penser à une solution de sauvegarde adaptée protéger les données contre les
+  1128→pertes
+  1129→Inconvénients
+  1130→
+  1131→Espace de stockage non dynamique
+  1132→
+  1133→Taux d’utilisation non optimal
+  1134→
+  1135→Temps d’indisponibilité considérable
+  1136→
+  1137→Les fonctionnalités évoluées telles que Vmotion et HA ne sont pas disponibles
+  1138→
+  1139→Pas de gestion centralisée des VM
+  1140→Virtualisation
+  1141→Types de virtualisation
+  1142→Virtualisation de stockage: Architectures
+  1143→68
+  1144→
+  1145→===== PAGE 58 =====
+  1146→Virtualisation
+  1147→Types de virtualisation
+  1148→Virtualisation de stockage
+  1149→69
+  1150→Solution:
+  1151→Stockage centralisé partagé
+  1152→Redondance des connexions / disques : accès continu aux données stockées sur des disques
+  1153→en cas de défaillance d'une connexion, d'un disque, ou d'une autre partie de l'infrastructure
+  1154→
+  1155→===== PAGE 59 =====
+  1156→Virtualisation
+  1157→Types de virtualisation
+  1158→Virtualisation de stockage
+  1159→70
+  1160→Solution:
+  1161→Stockage centralisé partagé
+  1162→Redondance des connexions / disques : accès continu aux données stockées sur des disques
+  1163→en cas de défaillance d'une connexion, d'un disque, ou d'une autre partie de l'infrastructure
+  1164→Serveurs virtualisés
+  1165→
+  1166→===== PAGE 60 =====
+  1167→Virtualisation
+  1168→Types de virtualisation
+  1169→Virtualisation de stockage: Architectures
+  1170→71
+  1171→NAS (Network Attached Storage)
+  1172→Le NAS est une solution de stockage en réseau.
+  1173→C’est un boîtier contenant un ou plusieurs
+  1174→disques durs, relié au réseau local (LAN), pour
+  1175→partager des fichiers entre plusieurs utilisateurs
+  1176→ou ordinateurs.
+  1177→Fonctionnement
+  1178→est
+  1179→connecté
+  1180→au
+  1181→réseau
+  1182→par
+  1183→un
+  1184→câble
+  1185→Ethernet.
+  1186→agit comme un petit serveur de fichiers.
+  1187→Les utilisateurs peuvent enregistrer, lire ou
+  1188→partager des documents à distance (un peu
+  1189→comme un “disque dur en réseau”).
+  1190→
+  1191→===== PAGE 61 =====
+  1192→Virtualisation
+  1193→Types de virtualisation
+  1194→Virtualisation de stockage: Architectures
+  1195→72
+  1196→NAS (Network Attached Storage)
+  1197→Configuration
+  1198→Le NAS n’a ni clavier ni écran.
+  1199→Il se configure via une interface web
+  1200→accessible
+  1201→depuis
+  1202→un
+  1203→navigateur
+  1204→(comme Chrome ou Firefox).
+  1205→Il possède sa propre adresse IP, ce qui
+  1206→en fait un nœud du réseau à part
+  1207→entière.
+  1208→
+  1209→===== PAGE 62 =====
+  1210→Virtualisation
+  1211→Types de virtualisation
+  1212→Virtualisation de stockage: Architectures
+  1213→73
+  1214→NAS (Network Attached Storage)
+  1215→Intérêt du NAS
+  1216→Centraliser les fichiers pour tous les utilisateurs.
+  1217→Sauvegarder et sécuriser les données.
+  1218→Accéder aux fichiers depuis plusieurs appareils (PC, tablette, etc.).
+  1219→Exemple
+  1220→Dans une entreprise, un NAS peut être utilisé pour partager les projets
+  1221→entre tous les employés du même réseau.
+  1222→Le NAS fournit un datastore centralisé que tous les hôtes ESXi peuvent
+  1223→utiliser pour stocker :
+  1224→Les
+  1225→fichiers
+  1226→des
+  1227→machines
+  1228→virtuelles
+  1229→(disques
+  1230→virtuels
+  1231→VMDK,
+  1232→snapshots, etc.),
+  1233→Les ISO des systèmes d’exploitation,
+  1234→
+  1235→===== PAGE 63 =====
+  1236→Virtualisation
+  1237→Types de virtualisation
+  1238→Virtualisation de stockage: Architectures
+  1239→74
+  1240→NAS (Network Attached Storage)
+  1241→Les protocoles utilisés par un NAS
+  1242→Un NAS peut fonctionner avec plusieurs types de protocoles selon le
+  1243→système d’exploitation utilisé (Windows, Linux ou macOS).
+  1244→Ces protocoles permettent de partager les fichiers sur le réseau entre
+  1245→différents ordinateurs.
+  1246→Principaux protocoles :
+  1247→CIFS / SMB : utilisé par Windows (et aussi par Samba sur Linux).
+  1248→NFS : utilisé surtout par Linux et Unix.
+  1249→C’est le protocole le plus courant dans les NAS, car il est rapide et
+  1250→compatible avec beaucoup de systèmes.
+  1251→AFP : utilisé par les ordinateurs Apple (macOS).
+  1252→
+  1253→===== PAGE 64 =====
+  1254→Virtualisation
+  1255→Types de virtualisation
+  1256→Virtualisation de stockage: Architectures
+  1257→75
+  1258→NAS (Network Attached Storage)
+  1259→Le stockage en réseau (NAS) est un type de
+  1260→périphérique de stockage de fichiers dédié qui
+  1261→fournit aux nœuds de réseau local (LAN) un
+  1262→stockage partagé basé sur des fichiers via une
+  1263→connexion Ethernet standard.
+  1264→Les
+  1265→périphériques
+  1266→NAS
+  1267→sont
+  1268→généralement
+  1269→dépourvus
+  1270→de
+  1271→clavier
+  1272→ou
+  1273→d’écran,
+  1274→ils
+  1275→sont
+  1276→configurés
+  1277→et
+  1278→gérés
+  1279→avec
+  1280→un
+  1281→programme
+  1282→utilitaire basé sur un navigateur
+  1283→Chaque NAS réside sur le réseau local en tant
+  1284→que nœud de réseau indépendant et possède sa
+  1285→propre adresse IP
+  1286→
+  1287→===== PAGE 65 =====
+  1288→Virtualisation
+  1289→Types de virtualisation
+  1290→Virtualisation de stockage: Architectures
+  1291→76
+  1292→NAS (Network Attached Storage)
+  1293→Les périphériques NAS intègrent le support de
+  1294→multiples systèmes de fichiers réseau, tels que:
+  1295→
+  1296→Common Internet File System (CIFS) protocole
+  1297→de partage de Microsoft et de Samba.
+  1298→
+  1299→Network File System (NFS) qui est un protocole
+  1300→de partage de fichiers Unix. C’est le standard
+  1301→universel pour l’accès aux fichiers sur un
+  1302→réseau, et c’est le protocole le plus utilisé dans
+  1303→les NAS.
+  1304→
+  1305→AFP
+  1306→(AppleShare
+  1307→File
+  1308→Protocol)
+  1309→qui
+  1310→est
+  1311→l’équivalent pour la technologie Apple.
+  1312→
+  1313→===== PAGE 66 =====
+  1314→Virtualisation
+  1315→Types de virtualisation
+  1316→Virtualisation de stockage: Architectures
+  1317→77
+  1318→NAS (Network Attached Storage)
+  1319→Exemple
+  1320→
+  1321→===== PAGE 67 =====
+  1322→Virtualisation
+  1323→Types de virtualisation
+  1324→Virtualisation de stockage: Architectures
+  1325→78
+  1326→SAN (Storage Area Network)
+  1327→Un SAN est un réseau spécialisé qui connecte des
+  1328→serveurs à un espace de stockage centralisé.
+  1329→Il est surtout utilisé dans les grandes entreprises et
+  1330→les centres de données.
+  1331→Fonctionnement
+  1332→utilise un réseau dédié (souvent Fibre Channel
+  1333→ou iSCSI).
+  1334→Pour les serveurs, le stockage du SAN apparaît
+  1335→comme un disque dur local, mais en réalité il est
+  1336→situé dans la baie SAN.
+  1337→Contrairement au NAS (qui partage des fichiers),
+  1338→le SAN fonctionne au niveau bloc (accès direct
+  1339→aux disques).
+  1340→
+  1341→===== PAGE 68 =====
+  1342→Virtualisation
+  1343→Types de virtualisation
+  1344→Virtualisation de stockage: Architectures
+  1345→79
+  1346→SAN (Storage Area Network)
+  1347→Configuration
+  1348→Composé de :
+  1349→des serveurs (qui utilisent le stockage),
+  1350→des switchs SAN (qui font le lien),
+  1351→une
+  1352→baie
+  1353→de
+  1354→stockage
+  1355→(qui
+  1356→contient
+  1357→les
+  1358→disques).
+  1359→Il se configure via une interface d’administration
+  1360→fournie par le constructeur (Dell EMC, NetApp,
+  1361→HPE).
+  1362→
+  1363→===== PAGE 69 =====
+  1364→Virtualisation
+  1365→Types de virtualisation
+  1366→Virtualisation de stockage: Architectures
+  1367→80
+  1368→SAN (Storage Area Network)
+  1369→Intérêt du SAN
+  1370→Très rapide : idéal pour les bases de données et les machines
+  1371→virtuelles.
+  1372→Centralisé : un seul gros espace de stockage pour plusieurs
+  1373→serveurs.
+  1374→Fiable : si un serveur tombe en panne, un autre peut continuer à
+  1375→accéder aux données.
+  1376→Exemple
+  1377→Dans un datacenter, plusieurs serveurs de virtualisation (VMware
+  1378→ESXi) accèdent à la même baie SAN.
+  1379→Toutes les machines virtuelles sont stockées dessus, ce qui permet
+  1380→de les déplacer facilement d’un serveur à un autre.
+  1381→
+  1382→===== PAGE 70 =====
+  1383→Virtualisation
+  1384→Types de virtualisation
+  1385→Virtualisation de stockage: Architectures
+  1386→81
+  1387→NAS = partage de fichiers (comme un disque réseau).
+  1388→SAN = partage de disques (comme si chaque serveur avait un gros
+  1389→disque dur externe très rapide).
+  1390→

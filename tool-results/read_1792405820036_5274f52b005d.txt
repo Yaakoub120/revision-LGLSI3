@@ -1,0 +1,847 @@
+     1→
+     2→===== PAGE 1 =====
+     3→CHAPITRE 3
+     4→FSM-LSI3-A.U. 2025-26
+     5→1
+     6→Année Universitaire 2025-26
+     7→Applications IOT via Raspberry Pi 
+     8→Faculté des sciences de Monastir
+     9→Niveau LSI3
+    10→Proposé par Mr Samir Belaid
+    11→Initiation Raspberry Pi
+    12→
+    13→===== PAGE 2 =====
+    14→CHAPITRE 3
+    15→FSM-LSI3-A.U. 2025-26
+    16→2
+    17→Bien débuter sur le Raspberry Pi
+    18→• Le Raspberry Pi charge son système d’exploitation à partir du lecteur de 
+    19→carte micro SD.
+    20→• Raspberry Pi OS (https://www.raspberrypi.org/software/) est un logiciel 
+    21→simplifiant le processus d’installation du système d’exploitation.
+    22→• Cliquer sur « See all download options »; deux configurations existent : OS 
+    23→with desktop ou OS Lite (une image avec ou sans interface graphique)
+    24→• Pour installer OS, il suffit de copier les fichiers décompressés sur la carte 
+    25→SD formatée en FAT32.(avec Balena Etcher pour la partition/validation)
+    26→• Le premier démarrage va nécessiter un écran avec entrée HDMI, un clavier
+    27→ainsi qu'une souris.
+    28→• Le Raspberry Pi s'initialise... puis le bureau apparaît après quelques 
+    29→secondes.
+    30→Se connecter au bureau de son Raspberry depuis un 
+    31→PC Windows
+    32→Configurations sur Raspberry
+    33→Du côté du Raspberry, il suffit d'installer les outils de bureau à distance 
+    34→pour Linux : xrdp et tightvncserver
+    35→sudo apt-get install tightvncserver
+    36→sudo apt-get install xrdp
+    37→Configurations sur Windows
+    38→• Lancer l'outil "Connexion Bureau à distance",
+    39→• Une fois ouvert, entrez l'adresse IP du Raspberry (disponible en tapant 
+    40→ifconfig dans un terminal),
+    41→• Puis, connectez vous avec vos identifiants et mots de passe (par défaut 
+    42→pi et raspberry).
+    43→
+    44→===== PAGE 3 =====
+    45→CHAPITRE 3
+    46→FSM-LSI3-A.U. 2025-26
+    47→3
+    48→Autres outils utiles
+    49→D'autres outils sont utiles lors de l'utilisation, par exemple, de l'appareil 
+    50→photo ou d'une webcam:
+    51→• SSH: Utilisée pour accéder à distance au Raspberry Pi via un réseau local
+    52→• SCP: permette de copier via SSH des photos prises par Pi sur un 
+    53→ordinateur principal
+    54→• rsync: Utilisée pour synchroniser les dossiers des photos prises entre Pi 
+    55→et l’ordinateur
+    56→• cron: Planifie la prise d'une photo à un intervalle donné, comme chaque 
+    57→minute pour capturer un laps de temps
+    58→Créer et exécuter un programme Python
+    59→Branchement d'une LED au Raspberry
+    60→• Pour relier la LED au Raspberry Pi, on a besoin d'une 
+    61→résistance (en général 100Ω).
+    62→GPIO18
+    63→GND
+    64→Création du fichier Python .py
+    65→• Une fois que tout est branché, vous pouvez vous connecter avec un 
+    66→clavier/souris ou par SSH pour écrire sur le Raspberry Pi votre 
+    67→premier programme en Python.
+    68→• Avec Raspberry Pi les commandes entrées sont des commandes Linux.
+    69→• On peut par exemple appeler le programme comme suit :
+    70→sudo nano led.py
+    71→Cette commande crée le fichier led.py dans le répertoire principal 
+    72→(/home/pi par défaut) et l'ouvre dans un éditeur de texte.
+    73→
+    74→===== PAGE 4 =====
+    75→CHAPITRE 3
+    76→FSM-LSI3-A.U. 2025-26
+    77→4
+    78→Ecriture du programme python
+    79→import RPi.GPIO as GPIO # Importation des librairies qui gèrent les ports
+    80→import time # Importation de la librairie temps
+    81→GPIO.setmode(GPIO.BCM) # BCM : Numéro des GPIO (GPIO 18)
+    82→GPIO.setup(18, GPIO.OUT) # Définition du port en sortie
+    83→GPIO.setwarnings(False) # Mettre sur OFF les alertes (qui sont inutiles)
+    84→# Affichage de texte
+    85→print("\n+---------------------/ Blink LED /-------------------------+")
+    86→print("| La LED doit etre reliée au GPIO 18 du Raspberry |")
+    87→print("+-----------------------------------------------------------------+\n")
+    88→nbrBlink = int(input("Combien de fois la LED doit clignoter ?\n")) # Utilisation de la fonction input pour acquérir des informations
+    89→tempsAllume = int(input("Combien de temps doit-elle rester allumée ?\n"))
+    90→tempsEteint = int(input("Combien de temps doit-elle rester éteinte ?\n"))
+    91→i = 0 # Définition d'une variable type compteur
+    92→while i < nbrBlink :
+    93→GPIO.output(18, True) # Mise a 1 du GPIO 18 (+5V)
+    94→time.sleep(tempsAllume) # On attend le temps défini
+    95→GPIO.output(18, False) # Mise a zero du GPIO 18 (GND)
+    96→time.sleep(tempsEteint) # ...
+    97→i = i+1
+    98→GPIO.cleanup()
+    99→Exécution du programme Python
+   100→Pour lancer le programme que vous avez créé, il suffit d'entrer :
+   101→sudo python led.py
+   102→Branchements de la sonde
+   103→On branche la sonde au Raspberry en suivant le 
+   104→schéma ci-devant.
+   105→Lecture via la commande du Raspberry
+   106→On peut lire la sonde en utilisant l'invite de commande 
+   107→du Raspberry comme ceci : (en remplaçant les 'x' par le 
+   108→numéro donné par le Raspberry).
+   109→sudo modprobe w1-gpio
+   110→sudo modprobe w1-therm
+   111→cd /sys/bus/w1/devices/
+   112→ls
+   113→cd 28-xxxxxxxxxx
+   114→cat w1_slave
+   115→Lire la température à l'aide d'une sonde DS18B20
+   116→
+   117→===== PAGE 5 =====
+   118→CHAPITRE 3
+   119→FSM-LSI3-A.U. 2025-26
+   120→5
+   121→Sonde DS18B20 non détectée ?
+   122→Il peut arriver que le Raspberry ne détecte pas la sonde de température. 
+   123→Pour qu'il la détecte, il faut modifier deux fichiers système :
+   124→Ajouter les lignes suivantes au ficher qui se trouve dans /etc/modules :
+   125→w1-therm
+   126→w1-gpio pullup=1
+   127→sudo nano /etc/modules
+   128→Ajouter la ligne suivante au fichier qui se trouve dans /boot/config.txt :
+   129→dtoverlay=w1-gpio
+   130→Redémarrer le Raspberry Pi.
+   131→Afficher la température avec un script Python
+   132→On peut créer un programme qui affiche la température au millième.
+   133→def lireFichier (emplacement) :
+   134→# Ouverture du fichier contenant la temperature
+   135→fichTemp = open(emplacement)
+   136→# Lecture du fichier
+   137→contenu = fichTemp.read()
+   138→# Fermeture du fichier apres qu'il ai ete lu
+   139→fichTemp.close()
+   140→return contenu
+   141→def recupTemp (contenuFich) :
+   142→# Supprimer la premiere ligne qui est inutile
+   143→secondeLigne = contenuFich.split("\n")[1]
+   144→temperatureData = secondeLigne.split(" ")[9]
+   145→# Supprimer le "t="
+   146→temperature = float(temperatureData[2:])
+   147→# Mettre un chiffre apres la virgule
+   148→temperature = temperature / 1000
+   149→return temperature
+   150→contenuFich = lireFichier("/sys/bus/w1/devices/28-xxxxxxxx/w1_slave")
+   151→temperature = recupTemp (contenuFich)
+   152→print ("Temperature :", temperature)
+   153→On obtient, en lançant le programme python ceci:
+   154→
+   155→===== PAGE 6 =====
+   156→CHAPITRE 3
+   157→FSM-LSI3-A.U. 2025-26
+   158→6
+   159→Enregistrer les températures dans un fichier texte
+   160→• On ajoute une ligne dans un fichier à chaque prise de température.
+   161→• Pour changer l'intervalle de lecture, modifier le time.sleep() qui est en seconde. 
+   162→import time
+   163→import datetime
+   164→def lireFichier (emplacement) :
+   165→fichTemp = open(emplacement)
+   166→contenu = fichTemp.read()
+   167→fichTemp.close()
+   168→return contenu
+   169→def recupTemp (contenuFich) :
+   170→secondeLigne = contenuFich.split("\n")[1]
+   171→temperatureData = secondeLigne.split(" ")[9]
+   172→temperature = float(temperatureData[2:])
+   173→temperature = temperature / 1000
+   174→return temperature
+   175→def sauvegarde (temperature, date, emplacement) :
+   176→fichierSauvegarde = open(emplacement, "a")
+   177→fichierSauvegarde.write(str(date)+"   ")
+   178→fichierSauvegarde.write(str(temperature)+'\r\n')
+   179→fichierSauvegarde.close()
+   180→while True :
+   181→date = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+   182→contenuFich = lireFichier("/sys/bus/w1/devices/28-xxxxxxxx/w1_slave")
+   183→temperature = recupTemp(contenuFich)
+   184→sauvegarde(temperature, date, "Temperature.txt")
+   185→time.sleep(60)
+   186→Mesure de distances avec un capteur HC-SR04
+   187→Le capteur à ultrasons HC-SR04 permet de mesurer une distance de 2 à 
+   188→400cm en envoyant des signaux sonores à 40 kHz. En fonction du temps
+   189→qui sépare l'émission de la réception, on trouve par un calcul la distance.
+   190→Branchement du capteur au Raspberry
+   191→• Le HC-SR04 se connecte grâce à 4 PINs: VCC, 
+   192→Trig, Echo et GND. Pour le connecter, on a 
+   193→besoin de deux résistances : 1KΩ et 2KΩ. 
+   194→• Une fois branché, il suffit d'exécuter un 
+   195→script Python pour obtenir la distance 
+   196→calculée entre le capteur et l'obstacle.
+   197→
+   198→===== PAGE 7 =====
+   199→CHAPITRE 3
+   200→FSM-LSI3-A.U. 2025-26
+   201→7
+   202→Programmation du capteur en Python
+   203→Ce script va donner une distance en centimètres toutes les secondes pendant un 
+   204→nombre de fois donné :
+   205→import RPi.GPIO as GPIO
+   206→import time
+   207→GPIO.setmode(GPIO.BCM)
+   208→print "+-----------------------------------------------------+"
+   209→print "|Mesure de distance par le capteur ultrasonore HC-SR04|"
+   210→print "+-----------------------------------------------------+"
+   211→Trig = 23
+   212→# Entree Trig du HC-SR04 branchee au GPIO 23
+   213→Echo = 24
+   214→# Sortie Echo du HC-SR04 branchee au GPIO 24
+   215→GPIO.setup(Trig,GPIO.OUT)
+   216→GPIO.setup(Echo,GPIO.IN)
+   217→GPIO.output(Trig, False)
+   218→repet = input("Entrez un nombre de repetitions de mesure : ")
+   219→for x in range(repet):    # On prend la mesure "repet" fois
+   220→time.sleep(1)       # On la prend toute les 1 seconde
+   221→GPIO.output(Trig, True)
+   222→time.sleep(0.00001)
+   223→GPIO.output(Trig, False)
+   224→while GPIO.input(Echo)==0:  ## Emission de l'ultrason
+   225→debutImpulsion = time.time()
+   226→while GPIO.input(Echo)==1:   ## Retour de l'Echo
+   227→finImpulsion = time.time()
+   228→distance = round((finImpulsion-
+   229→debutImpulsion)*340*100/2,1)## Vitesse du son=340m/s
+   230→print "La distance est de : ",distance," cm"
+   231→GPIO.cleanup()
+   232→L'exécution de ce programme donne :
+   233→Communication USB entre Arduino UNO et Raspberry Pi
+   234→Pour tirer l'avantage de chaque carte, le mieux est d'établir une communication 
+   235→entre les deux. Nous allons voir comment mettre en place les 3 types de 
+   236→communication suivants :
+   237→1. Communication unidirectionnelle Arduino UNO →Raspberry Pi,
+   238→2. Communication unidirectionnelle Raspberry Pi →Arduino UNO,
+   239→3. Communication bidirectionnelle Raspberry Pi ↔Arduino UNO : mélange les 
+   240→deux précédentes et permet à la fois d’envoyer et recevoir des données.
+   241→Communication unidirectionnelle de l'Arduino vers le Raspberry Pi
+   242→int i=0;
+   243→void setup() {
+   244→Serial.begin(9600);
+   245→Serial.println("Un message va etre envoye
+   246→toutes les deux secondes des maintenant!");}
+   247→void loop() {
+   248→Serial.println("Message #" + String(i));
+   249→delay(2000);
+   250→i++;}
+   251→• Côté Arduino, il suffit de lui demander 
+   252→d'écrire sur la sortie série Serial le 
+   253→message que l'on souhaite transmettre.
+   254→• Ne branchez pas encore l'Arduino au 
+   255→Raspberry Pi.
+   256→
+   257→===== PAGE 8 =====
+   258→CHAPITRE 3
+   259→FSM-LSI3-A.U. 2025-26
+   260→8
+   261→Communication unidirectionnelle de l'Arduino vers le Raspberry Pi
+   262→Côté Raspberry, on écrit un programme en Python qui utilise la fonction 
+   263→serial.Serial. Cependant, on a besoin pour utiliser cette fonction, du port 
+   264→utilisé par l'Arduino sur le Raspberry Pi.
+   265→Il suffit d'entrer la commande Linux suivante :
+   266→ls /dev/tty*
+   267→On obtient une liste de ce type :
+   268→Brancher l'Arduino au port USB et entrez à nouveau la commande. Un nouvel 
+   269→élément devrait apparaître dans la liste (c’est le nom que prend l’Arduino).
+   270→Communication unidirectionnelle de l'Arduino vers le Raspberry Pi
+   271→Dans ce cas, l'Arduino est détecté en temps que /dev/ttyACM0.
+   272→Regardons maintenant le programme qui sera exécuté sur le Raspberry :
+   273→# Import de la librairie serial
+   274→import serial
+   275→# Ouverture du port série avec :
+   276→# '/dev/ttyXXXX' : définition du port d écoute (remplacer 'X' par le bon nom)
+   277→# 9600 : vitesse de communication
+   278→serialArduino = serial.Serial('/dev/ttyXXXX', 9600)
+   279→# Ecriture de chaque message reçu
+   280→while True :
+   281→print(serialArduino.readline())
+   282→On obtient à l'exécution ceci :
+   283→
+   284→===== PAGE 9 =====
+   285→CHAPITRE 3
+   286→FSM-LSI3-A.U. 2025-26
+   287→9
+   288→Communication unidirectionnelle du Raspberry Pi vers l'Arduino
+   289→• Programmer maintenant l'Arduino, qui 
+   290→va recevoir les ordres du Raspberry Pi:
+   291→#define Rouge A0
+   292→#define Vert A1
+   293→#define Bleu A2
+   294→int message = 0;
+   295→int couleurs[] = {Rouge, Vert, Bleu};
+   296→void setup() {
+   297→Serial.begin(9600);
+   298→pinMode(Rouge, OUTPUT);
+   299→pinMode(Vert, OUTPUT);
+   300→pinMode(Bleu, OUTPUT);}
+   301→void loop() {
+   302→if (Serial.available())  {
+   303→message = Serial.read() - '0';
+   304→if (message > 3) {
+   305→digitalWrite(couleurs[message-4], LOW);}
+   306→else { digitalWrite(couleurs[message-1], HIGH);}
+   307→}  }
+   308→Pour cette communication, On va contrôler 
+   309→des LED connectées à l'Arduino à partir du 
+   310→Raspberry.
+   311→• Commencer par brancher les LEDs à 
+   312→l'Arduino en suivant le schéma ci-dessous:
+   313→Communication unidirectionnelle du Raspberry Pi vers l'Arduino
+   314→Pour finir, on code l'envoi des ordres par le Raspberry Pi :
+   315→import serial 
+   316→ser = serial.Serial('/dev/ttyXXXX', 9600)
+   317→print("CTRL + C pour arrêter")
+   318→while True :
+   319→led = int(input('Quelle LED souhaitez-vous allumer / éteindre ? 
+   320→(Rouge=1 / Vert=2 / Bleu=3)'))
+   321→action = input("Souhaitez-vous allumer ou Eteindre la LED ? 
+   322→(Allumer=1 / Eteindre=0)")
+   323→if (action == 1) :
+   324→ser.write(str(led))
+   325→else :
+   326→msg = led+3
+   327→ser.write(str(msg))
+   328→
+   329→===== PAGE 10 =====
+   330→CHAPITRE 3
+   331→FSM-LSI3-A.U. 2025-26
+   332→10
+   333→Débuter avec Node-Red sur Raspberry Pi
+   334→• Node-Red est un langage de programmation graphique pour développer des 
+   335→objets connectés, idéal pour comprendre l’IOT,
+   336→• Disponible sur Windows, macOS et inclus par défaut la distribution Raspbian.
+   337→Démarrer Node-Red
+   338→• Pour démarrer Node-Red sur Raspberry dans Menu -> Programmation
+   339→• On peut également démarrer depuis le Terminal avec la commande:
+   340→sudo node-red-start
+   341→• Le serveur web est maintenant démarré et accessible depuis le réseau local.
+   342→• L’utilisation du Node-Red peut se faire, depuis n’importe quel ordinateur, dans 
+   343→un navigateur internet en saisissant:
+   344→http://ADRESSE_IP_DU_RASPBERRY:1880/
+   345→• Si on veut programmer directement sur votre Pi, ouvrir le navigateur internet 
+   346→et saisir: http://localhost:1880/ ou http://127.0.0.1:1880/
+   347→sudo node-red-stop  #pour arrêter NodeRed
+   348→Découvrir l’environnement de programmation
+   349→• Au centre la zone de programmation.
+   350→• À gauche toutes les fonctions disponibles.
+   351→• À droite les onglets informations 
+   352→contextuelles et debug.
+   353→• Au coin supérieur droit, le bouton rouge
+   354→Deploy, pour déployer le programme. 
+   355→• Node-Red utilise le gestionnaire de package npm de nodejs.
+   356→Installer (ou mettre à jour) npm
+   357→sudo apt-get install npm
+   358→sudo npm i npm –g #on met à jour npm
+   359→Installation de node-red-admin
+   360→cd /home/pi/.node-red # aller dans le répertoire caché de node-red
+   361→npm install -g node-red-admin
+   362→
+   363→===== PAGE 11 =====
+   364→CHAPITRE 3
+   365→FSM-LSI3-A.U. 2025-26
+   366→11
+   367→Faire clignoter une Led avec Node-Red
+   368→• Pour faire clignoter une Led reliée sur le GPIO23 du Raspberry Pi on utilise 
+   369→la fonction inject qui envoi une pulsation, chaque seconde (au choix). A 
+   370→chaque pulsation, on utilise la fonction “Inverse Etat Led” pour allumer ou 
+   371→éteindre la Led.
+   372→• Copier puis Importer directement ce code dans le flow (Menu->Import-
+   373→>Clipboard).
+   374→[{"id":"3ff9c2cd.ef914e","type":"function","z":"16966388.6f0e2c","name":"Inverse état Led","func":"\ncontext.state = 
+   375→context.state || 0;\n\n(context.state == 0) ? context.state = 1 : context.state = 0;\nmsg.payload = context.state;\n\nreturn
+   376→msg;","outputs":1,"noerr":0,"x":340,"y":320,"wires":[["b91a94fa.ec1e48","59b95cea.56d4f4"]]},{"id":"b91a94fa.ec1e48","type":"
+   377→debug","z":"16966388.6f0e2c","name":"","active":true,"x":570,"y":360,"wires":[]},{"id":"9b2414e2.c584c8","type":"inject","z":"16
+   378→966388.6f0e2c","name":"chaque 
+   379→seconde","topic":"","payload":"","payloadType":"date","repeat":"1","crontab":"","once":false,"x":149,"y":320.0000009536743,"wi
+   380→res":[["3ff9c2cd.ef914e"]]},{"id":"59b95cea.56d4f4","type":"rpi-gpio out","z":"16966388.6f0e2c","name":"Led sur 
+   381→GPIO23","pin":"16","set":false,"out":"out","x":580,"y":280,"wires":[]}]
+   382→Installer le module node-red-node-openweathermap
+   383→• La communauté Node-Red développe de très nombreux plugins dans tous les 
+   384→domaines :
+   385→– Objets connectés (ZWave, Sonos..),
+   386→– Services en ligne (météo, twitter…),
+   387→– Bases de données...
+   388→• On propose installer le module node-red-node-openweathermap qui permet 
+   389→de récupérer la météo locale depuis le site openweathermap.
+   390→• Ouvrir le gestionnaire de palette, chercher le module node-red-node-
+   391→openweathermap puis cliquez sur install.
+   392→npm install node-red-node-openweathermap
+   393→• En cas de difficulté pour installer le 
+   394→module, arrêter NR puis exécuter la 
+   395→commande dans le Terminal.
+   396→
+   397→===== PAGE 12 =====
+   398→CHAPITRE 3
+   399→FSM-LSI3-A.U. 2025-26
+   400→12
+   401→Récupérer la météo locale depuis OpenWeatherMap
+   402→• Pour récupérer la météo, on doit récupérer une clé API qui est gratuite pour un 
+   403→usage personnel (voir le lien https://openweathermap.org/ ).
+   404→• Pour récupérer la clé, créer un compte, puis aller dans l’onglet API keys de My
+   405→profile
+   406→• Ajouter un node openweathermap (celui du bas) dans un flow. Faites un double 
+   407→clic puis :
+   408→– Coller la clé API
+   409→– Indiquer la ville (et le pays) ou les coordonnées 
+   410→GPS du lieu dont on souhaite connaître la météo
+   411→– Brancher un node debug pour envoyer la météo 
+   412→récupérée dans la console
+   413→Utiliser une caméra sur un Raspberry Pi: Prendre 
+   414→des photos et vidéos
+   415→• En plus de tous les composants que l'on peut relier aux GPIOs, le Raspberry Pi 
+   416→possède deux connecteurs particuliers : les ports DSI - Display Serial 
+   417→Interface et CSI - Camera Serial Interface. Ils permettent respectivement de 
+   418→relier un écran et une camera au Raspberry Pi. 
+   419→• La caméra se branche sur le bus CSI du Raspberry pi, spécialement conçu 
+   420→pour les caméras et qui offre un débit élevé.
+   421→Branchement de la caméra
+   422→
+   423→===== PAGE 13 =====
+   424→CHAPITRE 3
+   425→FSM-LSI3-A.U. 2025-26
+   426→13
+   427→Préparation du Raspberry
+   428→Dans un premier temps, il faut activer l'interface de la caméra. Pour se faire, 
+   429→entrez la commande suivante dans le terminal.
+   430→sudo raspi-config
+   431→Une fois dans le menu, sélectionner  Interfacing Options puis dans Camera. 
+   432→Puis, sélectionnez Yes pour confirmer l'activation ainsi que pour redémarrer le 
+   433→Raspberry.
+   434→Détection de la caméra
+   435→Avant de continuer, voici une commande qui permet de vérifier que la caméra 
+   436→soit bien détectée :
+   437→Si la ligne affichée n'est pas supported=1 detected=1, vérifier :
+   438→• Que la caméra soit branchée correctement,
+   439→• Que l'interface camera est bien activée.
+   440→Si detected n'est toujours pas à 1 après ces vérifications, redémarrer le 
+   441→Raspberry Pi et essayer de le mettre à jour :
+   442→vcgencmd get_camera
+   443→La caméra devrait maintenant être détectée.
+   444→sudo apt-get update
+   445→sudo apt-get upgrade
+   446→
+   447→===== PAGE 14 =====
+   448→CHAPITRE 3
+   449→FSM-LSI3-A.U. 2025-26
+   450→14
+   451→Prendre une photo
+   452→La première chose que l'on va faire avec cette caméra est de prendre des photos. 
+   453→Pour ce faire, entrer les commandes suivantes :
+   454→A. Par le Terminal
+   455→cd
+   456→mkdir Camera
+   457→raspistill -o ~/Camera/image.jpg -q 100
+   458→La commande de la 3ième ligne prend une photo et la stocke dans le dossier créé.
+   459→La commande raspistill accepte plusieurs arguments (raspistill --help) dont :
+   460→–o : output filename - Endroit ou va être stockée la photo
+   461→–q : quality - 0 à 100, Qualité de l'image
+   462→–w et -h : width et height - Permet de définir manuellement les dimensions de 
+   463→l'image
+   464→–t : timeout - Temps mis avant de prendre la photo (retardateur)
+   465→–vf et -hf : vertical flip et horizontal flip - Retourne la photo
+   466→Prendre une photo
+   467→Il est beaucoup plus pratique pour des éventuels projets de pouvoir prendre 
+   468→des photos directement à l'intérieur d'un script python. Pour se faire, il existe 
+   469→la librairie picamera. Cette librairie est normalement installée de base sur le 
+   470→Raspberry mais rien n’enpèche de vérifier. Lançons donc la commande :
+   471→B. En Python
+   472→sudo apt-get install python3-picamera
+   473→Cette fois, la librairie est forcément installée. Commençons par créer un 
+   474→simple script Python qui prend et sauvegarde une photo. (en ayant comme 
+   475→nom la date)
+   476→1
+   477→import picamera
+   478→2
+   479→import datetime
+   480→3
+   481→camera = picamera.PiCamera()
+   482→4
+   483→camera.resolution = (2592,1944)
+   484→5
+   485→camera.capture(str(datetime.datetime.now())+'.jpg')
+   486→
+   487→===== PAGE 15 =====
+   488→CHAPITRE 3
+   489→FSM-LSI3-A.U. 2025-26
+   490→15
+   491→Prendre une photo
+   492→Définir la résolution ?
+   493→La ligne camera.resolution n'est pas obligatoire. Cependant, si elle n'est pas 
+   494→renseignée, la résolution choisie sera de 1920x1080, et la qualité de la photo 
+   495→sera très mauvaise (surtout en basse luminosité). Si on souhaite une photo de 
+   496→la meilleure qualité possible:
+   497→• camera.resolution = (2592, 1944) si on dispose d'une camera 5 MP,
+   498→• camera.resolution = (3280, 2464) si on dispose d'une camera 8 MP.
+   499→Photo à l'envers ?
+   500→Tourner une photo: En fonction de comment est positionné votre caméra, l'image capturée 
+   501→peut être à l'envers. Pour corriger ceci, ajouter ceci après la ligne "camera=PiCamera()" :
+   502→camera.hflip = True
+   503→camera.vflip = True
+   504→Prendre une photo
+   505→Ce qui donne, le code suivant:
+   506→Photo à l'envers ?
+   507→1 import picamera
+   508→2 import datetime
+   509→3 camera = picamera.PiCamera()
+   510→4 camera.hflip = True
+   511→5 camera.vflip = True
+   512→6 camera.resolution = (2592,1944)
+   513→7 camera.capture(str(datetime.datetime.now())+'.jpg')
+   514→D'autres options pouvant s'ajouter au 
+   515→même endroit sont disponibles pour les 
+   516→plus photophyles dont voici une liste :
+   517→1  camera.sharpness = 0
+   518→2  camera.contrast = 0
+   519→3  camera.brightness = 50
+   520→4  camera.saturation = 0
+   521→5  camera.ISO = 0
+   522→6  camera.video_stabilization = False
+   523→7  camera.exposure_compensation = 0
+   524→8  camera.exposure_mode = 'auto'
+   525→9  camera.meter_mode = 'average'
+   526→10 camera.awb_mode = 'auto'
+   527→11 camera.image_effect = 'none'
+   528→12 camera.color_effects = None
+   529→13 camera.rotation = 0
+   530→14 camera.crop = (0.0, 0.0, 1.0, 1.0)
+   531→
+   532→===== PAGE 16 =====
+   533→CHAPITRE 3
+   534→FSM-LSI3-A.U. 2025-26
+   535→16
+   536→Prendre une vidéo
+   537→A. Par le Terminal
+   538→Pour enregistrer une vidéo de 10 secondes (10 000 ms) sous le nom de 
+   539→fichier video.h264, il suffit d'entrer la commande suivante.
+   540→raspivid -o video.h264 -t 10000
+   541→Les options de cette commande sont les mêmes que pour la photo
+   542→(comme hf et vf par exemple).
+   543→Problème: la plupart des lecteurs vidéo ne sauront pas lire le format .h264,
+   544→Pour cette raison, on va installer la librairie MP4Box qui va nous permettre
+   545→de convertir les vidéos au format MP4. Pour installer MP4Box, il suffit
+   546→d'entrer cette commande :
+   547→sudo apt-get install -y gpac
+   548→Une fois le logiciel installé, exécutez ceci afin de convertir le fichier:
+   549→MP4Box -add video.h264 video.mp4
+   550→Le fichier vidéo est maintenant lisible sur tous les appareils.
+   551→Prendre une vidéo
+   552→B. En Python
+   553→Voici un script qui permet de capturer une vidéo en Python et de la convertir 
+   554→en MP4 automatiquement:
+   555→1  import os
+   556→2  import picamera
+   557→3  import time
+   558→4  camera = picamera.PiCamera()
+   559→5  #Retourner image : Enlever les deux hashtag
+   560→suivants
+   561→6  #camera.hflip = True
+   562→7  #camera.vflip = True
+   563→8  dureeVideo = 5
+   564→9  nomVideo = time.strftime("%d.%m.%Y-%Hh%Mm%Ss")
+   565→10 camera.start_recording(nomVideo+".h264")
+   566→11 print("REC...")
+   567→12 time.sleep(dureeVideo)
+   568→13 camera.stop_recording()
+   569→14 commande = "MP4Box -add "+nomVideo+".h264 " + nomVideo+".mp4"
+   570→15 os.system(commande)
+   571→Si on souhaite que la Led de la caméra reste éteinte, il suffit de modifier le 
+   572→fichier /boot/config.txt en ajoutant la ligne disable_camera_led=1 à la fin.
+   573→
+   574→===== PAGE 17 =====
+   575→CHAPITRE 3
+   576→FSM-LSI3-A.U. 2025-26
+   577→17
+   578→Faire du streaming
+   579→Pour un système de vidéo surveillance ou pour le pilotage d’un robot à distance, il 
+   580→faut pouvoir récupérer le flux vidéo et le diffuser à travers le réseau (streaming).
+   581→Il y a 5 façons pour faire du streaming:
+   582→• Il s’agit de rediriger le flux capturé par la commande raspivid dans netcat,
+   583→• Sur un PC sous Linux exécuter la commande suivante (installer mplayer),
+   584→Méthode 1 : Netcat et Mplayer
+   585→nc -l -p 5001 | /usr/bin/mplayer -fps 10 -cache 1024 -
+   586→• Cette commande ordonne à nc (netcat) d’écouter sur le port 5001 et redirige ce 
+   587→qui arrive dans le lecteur vidéo Mplayer (1024 Ko de cache pour 10 images/s).
+   588→• Sur le Pi, exécuter raspivid et rediriger la sortie vers l’adresse IP du PC client en 
+   589→utilisant netcat :
+   590→raspivid -t 0 -w 1280 -h 720 -o - | nc adresse_ip_du_pc_client 5001
+   591→• Pour enregistrer le flux vidéo dans un fichier sur le PC client, modifier la première commande:
+   592→nc -l -p 5001 | /usr/bin/mplayer -fps 10 -cache 1024 -demuxer h264es -dumpstream -dumpfile
+   593→./Bureau/ma_video.h264 -
+   594→Faire du streaming
+   595→Méthode 2 : streaming VLC
+   596→• Avec cette méthode, le flux vidéo est visible depuis plusieurs postes clients.
+   597→• Sur le Pi, il suffit d’installer VLC :
+   598→apt-get install vlc
+   599→• Puis de rediriger la sortie de la commande raspivid vers VLC :
+   600→raspivid -t 0 -n --width 1280 --height 720 -o - | cvlc stream:///dev/stdin --
+   601→sout '#standard{access=http,mux=ts,dst=:8090}' :demux=h264
+   602→• Coté PC client, il suffit de lire le flux vidéo avec VLC grâce à la commande:
+   603→cvlc http://adresse_ip_du_pi:8090
+   604→Pour enregistrer le flux vidéo dans un fichier, utilisez la commande suivante:
+   605→cvlc http://adresse_ip_du_pi:8090 --sout file/ts:./Bureau/ma_video.h264
+   606→
+   607→===== PAGE 18 =====
+   608→CHAPITRE 3
+   609→FSM-LSI3-A.U. 2025-26
+   610→18
+   611→Méthode 3 : streaming de Pi à Pi avec OMXplayer
+   612→Faire du streaming
+   613→• Pour capturer un flux vidéo depuis un Pi pour l’observer depuis un autre Pi 
+   614→branché à un écran, il convient d’utiliser le lecteur OMXplayer.
+   615→Pour plus de détails voir:
+   616→http://www.magdiblog.fr/divers/raspberry-pi-camera-5-facons-de-faire-du-streaming/
+   617→Méthode 4 : mjpg-streamer
+   618→• Avec le mjpeg, on sort du streaming vidéo pur et dur, puisqu’il s’agit de 
+   619→transmettre et d’afficher une suite de photos les unes après les autres. Le 
+   620→résultat est beaucoup moins fluide
+   621→Méthode 5 : Serveur Web
+   622→Il n'existe pas de normes vidéo universellement prises en charge par tous les 
+   623→navigateurs Web. Cependant, pour les besoins, nous utiliserons un format 
+   624→beaucoup plus simple, le MJPEG. Le script suivant utilise le module http.server
+   625→pour créer un simple serveur de streaming vidéo:
+   626→import io
+   627→import picamera
+   628→import logging
+   629→import socketserver
+   630→from threading import Condition
+   631→from http import server
+   632→PAGE="""\
+   633→<html>
+   634→<head>
+   635→<title>Raspberry Pi - Surveillance Camera</title>
+   636→</head>
+   637→<body>
+   638→<center><h1>Raspberry Pi - Surveillance 
+   639→Camera</h1></center>
+   640→<center><img src="stream.mjpg" width="640" 
+   641→height="480"></center>
+   642→</body>
+   643→</html>
+   644→"""
+   645→class StreamingOutput(object):
+   646→def __init__(self):
+   647→self.frame = None
+   648→self.buffer = io.BytesIO()
+   649→self.condition = Condition()
+   650→def write(self, buf):
+   651→if buf.startswith(b'\xff\xd8'):
+   652→# New frame, copy the existing buffer's content 
+   653→and notify all
+   654→# clients it's available
+   655→self.buffer.truncate()
+   656→with self.condition:
+   657→self.frame = self.buffer.getvalue()
+   658→self.condition.notify_all()
+   659→self.buffer.seek(0)
+   660→return self.buffer.write(buf)class 
+   661→StreamingHandler(server.BaseHTTPRequestHandler):
+   662→def do_GET(self):
+   663→if self.path == '/':
+   664→self.send_response(301)
+   665→self.send_header('Location', '/index.html')
+   666→self.end_headers()
+   667→elif self.path == '/index.html':
+   668→content = PAGE.encode('utf-8')
+   669→self.send_response(200)
+   670→self.send_header('Content-Type', 'text/html')
+   671→self.send_header('Content-Length', len(content))
+   672→self.end_headers()
+   673→self.wfile.write(content)
+   674→elif self.path == '/stream.mjpg':
+   675→self.send_response(200)
+   676→self.send_header('Age', 0)
+   677→self.send_header('Cache-Control', 'no-cache, private')
+   678→self.send_header('Pragma', 'no-cache')
+   679→self.send_header('Content-Type', 'multipart/x-mixed-
+   680→replace; boundary=FRAME')
+   681→self.end_headers()
+   682→try:
+   683→while True:
+   684→with output.condition:
+   685→output.condition.wait()
+   686→frame = output.frame
+   687→self.wfile.write(b'--FRAME\r\n')
+   688→self.send_header('Content-Type', 'image/jpeg')
+   689→self.send_header('Content-Length', len(frame))
+   690→self.end_headers()
+   691→self.wfile.write(frame)
+   692→self.wfile.write(b'\r\n')
+   693→except Exception as e:
+   694→logging.warning(
+   695→'Removed streaming client %s: %s',
+   696→self.client_address, str(e))
+   697→else:
+   698→self.send_error(404)
+   699→self.end_headers()
+   700→class StreamingServer(socketserver.ThreadingMixIn,
+   701→server.HTTPServer):
+   702→allow_reuse_address = True
+   703→daemon_threads = True
+   704→with picamera.PiCamera(resolution='640x480', 
+   705→framerate=24) as camera:
+   706→output = StreamingOutput()
+   707→#Uncomment the next line to change your Pi's
+   708→Camera rotation (in degrees)
+   709→#camera.rotation = 90
+   710→camera.start_recording(output, format='mjpeg')
+   711→try:
+   712→address = ('', 8000)
+   713→server = StreamingServer(address, 
+   714→StreamingHandler)
+   715→server.serve_forever()
+   716→finally:
+   717→camera.stop_recording()
+   718→
+   719→===== PAGE 19 =====
+   720→CHAPITRE 3
+   721→FSM-LSI3-A.U. 2025-26
+   722→19
+   723→Utilisation d'une webcam USB standard
+   724→• Plutôt que d'utiliser le module de caméra Raspberry Pi, on peut utiliser une 
+   725→webcam USB standard pour prendre des photos et des vidéos. 
+   726→• Noter que la qualité du module de caméra est très supérieure à une webcam.
+   727→• Tout d'abord, installer le package fswebcam
+   728→sudo apt install fswebcam
+   729→• Si on n'utilise pas le compte utilisateur pi par défaut, on doit ajouter notre nom 
+   730→d'utilisateur au groupe vidéo, sinon on verra des erreurs «autorisation refusée».
+   731→sudo usermod -a -G video <username>
+   732→• Pour vérifier que l'utilisateur a été correctement ajouté au groupe, utilisez la 
+   733→commande groups.
+   734→• Entrer la commande fswebcam suivie d'un nom de fichier et une photo sera 
+   735→prise à l'aide de la webcam et enregistrée sous le nom de fichier spécifié:
+   736→fswebcam image.jpg
+   737→Utilisation d'une webcam USB standard
+   738→Deuxième méthode,
+   739→Il s’agit d’utiliser Putty
+   740→sudo apt-get update –y
+   741→lsusb
+   742→// vérifier la connection de la caméro
+   743→sudo apt-get install motion
+   744→sudo nano /etc/motion/motion.conf
+   745→sudo nano /etc/default/motion
+   746→Les modification à apporter dans le fichie motion.config
+   747→daemon on, width 640, height 480, framerate 10, quality 100, pre_capture
+   748→2, post_capture 5, stream_port 8081, stream_quality 100, stream_motion
+   749→off et webcontrol_localhost off.
+   750→Pour ecrire tapez ctr-o et entrer puis ctr-x pour sortir.
+   751→Un deuxième fichier à modifier qui est motion: start_motion_daemon=yes
+   752→Une fois c’est fait, motion devient installé. Ensuite il faut reboute,
+   753→sudo reboot
+   754→Lancer le navigateur et taper  Adr-ip:8081
+   755→
+   756→===== PAGE 20 =====
+   757→CHAPITRE 3
+   758→FSM-LSI3-A.U. 2025-26
+   759→20
+   760→Affichage des flux vidéo sur une page web
+   761→L’objectif est maintenant de transformer Raspberry Pi qui gère les caméras 
+   762→avec motion en un serveur web qui publie les flux vidéos. 
+   763→Installation d’un serveur Web
+   764→Pour transformer le Pi en serveur web et mettre à notre disposition des 
+   765→informations issues de divers capteurs. La première étape est d’installer Apache.
+   766→Installer Apache
+   767→Apache2 est un serveur HTML des pages Web dynamiques en utilisant le PHP. 
+   768→sudo apt install apache2 -y
+   769→Le lien http://adresse_IP_du_Pi permet d’accéder à la page Web (/var/www/ 
+   770→html/index.html). Pour permettre au serveur Apache de traiter les fichiers 
+   771→PHP, il faut installer le module PHP et créer le fichier index.php.
+   772→sudo apt install php libapache2-mod-php -y
+   773→Les flux vidéos d’une webcam sont capturés puis générés par motion et diffusés 
+   774→sur les ports 8081 et 8082 du Raspberry Pi.
+   775→Comment créer un serveur MQTT sur le Raspberry Pi
+   776→Principe de fonctionnement du MQTT
+   777→• MQTT est comme un forum avec des abonnés (lecteurs) et de rédacteurs qui 
+   778→eux publient des messages.
+   779→• Les messages sont hiérarchisés de la même manière, il est donc possible de 
+   780→consulter uniquement les messages qui nous intéressent.
+   781→• MQTT a été conçu pour économiser au maximum la batterie des objets.
+   782→– Consomme 11 fois moins d’énergie pour envoyer des messages,
+   783→– Consomme 170 fois moins pour en recevoir que le protocole HTTP.
+   784→– Consomme 93 fois plus rapide que le protocole HTTP.
+   785→• Il existe plusieurs niveaux de qualité de service avec MQTT Allant du:
+   786→– Néant (niveau 0), un message est publié sans garantie de sa bonne réception,
+   787→– Au niveau 2, appelé service garantie, qui se charge de publier le message en 
+   788→deux parties pour s’assurer et garantir, que le message est correctement 
+   789→délivré de façon unique.
+   790→• Plus on monte en niveau de QoS, plus on charge les trames.
+   791→MQTT et la QoS
+   792→
+   793→===== PAGE 21 =====
+   794→CHAPITRE 3
+   795→FSM-LSI3-A.U. 2025-26
+   796→21
+   797→Comment créer un serveur MQTT sur le Raspberry Pi
+   798→• Du point de vue sécurité, si MQTT est parfaitement compatible avec 
+   799→des échanges à travers l’internet, il est possible de tester simplement 
+   800→le protocole sur des brokers MQTT publiques.
+   801→• On préfère des échanges sur un réseau privé avec un serveur isolé de 
+   802→l’extérieur. En effet, MQTT n’intègre pas de mécanisme de sécurité à 
+   803→proprement parlé.
+   804→• Il est possible de monter des connexion SSL/TLS soumises à certificat.
+   805→• Dans le cadre d’une maison connectée, il n’est pas utile de dialoguer 
+   806→avec l’extérieur en MQTT. On préférera un schéma plus classique visant 
+   807→à faire communiquer les objets en local avec le serveur domotique, qui 
+   808→se charge de relayer l’info à l’extérieur si nécessaire.
+   809→La sécurité et MQTT
+   810→C’est donc tout l’intérêt de disposer d’un broker MQTT 
+   811→sur son réseau local à l’aide d’un Raspberry Pi.
+   812→Comment installer un broker Mosquitto sur le Raspberry Pi
+   813→• Il n’est pas nécessaire de disposer de la dernière version du Raspbery Pi.
+   814→• Si on a déjà un Raspberry Pi en fonctionnement pour une autre tâche, on peut 
+   815→lui attribuer cette tâche en plus.
+   816→• Pour ce faire, lançant la commande d’installation de Mosquitto.
+   817→sudo apt-get install mosquitto
+   818→• C’est terminé, notre serveur MQTT local est prêt à collecter les messages ! 
+   819→• Puis vérifier que tout est opérationnel avec la commande suivante.
+   820→systemctl status mosquitto
+   821→• Pour faire des tests sur Raspberry, il faut installer les clients mosquitto_sub, 
+   822→mosquitto_pub et mosquitto_passw (pour simuler des utilisateurs),
+   823→sudo apt-get install mosquitto-clients 
+   824→
+   825→===== PAGE 22 =====
+   826→CHAPITRE 3
+   827→FSM-LSI3-A.U. 2025-26
+   828→22
+   829→Comment installer un broker Mosquitto sur le Raspberry Pi
+   830→Publisher
+   831→Subscriber
+   832→Envoyer/recevoir des messages MQTT
+   833→• Maintenant que le broker est prêt, dans un Terminal (Subscriber), exécuter 
+   834→la commande
+   835→mosquitto_pub -h localhost -t sensor/temperature -m 24.9
+   836→mosquitto_sub -h localhost -t "sensor/temperature"
+   837→• Dans un autre Terminal (Publisher), publier notre premier message, on se 
+   838→connectant au serveur (-h) localhost sur le Topic (-t) sensor/temperature et 
+   839→on publie le message (-m) 24.9
+   840→Utiliser MQTT avec Node-RED
+   841→• Il est simple de communiquer avec MQTT en utilisant Node-RED.
+   842→• Ajouter un node mqtt (section input).
+   843→• Double cliquer sur le node pour ouvrir la boîte de configuration. et appuyer sur 
+   844→le crayon pour ajouter une nouvelle connexion.
+   845→• Si Node-RED fonctionne sur la même machine que le broker Mosquitto, 
+   846→saisissez localhost dans le champ serveur et 1883 dans le port. Valider.
+   847→

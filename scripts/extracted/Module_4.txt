@@ -1,0 +1,495 @@
+
+===== PAGE 1 =====
+Administration des
+Systèmes
+MODULE 4 — NOUVELLE GÉNÉRATION DE SYSTÈMES
+DE FICHIERS ET SAUVEGARDE SOUS LINUX
+HÉDI NSIBI – FACULTÉ DES SCIENCES DE MONASTIR 2025
+
+===== PAGE 2 =====
+Limites des anciens systèmes
+de fichiers
+
+Ext2:
+-
+Avantage : simple, rapide, peu de surcharge
+-
+Limite majeure: Pas de journalisation →après un crash, vérification longue et risque
+de perte de données
+
+Ext3:
+-
+Amélioration clé : ajout du journal (journaling)
+-
+Performance moyenne sur les gros volumes
+-
+Pas de vérification automatique d’intégrité ou de compression intégrée
+
+Ext4:
+-
+Supporte les très grands disques
+-
+Meilleure gestion du journal et des temps d’accès
+-
+Pas de vérification automatique d’intégrité (contrairement à Btrfs/ZFS)
+-
+Pas de snapshot ni de compression/déduplication natives
+
+===== PAGE 3 =====
+Présentation des systèmes
+modernes
+Les besoins modernes (cloud, conteneurs, disques SSD, serveurs à
+forte charge) exigent des systèmes plus robustes, flexibles et
+autonomes.
+
+XFS : haute performance, idéal pour grands fichiers
+
+Btrfs : snapshots, compression, auto-réparation
+
+ZFS : intégrité avancée, gestion de volume intégrée, réplication
+
+===== PAGE 4 =====
+Comparatif rapide
+
+EXT4 : Standard Stable et universel :
+-
+limites: pas de snapshots, compression, ni vérification d’intégrité automatique.
+-
+Utilisation typique: poste de travail, serveurs standards, machines virtuelle classique
+
+XFS: Chompion des performances
+-
+Très efficace sur les systèmes multi-utilisateurs et serveurs à haut débit.
+-
+Utilisation typique: serveurs de base de données, environnement professionnels à
+haut volume
+
+BTRFS: Gestion avancée et la sécurité intégrée
+-
+Support RAID, compression, clonage, et subvolumes intégrés
+-
+Utilisation typique: serveurs nécessitant sauvegardes fréquentes, tests,
+développement, NAS personnels.
+
+ZFS: La solution tout en un haut de gamme
+-
+Gestion du RAID, des snapshots, vérification d’intégrité et compression
+-
+Consomme beaucoup de mémoire RAM.
+-
+Utilisation typique : serveurs critiques, datacenters, stockage professionnel,
+sauvegardes complexes.
+
+===== PAGE 5 =====
+Fonctionnalités avancées
+
+Snapshots: Un snapshot est une image figée d’un système de
+fichiers à un instant donné.
+→Sauvegardes rapides et rollback faciles.
+→Présent dans : Btrfs, ZFS (nativement) ; possible avec LVM sur ext4/XFS.
+
+Compression et déduplication
+-
+Compression: les fichiers sont stockés en prenant moins d’esapce sur le
+disque
+-
+Déduplication: le système détecte les données identiques et ne les
+enregistre qu’une seule fois
+→Présent dans : Btrfs, ZFS (intégré) absent sur EXT4 et XFS
+→Gain d’espace important et réduction du trafic disque.
+
+===== PAGE 6 =====
+Fonctionnalités avancées
+
+Vérification automatique de l’intégrité
+-
+Le système de fichiers vérifie que chaque bloc de données est intact
+grâce à une somme de contrôle (checksum).
+-
+Si un bloc est corrompu, il peut être corrigé automatiquement
+(autoréparation).
+→Présent dans : Btrfs, ZFS, absent sur EXT4, XFS
+
+Gestion de très grands volumes (>16 To)
+-
+Les systèmes modernes peuvent gérer des disques de plusieurs
+dizaines ou centaines de téraoctets, voire des exaoctets.
+→Adapté aux serveurs, clouds et environnements de virtualisation.
+→XFS: Très efficace sur les grands volumes
+→BTRFS/ZFS: conçus pour les infrastructures de stockage massives
+
+===== PAGE 7 =====
+Introduction à LVM (Logical
+Volume Manager)
+
+LVM est un outil de gestion du stockage sous Linux qui
+permet de créer des volumes logiques flexibles au-dessus
+des disques physiques.
+Il agit comme une couche intermédiaire entre le système de
+fichiers et le matériel.
+
+Fonctionnalité Simple:
+-
+PV(Physical Volume): Disque ou partition physique(ex: /dev/sdb1)
+-
+VG(Volume Group): Regroupe plusieurs PV en un seul grand esapce de
+stockage
+-
+LV(Logicial Volume): Volume logique utilisé comme un disque virtuel
+monté par le système
+→comme un “RAID logiciel simplifié et flexible”.
+
+===== PAGE 8 =====
+LVM: Avantages clés
+
+Gestion flexible du stockage:
+-
+Tu peux combiner plusieurs disques physiques en un seul espace logique.
+
+Agrandir ou réduire dynamiquement:
+-
+Un volume peut être agrandi à chaud, sans redémarrer.
+
+Snapshots et sauvegardes:
+-
+LVM permet de créer des snapshots instantanés d’un volume avant
+modification.
+
+Migration de données simplifié:
+-
+On peut déplacer un volume d’un disque à un autre sans interruption de
+service.
+
+===== PAGE 9 =====
+Exemples de commandes LVM
+Action
+Commande
+Exemple
+Créer un volume
+physique
+pvcreate
+sudo pvcreate /dev/sdb1
+Créer un groupe de
+volumes
+vgcreate
+sudo vgcreate data_vg /dev/sdb1 /dev/sdc1
+Créer un volume logique lvcreate
+sudo lvcreate -L 50G -n lv_data data_vg
+Afficher les infos
+lvs, vgs, pvs
+sudo lvs
+
+===== PAGE 10 =====
+Cas pratique — Création d’un
+volume logique
+
+===== PAGE 11 =====
+La Sauvegarde (Backup)
+
+Objectif:
+Assurer la continuité et la sécurité du système et des données face aux incidents.
+
+Protection contre les pannes matérielles
+➡️
+Une sauvegarde permet de restaurer rapidement les données sur un autre support.
+
+Contre les erreurs humaines et attaques
+➡️
+Une sauvegarde régulière évite la perte définitive des fichiers.
+
+Conformité légale
+➡️
+Certaines entreprises doivent conserver leurs données pour des raisons juridiques ou
+réglementaires (ex : données comptables, factures, logs).
+
+Restauration rapide du système
+➡️
+En cas de panne, une sauvegarde permet de réinstaller le système complet en
+quelques minutes plutôt que tout reconfigurer manuellement.
+
+===== PAGE 12 =====
+Types de sauvegarde
+Description
+Sauvegarde tous les fichiers à chaque fois.
+Avantage
+Restauration simple et rapide (toutes les données sont dans une
+seule sauvegarde).
+Inconvénient
+Longue à faire, consomme beaucoup d’espace disque.
+Exemple commande
+rsync -a /home/ /backup/full/
+Sauvegarde complète (Full Backup)
+Sauvegarde différentielle
+Description
+Sauvegarde tous les fichiers modifiés depuis la dernière sauvegarde
+complète.
+Avantage
+Plus rapide qu’une complète, restauration plus simple qu’une
+incrémentale.
+Inconvénient
+La taille augmente chaque jour jusqu’à la prochaine complète.
+Exemple commande
+rsync -a --compare-dest=/backup/full/ /home/ /backup/diff/
+
+===== PAGE 13 =====
+Types de sauvegarde
+Sauvegarde incrémentale
+Conseil
+Description
+Sauvegarde uniquement les fichiers modifiés depuis la
+dernière sauvegarde (complète ou incrémentale).
+Avantage
+Très rapide et économe en espace.
+Inconvénient
+Restauration plus longue (il faut la complète + toutes les
+incrémentales).
+Exemple commande
+rsync -a --link-dest=/backup/prev/ /home/ /backup/inc/
+Combinez les trois :
+1 complète par semaine
+6 incrémentales par jour
+➕1 différentielle mensuelle pour archivage
+
+===== PAGE 14 =====
+Outils classiques de
+sauvegarde
+
+Chaque outil a un usage spécifique : archivage, synchronisation,
+clonage ou automatisation.
+
+Tar archivage standard :
+Élément
+Détail
+Rôle
+Crée des archives compressées (.tar, .gz, .bz2) pour regrouper plusieurs
+fichiers.
+Utilisation typique
+Sauvegarder un dossier ou le transférer.
+Exemple
+commande
+tar -czvf backup_home.tar.gz /home
+Restauration
+tar -xzvf backup_home.tar.gz -C /restore
+Avantage
+Simple, compatible partout.
+Limite
+Pas de synchronisation ni d’incrémental automatique.
+
+===== PAGE 15 =====
+Outils classiques de
+sauvegarde
+
+rsync — Synchronisation efficace
+Élément
+Détail
+Rôle
+Copie uniquement les fichiers modifiés entre deux répertoires ou
+machines.
+Utilisation typique
+Sauvegarde locale ou distante.
+Exemple commande
+rsync -avz /home/ /media/backup/
+Mode distant
+rsync -avz /home/ user@serveur:/sauvegarde/
+Avantage
+Très rapide et intelligent (copie différentielle).
+Limite
+Pas de compression automatique sans option.
+
+===== PAGE 16 =====
+Outils classiques de
+sauvegarde
+
+dd — Clonage bas-niveau
+Élément
+Détail
+Rôle
+Copie bit à bit un disque ou une partition entière.
+Utilisation typique
+Clonage système, création d’images disque.
+Exemple commande
+sudo dd if=/dev/sda of=/dev/sdb bs=64K status=progress
+Avantage
+Parfait pour les copies complètes.
+Limite
+Lent et risqué (aucune vérification avant écrasement).
+
+===== PAGE 17 =====
+Outils classiques de
+sauvegarde
+
+cron — Automatisation
+Élément
+Détail
+Rôle
+Planifie des tâches automatiques (sauvegardes
+régulières).
+Exemple commande
+sudo crontab -e →0 2 * * 0 rsync -av /home /backup/
+Avantage
+Fiable et programmable.
+Limite
+Nécessite un bon suivi (logs, alertes, etc.).
+
+===== PAGE 18 =====
+Outils classiques de
+sauvegarde
+
+cp — Copie simple
+Élément
+Détail
+Rôle
+Copie directe de fichiers.
+Exemple
+commande
+cp -r /home /media/usb_backup
+Avantage
+Facile à utiliser, présent partout.
+Limite
+Aucune vérification, pas de synchronisation ni
+d’incrémental.
+
+===== PAGE 19 =====
+Outils avancés de sauvegarde
+
+Timeshift:
+-
+Crée des snapshots système complets (similaire à Windows Restore Point)
+-
+Idéal pour les postes de travail Linux (Mint, Ubuntu, etc.)
+-
+Permet une restauration rapide du système sans affecter les fichiers
+personnels
+
+Bacula:
+-
+Solution professionnelle et centralisée de sauvegarde en réseau
+-
+Supporte serveurs, bases de données, disques et bandes magnétiques
+-
+Gestion automatisée et planifiée des sauvegardes
+
+DejaDup:
+-
+Interface simple et intégrée à GNOME
+-
+Supporte chiffrement, stockage distant (Google Drive, FTP, etc.)
+-
+Convient aux utilisateurs non techniques pour des sauvegardes rapides
+
+===== PAGE 20 =====
+Script de sauvegarde
+automatique (exemple)
+Ligne
+Description
+#!/bin/bash
+Indique que le script doit être exécuté avec l’interpréteur Bash.
+DATE=$(date +%Y-%m-%d)
+Stocke la date du jour (ex. 2025-10-20) dans la variable DATE.
+DEST=/backup/$DATE
+Définit le dossier de destination : /backup/2025-10-20. Chaque
+jour, un dossier différent est créé automatiquement.
+rsync -av --delete /home/ $DEST
+Commande principale : synchronise le contenu de /home/ vers le
+dossier de sauvegarde.Options :• -a : archive (préserve les
+permissions, liens, etc.)• -v : mode verbeux (affiche les fichiers
+copiés)• --delete : supprime les fichiers effacés dans la source.
+logger "Sauvegarde terminée à
+$(date)"
+Envoie un message dans le journal système (/var/log/syslog) avec
+la date de fin.
+
+===== PAGE 21 =====
+Restauration d’une
+sauvegarde tar
+
+tar -xvf sauvegarde.tar -C /repertoire_cible
+-
+x: extraction des fichiers
+-
+v: affichage des fichiers en cours d’extraction (verbose)
+-
+f: spécifie le fichier source à restaurer
+
+===== PAGE 22 =====
+Restauration avec rsync
+
+rsync –av
+/backup/2025-09-01/ /home/
+➡a: mode archive(préserve les permissions, timestamps, liens, etc)
+➡v: affichage des fichiers transférés(verbose)
+
+===== PAGE 23 =====
+Récupération de fichiers
+supprimés
+
+testdisk :
+-
+Restauration de partitions perdues ou corrompues
+-
+Utile si un disque ou une partition a été supprimé ou devient
+inaccessible
+
+photorec :
+-
+Récupération de fichiers (photos, documents, videos ..)
+-
+Fonctionne même si le système de fichier est endommagé
+
+extundelete :
+-
+Récupération de fichiers supprimés sur ext3/ext4
+-
+Nécessite que la partition ne soit pas montée en écriture pour
+maximiser la récupération
+
+===== PAGE 24 =====
+Création de snapshots
+
+Objectif: Capturer l’état d’un volume avant modification ou
+sauvegarde.
+
+Avec btrfs:
+btrfs subvolume snapshot /chemin/source /chemin/snapshot
+
+Avec LVM
+lvcreate --size 1G --snapshot --name snapshot_lv /dev/vg/volume
+
+===== PAGE 25 =====
+Restauration via snapshots
+
+Btrfs :
+-
+btrfs subvolume snapshot restore
+-
+Restaure un snapshot d’un sous-volume Btrfs
+
+LVM :
+-
+lvconvert --merge /dev/vg/snapshot
+-
+Fusionne un snapshot LVM avec le volume original
+
+➡Retour immédiat à un état antérieur, sans besoin
+de restaurer depuis une sauvegarde classique
+
+===== PAGE 26 =====
+Synthèse du module
+
+Séance 1 : Structure et hiérarchie
+
+Séance 2 : Gestion et montage
+
+Séance 3 : Maintenance et mémoire
+
+Séance 4 : Sauvegarde et restauration
+
+Récap:
+-
+Pour une sauvegarde quotidienne: rsync est le plus pratique
+-
+Pour archivage historique: tar ou tar.gz
+-
+Pour disques systèmes : dd
+-
+Pour copies simples ponctuelle : cp

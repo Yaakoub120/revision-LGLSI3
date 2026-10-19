@@ -1,0 +1,1389 @@
+
+===== PAGE 1 =====
+Virtualisation
+& Cloud
+Spécialité
+Niveau
+Département
+Licence
+LGLSI3
+Informatique
+2025-2026
+Leila GHORBEL
+
+===== PAGE 2 =====
+Introduction
+Un peu d’histoire !
+•
+Les systèmes distribués ont parcouru un long chemin depuis leur
+création.
+•
+Au tout début, un ordinateur ne pouvait effectuer qu'une tâche à la
+fois.
+•
+Si plusieurs tâches doivent être effectuées en parallèle, plusieurs
+ordinateurs doivent fonctionner en parallèle.
+•
+Mais leur exécution en parallèle ne suffisait pas pour construire un
+système véritablement distribué, car elle nécessite un mécanisme
+pour communiquer entre différents ordinateurs (ou programmes
+exécutés sur ces ordinateurs).
+13
+
+===== PAGE 3 =====
+Introduction
+Un peu d’histoire !
+La communication:
+•
+Cette nécessité d’échanger (partager) des données sur
+plusieurs
+ordinateurs
+a
+suscité
+l'idée
+d'une
+communication orientée message, dans laquelle deux
+ordinateurs partagent des données a l'aide d'un message
+qui les encapsule.
+• Il y avait peu d'autres mécanismes comme le partage de
+fichiers et le partage de base de données.
+14
+
+===== PAGE 4 =====
+Introduction
+Un peu d’histoire !
+Les architectures orientées service SOA:
+• L’invention des OS multitâches, tels que Windows et Unix, a
+permis aux développeurs de créer et d’exécuter des
+systèmes distribués complets .
+• Cela a conduit à l'architecture SOA, dans laquelle chaque
+système distribué pourrait être construit en intégrant un
+ensemble
+de
+services
+exécutés
+sur
+un
+ou
+plusieurs
+ordinateurs .
+• Les interfaces de service ont été correctement définies via
+un WSDL (pour SOAP) ou un WADL (pour
+REST) et les
+consommateurs de service ont utilisé ces interfaces pour
+leurs implémentations côté client.
+15
+
+===== PAGE 5 =====
+Introduction
+Un peu d’histoire !
+La popularité des APIs REST :
+• Avec la popularité d'Internet et la simplicité du modèle, la
+communication
+basée
+sur
+REST
+est
+devenue
+plus
+populaire que le modèle de communication basé sur
+SOAP .
+• Cela a conduit a l’évolution de la communication basée
+sur l'interface de programmation d'application (API) sur le
+modèle REST.
+• Vous pouvez vous représenter une API comme un
+médiateur
+entre
+les
+utilisateurs
+ou
+clients
+et
+les
+ressources ou services web auxquels ils souhaitent
+accéder.
+• Pour une entreprise, c'est aussi une solution pour
+partager des ressources et des informations, tout en
+maintenant un certain niveau de sécurité
+16
+
+===== PAGE 6 =====
+Introduction
+Un peu d’histoire !
+Les machines virtuelles :
+• Puis vient le grand moment des systèmes distribués
+• L’importance des entreprises basées sur Internet telles
+que Facebook, Google, Amazon, Netflix, LinkedIn et
+Twitter est suite à ce qu’elles voulaient créer des
+systèmes
+distribués
+couvrant
+plusieurs
+zones
+géographiques et plusieurs centres de données.
+•
+Les ingénieurs ont commencé à réfléchir au concept
+d'un seul ordinateur .
+• Au
+lieu
+de
+considérer
+un
+ordinateur
+comme
+un
+ordinateur unique, ils réfléchissent à un moyen de créer
+plusieurs ordinateurs virtuels sur le même ordinateur .
+• Cela conduit a l'idée de machines virtuelles ou un
+même
+ordinateur
+peut
+agir
+comme
+plusieurs
+ordinateurs et les exécuter tous en parallèle.
+17
+
+===== PAGE 7 =====
+Introduction
+Un peu d’histoire !
+Le cloud computing :
+• La technologie de virtualisation rend possible le cloud
+computing.
+• Les fournisseurs de cloud computing mettent en place
+et entretiennent leurs propres datacenters.
+• Ils créent différents environnements virtuels qui utilisent
+les ressources matérielles de base.
+•
+Vous pouvez ensuite programmer votre système pour
+qu'il accède à ces ressources en cloud à l'aide des
+APIs.
+18
+
+===== PAGE 8 =====
+Introduction
+Un peu d’histoire !
+Vue sur un datacenter
+Amazon
+Déploiement des datacenters
+de google dans le monde
+19
+
+===== PAGE 9 =====
+Introduction
+Retour en arrière sur le fonctionnement d’un ordinateur
+20
+
+===== PAGE 10 =====
+Introduction
+Retour en arrière sur le fonctionnement d’un ordinateur
+21
+
+===== PAGE 11 =====
+Introduction
+Retour en arrière sur le fonctionnement d’un ordinateur: Hardware
+ROM (Read Only Memory):
+•
+Il s'agit d'un type de mémoire non volatile qui stocke un logiciel appelé BIOS
+•
+Ce type de logiciel est responsable au démarrage du matériel
+•
+La ROM ne s'efface jamais lorsque vous éteignez l'ordinateur
+Carte mère:
+PCB (Printed Circuit Board) qui contient le processeur, la RAM, la ROM, le réseau et les ports I/O (Input/Output),
+ainsi que d'autres composants.
+Stockage:
+Un dispositif de stockage persistant (non volatile) tel qu'un disque dur (HDD) ou un disque SSD (Solid State Drive).
+RAM (Random Access Memory):
+Contient les programmes à exécuter et les données actuellement utilisées par le processeur.
+Processeur:
+•
+CPU (Computer Processing Unit), le processeur est la partie de l'ordinateur qui exécute les programmes logiciels
+en effectuant des opérations mathématiques, logiques et d'entrée/sortie.
+•
+C'est la partie du matériel informatique qui résout les problèmes
+22
+
+===== PAGE 12 =====
+Introduction
+Retour en arrière sur le fonctionnement d’un ordinateur: Software (Logiciel)
+Logiciel système:
+•
+sert d'interface entre le logiciel d'application et le matériel de l'ordinateur.
+•
+est conçu pour gérer les ressources système et fournit également une plate-forme à l'exécution du logiciel d'application
+Logiciel d'application:
+•
+constitue une interface entre l'utilisateur et le logiciel système.
+•
+conçu pour que les utilisateurs puissent effectuer leurs tâches spécifiques
+Logiciel d'application
+Logiciel système
+Base de comparaison
+exécute des tâches spécifiques pour lesquelles ils
+ont été conçus.
+gère les ressources système et fournit une plate-forme pour l'exécution
+du logiciel d'application.
+De base
+est écrit dans un langage évolué tel que Java, C ++,
+.net, VB, etc.
+est écrit dans un langage de bas niveau, c'est-à-dire un langage
+d'assemblage.
+La langue
+s'exécute au fur et à mesure des demandes de
+l'utilisateur.
+commence à s'exécuter lorsque le système est allumé et s'exécute jusqu'à
+ce que le système soit arrêté.
+Exécution
+n'est même pas nécessaire pour exécuter le
+système; c'est spécifique à l'utilisateur.
+Un système ne peut pas fonctionner sans logiciel système.
+Exigence
+est spécifique.
+est polyvalent.
+Objectif
+Microsoft Office, Photoshop, logiciel d'animation,
+etc.
+Système d’exploitation.
+Exemples
+23
+
+===== PAGE 13 =====
+Introduction
+Qu’est ce qu’un serveur?
+De nos jours, les utilisateurs (tel que les entreprises) investissent beaucoup plus dans leurs
+infrastructures informatiques afin d'améliorer leur efficacité et fiabilité.
+Il existe des solutions traditionnelles et virtuelles
+serveurs physiques représentent les puissants déploiements de centres de données traditionnels
+serveurs virtuels offrent aux entreprises des services innovants, centrés sur le cloud computing,
+adaptés aux besoins du futur.
+24
+
+===== PAGE 14 =====
+Introduction
+Qu’est ce qu’un serveur?
+Serveur physique:
+très similaire à un ordinateur conventionnel, possède une mémoire, un processeur, une connexion réseau et
+un disque dur ainsi qu'un système d'exploitation (OS) pour exécuter des programmes et des applications.
+est mis à disposition d'un seul client (ex. accessible que par les membres d’une entreprise)
+il existe différents types de serveurs physiques qui varient en fonction de leur rôle dans le réseau :
+Serveur Web : utilisé pour enregistrer des contenus Web et assurer l'accessibilité aux utilisateurs de
+manière sûre.
+Serveur Proxy : utilisé comme une interface de communication dans des réseaux d’ordinateurs pour
+filtrer les communications et contrôler la bande passante.
+Serveur de fichiers : utilisé pour le stockage de fichiers de données pour plusieurs clients.
+Serveur de bases de données : fonctionne comme un programme informatique permettant à
+d’autres programmes d'accéder à un ou plusieurs systèmes de bases de données sur un réseau.
+Serveur d'impression : plusieurs ordinateurs peuvent être connectés à distance à ce type de serveur
+pour imprimer des fichiers.
+Serveur email : utilisé pour recevoir et expédier des courriers électroniques.
+25
+
+===== PAGE 15 =====
+Introduction
+Qu’est ce qu’un serveur?
+Serveur physique:
+26
+
+===== PAGE 16 =====
+Introduction
+Qu’est ce qu’un serveur?
+Serveur physique:
+La puissance de calcul, la capacité de stockage et la performance d'un serveur dépend de nombreux
+critères y compris le format : tour, rack, ou lame
+27
+
+===== PAGE 17 =====
+Introduction
+Qu’est ce qu’un serveur?
+Serveur physique:
+Format tour :
+−ressemble de près à une unité centrale d'ordinateur fixe.
+−il peut être installé dans n'importe quelle pièce de l'entreprise, contrairement aux serveurs
+racks ou lames, qui nécessitent une baie pour fonctionner.
+28
+
+===== PAGE 18 =====
+Introduction
+Qu’est ce qu’un serveur?
+Serveur physique:
+Format rack
+est conçu pour être disposé dans des baies, c'est à dire des armoires équipées pour installer les
+différents matériels informatiques.
+29
+
+===== PAGE 19 =====
+Introduction
+Qu’est ce qu’un serveur?
+Serveur physique:
+Format lame (ou blade)
+sont les derniers nés des formats de serveur. Compact, et mince... comme une lame, ils se
+glissent verticalement dans un casier dédié.
+30
+
+===== PAGE 20 =====
+Introduction
+Qu’est ce qu’un serveur?
+Serveur virtuel:
+ne fonctionne pas sur un ordinateur physique mais sur un logiciel spécialisé, également appelé hyperviseur.
+est un système permettant de convertir un serveur physique en plusieurs machines virtuelles (VM)
+indépendantes qui agissent de manière autonome comme un dispositif physique.
+est capable d'exécuter son propre système d'exploitation (OS), en utilisant des techniques de virtualisation.
+peut être migré facilement vers l'environnement cloud
+31
+
+===== PAGE 21 =====
+Virtualisation
+Pourquoi virtualiser: Architecture classique
+32
+
+===== PAGE 22 =====
+Virtualisation
+Pourquoi virtualiser?
+Les serveurs sont de plus en plus accessibles
+Hardware de plus en plus performant
++
+Les éditeurs (Microsoft, distribution Linux) recommandent une application/service par système d’exploitation
+Un serveur pour le DNS
+Un serveur pour le mail
+Un serveur pour NFS
+Etc.
+=>
+Une multiplicité de serveurs dans les datacenters (ou salles serveurs dans les entreprises)
+80% ont une utilisation moyenne inférieure à 10%
+Des coûts d’exploitation/maintenance (personnel du service informatique) qui croissent avec le nombre de serveurs
+Des coûts en place: les salles serveurs ne sont pas indéfiniment extensibles
+Des coûts en climatisation/électricité élevés
+Ne jamais négliger ces coûts
+33
+
+===== PAGE 23 =====
+Virtualisation
+Qu'est-ce que la virtualisation ?
+L’ensemble des techniques qui permet de faire tourner plusieurs systèmes d’exploitation sur une machine
+simultanément comme s’ils fonctionnaient sur des ordinateurs distincts
+De la même façon que l'on fait fonctionner plusieurs programmes sur un même OS (multi-tâches) nous savons faire
+fonctionner plusieurs OS sur un même hardware (virtualisation)
+C’est pas du multi-boot
+34
+
+===== PAGE 24 =====
+Virtualisation
+Qu'est-ce que la virtualisation ?
+Simulation, Emulation, d’un environnement réel de façon virtuelle, logique, etc. en ayant recours à des outils logiciel
+(VLAN: Un réseau local virtuel, Machine virtuelle, etc.)
+La virtualisation est un ensemble de techniques matérielles et/ou logicielles qui autorisent l’exécution de plusieurs
+applications (Systèmes) indépendantes sur une même machine hôte.
+On parle souvent d’environnement virtuel (Virtual Environment – VE) ou de serveur privé virtuel (Virtual Private Server
+– VPS) lorsqu’une machine exploite la virtualisation.
+Pour bénéficier de cette technologie, il suffit d’équiper une machine d’un logiciel de virtualisation permettant d’ajouter
+une couche de virtualisation, appelée hyperviseur.
+L’hyperviseur masque les véritables ressources physiques de la machine.
+Propose des ressources différentes et spécifiques en fonction des applications qui tournent (nouvelle
+configuration).
+Il y a indépendance entre le matériel et les applications.
+35
+
+===== PAGE 25 =====
+Virtualisation
+Qu'est-ce que la virtualisation ?
+Principes:
+Le cloisonnement : chaque système d’exploitation a un fonctionnement indépendant, et ne peut interférer avec les
+autres en aucune manière.
+La transparence : le fait de fonctionner en mode virtualisé ne change rien au fonctionnement du système
+d’exploitation.
+=>La transparence implique la compatibilité : toutes les applications peuvent tourner sur un système virtualisé, et leur
+fonctionnement n’est en rien modifié.
+36
+
+===== PAGE 26 =====
+Virtualisation
+Qu'est-ce que la virtualisation ?
+tester un OS sans l'installer sur votre machine physique
+s’assurer de la compatibilité d’une application avec différents OS
+utiliser une application dans un environnement particulier
+utiliser les fonctionnalités spécifiques d’un OS
+simuler une 2e machine et faire des tests de communication simples
+créer un petit réseau de plusieurs machines
+simuler des environnements multi-OS
+partager un serveur physique en plusieurs serveurs virtuels
+rendre une architecture hautement disponible (HA) en améliorant sensiblement sa tolérance aux pannes
+migrer des serveurs virtuels sur de nouveaux serveurs physiques
+faciliter les opérations de maintenance
+Cas d’utilisation:
+37
+
+===== PAGE 27 =====
+Virtualisation
+Qu'est-ce que la virtualisation ?
+Moins de serveurs physiques
+Économie sur le matériel
+Usage optimale des ressources
+De meilleures performances
+Une meilleure sécurité
+Un gain dans les coûts
+La portabilité
+Un monitoring simplifié
+De la haute disponibilité
+Réduction de l’impact environnemental
+(moins
+de
+consommation
+d’énergie,
+allongement du cycle de vie du matériels,
+etc.)
+Avantages
+Inconvénients
+Plusieurs environnements virtuels s’exécutent sur une
+unique machine physique
+Machine physique en panne=> suspension de tous les
+services
+Le recours à des machines puissantes.
+Les
+outils
+de
+virtualisations
+sont
+généralement
+gourmands en ressources.
+Bien
+qu’elle
+soit
+implémentée
+sur
+des
+machines
+puissantes, la virtualisation peut réduire les performances
+des applications.
+Suivant le type de virtualisation envisagé, cette perte de
+performances peut ou non être significative.
+38
+
+===== PAGE 28 =====
+Virtualisation
+Composants d’un système virtuel
+Le système hôte (host) est l’OS principal de l’ordinateur.
+Le système invité (guest) est l’OS installé à l’intérieur d’une machine virtuelle.
+Une machine virtuelle (VM) est un ordinateur virtuel qui utilise un système invité.
+Hyperviseur est un composant essentiel entre le matériel et les machines virtuelles.
+39
+
+===== PAGE 29 =====
+Virtualisation
+Composants d’un système virtuel
+La machine virtuelle
+un système informatique virtuel conteneur de logiciels parfaitement isolé intégrant un système
+d’exploitation et des applications.
+chaque VM autonome est entièrement indépendante.
+l’installation de plusieurs VM sur un ordinateur permet d’exécuter différents systèmes d’exploitation et
+applications sur un seul et même serveur physique, ou « hôte ».
+L’hyperviseur, une fine couche logicielle dissocie les machines virtuelles de l’hôte, et alloue
+dynamiquement des ressources informatiques à chaque machine selon les besoins.
+Quelque soit la technologie utilisée, une machine virtuelle se compose de deux éléments :
+ressources : part de CPU alloués, mémoire vive autorisée, nombre de cartes réseau virtuelles.
+données : comme un serveur normal, on doit disposer d’un système d’exploitation, de bibliothèques,
+d’outils, d’applications et de leurs données.
+40
+
+===== PAGE 30 =====
+Virtualisation
+Composants d’un système virtuel
+La machine virtuelle: les fichiers
+Description
+Nom du fichier
+Type de fichier
+Conserve un journal de l'activité de la VM et est utilisé pour le dépannage.
+<vmname>.log
+Log file
+Il s'agit du fichier qui stocke l'état du BIOS de la machine virtuelle.
+<vmname>.nvram
+BIOS file
+Stocke le contenu de l'unité de disque de la VM. Un disque virtuel est
+composé d'un ou plusieurs fichiers .vmdk. Le nombre de fichiers .vmdk
+dépend de la taille du disque virtuel.
+<vmname>.vmdk
+Virtual disk file
+Il s'agit d'un fichier centralisé permettant de stocker des informations et des
+métadonnées sur les instantanés.
+<vmname>.vmsd
+<vmname>.vmsn
+Snapshot file
+Il s'agit du fichier d'état suspendu, qui stocke l'état d'une machine virtuelle
+suspendue.
+<vmname>.vmss
+Suspend state
+file
+Stocke des informations, telles que le nom de la VM, les informations du
+BIOS, le type de système d'exploitation invité et la taille de la mémoire.
+<vmname>.vmx
+Configuration file
+Lorsqu'une machine virtuelle est créée, elle apparaît sur l'ordinateur hôte sous la forme d'un ensemble de fichiers.
+Elle est généralement stockée dans un répertoire, créé par l'hyperviseur
+41
+Exemple: fichiers d’une machine virtuelle créée sur VMware
+
+===== PAGE 31 =====
+Virtualisation
+Composants d’un système virtuel
+La machine virtuelle: Snapshots
+42
+Capture de l’état exact d’une VM à un instant donné.
+•Utilité :
+• Revenir rapidement à un état précédent en cas d’erreur ou de test.
+• Sauvegarder la configuration avant une mise à jour ou une modification critique.
+•Caractéristiques :
+• Ne crée pas une copie complète du disque, mais stocke les changements
+depuis le snapshot.
+• Rapide à créer et à restaurer, mais ne remplace pas une sauvegarde complète.
+
+===== PAGE 32 =====
+Virtualisation
+Composants d’un système virtuel
+La machine virtuelle: Snapshots
+43
+
+===== PAGE 33 =====
+Virtualisation
+Composants d’un système virtuel
+La machine virtuelle: Clone
+44
+Création d’une copie complète et indépendante d’une VM existante.
+• Utilité :
+• Déployer rapidement de nouvelles VM identiques.
+• Tester des modifications sans risquer la VM originale.
+• Fournir une VM de secours pour remplacer rapidement une VM
+défaillante.
+• Caractéristiques : Clonage complet ou lié (linked clone) :
+• Clonage complet : copie totale, indépendant de l’original.
+• Clonage lié : dépend de l’original, économise de l’espace mais nécessite
+la VM source.
+
+===== PAGE 34 =====
+Virtualisation
+Composants d’un système virtuel
+La machine virtuelle: Clone complet
+45
+
+===== PAGE 35 =====
+Virtualisation
+Composants d’un système virtuel
+La machine virtuelle: Clone lié
+46
+
+===== PAGE 36 =====
+Virtualisation
+Composants d’un système virtuel
+La machine virtuelle: Exportation
+Créer un fichier ou ensemble de fichiers qui représente toute la machine virtuelle (configuration, disques,
+snapshots, etc.) pour pouvoir la déplacer ou sauvegarder.
+•
+Utilité
+•
+Déplacer une VM d’un serveur/hyperviseur à un autre.
+•
+Archiver une VM pour restauration ultérieure.
+•
+Partager une VM pré-configurée avec d’autres utilisateurs ou laboratoires.
+47
+Exportation
+Clonage
+Aspect
+Fichier exporté pouvant être importé
+ailleurs
+Nouvelle VM sur le même
+hyperviseur
+Création
+Fichier indépendant de l’original
+Peut être lié ou complet
+Dépendance
+Déplacement, sauvegarde ou partage
+Déployer rapidement une copie
+Objectif
+Différence avec le clonage
+
+===== PAGE 37 =====
+Virtualisation
+Composants d’un système virtuel
+La machine virtuelle: Exportation
+Formats d’exportation:
+•
+OVF (Open Virtualization Format)
+•
+C’est un format standard pour enregistrer une machine virtuelle.
+•
+Il contient plusieurs fichiers : la configuration (.ovf), les disques
+virtuels (.vmdk ou .vhd) et parfois un fichier de vérification (.mf).
+•
+Il
+est
+compatible
+avec
+plusieurs
+hyperviseurs
+(VirtualBox,
+VMware, etc.).
+•
+OVA (Open Virtual Appliance)
+•
+C’est la version compressée du format OVF.
+•
+Tous les fichiers OVF sont regroupés dans un seul fichier .ova.
+•
+Plus simple à déplacer ou à partager.
+•
+La plupart des hyperviseurs modernes l’acceptent (VMware,
+VirtualBox),
+mais
+certains
+hyperviseurs
+peuvent
+préférer
+décompresser le fichier avant import.
+48
+
+===== PAGE 38 =====
+Virtualisation
+Hyperviseur
+Pour créer des machines virtuelles (guest machines) sur une machine physique
+(host machine), nous avons besoin d’un logiciel hyperviseur.
+Un logiciel hyperviseur émule ou virtualise les composants de la machine physique
+en divisant le CPU, RAM, Disque dur et les cartes réseaux, et assigner ces
+ressources aux machines virtuelles (guest).
+La couche logicielle rendant la virtualisation possible
+S’exécute au dessous de toutes les VMs pour les gérer
+Assure le contrôle des processeurs et des ressources de la machine physique
+Hôte
+Alloue à chaque MV les ressources dont elle a besoin
+S’assure que les MV ne s’interférent pas (assurer l'isolation et la sécurité entre les
+MV)
+Les
+hyperviseurs
+sont
+divisés
+en
+deux
+types
+indiquant
+leur
+mode
+de
+fonctionnement: Hyperviseur type 1 (Bare metal) et Hyperviseur Type 2 (Host metal)
+49
+
+===== PAGE 39 =====
+Virtualisation
+Hyperviseur
+Hyperviseur type 1 : Bare metal
+s’exécuter directement sur le hardware
+est un noyau hôte allégé et optimisé pour ne faire tourner initialement que des noyaux de
+systèmes d’exploitation invités adaptés et optimisés à cette architecture spécifique.
+pour des processeurs ayant les instructions de virtualisation matérielle (AMD -V et Intel VT),
+le système d’exploitation invité n’a plus besoin d’être modifié pour pouvoir être exécuté dans
+un hyperviseur de type 1
+le modèle d’hyperviseur le plus répondu en entreprise
+exemples : XEN, Oracle VM, Microsoft Hyper-V, VMware ESX
+50
+
+===== PAGE 40 =====
+Virtualisation
+Hyperviseur
+Hyperviseur type 2 : Host metal
+S’exécute à l’intérieur d’un OS Hôte
+s’exécute en troisième niveau au dessus du matériel
+C’est le modèle préféré souvent par les utilisateurs de machines Lap Top ou DeskTop
+exemples : VMware Workstation, VMware Fusion, l’hyperviseur open source QEMU, les
+produits Microsoft Virtual PC et Virtual Server, VirtualBox d’Oracle, de même que Parallels
+Workstation de SWsoft et Parallels Desktop
+51
+
+===== PAGE 41 =====
+Virtualisation
+Hyperviseur
+Rôle d’un OS
+Partage le processeur entre plusieurs processus
+Partage la mémoire entre plusieurs processus
+Partage les I/O des périphériques entre plusieurs processus
+Rôle de l’hyperviseur
+Permettre ces mécanismes pour chaque OS invité, lui
+permettant de croire qu’il est le seul sur la machine
+Intercepter les communications avec les interruptions et
+simuler de façon logicielle les interfaces
+52
+
+===== PAGE 42 =====
+Virtualisation
+Techniques de virtualisation
+Virtualisation complète
+La
+virtualisation
+est
+dite
+complète
+lorsque
+le
+système d'exploitation invité n'a pas conscience d'être
+virtualisé.
+L'OS qui est virtualisé n'a aucun moyen de savoir
+qu'il partage le matériel avec d'autres OS.
+Ainsi,
+l'ensemble
+des
+systèmes
+d'exploitation
+virtualisés
+s'exécutant
+sur
+un
+unique
+ordinateur,
+peuvent
+fonctionner
+de
+manière
+totalement
+indépendante les uns des autres et être vu comme
+des ordinateurs à part entière sur un réseau.
+53
+
+===== PAGE 43 =====
+Virtualisation
+Techniques de virtualisation
+Paravirtualisation
+Par opposition à la virtualisation complète, on parle
+de
+paravirtualisation
+lorsque
+les
+systèmes
+d'exploitation doivent être modifiés pour fonctionner
+sur un hyperviseur de paravirtualisation.
+Les modifications sont en fait des insertions de
+drivers permettant de rediriger les appels système au
+lieu de les traduire.
+Elle
+nécessite
+une
+collaboration
+étroite
+entre
+l'hyperviseur et les systèmes d'exploitation invités
+pour fonctionner correctement
+54
+
+===== PAGE 44 =====
+Virtualisation
+Techniques de virtualisation
+Paravirtualisation
+Le mécanisme de redirection des appels système est expliqué ici:
+Des drivers backend et frontend sont installés dans les OS para-
+virtualisés.
+Ils permettent, au lieu de traduire les appels système comme dans la
+virtualisation complète, de ne faire que de la redirection (ce qui est
+beaucoup plus rapide).
+Il est donc intelligent d'utiliser un tel mécanisme pour accéder au
+matériel potentiellement très sollicité (disque dur, interface réseau...).
+En fait, ce qu'il se passe dans une telle technologie, c'est que le contrôle
+d'un ou plusieurs matériel(s) est donné à un des OS virtualisé (celui qui
+contient le driver backend), ici le système d'exploitation 1.
+il sera simple d'imaginer que l'OS 2, qui souhaite accéder au hardware,
+devra passé par son driver front end qui redirigera les appels système vers
+l'OS 1.
+L'inconvénient de cette technique est donc la dépendance d'un OS
+virtualisé vis à vis d'un autre qui se créé par ce mécanisme de driver.
+Si l'OS 1 tombe en panne, l'OS 2 ne pourra plus accéder au
+matériel.
+55
+
+===== PAGE 45 =====
+Virtualisation
+Types de virtualisation
+La virtualisation peut prendre de nombreuses formes en fonction du type d'utilisation de l'application et de
+l'utilisation du matériel
+Virtualisation de l’OS
+Virtualisation de serveurs
+Virtualisation des postes de travail:
+Virtual Desk Top Infrastructure (VDI)
+Streaming d’OS
+Virtualisation des applications
+Virtualisation de sessions
+Virtualisation par isolation ou Bulles Applications
+(Conteneurs d’application)
+Virtualisation de réseaux
+Virtualisation de stockage
+56
+
+===== PAGE 46 =====
+Virtualisation
+Types de virtualisation
+Virtualisation de l’OS
+
+dans un même serveur, on peut créer plusieurs serveurs virtuels et plusieurs
+postes de travails
+Virtualisation de serveurs
+
+C’est le fait de faire fonctionner simultanément, sur un seul serveur
+physique, plusieurs serveurs virtuels.
+
+Meilleur utilisation de la capacité de chaque serveur
+
+réduire la surface au sol, les équipements matériels, le besoin
+de climatisation et le nombre d'administrateurs ;
+
+réaliser
+des
+économies
+(locaux,
+consommation
+électrique,
+personnel) ;
+
+réduire les délais de mise à disposition de nouveaux serveurs
+
+simplifier l’administration et la gestion
+
+améliorer le niveau de service et la disponibilité des applications
+
+simplifier
+la
+migration
+des
+applications
+sur
+de
+nouveaux
+serveurs
+57
+
+===== PAGE 47 =====
+Virtualisation
+Types de virtualisation
+Virtualisation de l’OS
+Virtualisation de serveurs
+Virtualisation des postes de travail
+
+Virtual Desk Top Infrastructure (VDI)
+Principe : Dans une architecture VDI, des environnements de bureau complets (OS + applications) sont
+hébergés sur des machines virtuelles centralisées sur des serveurs. Les utilisateurs accèdent à ces
+machines virtuelles à distance à partir de leurs appareils.
+Fonctionnement :
+
+L'OS complet (comme Windows ou Linux) tourne sur une machine virtuelle sur un serveur.
+
+Les utilisateurs interagissent avec cette machine virtuelle via un protocole de bureau à distance (par
+exemple, RDP, Citrix ICA).
+
+Tout est exécuté côté serveur : calcul, stockage, gestion des applications.
+Avantages :
+
+Flexibilité et accès à distance : les utilisateurs peuvent accéder à leur bureau virtuel depuis n'importe
+quel appareil.
+
+Sécurité centralisée : les données et les applications restent dans le centre de données.
+
+Simplification de la gestion : les mises à jour, les correctifs, et la gestion des applications sont
+centralisés.
+58
+
+===== PAGE 48 =====
+Virtualisation
+Types de virtualisation
+Virtualisation de l’OS
+Virtualisation de serveurs
+Virtualisation des postes de travail
+
+Streaming d’OS
+Principe : Le streaming d'OS consiste à diffuser un système d'exploitation directement depuis un serveur
+vers une machine physique ou virtuelle sans installer le système d'exploitation localement.
+Fonctionnement :
+
+Le système d'exploitation est stocké et géré sur un serveur central.
+
+Lorsqu'un utilisateur démarre un appareil client, l'OS est envoyé en temps réel (streamé) sur le client,
+où il est exécuté en mémoire.
+
+Le poste client peut être un PC léger ou un autre appareil capable de recevoir le flux de l’OS.
+Avantages :
+
+Temps de déploiement rapide : il n'est pas nécessaire d'installer ou de cloner des systèmes
+d'exploitation sur chaque poste.
+
+Moins de stockage local : l'OS n'a pas besoin d'être stocké sur le périphérique client.
+
+Gestion simplifiée : comme le système est streamé à chaque démarrage, les mises à jour et les
+correctifs peuvent être appliqués facilement.
+59
+
+===== PAGE 49 =====
+Virtualisation
+Types de virtualisation
+Virtualisation d’applications
+Virtualisation de sessions
+est une
+méthode de virtualisation où
+plusieurs
+utilisateurs
+se
+connectent
+simultanément à un serveur, et chacun
+d'entre
+eux
+obtient
+une
+session
+indépendante
+sur
+un
+système
+d'exploitation partagé.
+Contrairement à la virtualisation VDI, où
+chaque
+utilisateur
+a
+son
+propre
+environnement de machine virtuelle (VM)
+avec un système d'exploitation dédié, la
+virtualisation de session fait en sorte que
+tous les utilisateurs partagent le même OS,
+mais dans des sessions isolées.
+60
+
+===== PAGE 50 =====
+Virtualisation
+Types de virtualisation
+Virtualisation d’applications
+Virtualisation de sessions
+Fonctionnement:
+Serveur
+central
+:
+Il
+exécute
+un
+système
+d'exploitation
+unique,
+souvent
+un
+Windows
+Server ou un OS Linux. Le serveur héberge les
+applications
+et
+les
+bureaux
+auxquels
+les
+utilisateurs se connectent.
+Sessions utilisateur : Lorsque les utilisateurs se
+connectent, ils ouvrent une session distante sur
+ce
+serveur.
+Ils
+obtiennent
+leur
+propre
+environnement de bureau ou d'application, mais
+ils partagent les ressources du serveur (CPU,
+RAM, stockage) avec les autres utilisateurs.
+61
+
+===== PAGE 51 =====
+Virtualisation
+Types de virtualisation
+Virtualisation d’applications
+Virtualisation
+par
+isolation
+ou
+Bulles
+Applications
+(Conteneurs
+d’applications)
+également
+appelées
+conteneurs
+d'applications:
+est
+une
+méthode
+de
+virtualisation
+légère
+qui
+permet
+d'exécuter
+des
+applications
+dans
+des
+environnements isolés les uns des autres, tout en partageant le même système
+d'exploitation sous-jacent.
+Contrairement à la virtualisation traditionnelle qui nécessite des machines
+virtuelles avec leur propre OS, cette technique se concentre sur l’encapsulation
+et l'isolement des applications.
+Exemples : UNIX chariot, Unix LXC (voir l’historique de docker)
+62
+
+===== PAGE 52 =====
+Virtualisation
+Types de virtualisation
+Virtualisation de réseaux
+est
+un
+processus
+qui
+permet
+de
+créer
+des
+versions virtuelles de ressources réseau, offrant
+une abstraction et une gestion améliorées des
+infrastructures réseau physiques.
+Elle consiste à découpler (séparer) les fonctions
+et les services réseau de l'infrastructure physique
+sous-jacente, permettant ainsi une flexibilité, une
+scalabilité et une gestion simplifiée des réseaux.
+63
+
+===== PAGE 53 =====
+Virtualisation
+Types de virtualisation
+Virtualisation de réseaux
+Les réseaux virtuels sont isolés les uns des autres, assurant que le trafic
+d’un réseau n’interfère pas avec un autre, ce qui renforce la sécurité des
+données.
+Des équipements comme VMware vSwitch et Open vSwitch facilitent cette
+abstraction, tandis que des pare-feu virtuels tels que Cisco ASA Virtual
+Firewall protègent les flux de trafic.
+Les ressources réseau, comme les routeurs et les commutateurs, peuvent
+être découpées logiquement pour une gestion plus granulaire et une allocation
+dynamique.
+Par exemple, des routeurs virtuels comme Cisco CSR 1000V permettent de
+créer des instances configurables sur un seul appareil physique.
+64
+=> la virtualisation de réseaux améliore la flexibilité, la sécurité et l'optimisation
+des ressources pour les entreprises.
+
+===== PAGE 54 =====
+Virtualisation
+Types de virtualisation
+Virtualisation de stockage
+65
+est
+un
+concept
+qui permet
+à
+plusieurs périphériques
+de
+stockage physique qui sont regroupés d’apparaître comme un
+seul et unique périphérique de stockage
+Cet espace de stockage regroupé sera présenté aux hôtes qui
+les verront comme un pool de stockage lié (data Store) (leur
+propre disque).
+
+===== PAGE 55 =====
+Virtualisation
+Types de virtualisation
+Virtualisation de stockage
+66
+Avantages:
+Homogénéisation du stockage sur des périphériques de
+stockage de capacité et de vitesses différentes
+Temps d’arrêt réduits
+Meilleure optimisation des performances et de la vitesse
+avec disponibilité très élevée (High Availability)
+Migration automatique et à chaud des données vers une
+autre machine virtuelle (Vmotion)
+Automatisation de l’extension de capacité de stockage par
+réduction du besoin de provisionnement manuel
+
+===== PAGE 56 =====
+Virtualisation
+Types de virtualisation
+Virtualisation de stockage: Architectures
+67
+DAS
+(Direct
+Attached
+Storage):
+Stockage
+à
+connexion
+directe, fait référence à un système de stockage informatique
+qui est directement connecté au serveur ou ordinateur au
+lieu de transiter par un réseau
+1) SCSI (Small Computer System Interface),
+2) SATA (Serial Advanced Technology Attachment)
+3) SAS (Serial Attached SCSI)
+
+===== PAGE 57 =====
+DAS (Direct Attached Storage):
+Avantages
+
+Solution la plus économique, très simple et rapide à mettre en place
+
+Architecture est envisageable en environnement de production mais il faut
+penser à une solution de sauvegarde adaptée protéger les données contre les
+pertes
+Inconvénients
+
+Espace de stockage non dynamique
+
+Taux d’utilisation non optimal
+
+Temps d’indisponibilité considérable
+
+Les fonctionnalités évoluées telles que Vmotion et HA ne sont pas disponibles
+
+Pas de gestion centralisée des VM
+Virtualisation
+Types de virtualisation
+Virtualisation de stockage: Architectures
+68
+
+===== PAGE 58 =====
+Virtualisation
+Types de virtualisation
+Virtualisation de stockage
+69
+Solution:
+Stockage centralisé partagé
+Redondance des connexions / disques : accès continu aux données stockées sur des disques
+en cas de défaillance d'une connexion, d'un disque, ou d'une autre partie de l'infrastructure
+
+===== PAGE 59 =====
+Virtualisation
+Types de virtualisation
+Virtualisation de stockage
+70
+Solution:
+Stockage centralisé partagé
+Redondance des connexions / disques : accès continu aux données stockées sur des disques
+en cas de défaillance d'une connexion, d'un disque, ou d'une autre partie de l'infrastructure
+Serveurs virtualisés
+
+===== PAGE 60 =====
+Virtualisation
+Types de virtualisation
+Virtualisation de stockage: Architectures
+71
+NAS (Network Attached Storage)
+Le NAS est une solution de stockage en réseau.
+C’est un boîtier contenant un ou plusieurs
+disques durs, relié au réseau local (LAN), pour
+partager des fichiers entre plusieurs utilisateurs
+ou ordinateurs.
+Fonctionnement
+est
+connecté
+au
+réseau
+par
+un
+câble
+Ethernet.
+agit comme un petit serveur de fichiers.
+Les utilisateurs peuvent enregistrer, lire ou
+partager des documents à distance (un peu
+comme un “disque dur en réseau”).
+
+===== PAGE 61 =====
+Virtualisation
+Types de virtualisation
+Virtualisation de stockage: Architectures
+72
+NAS (Network Attached Storage)
+Configuration
+Le NAS n’a ni clavier ni écran.
+Il se configure via une interface web
+accessible
+depuis
+un
+navigateur
+(comme Chrome ou Firefox).
+Il possède sa propre adresse IP, ce qui
+en fait un nœud du réseau à part
+entière.
+
+===== PAGE 62 =====
+Virtualisation
+Types de virtualisation
+Virtualisation de stockage: Architectures
+73
+NAS (Network Attached Storage)
+Intérêt du NAS
+Centraliser les fichiers pour tous les utilisateurs.
+Sauvegarder et sécuriser les données.
+Accéder aux fichiers depuis plusieurs appareils (PC, tablette, etc.).
+Exemple
+Dans une entreprise, un NAS peut être utilisé pour partager les projets
+entre tous les employés du même réseau.
+Le NAS fournit un datastore centralisé que tous les hôtes ESXi peuvent
+utiliser pour stocker :
+Les
+fichiers
+des
+machines
+virtuelles
+(disques
+virtuels
+VMDK,
+snapshots, etc.),
+Les ISO des systèmes d’exploitation,
+
+===== PAGE 63 =====
+Virtualisation
+Types de virtualisation
+Virtualisation de stockage: Architectures
+74
+NAS (Network Attached Storage)
+Les protocoles utilisés par un NAS
+Un NAS peut fonctionner avec plusieurs types de protocoles selon le
+système d’exploitation utilisé (Windows, Linux ou macOS).
+Ces protocoles permettent de partager les fichiers sur le réseau entre
+différents ordinateurs.
+Principaux protocoles :
+CIFS / SMB : utilisé par Windows (et aussi par Samba sur Linux).
+NFS : utilisé surtout par Linux et Unix.
+C’est le protocole le plus courant dans les NAS, car il est rapide et
+compatible avec beaucoup de systèmes.
+AFP : utilisé par les ordinateurs Apple (macOS).
+
+===== PAGE 64 =====
+Virtualisation
+Types de virtualisation
+Virtualisation de stockage: Architectures
+75
+NAS (Network Attached Storage)
+Le stockage en réseau (NAS) est un type de
+périphérique de stockage de fichiers dédié qui
+fournit aux nœuds de réseau local (LAN) un
+stockage partagé basé sur des fichiers via une
+connexion Ethernet standard.
+Les
+périphériques
+NAS
+sont
+généralement
+dépourvus
+de
+clavier
+ou
+d’écran,
+ils
+sont
+configurés
+et
+gérés
+avec
+un
+programme
+utilitaire basé sur un navigateur
+Chaque NAS réside sur le réseau local en tant
+que nœud de réseau indépendant et possède sa
+propre adresse IP
+
+===== PAGE 65 =====
+Virtualisation
+Types de virtualisation
+Virtualisation de stockage: Architectures
+76
+NAS (Network Attached Storage)
+Les périphériques NAS intègrent le support de
+multiples systèmes de fichiers réseau, tels que:
+
+Common Internet File System (CIFS) protocole
+de partage de Microsoft et de Samba.
+
+Network File System (NFS) qui est un protocole
+de partage de fichiers Unix. C’est le standard
+universel pour l’accès aux fichiers sur un
+réseau, et c’est le protocole le plus utilisé dans
+les NAS.
+
+AFP
+(AppleShare
+File
+Protocol)
+qui
+est
+l’équivalent pour la technologie Apple.
+
+===== PAGE 66 =====
+Virtualisation
+Types de virtualisation
+Virtualisation de stockage: Architectures
+77
+NAS (Network Attached Storage)
+Exemple
+
+===== PAGE 67 =====
+Virtualisation
+Types de virtualisation
+Virtualisation de stockage: Architectures
+78
+SAN (Storage Area Network)
+Un SAN est un réseau spécialisé qui connecte des
+serveurs à un espace de stockage centralisé.
+Il est surtout utilisé dans les grandes entreprises et
+les centres de données.
+Fonctionnement
+utilise un réseau dédié (souvent Fibre Channel
+ou iSCSI).
+Pour les serveurs, le stockage du SAN apparaît
+comme un disque dur local, mais en réalité il est
+situé dans la baie SAN.
+Contrairement au NAS (qui partage des fichiers),
+le SAN fonctionne au niveau bloc (accès direct
+aux disques).
+
+===== PAGE 68 =====
+Virtualisation
+Types de virtualisation
+Virtualisation de stockage: Architectures
+79
+SAN (Storage Area Network)
+Configuration
+Composé de :
+des serveurs (qui utilisent le stockage),
+des switchs SAN (qui font le lien),
+une
+baie
+de
+stockage
+(qui
+contient
+les
+disques).
+Il se configure via une interface d’administration
+fournie par le constructeur (Dell EMC, NetApp,
+HPE).
+
+===== PAGE 69 =====
+Virtualisation
+Types de virtualisation
+Virtualisation de stockage: Architectures
+80
+SAN (Storage Area Network)
+Intérêt du SAN
+Très rapide : idéal pour les bases de données et les machines
+virtuelles.
+Centralisé : un seul gros espace de stockage pour plusieurs
+serveurs.
+Fiable : si un serveur tombe en panne, un autre peut continuer à
+accéder aux données.
+Exemple
+Dans un datacenter, plusieurs serveurs de virtualisation (VMware
+ESXi) accèdent à la même baie SAN.
+Toutes les machines virtuelles sont stockées dessus, ce qui permet
+de les déplacer facilement d’un serveur à un autre.
+
+===== PAGE 70 =====
+Virtualisation
+Types de virtualisation
+Virtualisation de stockage: Architectures
+81
+NAS = partage de fichiers (comme un disque réseau).
+SAN = partage de disques (comme si chaque serveur avait un gros
+disque dur externe très rapide).

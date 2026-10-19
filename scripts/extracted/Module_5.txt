@@ -1,0 +1,442 @@
+
+===== PAGE 1 =====
+Administration des
+Systèmes
+MODULE 5 — GESTION DES UTILISATEURS
+HÉDI NSIBI – FACULTÉ DES SCIENCES DE MONASTIR 2025
+
+===== PAGE 2 =====
+Introduction au cours
+Ce cours présente la gestion des utilisateurs et groupes sous Linux.
+Objectifs :
+
+Comprendre les fichiers de configuration utilisateur
+
+Savoir créer, modifier et supprimer des comptes
+
+Gérer les permissions et les quotas disque
+
+===== PAGE 3 =====
+Rôle de l’administrateur
+système
+
+Maintenir la sécurité et la stabilité du système
+
+Créer et gérer les utilisateurs et groupes
+
+Gérer les droits d’accès et la confidentialité
+
+Surveiller les ressources et appliquer des quotas
+
+===== PAGE 4 =====
+Concepts fondamentaux
+
+Utilisateur : entité identifiée par un UID
+
+Groupe : ensemble d’utilisateurs partageant des droits
+
+UID (User ID) et GID (Group ID)
+
+Superutilisateur (root) et utilisateurs standards
+
+===== PAGE 5 =====
+Fichier /etc/passwd
+C’est un fichier de configuration fondamental dans les systèmes
+d'exploitation de type Unix, y compris Linux. Il contient des
+informations essentielles sur les comptes d'utilisateurs du système
+
+Format :
+nom:x:UID:GID:infoComplementaire:répertoire_perso:shell
+
+Exemple :
+
+etudiant:x:1001:1001:Etudiant:/home/etudiant:/bin/bash
+
+===== PAGE 6 =====
+Fichier /etc/shadow
+
+Contrairement au fichier /etc/passwd qui est public, le fichier
+/etc/shadow n’est accessible qu’à l’utilisateur root
+
+Contient les mots de passe chiffrés et politiques de sécurité.
+
+Format : nom:motdepasse:lastchg:min:max:warn:inactive:expire
+-
+Nom d’utilisateur
+-
+Mot de passe chifré
+-
+Dernier changement
+-
+Nbre de jours minimale avant que le mot de passe puisse être changé à nouveau
+-
+Nbre de jours maximal après lequel le mot de passe doit être changé
+-
+Période d’avertissement
+-
+Période d’inactivité
+-
+Date d’expériration
+-
+Champ réservé
+
+===== PAGE 7 =====
+Fichiers /etc/group et
+/etc/gshadow
+
+Les fichiers /etc/group et /etc/gshadow sont des fichiers de
+configuration qui gérent les informations relatives aux groupes
+d’utilisateurs. alors que /etc/group contient les informations de
+base sur les groupes, /etc/gshadw stocke de manière sécurisée les
+données sensibles des groupes, comme les mot de passe
+
+===== PAGE 8 =====
+/etc/login.defs et
+/etc/default/useradd
+
+Ces deux fichiers sont des fichiers de configuration système qui
+définissent le comportement par défaut lors de la création de
+nouveaux utilisateurs sous Linux.
+
+Le premier contient des paramètres globaux de sécurité et de
+gestion des utilisateurs.
+-
+UID_MIN, UID_MAX, PASS_MAX_DAYS, PASS_MIN_DAYS
+
+Le deuxième contient les paramètres par défaut utilisés par la 
+commande useradd.
+-
+HOME, SHELL( souvent /bin/bash), CREATE_HOME
+-
+Aussi SKEL qui est un répértoire contenant les fichiers modèles à
+copier dans le répértoire personnel /etc/skel
+
+Créé automatiquement avec l’option -m de useradd.
+
+===== PAGE 9 =====
+Commandes d’exploration
+
+cat /etc/passwd
+-
+Lister les utilisateurs avec leurs informations de base
+
+grep 'etudiant' /etc/passwd
+-
+Chercher uniquement les lignes contenant le mot “etudiant”
+
+cut -d: -f1 /etc/passwd
+-
+Extraire uniquement les nom des utilisateurs
+-
+-d →utilise le caractère: comme séparateur, -f1 →prend le premier
+champs de chaque ligne
+
+less /etc/shadow
+- Consulter le fichier /etc/shadow de manière sécurisé et paginée
+
+===== PAGE 10 =====
+Création d’un utilisateur
+
+Commande principale :
+sudo useradd -m -s /bin/bash etudiant
+-m : crée le dossier /home/etudiant
+-s : définit le shell
+
+===== PAGE 11 =====
+Modification d’un utilisateur
+
+Commande principale :
+sudo usermod -s /bin/zsh etudiant
+sudo usermod -d /home/newhome etudiant
+
+Permet de modifier le shell ou le répertoire personnel.
+
+===== PAGE 12 =====
+Suppression d’un utilisateur
+
+Commande principale :
+sudo userdel etudiant
+sudo userdel -r etudiant
+# supprime aussi le répertoire personnel
+
+===== PAGE 13 =====
+Informations utilisateur
+Commande
+Rôle principal
+id user
+Identité et groupes d’un utilisateur
+who / w
+Utilisateurs actuellement connectés
+Last
+Historique des connexions
+finger user
+Informations détaillées sur un utilisateur
+
+===== PAGE 14 =====
+Profils utilisateurs /etc/skel
+
+Le dossier /etc/skel , contient les fichiers modèles
+utilisé lors de la création d’un nouvel utilisateur
+Contenu du répertoire /etc/skel
+- ls -a /etc/skel
+
+Permet de personnaliser les environnements par
+défaut.
+
+===== PAGE 15 =====
+Création de groupes
+Un groupe est un ensemble d’utilisateurs qui partagent des droits ou des ressources
+communes.
+
+Commande principale
+sudo groupadd developpeurs
+
+Renommer le groupe « developpeur » en « dev »
+sudo groupmod -n dev developpeurs
+
+Supprimer le groupe
+sudo groupdel dev
+
+Ajouter plusieurs utilisateurs à ce groupe:
+Sudo usermod –aG projetA alice
+Sudo usermod –aG projetA bob
+
+Donner au groupe accès a un dossier:
+Sudo chown :projetA /srv/projetA
+Sudo chmod 770 /srv/projetA
+
+===== PAGE 16 =====
+Bonnes pratiques de gestion
+des groupes
+
+Créer des groupes logiques (ex : web, dev, admin)
+
+Eviter les utilisateurs dans trop de groupes
+
+Utiliser les permissions de groupe correctement
+
+===== PAGE 17 =====
+Gestion des mots de passe
+
+Commande principale (définir ou modifier)
+-
+sudo passwd etudiant
+
+Vérifier les informations du mot de passe
+-
+sudo chage -l etudiant # vérifier la validité du mot de passe--
+
+Définir une politique d’expiration
+-
+sudo chage -M 90 etudiant # expiration à 90 jours
+
+===== PAGE 18 =====
+Politiques de sécurité
+
+/etc/login.defs : définit la longueur et la durée des mots de passe
+
+pam_pwquality : gère la complexité des mots de passe
+Fichier de configuration
+- /etc/security/pwquality.conf
+
+===== PAGE 19 =====
+Surveillance des connexions
+
+faillog : Affiche le nombre d’échecs de connexion pour
+chaque utilisateur.
+
+lastlog : Affiche la dernière connexion réussie de chaque
+utilisateur.
+
+Sudo pam_tally2 : verrouillage après échecs répétés
+
+===== PAGE 20 =====
+Bonnes pratiques
+
+Forcer le changement de mot de passe périodiquement
+
+Interdire les mots de passe faibles
+
+Surveiller les comptes inactifs
+
+===== PAGE 21 =====
+Gestion des permissions et
+ownership
+
+Lecture des permissions
+-
+Commande ls-l
+-
+-rw-r--r-- 1 alice dev 1024 Oct 28 12:00 fichier.txt
+
+Modifier les permssions: chmod
+-
+chmod u+x fichier.txt
+# ajoute le droit exécution au propriétaire
+-
+chmod g-w fichier.txt
+# retire le droit écriture au groupe
+-
+chmod 755 fichier.txt
+# rwx pour propriétaire, r-x pour groupe et
+autres
+
+Bonnes pratiques :
+Fichiers personnels →600
+Dossiers partagés →770 ou 775
+
+===== PAGE 22 =====
+Gestion des permissions et
+ownership
+
+Modifier propriétaire et groupe : chown / chgrp
+-
+sudo chown alice fichier.txt
+# change le propriétaire
+-
+sudo chgrp dev fichier.txt
+# change le groupe
+-
+sudo chown alice:dev fichier.txt # change les deux
+
+===== PAGE 23 =====
+umask et valeurs par défaut
+
+Définit les permissions par défaut lors de la création de
+fichiers/dossiers
+-
+umask
+# affiche la valeur actuelle
+-
+umask 022
+# fichiers 644, dossiers 755
+-
+umask 077 # fichier privés (600)
+-
+umask 002 #fichier partagés(664)
+
+===== PAGE 24 =====
+Outils d’administration et
+gestion centralisée
+
+Interfaces graphiques
+-
+GNOME, KDE, XFCE →gestion utilisateurs via GUI
+-
+Webmin (interface web d’administration)
+Outils centralisés
+-
+LDAP →annuaire centralisé, authentification globale
+-
+NIS →ancien système de gestion réseau des utilisateurs
+-
+Kerberos →authentification sécurisée par tickets
+Sauvegarder /etc/passwd, /etc/shadow et /etc/group régulièrement.
+
+===== PAGE 25 =====
+PAM – Pluggable
+Authentication Modules
+
+C’est une infrastructure flexible qui permet aux systèmes
+d'exploitation de gérer l'authentification des utilisateurs de
+manière centralisée et configurable, sans avoir à modifier le code
+des applications
+
+Les administrateurs peuvent personnaliser l’authentification pour
+un service en modifiant simplement ses fichiers de configuration
+dans le répertoire /etc/pam.d
+
+===== PAGE 26 =====
+Automatisation avec scripts
+Bash
+
+Création d’utilisateurs depuis CSV
+while IFS=, read -r user pwd; do
+sudo useradd -m -s /bin/bash "$user"
+echo "$user:$pwd" | sudo chpasswd
+done < utilisateurs.csv
+
+Script de sauvegarde des comptes
+#!/bin/bash
+cp /etc/passwd /backup/passwd_$(date +%F).bak
+cp /etc/shadow /backup/shadow_$(date +%F).bak
+echo "Sauvegarde effectuée $(date)"
+
+===== PAGE 27 =====
+Automatisation avec scripts
+Bash
+
+Script suppression utilisateurs inactifs
+#!/bin/bash
+for user in $(awk -F: '$3>=1000 {print $1}' /etc/passwd);
+do
+lastlog -u $user | grep -q 'Never logged in' && sudo userdel -r $user
+done
+
+===== PAGE 28 =====
+Introduction aux quotas disque
+
+Limiter l’espace disque d’un utilisateur ou d’un
+groupe
+
+Évite qu’un utilisateur monopolise tout le stockage
+Activer la gestion des quotas
+sudo quotacheck -cum /home
+sudo quotaon /home
+Édition et affichage
+sudo edquota etudiant
+# modifier les quotas
+repquota /home
+# afficher les rapports
+
+===== PAGE 29 =====
+Application pratique : quotas
+utilisateur --limiter l’espace disque
+1.
+Activer quota sur /home : quotaon /home
+2.
+Attribuer quota à un utilisateur: edquota etudiant
+3.
+Définir:
+4.
+Soft limit: 500M
+5.
+Hard limit 550M
+Vérification et bonne pratiques:
+-
+Vérfier repquota /home, quota –u etudiant
+-
+Tester la limitation en créant des fichiers
+-
+Erreurs fréquentes: oublier d’activer quotaon, mauvaise
+unité(K/M/G)
+
+===== PAGE 30 =====
+Application pratique : quotas
+utilisateur --limiter l’espace
+disque
+Cas d’usage
+Action
+Plusieurs étudiants sur le même
+serveur
+Activer le quota sur /home et
+définir une limite par utilisateur
+Serveur web avec plusieurs sites
+dans /var/www
+Activer quota sur /var pour
+limiter chaque compte FTP
+Projet commun entre
+développeurs
+Activer quota de groupe sur
+/srv/projet
+
+===== PAGE 31 =====
+Résumé général
+
+Gestion des utilisateurs, groupes, mots de passe
+
+Permission, ownership et quotas
+
+Outlis d’administration, scripts et automatisation
+
+Sécurité et surveillance des comptes

@@ -1,0 +1,369 @@
+
+===== PAGE 1 =====
+Module 2 : Systèmes de fichiers Linux
+Gestion des médias et maintenance
+PARTITIONNEMENT, CRÉATION ET VÉRIFICATION DES
+SYSTÈMES DE FICHIERS
+Administration des
+systèmes
+HÉDI NSIBI – FACULTÉ DES SCIENCES DE MONASTIR
+
+===== PAGE 2 =====
+1. Nommage des médias de
+stockage
+
+Types de médias
+-
+HDD (Hard Disk Drive) →Disque dur classique.
+-
+SSD(Solid State Drive) →Disque à mémoire flash, plus rapide
+-
+Clé USB →Périphérique amovible, souvent monté
+automatiquement.
+-
+CD/DVD →Support optique, souvent monté dans /media ou
+/mnt/cdrom
+
+Localisation :
+-
+/dev/sda →premier disque détecté.
+-
+/dev/sdb1 →première partition du deuxième disque.
+-
+/dev/sdc →troisième disque (souvent un périphérique USB).
+
+===== PAGE 3 =====
+Convention de nommage
+Linux
+
+Disques SATA/SCSI:
+-
+X: lettre identifiant le disque (a, b, c, ..)
+-
+Exemple: /dev/sda(1er disque), /dev/sdb 2e disque
+
+Disque NVMe(SSD modernes):
+-
+/dev/nvme0n1px
+-
+Nvme0n1: premier périphérique NVMe détecté.
+-
+/dev/nvme0n1p1 →p1, 1ère partition du disque NVMe.
+
+Carte SD
+-
+/dev/mmcblmXpX
+-
+Mmcblk0: premiere carte SD détectée
+-
+Px: numéro de partition
+
+===== PAGE 4 =====
+Fichier /etc/fstab
+
+Le fichier /etc/fstab
+Role: Fichier de configuration pour les montages
+automatiques
+comment editer ce fichier
+
+Format :
+
+0: pas de sauvegarde avec dump
+1: Sauvegarde activée
+
+Avantage : montage automatique au démarrage
+
+===== PAGE 5 =====
+
+Etapes recommandées (en mode administrateur)
+-
+Sudo nano /etc/fstab
+-
+Sudo vim /etc/fstab
+
+Faire une sauvegarde avant modification:
+-
+Sudo cp /etc/fstab /etc/fstab.backup (Cas de restauration : sudo cp /etc/fstab.backup /etc/fstab)
+
+Ajouter ou modifier la ligne voulue
+-
+/dev/sdb1 /mnt/data ext defaults 0 0
+
+Tester la validité du fichier avant de redemarrer :
+-
+Sudo mount –a
+Cette commande monte tous les sytèmes définis dans fstab
+Si aucune erreur n’apprait, la configuration est correcte
+
+Redemarrer le système
+-
+Sudo reboot
+Astuce : Utiliser sudo blkid pour obtenir UUID : les UUID sont plus fiables que les
+/dev/sdX (qui peuvent changer selon l’ordre de branchement)
+Comment éditer le fichier /etc/fstab
+
+===== PAGE 6 =====
+Identifier les périphériques
+
+lsblk : affiche la hiérarchie
+-
+MAJ:MIN : Identifiant interne Linux
+-
+RM: Removable 1 amvible 0 Fixe
+-
+SIZE: Taille du périphérique
+-
+RO: Read Only
+-
+…
+
+===== PAGE 7 =====
+Identifier les périphériques
+
+fdisk -l : liste les disques et leurs tables de partition
+-
+Start : Numéro du secteur de début
+-
+End : Numéro du secteur de fin
+-
+Sectors : Nombre total de secteurs utilisés
+-
+Size: Taille de la partition
+(calculée à partir des secteurs
+-
+Type: type de partition
+-
+…
+
+===== PAGE 8 =====
+Identifier les périphériques
+
+blkid : affiche UUID et FS
+-
+Les UUID : Universal Unique Identifier
+-
+Les LABELS des partitions
+-
+Les Types de systèmes de fichiers(ext4, Vfat..)
+-
+Les emplacements des paritions /dev/sda
+-
+..
+
+===== PAGE 9 =====
+Identifier les périphériques
+
+Lsblk /dev/sda : affiche uniquement la hiérarchie
+-
+On peut utiliser lsbk –f pour voir les UUID et types de FS direectement
+-
+Lsblk – f : combine les infos de lsblk et blkid
+
+===== PAGE 10 =====
+2. Montage et démontage
+d’un système de fichiers
+
+Montage = rattacher un périphérique à un répertoire
+
+Ex : sudo mount /dev/sdb1 /mnt/usb
+
+Démontage : sudo umount /mnt/usb
+Le montage rend les fichiers accessibles.
+
+===== PAGE 11 =====
+Points de montage standards
+Dossier
+Utilisation principale
+Monté par
+Exemple
+/mnt
+Montages manuels
+(administrateur)
+Commande mount
+/mnt/data
+/media
+Montages
+automatiques (clés
+USB, CD)
+Système / udisks
+/media/hedi/USB32
+/run/media
+Montages
+dynamiques
+(environnements
+graphiques)
+Gestionnaire de
+bureau
+/run/media/hedi/DISK
+
+===== PAGE 12 =====
+Utilitaire UDISKS
+
+Udisks: est un gestionnaire de disques sous linux,
+c’est un démon système(service d’arriere plan) qui
+gére les périphériques de stockage
+
+Il permet aux environnement graphiques (GNOME,
+KDE, FEDORA ):
+-
+De détecter automatiquement les périphériques branchés
+-
+Les monter sans commande manuelle
+-
+Les démonter proprement à la déconnexion
+
+Commande : systemctl status udisks2
+
+===== PAGE 13 =====
+Commandes utiles pour le
+montage
+
+df -h : espace disque
+
+===== PAGE 14 =====
+Commandes utiles pour le
+montage
+
+du -sh /home : taille dossier
+
+===== PAGE 15 =====
+Commandes utiles pour le
+montage
+
+findmnt : affiche les FS montés
+
+===== PAGE 16 =====
+Commandes utiles pour le
+montage
+
+mount | grep sda : vérifie les points actifs
+
+Grep sda : filtre uniquement les lignes contenant le
+mot sda
+
+===== PAGE 17 =====
+Bonnes pratiques et erreurs
+fréquentes
+Toujours démonter avant retrait
+Ne pas monter deux fois la même
+partition
+Vérifier /etc/fstab avant redémarrage
+
+===== PAGE 18 =====
+3. Partitionnement des disques
+
+Le partitionnement du disque consiste à diviser un disque dur
+physique en plusieurs partitions logiques.
+Chaque partition peut contenir un système de fichiers (FS)
+distinct et être utilisée pour un rôle différent.
+Type
+Description
+Exemple
+Primaire
+Partition principale du disque (max 4 sur
+un disque MBR)
+/dev/sda1
+Étendue
+Conteneur permettant de créer des
+partitions supplémentaires
+/dev/sda2
+Logique
+Située à l’intérieur d’une partition
+étendue
+/dev/sda5, /dev/sda6, etc.
+MBR (Master Boot Record) et GPT (GUID Partition Table) sont deux méthodes de
+partitionnement de disque,
+
+===== PAGE 19 =====
+Outils de partitionnement
+Commande
+Description
+Exemple
+fdisk
+Outil classique pour gérer les partitions
+MBR (en ligne de commande)
+sudo fdisk /dev/sdb
+parted
+Outil plus moderne, compatible GPT et
+MBR
+sudo parted /dev/sdb
+fdisk →simple, rapide, historique
+parted →plus puissant, gère les grands disques (> 2 To) et GPT
+Outil
+Interface
+Particularités
+GParted
+Interface graphique (GUI)
+Permet de créer,
+redimensionner, supprimer
+ou formater les partitions
+visuellement
+
+===== PAGE 20 =====
+Exemple pratique
+
+Sudo fdisk /dev/sdb
+
+Ouvre l’outil de partitionnement du disque /dev/sdb
+Touche
+Action
+Description
+m
+menu
+affiche l’aide
+n
+new
+créer une nouvelle
+partition
+d
+delete
+supprimer une partition
+p
+print
+afficher la table des
+partitions
+w
+write
+sauvegarder et quitter
+
+===== PAGE 21 =====
+Tables de partition : MBR vs
+GPT
+
+MBR : ancien, max 4 primaires, ≤2 To
+
+GPT : moderne, jusqu’à 128 partitions, >2 To
+
+GPT recommandé pour UEFI
+UEFI : un remplaçant moderne et plus performant du BIOS traditionnel, qui sert
+d'interface entre le matériel et le système d'exploitation d'un ordinateur
+
+===== PAGE 22 =====
+Affectation d’un système de
+fichiers
+
+Formater : sudo mkfs.ext4 /dev/sdb1
+Élément
+Signification
+mkfs
+make filesystem – crée un système de fichiers
+ext4
+Type du système de fichiers (le plus courant sous Linux)
+/dev/sdb1
+Partition à formater
+
+Créer un point de montage: sudo mkdir /mnt/data
+
+Monter la partition: sudo mount /dev/sdb1 /mnt/data
+
+Verification : df -h | grep sdb1
+
+===== PAGE 23 =====
+Vérification et réparation d’un
+FS
+
+Vérifier : sudo fsck /dev/sdb1
+
+Réparer : sudo fsck -y /dev/sdb1
+
+Toujours démonter avant fsck.

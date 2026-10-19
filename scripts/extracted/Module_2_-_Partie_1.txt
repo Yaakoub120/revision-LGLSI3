@@ -1,0 +1,536 @@
+
+===== PAGE 1 =====
+Administration des
+systèmes
+qu3jgk4w
+MODULE 2 – SYSTÈMES DE FICHIERS LINUX
+COMPRENDRE ET MANIPULER LA HIÉRARCHIE DU
+SYSTÈME DE FICHIERS LINUX
+HÉDI NSIBI – FACULTÉ DES SCIENCES DE MONASTIR
+
+===== PAGE 2 =====
+Qu’est-ce qu’un système de
+fichiers ?
+1/2
+Définition :
+
+Un système de fichiers (File System) est une méthode
+d’organisation et de gestion des données sur un support de
+stockage (disque dur, SSD, clé USB, etc.).
+
+Il permet au système d’exploitation de stocker, lire, modifier et
+supprimer des fichiers.
+
+===== PAGE 3 =====
+Qu’est-ce qu’un système de
+fichiers ?
+2/2
+Fonctions principales :
+
+Organisation hiérarchique des fichiers et répertoires.
+
+Gestion des métadonnées (taille, propriétaire, permissions, date…).
+
+Contrôle des accès aux ressources (droits utilisateurs).
+
+Allocation et libération d’espace disque.
+
+Fiabilité et tolérance aux pannes (journalisation, vérification
+d’intégrité).
+
+===== PAGE 4 =====
+Tableau comparatif
+Système
+de
+fichiers
+Système
+d’exploitation
+Caractéristiques principales
+Avantages
+Inconvénients
+FAT32
+Windows / Linux /
+macOS
+Ancien format, compatible avec
+tous les OS
+Très compatible, léger
+Taille max fichier = 4 Go, pas
+de gestion des droits
+NTFS
+Windows (lecture
+seule sous
+macOS/Linux sans
+outil)
+Journalisation, permissions,
+compression
+Sécurisé, fiable, supporte fichiers
+> 4 Go
+Moins compatible avec autres
+systèmes
+exFAT
+Windows / macOS /
+Linux
+Version améliorée de FAT32 pour
+gros fichiers
+Compatible multi-OS, pas de
+limite 4 Go
+Pas de journalisation, moins sûr
+ext4
+Linux
+Journalisé, stable, supporte gros
+volumes
+Performant, fiable, standard
+Linux
+Peu compatible avec
+Windows/macOS
+XFS
+Linux
+Journalisé, orienté gros fichiers
+Excellente performance pour
+serveurs
+Moins flexible pour petits
+fichiers
+Btrfs
+Linux
+Copie sur écriture (COW),
+snapshots
+Moderne, supporte la
+compression et la réplication
+Moins mature que ext4
+APFS
+macOS
+Journalisé, optimisé pour SSD
+Très rapide, sécurisé
+Compatible uniquement avec
+macOS
+
+===== PAGE 5 =====
+Utilisation typique
+
+NTFS est le plus sécurisé sous Windows, tandis qu’ext4 domine sur
+Linux.
+Parfait pour les disques internes windows, supporte les droitss d’accées utilisateurs, la compression et
+la journalisation
+
+FAT32 reste le plus compatible, mais limité à 4 Go par fichier.
+Parfait pour les disques internes windows, supporte les droitss d’accées utilisateurs, la compression et
+la journalisation
+
+exFat Idéal pour les clés USB ou disques externes compatibles
+Windows/macOS/Linux.
+Recommandé pour transférer de gros fichiers multimédias, moins sûr(pas de journalisation ni
+permissions avancées).
+
+===== PAGE 6 =====
+Utilisation typique
+
+Ext4 Système par défaut de la plupart des distributions Linux
+(Ubuntu, Debian…).
+Convient aux serveurs et postes Linux pour sa stabilité et sa performance.
+
+XFS Utilisé sur les serveurs Linux professionnels.
+Très efficace pour les gros volumes de données ou les fichiers volumineux.
+
+Btrfs Choisi pour les systèmes modernes cherchant la résilience
+et la gestion avancée (snapshots, compression…).
+À réserver aux administrateurs expérimentés.
+
+APFS Utilisé exclusivement sur macOS et iOS.
+Optimisé pour les SSD, très rapide et sécurisé.
+
+===== PAGE 7 =====
+Système de fichiers Linux vs
+Windows
+Linux
+ext4, XFS, Btrfs
+❑
+Arborescence unique avec racine /
+❑
+Permissions utilisateurs strictes
+❑
+Journalisation intégrée
+❑
+Très stable et utilisé sur les serveurs
+Windows
+NTFS, FAT32, exFAT
+❑
+Organisation par lettres de disque (C:, D:…)
+❑
+ACL (Access Control List) pour les permissions
+❑
+Optimisé pour les postes utilisateurs
+❑
+Plus compatible avec les logiciels grand public
+
+===== PAGE 8 =====
+Composants
+d’un système
+de fichiers
+
+===== PAGE 9 =====
+Architecture
+d’un système
+de fichiers
+Linux
+
+===== PAGE 10 =====
+Explication:
+EXT3 (Third Extended File System)
+-
+Ancien standard de Linux. Qui a Introduit la journalisation, ce qui permet une restauration
+facile
+EXT4 (Fourth Extended File System)
+-
+Par défaut sur la plupart des distributions Linux modernes.
+-
+Meilleure performance pour les gros fichiers et partitions
+HPFS (High Performance File System)
+-
+Développé par IBM pour OS/2. Gestion efficace de gros fichiers. Peu utilisé aujourd’hui
+VFAT (Virtual File Allocation Table)
+-
+Version améliorée de FAT16/FAT32, introduite avec Windows 95.
+Idéal pour les clés USB et disques externes.
+FreeBSD UFS (Unix File System)
+-
+Stable, sécurisé et conçu pour les serveurs.
+-
+Robuste Gestion fine des droits d’accès et des quotas utilisateurs.
+
+===== PAGE 11 =====
+Lien entre
+Kernel, VFS
+et Système
+de fichiers
+
+===== PAGE 12 =====
+Répertoires principaux
+
+===== PAGE 13 =====
+/opt – “Optional” (logiciels
+additionnels)
+
+/opt = optional software : cest le dossier réservé aux
+applications tierces qui ne font pas partie du
+système de base Linux
+
+Utilisation typique : quand on installe manuellement
+un logiciel(hors gestionnaire paquets) il souvent
+placé dans /opt
+
+Chaque logiciel y a son propre dossier
+
+===== PAGE 14 =====
+Exemples concrets
+Logiciel
+Chemin d’installation
+typique
+Détails
+VMware Workstation
+/opt/vmware/
+Contient les binaires et
+ressources de VMware
+Google Chrome
+/opt/google/chrome/
+Navigateur installé via
+un paquet .deb
+Visual Studio Code
+/opt/visual-studio-code/
+Application manuelle
+Docker Desktop (Linux)
+/opt/docker-desktop/
+Version GUI de Docker
+
+===== PAGE 15 =====
+/tmp – “Temporary files”
+
+/tmp=
+cest un répertoire temporaire partagé par
+tous les utilisateurs et processus
+
+Utilisation typique: fichier temporaire créés par les
+applications (installation, cache, logs temporaires,
+etc. )
+
+/tmp est effacé a chaque redémarrage
+
+===== PAGE 16 =====
+Cas pratiques: logiciels &
+utilitaires
+Action
+Où ça s’installe / agit
+Exemple concret
+Installation manuelle d’un
+logiciel
+/opt
+VMware, VS Code,
+Chrome
+Fichiers temporaires
+pendant installation
+/tmp
+Installeurs .run ou .deb
+Sauvegardes utilisateurs
+/home/<user>/backup
+ou /var/backups
+Sauvegarde manuelle ou
+automatique
+Docker Engine
+/usr/bin/, /var/lib/docker/
+Binaires dans /usr/bin,
+données des conteneurs
+dans /var/lib/docker
+VMware / VirtualBox
+/opt/ (binaire) et /var/lib/
+(machines virtuelles)
+/opt/vmware/ pour app,
+/var/lib/vmware/ pour
+données
+Utilitaires systèmes (rsync,
+tar, etc.)
+/bin, /usr/bin
+Outils natifs Linux
+
+===== PAGE 17 =====
+Autres cas d’usages
+Répertoire
+Utilisation principale
+Exemples concrets d’utilisation
+/etc/
+Contient tous les fichiers de configuration
+système et applicatifs
+etc/nginx/nginx.conf →configuration du
+serveur Nginx
+etc/ssh/sshd_config →configuration du service
+SSH
+/usr/
+Contient les programmes installés pour les
+utilisateurs (User System Resources)
+/usr/bin/python3,
+/usr/lib/firefox/ — programmes installés par
+défaut ou via apt
+/opt/
+Contient les applications supplémentaires
+ou tierces non fournies par la distribution
+/opt/lampp/ →XAMPP (Apache + MySQL +
+PHP)
+/opt/google/chrome/ →navigateur Chrome
+/opt/vmware/ →VMware Workstation
+/tmp/
+Stocke les fichiers temporaires
+(automatiquement supprimés au
+redémarrage)
+Fichiers de cache, téléchargement temporaire
+pendant une installation ou une exécution de
+script
+/var/
+Contient les données variables (journaux,
+bases de données, sites web, e-mails…)
+/var/log/ →logs système et applicatifs
+/var/www/ →fichiers de sites web pour
+Apache/Nginx
+/var/lib/mysql/ →base de données MySQL
+/var/spool/mail/ →files d’attente des mails
+
+===== PAGE 18 =====
+Navigation dans le système de
+fichiers
+
+/mnt : point de montage temporaire pour des
+systèmes de fichiers externes ou réseaux.
+
+/media : montage automatique de périphériques
+amovibles comme (USB, CD, etc.)
+
+/proc et /sys : systèmes de fichiers virtuels exposant
+des informations du noyau et des processus
+
+/root : répertoire personnel de l’administrateur
+
+===== PAGE 19 =====
+
+/mnt est utilisé comme point de montage temporaire pour
+tout disque ou partition que l’on souhaite accèder
+ponctuellement
+
+Cela peut être un disque interne secondaire, une partition
+interne, ou un disque externe
+
+Exemple pour un disque interne secondaire :
+sudo mount /dev/sdb1 /mnt
+
+Exemple pour un disque externe :
+sudo mount /dev/sdc1 /mnt
+Le répertoire /mnt
+
+===== PAGE 20 =====
+Sous-répertoires dans /mnt :
+
+/mnt
+├──data
+# Partition interne pour les données
+├──backup
+# Disque externe pour sauvegarde
+└──usbdrive
+# Clé USB ou autre périphérique temporaire
+Exemple
+sudo mount /dev/sdb1 /mnt/data
+sudo mount /dev/sdc1 /mnt/backup
+
+===== PAGE 21 =====
+— Commandes de base (1/2)
+
+pwd : affiche le chemin du dossier courant
+
+ls : liste les fichiers
+
+cd : change de répertoire
+
+cat, less, more : affichage du contenu
+
+===== PAGE 22 =====
+Commandes de base (2/2)
+
+cp, mv, rm, mkdir, rmdir
+
+Astuces :
+ls -l →permissions
+ls -a →fichiers cachés
+ls -lh →taille lisible
+
+===== PAGE 23 =====
+Recherche de fichiers
+
+find / -name fichier.txt
+
+locate motclé
+
+which / whereis pour les exécutables
+Attention aux droits root pour la recherche dans
+/
+
+===== PAGE 24 =====
+Chemins relatifs et absolus
+
+Absolu : commence toujours par /
+→ex : /home/user/documents/file.txt
+
+Relatif : basé sur le répertoire courant
+→ex : ../dossier/file.txt
+
+===== PAGE 25 =====
+Astuce pratique : navigation
+rapide
+
+cd - : revient au dossier précédent
+
+cd ~ : va au dossier personnel
+
+history : historique des commandes
+
+alias : créer des raccourcis de commande
+
+===== PAGE 26 =====
+Montage d’un système de fichiers
+1/6
+
+Principe du montage
+
+Un système de fichiers doit être monté avant
+utilisation
+
+Le montage connecte une partition à un répertoire
+(point de montage)
+Exemple : /dev/sdb1 →/mnt/usb
+
+===== PAGE 27 =====
+Montage d’un système de fichiers
+2/6
+
+Commandes de montage
+
+mount [options] /dev/sdX /mnt/dossier
+
+umount /mnt/dossier
+
+Vérifier le montage : df -h, lsblk, mount | grep /mnt
+Les utilisateurs non-root doivent avoir les droits
+nécessaires
+
+===== PAGE 28 =====
+Le fichier /etc/fstab 3/6
+
+Fichier de configuration pour les montages
+automatiques
+
+Format :
+
+/dev/sda1 /boot ext4 defaults 0 2
+
+UUID=xxxx /data ext4 defaults 0 0
+
+Avantage : montage automatique au démarrage
+
+===== PAGE 29 =====
+Exemple : Montage d’une clé USB
+4/6
+
+Étapes :
+
+Identifier le périphérique (lsblk)
+
+Créer un dossier /mnt/usb
+
+Monter la clé : mount /dev/sdb1 /mnt/usb
+
+Vérifier avec df -h
+
+Démonter : umount /mnt/usb
+
+===== PAGE 30 =====
+TP : Montage / Démontage
+manuel 5/6
+
+Objectif : Monter un disque ou une clé USB
+
+1. Identifier le périphérique
+
+2. Monter et vérifier
+
+3. Démonter
+
+4. Ajouter au fichier /etc/fstab
+
+===== PAGE 31 =====
+Récapitulatif de la séance 6/6
+
+Compréhension du FHS
+
+Commandes de navigation
+
+Montage et démontage
+
+Configuration automatique (/etc/fstab)
+
+===== PAGE 32 =====
+Mini Quiz
+
+1. Où se trouvent les fichiers de configuration
+système ?
+
+2. Quelle commande permet de vérifier les
+montages ?
+
+3. Différence entre /mnt et /media ?
+
+===== PAGE 33 =====
+Prochaine séance
+
+Maintenance d’un système de fichiers Linux
+• Partitionnement des disques
+• Création de FS
+• Vérification et maintenance
+• Introduction à LVM(Logical Volume Manager)
+Au lieu de travailler directement avec des partitions fixes
+(/dev/sda1, /dev/sda2…), LVM permet de créer des volumes
+logiques que tu peux redimensionner, déplacer ou regrouper
+sans tout reformater.

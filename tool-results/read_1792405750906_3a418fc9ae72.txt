@@ -1,0 +1,905 @@
+     1→
+     2→===== PAGE 1 =====
+     3→26/10/2025
+     4→1
+     5→Partie I
+     6→Proposé par Mr Samir Belaid
+     7→Année Universitaire 2025-26
+     8→Table des matières
+     9→1. Qu’est-ce que l’IoT ?
+    10→2. Historique et évolution
+    11→3. Composants clés de l’IoT
+    12→4. Applications concrètes
+    13→5. Défis et limites
+    14→6. Futur de l’IoT
+    15→Introduction à l’IoT (Internet of Things) 
+    16→Faculté des sciences de Monastir
+    17→Niveau LSI3
+    18→I. Définitions et Exemples
+    19→I.1 Définitions
+    20→o IoT: « Un réseau d’objets physiques connectés à Internet, capables de collecter, 
+    21→transmettre et analyser des données. »
+    22→o IoMT : « Désigne les dispositifs connectés utilisés pour surveiller, diagnostiquer 
+    23→ou traiter des patients à distance. »
+    24→o Améliorer les soins, réduire les 
+    25→coûts, personnaliser les traitements.
+    26→I.2 Objectifs
+    27→
+    28→===== PAGE 2 =====
+    29→26/10/2025
+    30→2
+    31→o 1999 : Kevin Ashton (MIT) invente le terme Internet of Things pour décrire la gestion 
+    32→de la chaîne logistique via RFID.
+    33→o Années 2000 : RFID et capteurs simples.
+    34→o 2008 : Premier pic avec 12 milliards d’objets connectés (dépassant la population 
+    35→mondiale).
+    36→o 2020s : Explosion des applications (santé, smart cities, industrie 4.0).
+    37→o Aujourd’hui : 50+ milliards d’objets connectés.
+    38→o Marché mondial estimé à 1 600 milliards de dollars d’ici fin 2026 (McKinsey).
+    39→o Marché de l’IoMT : 187 milliards de dollars d’ici 2030 (Source : Deloitte).
+    40→o 60 % des établissements de santé utilisent des solutions IoT (Source : HIMSS).
+    41→I.3 Historique et évolution
+    42→1. Dispositifs portables (Wearables)
+    43→o Smartwatches médicales :
+    44→Apple Watch Series 10 : Détection des arythmies cardiaques (ECG intégré) et suivi du 
+    45→taux d’oxygène dans le sang (SpO₂).
+    46→Fitbit Sense : Surveillance du stress via la variabilité du rythme cardiaque.
+    47→o Patchs connectés :
+    48→FreeStyle Libre (Abbott) : Mesure du glucose sanguin en continu pour les 
+    49→diabétiques, sans piqûre.
+    50→BioSticker (BioIntelliSense) : Suivi des signes vitaux (température, fréquence 
+    51→respiratoire) pendant 30 jours.
+    52→I.4 Exemples 
+    53→
+    54→===== PAGE 3 =====
+    55→26/10/2025
+    56→3
+    57→2. Implants médicaux connectés
+    58→o Stimulateurs cardiaques :
+    59→Medtronic MyCareLink : Transmet des données sur le fonctionnement du pacemaker 
+    60→au médecin via Bluetooth.
+    61→o Pompes à insuline intelligentes :
+    62→Tandem t:slim X2 : S’adapte automatiquement aux besoins en insuline en temps réel 
+    63→(intégration avec les capteurs Dexcom).
+    64→o Neurostimulateurs :
+    65→StimWave : Gère la douleur chronique via une application mobile.
+    66→I.4 Exemples 
+    67→3. Surveillance à distance des patients
+    68→o Plateformes de télésurveillance :
+    69→Philips eCareCoordinator : Surveille les patients atteints de BPCO ou d’insuffisance 
+    70→cardiaque à domicile.
+    71→BioTelemetry (GE Healthcare) : Suivi cardiaque via des capteurs ECG portables.
+    72→o Capteurs pour personnes âgées :
+    73→CarePredict : Détecte les chutes et les changements de comportement via des 
+    74→capteurs de mouvement et d’IA.
+    75→I.4 Exemples 
+    76→
+    77→===== PAGE 4 =====
+    78→26/10/2025
+    79→4
+    80→4. Télémédecine et consultation virtuelle
+    81→o Kits de diagnostic à domicile :
+    82→TytoCare : Stéthoscope, otoscope et thermomètre connectés pour des examens à 
+    83→distance.
+    84→o Plateformes intégrées :
+    85→Teladoc : Consultation vidéo avec partage de données de dispositifs IoMT (ex : 
+    86→tension artérielle).
+    87→5. Hôpitaux intelligents
+    88→o Lits connectés :
+    89→EarlySense : Capteurs sous le matelas pour surveiller la fréquence cardiaque, la 
+    90→respiration et les mouvements des patients..
+    91→o Gestion des stocks :
+    92→Siemens Healthineers : Capteurs IoT pour suivre les stocks de sang ou de vaccins en 
+    93→temps réel.
+    94→o Robots de désinfection :
+    95→Xenex LightStrike : Robot utilisant les UV pour désinfecter les chambres d’hôpital.
+    96→I.4 Exemples 
+    97→6. Applications d’urgence
+    98→o Détection des crises :
+    99→Embrace2 (Empatica) : Bracelet détectant les crises d’épilepsie via des capteurs de 
+   100→mouvement et de transpiration, et envoie une alerte.
+   101→o Réponse aux arrêts cardiaques :
+   102→HeartHero : Défibrillateur portable connecté guidant les secouristes via une appli.
+   103→7. Santé mentale et bien-être
+   104→o Dispositifs de neurofeedback :
+   105→Muse 2 : Bandeau mesurant l’activité cérébrale pour améliorer la méditation.
+   106→o Thérapie par réalité virtuelle :
+   107→AppliedVR : Traite la douleur chronique et l’anxiété via des séances de VR connectées.
+   108→I.4 Exemples 
+   109→
+   110→===== PAGE 5 =====
+   111→26/10/2025
+   112→5
+   113→II. Architecture Technique de l’IoT
+   114→• Définition :
+   115→o L’architecture IoT décrit l’organisation des composants matériels, logiciels et 
+   116→réseaux pour collecter, transmettre, traiter et exploiter les données.
+   117→• Objectifs :
+   118→o Fiabilité, évolutivité, sécurité, interopérabilité.
+   119→• Enjeux :
+   120→o Gérer l’hétérogénéité des dispositifs et le volume de données.
+   121→Mapping : Transposition du monde physique vers le monde d’informations
+   122→Y.2060(12)_F02
+   123→Identifier un objet physique dans le monde du système d’informations (objet virtuel).
+   124→
+   125→===== PAGE 6 =====
+   126→26/10/2025
+   127→6
+   128→Mapping
+   129→Visibilité des objets via l’Internet
+   130→Objets intelligents
+   131→Site Internet
+   132→Blogues
+   133→Réseaux sociaux
+   134→Cloud
+   135→Véhicules
+   136→−
+   137→Voitures de service
+   138→−
+   139→Gestion des foules
+   140→−
+   141→Bus, trains
+   142→−
+   143→Moyens et machines 
+   144→agricoles
+   145→Domotique
+   146→−
+   147→PC
+   148→−
+   149→IPTV
+   150→−
+   151→Téléphone intelligent
+   152→−
+   153→Lecteur audio/vidéo
+   154→−
+   155→Réfrigérateur
+   156→−
+   157→Machine à café
+   158→−
+   159→Fours-maison/ville 
+   160→intelligente
+   161→−
+   162→Université intelligente
+   163→WSN
+   164→Suivi
+   165→−
+   166→Objets
+   167→−
+   168→Régions
+   169→−
+   170→Zone & objets
+   171→Objets réels
+   172→Objets virtuels
+   173→Objets 
+   174→Web
+   175→WSN: Wireless Sensor Networks
+   176→La communication est possible en tout
+   177→LIEU et à tout MOMENT, mais aussi avec
+   178→n'importe quel OBJET (IoE)
+   179→IoE (Internet of Everything): Recommandation de l’UIT
+   180→Un Objet de Any thing vers l’Internet de Everything 
+   181→- en déplacement
+   182→- la nuit
+   183→- le jour
+   184→- en extérieur (outdoor)
+   185→- en intérieur (indoor)
+   186→– entre ordinateurs
+   187→– entre personnes, sans ordinateur
+   188→– entre objets
+   189→Communication
+   190→à tout MOMENT
+   191→Communication
+   192→en tout LIEU
+   193→Communication avec
+   194→n'importe quel OBJET IoE
+   195→CISCO 
+   196→
+   197→===== PAGE 7 =====
+   198→26/10/2025
+   199→7
+   200→Ecosystème TIC de l’IOT
+   201→P2P
+   202→M2P
+   203→M2M
+   204→Internet Of Things
+   205→• M2M (ou Device to device: D2D) fait référence à la connexion entre des
+   206→machines sans intervention humaine.
+   207→• M2P (Machine to People) désigne la connexion entre une machine et une
+   208→personne.
+   209→• P2P (Peer-to-Peer) ou système pair à pair est un modèle d'échange en réseau
+   210→où chaque entité est à la fois client et serveur.
+   211→L'IoT fait référence à l'ensemble M2M et M2P, qui comprend 
+   212→l'application, la connectivité backend, etc…
+   213→Caractéristiques des objets
+   214→1. Inter-connectivité : Tout peut être interconnecté avec une infrastructure mondiale
+   215→d'information et de communication.
+   216→2. Hétérogénéité : Les objets sont basés sur des plates-formes matérielles et des
+   217→réseaux différents. Ils peuvent interagir avec d'autres objets ou plates-formes de
+   218→services via différents réseaux.
+   219→3. Changement dynamique : l'état des objets change de manière dynamique, par
+   220→exemple, état de sommeil ou éveil, connecté et/ou déconnecté, ainsi que le
+   221→contexte des objets, y compris l'emplacement et la vitesse. De plus, le nombre
+   222→d’objets peut changer dynamiquement.
+   223→Source: Recommendation ITU-T Y.2060
+   224→
+   225→===== PAGE 8 =====
+   226→26/10/2025
+   227→8
+   228→Cloud+Application
+   229→II.1 Comment connecter un objet IoT?
+   230→Sous-parties d'un objet connecté
+   231→Empilement technologique de l’IOT
+   232→(+ de profondeur)
+   233→Capacités: incluent Capteurs, Actionneurs, Traitement, Contrôle, alimentation
+   234→Compromis de conception: Coût, Taille, Performances, Contraintes
+   235→1. Objets physiques
+   236→1. Appareil
+   237→électronique: 
+   238→(device)
+   239→Réseau réception, Passerelle 
+   240→Gateway, serveur
+   241→Réception données, 
+   242→Traitement, Stockage
+   243→Capteurs et actionneurs, 
+   244→Traitement, Sauvegarde
+   245→Affichage des données, 
+   246→prise de contrôle
+   247→2. Internet: qui permet la 
+   248→transaction des données
+   249→3. Cloud : là où on 
+   250→reçoit les données
+   251→4. Application : là où on 
+   252→a le tableau de bord 
+   253→(dashboard)
+   254→Empilement technologique de l’IOT (suite)
+   255→3. Logiciel (Traite, stocke et analyse des données): Permet d'interagir avec le système IoT
+   256→et de visualiser des données
+   257→4. Opérations (Combiné à des ressources de développement et de sécurité): Essentielle 
+   258→au déploiement et à la maintenance d'un système IoT; l'accessibilité de l'infrastructure 
+   259→Cloud fournit une fonction DevOps
+   260→5. Données: Les données sont un sous-produit du système IoT
+   261→2. Canaux de communication (Protocoles et solutions de connectivité): Pour un transfert 
+   262→de données d'objet à objet, objet à serveur ou serveur à serveur
+   263→Cloud+Application
+   264→
+   265→===== PAGE 9 =====
+   266→26/10/2025
+   267→9
+   268→DATA (Pour ce faire de l’argent)
+   269→• L’IoT est le futur eldorado des acteurs de l’IT. Smart grid, domotique, santé connectée, 
+   270→industrie 4.0, logistique, urbanisme, agriculture, défense
+   271→• Les grands acteurs IT (IBM, Microsoft, HPE, SAP et AWS) profitent de l’explosion des objets 
+   272→connectés pour apporter leur savoir-faire et leurs solutions.
+   273→• La DATA peut être utilisée et vendue par les entreprises qui conçoivent ces objets 
+   274→connectés.
+   275→Données sensible / Collecte interdite (par principe)
+   276→!
+   277→Etat de 
+   278→santé
+   279→Données
+   280→génétiques
+   281→Données
+   282→biométriques
+   283→Origine raciale 
+   284→ou éthique
+   285→Convictions
+   286→religieuses ou
+   287→philosophiques
+   288→Opinions
+   289→politiques
+   290→Condamnations
+   291→pénales et 
+   292→infractions
+   293→Orientations
+   294→sexuelles
+   295→Opinions
+   296→syndicales
+   297→Un objet IoT embarqué se compose de plusieurs composants, notamment:
+   298→(i)
+   299→un processeur intégré,
+   300→(ii)
+   301→des capteurs ou l'acquisition de données,
+   302→(iii) une radio sans fil comme Bluetooth.
+   303→Composition d’un objet physique
+   304→AFE: Analogue 
+   305→Front End
+   306→
+   307→===== PAGE 10 =====
+   308→26/10/2025
+   309→10
+   310→• Capteurs d'environnement
+   311→• Capteurs de mouvement
+   312→• Nécessitant une interaction humaines
+   313→• autres
+   314→Exemple de capteurs
+   315→Nécessitant une 
+   316→interaction 
+   317→humaines
+   318→Capteurs de 
+   319→mouvement
+   320→Capteurs 
+   321→d'environn
+   322→ement
+   323→• Couche Perception/Collecte 
+   324→d'informations  (Capteurs/actionneurs).
+   325→• Couche Réseau (Communication).
+   326→• Couche Middleware/couche traitement: 
+   327→Stocke, traite des données et fournit des 
+   328→services aux couches inférieures (bases de 
+   329→données, cloud computing traitement Big 
+   330→data).
+   331→• Couche Application (Services métiers).
+   332→• Couche Business (Analyse et décision) 
+   333→Gère l'ensemble du système IoT, y compris 
+   334→les applications, les modèles commerciaux 
+   335→/ profit, et confidentialité des utilisateurs.
+   336→II.2 Architecture IoT à 5 couches
+   337→
+   338→===== PAGE 11 =====
+   339→26/10/2025
+   340→11
+   341→II.2 Architecture IoT à 5 couches
+   342→1. Couche Perception (Physical Layer)
+   343→• Rôle : Collecter des données physiques (température, mouvement, etc.).
+   344→• Composants :
+   345→o Capteurs (ex : DHT22, capteur de CO₂).
+   346→o Actionneurs (ex : moteurs, LED).
+   347→o RFID/NFC pour l’identification.
+   348→• Exemple : Capteur de 
+   349→température envoyant des 
+   350→données via Bluetooth.
+   351→II.2 Architecture IoT à 5 couches
+   352→2. Couche Réseau (Transport Layer)
+   353→• Rôle : Transmettre les données vers le cloud ou l’edge.
+   354→• Protocoles:
+   355→o Courtes distances : BLE, Zigbee, LoRa.
+   356→o Longues distances : LoRaWAN, NB-IoT, 5G.
+   357→• Passerelles
+   358→o Agrégation des données (ex : Raspberry Pi comme gateway).
+   359→
+   360→===== PAGE 12 =====
+   361→26/10/2025
+   362→12
+   363→II.2 Architecture IoT à 5 couches
+   364→3. Couche Middleware (Traitement)
+   365→• Rôle : Stockage, traitement, et préparation des données.
+   366→• Composants:
+   367→o Edge Computing : Traitement local (ex : NVIDIA Jetson).
+   368→o Cloud : AWS IoT, Azure IoT Hub.
+   369→o Bases de données : MongoDB, InfluxDB.
+   370→• Fonctions
+   371→o Filtrage, agrégation, 
+   372→chiffrement.
+   373→II.2 Architecture IoT à 5 couches
+   374→4. Couche Application (Services)
+   375→• Rôle : Fournir des services métiers aux utilisateurs.
+   376→• Exemples:
+   377→Dashboard IoT de ThingsBoard
+   378→o Dashboard de surveillance (ex : Grafana).
+   379→o Alertes en temps réel (ex : notification SMS en cas d’incendie).
+   380→o Automatisation (ex : irrigation intelligente)
+   381→
+   382→===== PAGE 13 =====
+   383→26/10/2025
+   384→13
+   385→II.2 Architecture IoT à 5 couches
+   386→5. Couche Business (Analyse)
+   387→• Rôle : Analyse avancée et prise de décision.
+   388→• Outils:
+   389→• KPIs :
+   390→o Big Data : Hadoop, Spark.
+   391→o IA/ML : Prédictions (ex : maintenance prédictive).
+   392→o Réduction des coûts, amélioration de l’efficacité
+   393→II.3 Architecture de référence (Schéma global)
+   394→
+   395→===== PAGE 14 =====
+   396→26/10/2025
+   397→14
+   398→II.4 Sécurité dans l’architecture IoT
+   399→• Risques :
+   400→o Piratage des capteurs, interception des données.
+   401→• Solutions:
+   402→o Chiffrement (TLS/SSL), authentification (MQTT avec 
+   403→login/password).
+   404→o Mises à jour OTA (Over-The-Air).
+   405→• Normes :
+   406→o ISO/IEC 27001, GDPR.
+   407→III. Questions à poser pour choisir une plateforme IOT
+   408→• Caractéristiques générales d’une plateforme pour l’IoT
+   409→Interaction
+   410→Capteur
+   411→Actionneur
+   412→Traitement local 
+   413→des données 
+   414→Energie
+   415→Protocole
+   416→Communication
+   417→Transmission
+   418→Réseau 
+   419→informatique
+   420→Monde 
+   421→physique
+   422→• Ce qu’il faut se demander pour bien choisir la plateforme technologique :
+   423→– Dans quel environnement l’objet évoluera-t-il ? (Espace urbain, sous-terrain, rural, indoor ou outdoor-
+   424→actionneurs)
+   425→– À quelle distance l’objet sera-t-il du point relais le plus proche (exemple: smartphone, antenne-relais, 
+   426→passerelle WiFi) ?
+   427→– À quelle fréquence ces données seront envoyées ? (quelques envois, plusieurs centaines ou plus)
+   428→– Quel est le délai maximum toléré pour transmettre une donnée du Système d’Information à l’objet ?
+   429→– Est-ce qu’il s’agit d’un objet mobile ou fixe ?
+   430→– Souhaitez-vous géolocaliser votre objet ? Si oui, quelle est la précision tolérée en mètres ?
+   431→– Quel type de source d’énergie alimente votre objet ? (secteur, batterie ou pile)
+   432→– Si l’objet doit avoir une source d’énergie limitée, combien de temps doit-elle durer ?
+   433→– …
+   434→
+   435→===== PAGE 15 =====
+   436→26/10/2025
+   437→15
+   438→Révolution des systèmes embarqués à faible coût,
+   439→Deux approches majeures :
+   440→• Systèmes construits autour d’un OS embarqué (RASPBERRY PI, BEAGLEBONE, et 
+   441→plateformes similaires)
+   442→– Avantages : ouverts, puissants, langages de programmation multiples,
+   443→– Inconvénients : parfois complexes à mettre en œuvre, prise en main longue, réactivité 
+   444→moyenne, coût relativement élevé, interfaçage plus difficile.
+   445→• Systèmes dédiés compacts à logiciel propriétaire (ARDUINO, GENUINO, INTEL 
+   446→GALILEO, ESP8266 etc.)
+   447→– Avantages : Très réactifs, faible coût, fonctionnement plus robuste (pas de couches logicielles), 
+   448→interfaçage aisé, prise en main très rapide.
+   449→– Inconvénients : moins puissants, langages de programmation plus limités, moins flexibles sur le 
+   450→plan logiciel.
+   451→III. Questions à poser pour choisir une plateforme IOT
+   452→IV. Protocoles de Communication
+   453→IV.1 Définition
+   454→Les protocoles de communication IoT sont des règles et standards permettant aux 
+   455→dispositifs (capteurs, actionneurs, passerelles, etc.) d’échanger des données de manière 
+   456→fiable et sécurisée, malgré des contraintes de ressources (énergie, bande passante, 
+   457→puissance de calcul).
+   458→Enjeux
+   459→• Faible consommation d’énergie (ex : capteurs sur batterie).
+   460→• Latence réduite (temps réel).
+   461→• Fiabilité dans des environnements perturbés.
+   462→• Sécurité des données (chiffrement, authentification).
+   463→
+   464→===== PAGE 16 =====
+   465→26/10/2025
+   466→16
+   467→IV.2 Catégories de protocoles IoT
+   468→o Protocoles de couche application (gestion des données) :
+   469→MQTT, CoAP, HTTP/HTTPS, AMQP.
+   470→o Protocoles de couche réseau (connectivité) :
+   471→LoRaWAN, Zigbee, NB-IoT, Wi-Fi HaLow, Sigfox, Bluetooth Low Energy (BLE).
+   472→1. MQTT (Message Queuing Telemetry Transport)
+   473→• Fonctionnement :
+   474→o Basé sur un modèle publish/subscribe avec un broker central.
+   475→o Utilise TCP/IP pour une transmission fiable.
+   476→• Cas d’usage :
+   477→o Surveillance médicale, industrielle, domotique, systèmes avec connexion 
+   478→intermittente.
+   479→• Avantages :
+   480→o Léger, idéal pour les réseaux à faible bande passante.
+   481→o Supporte les appareils embarqués.
+   482→• Inconvénients :
+   483→o Dépendance au broker (point unique de défaillance).
+   484→IV.3 Protocoles de couche application
+   485→
+   486→===== PAGE 17 =====
+   487→26/10/2025
+   488→17
+   489→2. CoAP (Constrained Application Protocol)
+   490→• Fonctionnement :
+   491→o Inspiré de HTTP, mais optimisé pour les appareils contraints.
+   492→o Utilise UDP pour réduire la surcharge.
+   493→• Cas d’usage :
+   494→o Capteurs IoT avec ressources limitées (ex : smart lighting, agriculture).
+   495→• Avantages :
+   496→o Léger, compatible avec 
+   497→RESTful APIs.
+   498→o Supporte le multicast.
+   499→• Inconvénients :
+   500→o Moins fiable que MQTT (pas 
+   501→de garantie de livraison).
+   502→IV.3 Protocoles de couche application
+   503→3. HTTP/HTTPS
+   504→• Fonctionnement :
+   505→o Standard web, basé sur le modèle client-serveur.
+   506→o Utilise TCP/IP (HTTP) ou TLS (HTTPS) pour la sécurité.
+   507→• Cas d’usage :
+   508→o IoT grand public (ex : applications mobiles connectées à des objets).
+   509→• Avantages :
+   510→o Universel, facile à intégrer avec les infrastructures existantes.
+   511→• Inconvénients :
+   512→o Lourd en consommation de ressources.
+   513→IV.3 Protocoles de couche application
+   514→
+   515→===== PAGE 18 =====
+   516→26/10/2025
+   517→18
+   518→1. LoRaWAN (Long Range Wide Area Network)
+   519→• Fonctionnement :
+   520→o Utilise des ondes radio sub-GHz pour une longue portée (jusqu’à 15 km en zone rurale).
+   521→o Architecture en étoile avec des passerelles.
+   522→• Cas d’usage :
+   523→o Smart cities, suivi de flottes, agriculture.
+   524→• Avantages :
+   525→o Faible consommation, longue portée.
+   526→o Idéal pour les déploiements massifs.
+   527→• Inconvénients :
+   528→o Débit limité (0,3 à 50 kbps).
+   529→IV.4 Protocoles de couche réseau
+   530→2. Zigbee
+   531→• Fonctionnement :
+   532→o Basé sur le standard IEEE 802.15.4.
+   533→o Réseau maillé (mesh) auto-organisé.
+   534→• Cas d’usage :
+   535→o Domotique, automatisation industrielle.
+   536→• Avantages :
+   537→o Faible latence, réseau robuste (redondance via le mesh).
+   538→• Inconvénients :
+   539→o Portée limitée (10-100 mètres).
+   540→IV.4 Protocoles de couche réseau
+   541→
+   542→===== PAGE 19 =====
+   543→26/10/2025
+   544→19
+   545→• Cas d’usage :
+   546→o Wearables, santé connectée, beacons.
+   547→• Avantages :
+   548→o Compatibilité avec les smartphones.
+   549→o Énergétiquement efficace.
+   550→• Inconvénients :
+   551→o Portée très courte (jusqu’à 100 mètres en théorie, souvent moins).
+   552→IV.4 Protocoles de couche réseau
+   553→3. Bluetooth Low Energy (BLE)
+   554→• Fonctionnement :
+   555→o Optimisé pour une 
+   556→consommation ultra-faible.
+   557→o Communication en peer-
+   558→to-peer ou en étoile.
+   559→Protocole
+   560→Portée
+   561→Débit
+   562→Consommation
+   563→Cas d’usage
+   564→MQTT
+   565→Illimitée (IP)
+   566→Variable
+   567→Modérée
+   568→Médecine, Industrie, domotique
+   569→CoAP
+   570→Illimitée (IP)
+   571→Faible
+   572→Faible
+   573→Capteurs contraint
+   574→LoRaWAN
+   575→15 km
+   576→0.3-50 kbps
+   577→Très faible
+   578→Smart cities
+   579→Zigbee
+   580→10-100 m
+   581→250 kbps
+   582→Faible
+   583→Domotique
+   584→BLE
+   585→10-100 m
+   586→1-2 Mbps
+   587→Très faible
+   588→Wearables
+   589→IV.6 Sécurité des protocoles IoT
+   590→• Risques :
+   591→o Écoute passive (sniffing).
+   592→o Attaques par déni de service (DDoS).
+   593→o Failles de chiffrement.
+   594→• Solutions :
+   595→o Chiffrement de bout en bout (TLS/DTLS pour MQTT/CoAP).
+   596→o Authentification des dispositifs (certificats X.509).
+   597→o Mises à jour régulières des firmware.
+   598→IV.5 Comparaison des protocoles
+   599→
+   600→===== PAGE 20 =====
+   601→26/10/2025
+   602→20
+   603→V. Topologies de réseaux IoT médicaux
+   604→Définition
+   605→• Les réseaux IoMT relient des dispositifs médicaux (capteurs, implants, équipements 
+   606→hospitaliers) pour collecter, transmettre et analyser des données de santé en temps réel.
+   607→Enjeux
+   608→• Sécurité : Protection des données sensibles (RGPD, HIPAA).
+   609→• Fiabilité : Aucune tolérance aux pannes dans les applications critiques (ex : pacemakers).
+   610→• Latence ultra-faible : Nécessaire pour la télémédecine ou la chirurgie assistée.
+   611→Exemples
+   612→• Surveillance cardiaque à distance.
+   613→• Pompes à insuline connectées.
+   614→• Hôpitaux intelligents (lits connectés, gestion des stocks de médicaments).
+   615→V.1 Topologies de réseaux adaptées à l’IoMT
+   616→A. Topologie en Étoile (Star)
+   617→Description
+   618→• Tous les dispositifs médicaux se connectent à un nœud central (passerelle, serveur 
+   619→hospitalier).
+   620→Cas d’usage
+   621→• Surveillance centralisée des patients dans une chambre d’hôpital.
+   622→• Dispositifs portables (ex : glucomètre connecté à un smartphone).
+   623→Avantages
+   624→• Simplicité de gestion.
+   625→• Faible latence pour la transmission directe.
+   626→Inconvénients
+   627→• Dépendance à la passerelle centrale (risque de panne critique).
+   628→Protocoles
+   629→• Bluetooth Low Energy (BLE) pour les wearables.
+   630→• Wi-Fi pour les équipements fixes.
+   631→
+   632→===== PAGE 21 =====
+   633→26/10/2025
+   634→21
+   635→V.1 Topologies de réseaux adaptées à l’IoMT
+   636→B. Topologie en Maillage (Mesh)
+   637→Description
+   638→• Les dispositifs communiquent entre eux pour assurer la redondance.
+   639→Cas d’usage
+   640→• Bloc opératoire intelligent : Communication entre capteurs de signes vitaux, robots 
+   641→chirurgicaux et moniteurs.
+   642→• Réseaux de capteurs corporels (BAN) : Patchs connectés sur un patient communiquant 
+   643→entre eux.
+   644→Avantages
+   645→• Tolérance aux pannes (pas de point unique de défaillance).
+   646→• Couverture étendue dans un hôpital.
+   647→Inconvénients
+   648→• Consommation énergétique élevée (problématique pour les implants).
+   649→Protocoles
+   650→• Zigbee ou Thread pour les réseaux corporels.
+   651→• WirelessHART pour l’industrie médicale.
+   652→V.1 Topologies de réseaux adaptées à l’IoMT
+   653→C. Topologie Hybride (Étoile + Maillage)
+   654→Description
+   655→• Combinaison de sous-réseaux en étoile (ex : salles d’hôpital) et d’une dorsale maillée.
+   656→Cas d’usage
+   657→• Hôpital intelligent : Capteurs en étoile dans chaque chambre → Passerelles 
+   658→connectées en maillage.
+   659→• Télémédecine rurale : Capteurs en étoile dans un village → Relais maillés pour 
+   660→atteindre l’hôpital.
+   661→Avantages
+   662→• Équilibre entre simplicité et redondance.
+   663→Inconvénients
+   664→• Complexité de configuration et de gestion, Maintenance difficile.
+   665→• Coût élevé, Consommation énergétique accrue, Latence variable.
+   666→Protocoles
+   667→• LoRaWAN pour la dorsale longue portée.
+   668→• MQTT pour l’échange de données vers le cloud.
+   669→
+   670→===== PAGE 22 =====
+   671→26/10/2025
+   672→22
+   673→V.1 Topologies de réseaux adaptées à l’IoMT
+   674→D. Topologie en Bus (Modbus/CAN)
+   675→Description
+   676→• Dispositifs connectés sur un bus de communication partagé.
+   677→Cas d’usage
+   678→• Équipements fixes : Analyseurs de sang connectés en laboratoire.
+   679→• Ambulances intelligentes : Réseau CAN pour relier les capteurs de vie au système de 
+   680→communication.
+   681→Avantages
+   682→• Câblage simplifié.
+   683→Inconvénients
+   684→• Risque de collision de données (inadapté aux applications critiques).
+   685→V.2 Études de cas concrets
+   686→A. Réseau Maillé pour la Surveillance Post-opératoire
+   687→• Topologie : Maillage avec capteurs sans fil (ECG, SpO₂, pression artérielle).
+   688→• Protocoles : Zigbee + TLS pour le chiffrement.
+   689→• Résultat : Réduction de 30 % des complications grâce à des alertes en temps réel.
+   690→B. Réseau en Étoile pour les Dispositifs Implantables
+   691→• Dispositif : Pacemaker connecté (Medtronic).
+   692→• Topologie : Communication en étoile vers une passerelle portable.
+   693→• Sécurité : Chiffrement AES-256 pour éviter les piratages.
+   694→VI. Protocoles de communication série pour périphériques     
+   695→(UART, SPI, I2C, 1-Wire et CAN)
+   696→VI.1 Définitions
+   697→• Communication série vs parallèle :
+   698→o Série : Transmission bit par bit sur un seul fil (ex : UART).
+   699→o Parallèle : Transmission simultanée sur plusieurs fils (ex : bus PCI).
+   700→• Avantages de la communication série :
+   701→o Coût réduit, simplicité de câblage, adaptée aux longues distances.
+   702→
+   703→===== PAGE 23 =====
+   704→26/10/2025
+   705→23
+   706→VI.2 Protocoles asynchrones (sans horloge)
+   707→UART (Universal Asynchronous Receiver/Transmitter)
+   708→• Principe 
+   709→o Asynchrone : Pas de signal d’horloge partagé.
+   710→o Trame : Bit de start (0), données (5-9 bits), bit de parité (optionnel), bits de stop (1).
+   711→o Baud rate : Vitesse de transmission (ex : 9600, 115200 bauds).
+   712→• Utilisation: Communication entre microcontrôleurs, modules GPS, Bluetooth.
+   713→• Avantages : Simple, universel.
+   714→• Inconvénients : Pas de détection d’erreur (sans parité), distance limitée.
+   715→RS-232 : Standard industriel pour UART (niveaux de tension ±3 à ±15V).
+   716→RS-485 : Communication différentielle pour longues distances (jusqu’à 1200m).
+   717→VI.3 Protocoles synchrones (avec horloge)
+   718→1. SPI (Serial Peripheral Interface)
+   719→• Principe 
+   720→o Synchrone : Horloge partagée (SCK).
+   721→o Périphérique maître/esclave : Fils : MOSI (Master Out Slave In), MISO (Master In 
+   722→Slave Out), SS (Slave Select).
+   723→o Mode de communication : Full-duplex (données bidirectionnelles simultanées).
+   724→• Utilisation:
+   725→o Mémoires (EEPROM, Flash), écrans LCD, capteurs haute vitesse.
+   726→• Avantages : Débit élevé (jusqu’à 100 Mbps), flexible.
+   727→• Inconvénients : Nombreux fils (4 minimum), pas de gestion native des erreurs.
+   728→
+   729→===== PAGE 24 =====
+   730→26/10/2025
+   731→24
+   732→VI.3 Protocoles synchrones (avec horloge)
+   733→2. I2C (Inter-Integrated Circuit)
+   734→• Principe 
+   735→o Synchrone : Horloge partagée (SCL) et données bidirectionnelles (SDA).
+   736→o Adressage : 7 ou 10 bits pour identifier les esclaves.
+   737→o Structure de trame : Start bit → adresse esclave → données → stop bit.
+   738→• Utilisation:
+   739→o Capteurs (température, pression), RTC (Real-Time Clock).
+   740→• Avantages : 2 fils seulement et multi-esclaves.
+   741→• Inconvénients : Débit modéré (400 kHz en standard, 5 MHz en Ultra Fast Mode).
+   742→Résistance: Améliore l’impédance et donc la longueur de la ligne
+   743→VI.4 Protocoles spécialisés
+   744→1. 1-Wire
+   745→• Principe 
+   746→o Single-wire : Communication + alimentation sur un seul fil (DQ).
+   747→o Adressage unique : Chaque périphérique a une ROM ID 64 bits.
+   748→• Utilisation:
+   749→o Capteurs Dallas (DS18B20), systèmes de sécurité.
+   750→• Avantages : Câblage minimal, idéal pour les réseaux de capteurs.
+   751→• Inconvénients : Débit très lent (15 kbps), complexité logicielle.
+   752→
+   753→===== PAGE 25 =====
+   754→26/10/2025
+   755→25
+   756→VI.4 Protocoles spécialisés
+   757→2. CAN (Controller Area Network)
+   758→• Principe 
+   759→o Réseau différentiel (CAN_H et CAN_L) pour environnements bruyants.
+   760→o Gestion des collisions : Priorité des messages par ID.
+   761→• Utilisation: Automobile, industrie (automates).
+   762→• Avantages : Robustesse, tolérance aux pannes.
+   763→• Inconvénients : Complexité matérielle.
+   764→VI.5 Comparaison des protocoles
+   765→Tableau récapitulatif
+   766→Protocole
+   767→Vitesse
+   768→Fils
+   769→Topologie
+   770→Applications
+   771→UART
+   772→9600– 4 Mbps
+   773→2 (TX/RX)
+   774→Point-à-point
+   775→Modules sans fil
+   776→SPI
+   777→1 – 100 Mbps
+   778→4+
+   779→Maître/esclave
+   780→Mémoires, écrans
+   781→I2C
+   782→1 – 10 Mbps
+   783→2
+   784→Bus
+   785→Capteurs, RTC
+   786→1-Wire
+   787→15 kbps
+   788→1
+   789→Bus
+   790→Capteurs Dallas
+   791→CAN
+   792→1 Mbps
+   793→2
+   794→Bus
+   795→Automobile, industrie
+   796→RTC: Réseau Téléphonique Commuté
+   797→void setup() {
+   798→Serial.begin(9600);
+   799→//Initialisation UART à 
+   800→9600 bauds
+   801→}
+   802→void loop() {
+   803→Serial.println("Hello, 
+   804→World!");
+   805→delay(1000);
+   806→}
+   807→IV.6 Exemples pratiques
+   808→• Communication UART 
+   809→avec Arduino
+   810→Choix du protocole : Dépend du débit, du nombre de périphériques et de l’environnement.
+   811→OLED128X64
+   812→MAX30102
+   813→
+   814→===== PAGE 26 =====
+   815→26/10/2025
+   816→26
+   817→include <Wire.h>
+   818→#include <Adafruit_BME280.h>
+   819→Adafruit_BME280 bme;
+   820→void setup() {
+   821→Wire.begin(); //Initialisation I2C 
+   822→bme.begin(0x76);
+   823→}
+   824→void loop() {
+   825→float temp =
+   826→bme.readTemperature();
+   827→delay(1000);
+   828→}
+   829→VI.6 Exemples pratiques
+   830→• Lecture d’un capteur I2C 
+   831→(BME280)
+   832→Code Arduino
+   833→VI.7 Bonnes pratiques et erreurs courantes
+   834→Conseils
+   835→UART : Vérifier le baud rate et les bits de stop/parité.
+   836→SPI : Configurer le mode (CPOL/CPHA) correctement.
+   837→I2C : Ajouter des résistances de pull-up (4.7 kΩ sur SDA/SCL).
+   838→1-Wire : Utiliser des bibliothèques dédiées (ex : OneWire).
+   839→Problèmes courants
+   840→Données corrompues : Bruit électrique (utiliser des câbles blindés).
+   841→Périphérique non détecté : Adresse I2C incorrecte (scanner avec i2cdetect).
+   842→• Réseau CAN dans une voiture pour 
+   843→connecter le moteur, l’ABS, et l’ECU.
+   844→VII. Application: Bracelet médical connecté
+   845→According to ESP32 pinout, the SCL pin is D22 and the SDA is D21.
+   846→As you can see in the picture, the connections are:
+   847→ESP32 D22 ----> MAX30100 SCL
+   848→ESP32 D21 ----> MAX30100 SDA
+   849→ESP32 GND ----> MAX30100 GND
+   850→ESP32 3.3V -----> MAX30100 VIN
+   851→OLED VDD -----> ESP32 3.3V
+   852→OLED GND -----> ESP32 GND
+   853→OLED SCL -----> ESP32 D22
+   854→OLED SDA ----> ESP D21
+   855→https://www.instructables.com/Heart-Rate-and-Blood-Oxygen-Level-With-Arduino-IDE/
+   856→
+   857→===== PAGE 27 =====
+   858→26/10/2025
+   859→27
+   860→Saisir d’un texte via un écran OLED SD 1306 
+   861→Les majuscules
+   862→Les caractères spéciaux 
+   863→et les numériques
+   864→Validation, il est possible ici d'effacer 
+   865→le dernier caractère d'effacer la 
+   866→totalité de la saisie en cours de 
+   867→valider ou d'annuler la selection.
+   868→•
+   869→Les 10 broches qui peuvent être utilisées pour détecter un contact avec le doigt 
+   870→sont:GPIO 0, GPIO 2, GPIO 4, GPIO 12, GPIO 13, GPIO 14, GPIO 15, GPIO 27, 
+   871→GPIO 32 et GPIO 33.
+   872→•
+   873→Remarque: Pour lire l'état de la broche GPIO 32, par exemple, on pourra écrire 
+   874→touchRead(32) ou touchRead(T9), avec le même résultat.
+   875→
+   876→===== PAGE 28 =====
+   877→26/10/2025
+   878→28
+   879→VIII. Futur et Tendances
+   880→• Nanorobots connectés : Administration ciblée de médicaments.
+   881→• IA prédictive : Anticipation des crises d’épilepsie.
+   882→• Réalité augmentée : Chirurgie assistée par IoT (ex : Google Glass).
+   883→• Blockchain : Sécurisation des dossiers médicaux.
+   884→• 5G/6G : Latence ultra-faible.
+   885→• Edge Computing : Traitement local.
+   886→• IA intégrée : Analyse en temps réel.
+   887→L’IoMT révolutionne la médecine (prévention, précision, accessibilité).
+   888→"L’IoT médical ne remplace pas les médecins, mais 
+   889→leur donne des super-pouvoirs."
+   890→IX. Synthèse
+   891→• Avantages : Efficacité, automatisation, données en temps réel.
+   892→• Risques : Sécurité, dépendance technologique, impact environnemental.
+   893→• Quote : "L’IoT n’est pas une technologie, mais un écosystème." (Kevin Ashton).
+   894→X. Ressources Pédagogiques Supplémentaires
+   895→• Simulateurs IoT :
+   896→o Plateformes : Arduino IoT Cloud, Node-RED.
+   897→• Documentaires : "Lo and Behold" (R. Herzog) sur la révolution numérique.
+   898→• Livres : 
+   899→"The Fourth Industrial Revolution" (Klaus Schwab).
+   900→"Making Embedded Systems" (Elecia White).
+   901→"Healthcare 4.0" (Dr. John Smith), "IoT in Medicine" (Dr. Laura Green).
+   902→• Études : 
+   903→WHO, Deloitte, Journal of Medical IoT.
+   904→• Sites : FDA, sites fabricants (Medtronic, Abbott).
+   905→

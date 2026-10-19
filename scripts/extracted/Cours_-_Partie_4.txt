@@ -1,0 +1,720 @@
+
+===== PAGE 1 =====
+Containerisation
+
+===== PAGE 2 =====
+Containerisation
+Evolution de l’infrastructure
+168
+
+===== PAGE 3 =====
+C’est quoi un conteneur?
+169
+Conteneurisation
+Enveloppe permettant de packager une application avec juste
+ce dont elle a besoin pour fonctionner
+Peut être déployé tel quel dans n'importe quelle machine
+disposant d'un Container Engine avec différents environnement
+(Dev, Test, Prod)
+Utilise le Kernel de l'OS Hôte
+A son propre espace de processus et sa propre interface
+réseau
+Isolé de l'hôte, mais exécutée directement dessus.
+Permet de décomposer l'infrastructure applicative en petits
+éléments légers facile à déployer et à réutiliser
+
+===== PAGE 4 =====
+Avantages du conteneur
+170
+Conteneurisation
+Meilleures
+performances
+que
+les
+VM
+(Démarrage
+instantané )
+Portabilité d'un environnement à l'autre (Multicloud)
+Cohérence entre les environnements Dev, test et prod
+Permet de modulariser facilement l'application
+Gérer l'héritage technique (Ancienne application) grâce
+à l'isolation
+
+===== PAGE 5 =====
+Conteneurs vs Machine Virtuelles
+171
+Conteneurisation
+Machine Virtuelle:
+Permet de virtualiser une machine physique
+Chaque VM a son propre OS
+Une
+VM
+consomme
+beaucoup
+de
+ressources (CPU, Stockage) et prend assez
+de temps pour
+booter (qq minutes).
+Conteneur:
+Permet
+de
+créer
+un
+environnement
+d'exécution des applications
+Les conteneurs utilisent le même OS
+Tous
+les
+conteneurs
+utilisent
+le
+même
+kernel
+OS
+(Linux),
+consomme
+peu
+de
+ressources, boot rapide (qq secondes)
+
+===== PAGE 6 =====
+Utiliser des conteneurs dans des machine virtuelles
+172
+Conteneurisation
+Les
+container
+engine ne viennent pas
+pour
+remplacer les machines virtuelles.
+Dans la pratique on utilise les deux:
+Les machines virtuelles pour virtualiser les
+machines
+Utiliser un container engine tel que Docker
+pour isoler les environnements d'exécution
+des
+applications
+dans
+des
+machines
+virtuelles.
+Ceci pour tirer le bénéfice des deux technologies
+
+===== PAGE 7 =====
+Historique
+173
+Conteneurisation
+Conteneur = unité de transport intermodal
+Virtualisation de processus :
+UNIX chroot (1979-1982)
+BSD Jail (1998)
+Parallels Virtuozzo (2001)
+Solaris Containers (2005)
+Linux LXC (2008)
+Docker (2013) (basé sur LXC)
+
+===== PAGE 8 =====
+C’est quoi docker?
+174
+Conteneurisation avec Docker
+Docker permet de créer des environnements (appelées containers) de
+manière à isoler des applications.
+Il
+permet
+d'empaqueter
+une
+application
+ainsi
+que
+les
+dépendances
+nécessaires dans un conteneur virtuel isolé qui pourra être exécuté sur
+n'importe quelle machine supportant docker.
+Docker est un logiciel libre qui permet le déploiement d'applications sous la
+forme de conteneurs logiciels.
+L'origine de docker est :
+Au départ, société française et maintenant basée à San Francisco.
+dotCloud : un PaaS avec un container engine écrit en Python
+En 2012 : Réécriture le langage Go.
+En 2013, Première version Open source de docker
+Réaction très positive de la communauté
+dotCloud change de nom pour Docker.
+En 2014, Levée de fonds : 40 millions $
+En 2015, Levée de fonds : 95 millions $
+
+===== PAGE 9 =====
+Problèmes de déploiement des applications
+175
+Conteneurisation avec Docker
+Pour une application utilisant différentes technologies
+(services),
+des problèmes
+sont
+posés
+au
+moment
+du
+déploiement en production:
+Compatibilité des applications avec les OS
+Installer les dépendances et les librairies requises
+avec les bonnes versions pour chaque service.
+Installer les différents environnements :
+Dev
+Test
+Prod
+Ce qui prend beaucoup de temps pour déployer les
+applications.
+Avec
+des
+conflits
+entres
+les
+développeurs
+et
+les
+opérationnels (Administrateurs systèmes)
+
+===== PAGE 10 =====
+Problèmes de déploiement des applications
+176
+Conteneurisation avec Docker
+Solution: conteneurs d’applications
+Embarquer les applications dans des conteneurs
+Exécuter
+chaque
+service
+avec
+ses
+propres
+dépendances dans des conteneurs séparées
+
+===== PAGE 11 =====
+Architecture globale de docker
+177
+Conteneurisation avec Docker
+Le développeur crée un fichier Dockerfile contenant les commandes que
+docker va exécuter pour construire une image docker de cette application.
+$ docker build
+L'image docker contient tout ce dont l'application a besoin pour s'exécuter
+correctement.
+Les images Docker peuvent être publiées dans un registre public (Docker
+hub) ou privé.
+$ docker push image_name
+Pour télécharger une image docker d'une application dans un Host Docker,
+il suffit d'utiliser:
+$ docker pull image_name
+La création et l'exécution d'un conteneur d’une application se fait par
+instanciation et exécution de l'image en utilisant :
+$ docker run image_name
+Avec docker run, si l'image n'existe pas dans le host, elle va procéder au
+téléchargement celle-ci avant d'en créer et exécuter un conteneur docker.
+Docker se compose de :
+Docker Engine qui permet de créer le Host Docker sur une machine
+Linux (Docker daemon)
+Un client Docker qui peut se trouver dans n'importe quelle autre
+machine et qui est connecté à Docker
+Engine via différents
+connecteurs exposés par docker (socket, REST API, etc.)
+
+===== PAGE 12 =====
+Docker hub
+178
+Conteneurisation avec Docker
+Une image docker est juste un fichier package
+représentant la Template des conteneurs. Elle
+définit la structure du conteneur en englobant
+l'application containérisée et l'ensemble de ses
+dépendances.
+Un Conteneur représente une instance d’une
+image. Un conteneur est exécuté par le Docker
+Host. Ce qui implique l'exécution de l'application
+qu'il transporte dans un environnement isolé
+fourni par le conteneur.
+
+===== PAGE 13 =====
+Docker contribue à instaurer l’approche devops
+179
+Conteneurisation avec Docker
+Sans Docker :
+Le développeur
+Développe l'application.
+Génère le package de l'application à déployer (App.war)
+Envoie à l'opérationel (Administrateur système)
+App.war
+Un descriptif des dépendances qu'il faut installer et configurer pour
+que l'application s'exécute normalement.
+L'opérationnel
+Doit se débrouiller pour satisfaire les exigences de l'application.
+Pour chaque mise à jour, c'est toujours les mêmes histoires qui se
+répètent.
+Ce qui rend la vie dur au administrateur systèmes (Opérationnels)
+Ce qui crée beaucoup de conflits entre les développeurs qui tentent d'améliorer
+constamment les applications et les opérationnels qui doivent redéployer les mises à
+jour.
+Avec Docker:
+Le développeur
+Développe l'application
+Construit une image docker de son application contenant toutes les
+dépendances dont l'appli a besoin.
+Publie l'image docker dans le registre docker
+L'opérationnel déploie l'application en instanciant des conteneurs à parti de
+l'image docker récupérée à partir du repository docker.
+
+===== PAGE 14 =====
+Les éditions de Docker
+180
+Conteneurisation avec Docker
+Docker est disponible en deux éditions :
+Community Edition (Open source)
+Disponible pour les platforms :
+Linux
+Mac
+Windows
+Cloud (Azure, AWS,GCP)
+Pour Windows et Mac deux solutions :
+Installer une Machine virtuelle Linux
+avec
+VirtualBox
+ou
+Vmware
+par
+exemple
+Installer Docker desktop pour Windows
+Server ou Mac
+Enterprise Edition
+
+===== PAGE 15 =====
+Explorer Docker hub
+181
+Conteneurisation avec Docker
+
+===== PAGE 16 =====
+Les commandes de base de docker : run et ps
+182
+Conteneurisation avec Docker
+$docker run image name
+Permet de créer et démarre un conteneur nouvelle instance de l'image.
+Si l'image n'existe pas, elle sera d'abord téléchargée à partir du docker hub
+$docker run -d image name
+Permet de démarrer le conteneur comme service de fond.
+La valeur par défaut de la version de l'image est latest
+Pour spécifier la version (tag):
+$docker run image name:tag
+Exemple : $ docker run redis: 4.0
+$ docker ps
+Permet de lister les conteneur qui sont en cours d'exécution
+Chaque conteneur créé dispose d'un identifiant unique et d’un nom du conteneur.
+docker ps –a
+Permet de lister tous les conteneur avec leurs status (Up, Exited, Created)
+
+===== PAGE 17 =====
+Les commandes de base de docker : run et ps
+183
+Conteneurisation avec Docker
+
+===== PAGE 18 =====
+Les commandes de base de docker : mapper les ports pour un accès externe
+184
+Conteneurisation avec Docker
+Au démarrage nginx ouvre un service http sur
+le port 80
+Comme
+nginx
+démarre
+à
+l'intérieur
+du
+conteneur docker, l'accès http à cette application
+ne peut se faire qu’à l'intérieur du conteneur.
+Pour accéder à un service de l'extérieur à un
+service déployé à l'intérieur du conteneur, il
+faudrait qu'au démarrage du conteneur, spécifier
+à docker le mapping entre les ports exposés en
+interne avec les ports externes
+Cette opération se fait via l'option
+–p port externe:port interne
+Exemple:
+$sudo docker run -d -p 8082 80
+:
+nginx
+Dans notre cas :
+3
+.
+57
+.
+168
+.
+192
+représente
+l'adresse IP de la machine virtuelle ubuntu qui
+déploie docker Host
+
+===== PAGE 19 =====
+Les commandes de base de docker : images et rmi
+185
+Conteneurisation avec Docker
+$docker images
+Permet de lister les images présentées dans le host docker
+$ docker
+rmi <<nom-image>>
+Permet de supprimer une image du host docker. Pour ce faire il faut s’assurer de
+stopper et supprimer d’abord tous les conteneurs instanciés de cette image
+
+===== PAGE 20 =====
+Les commandes de base de docker : stop et rm
+186
+Conteneurisation avec Docker
+Docker stop <<containerID or containerName>>
+Permet de stopper un conteneur
+Docker rm << containerID or containerName>>
+Permet
+de
+supprimer
+un
+conteneur
+d’une
+manière
+permanente
+
+===== PAGE 21 =====
+Un conteneur docker ne peut pas contenir un OS
+187
+Conteneurisation avec Docker
+Exemple : Tenter de démarrer un conteneur ubuntu
+$ docker run ubuntu
+Le conteneur sera créé, mais pas démarré.
+En effet, un conteneur docker est fait pour contenir des processus et des services et non
+pas des OS
+L'image ubuntu est faites pour être l'image de base d'autres conteneurs et non pas
+l'exécuter en tant que telle
+Quand un service du conteneur s'arrête, le conteneur s'arrête aussi.
+
+===== PAGE 22 =====
+La commande EXEC
+188
+Conteneurisation avec Docker
+Permet d’exécuter une commande dans un conteneur démarré
+Exemple:
+Démarrer un conteneur MySQL
+Exécuter mysql dans le conteneur en mode interactif
+docker run --name some-mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:tag
+docker run --name my2 -e MYSQL_ROOT_PASSWORD=root -d mysql
+
+===== PAGE 23 =====
+La commande EXEC
+189
+Conteneurisation avec Docker
+docker exec -it my2 mysql --password
+Cette ligne permet d’exécuter une commande mysql à l’intérieur d’un conteneur nommé
+mysql2, en demandant le mdp
+on peut se connecter au serveur mysql et taper les cmds correspondants. Les résultats seront
+envoyés sur le terminal puisque le mode itératif -it est défini
+
+===== PAGE 24 =====
+La commande Attach
+190
+Conteneurisation avec Docker
+Quand vous lancez un conteneur comme tâche de fond avec l'options -d, il se peut que vous ayez
+besoin d'attacher la console du terminal courant au conteneur.
+Cette opération se fait via la commande :
+$ docker attach containerlD
+Exemple:
+
+===== PAGE 25 =====
+Inspecter un conteneur
+191
+Conteneurisation avec Docker
+La commande ps permet d’avoir des informations basiques sur les conteneurs
+Pour avoir plus de détail sur les conteneurs au format JSON, on peut utiliser la
+commande:
+$docker inspect <<container_name or container_id>>
+
+===== PAGE 26 =====
+Mapping des volumes: persistances des données dans un conteneur
+192
+Conteneurisation avec Docker
+Quand vous démarrez un conteneur MySQL, les données des
+bases de données sont stockées par défaut dans le dossier
+/var/lib/mysql à l'intérieur du docker container.
+Un docker container dispose de son propre système de fichier.
+Si vous supprimer ce conteneur MySQL, toutes les bases de
+données seront détruites.
+Vous vous souhaitez rendre les données persistantes en dehors
+du conteneur, il faudrait mapper les volume au démarrage du
+conteneur.
+$ docker run -v /opt/dataDir: /var/lib/mysql mysql
+Quand le conteneur mysql démarre, il monte implicitement un
+dossier en dehors du conteneur vers un dossier interne au
+conteneur.
+Dans ce cas , toutes les données seront stockées dans un
+dossier externe au conteneur et même si on supprime le
+conteneur, les données restent dans le dossier /opt/dataDir
+
+===== PAGE 27 =====
+Logs des conteneurs
+193
+Conteneurisation avec Docker
+Quand vous démarrez un conteneur comme tâche de fond, il serait utile un moment
+donné de visualiser le fichier log d’un conteneur.
+Cette opération peut se faire par la commande:
+$ docker logs container_ID
+
+===== PAGE 28 =====
+Dockerfile
+197
+Conteneurisation avec Docker
+Un Dockerfile est un fichier texte qui contient les commandes nécessaires à la construction
+d'une image.
+Une fois qu'un Dockerfile est créé, l'administrateur utilise la commande docker build pour créer
+une image basée sur les commandes contenues dans le fichier.
+Les commandes et les informations contenues dans le Dockerfile peuvent être configurées
+pour utiliser des versions et des dépendances logicielles spécifiques afin de garantir des
+déploiements cohérents et stables.
+
+===== PAGE 29 =====
+Dockerfile
+198
+Conteneurisation avec Docker
+Un Dockerfile utilise les commandes suivantes pour construire les images :
+COPY : Copie des fichiers ou dossiers locaux depuis le contexte de build vers l’image Docker.
+ADD : Copie des fichiers ou dossiers et peut aussi extraire des archives ou télécharger des
+fichiers depuis une URL.
+CMD : Exécuter une commande spécifique dans le conteneur.
+RUN : Directive d'exécution centrale pour les fichiers Docker.
+ENTRYPOINT : Définit le programme ou script qui sera toujours exécuté quand le conteneur
+démarre, en acceptant éventuellement des arguments supplémentaires.
+ENV : Définir des variables d'environnement.
+EXPOSE : Exposer un port spécifique pour permettre la mise en réseau du conteneur avec le
+monde extérieur.
+FROM : Définir l'image de base utilisée pour démarrer le processus de construction.
+MAINTAINER / LABEL : Définit le nom complet et l'adresse électronique du créateur de l'image.
+USER : Définir l'UID (le nom d'utilisateur) qui exécutera le conteneur.
+VOLUME : Déclare un dossier qui doit être stocké de façon persistante (en dehors du conteneur).
+WORKDIR : Définir le chemin où la commande, définie avec CMD, doit être exécutée.
+
+===== PAGE 30 =====
+Dockerfile
+199
+Conteneurisation avec Docker
+
+===== PAGE 31 =====
+Networking dans Docker
+200
+Conteneurisation avec Docker
+Il existe 3 modes réseaux en docker :
+Bridge : Par défaut : $ docker run nginx
+Host: $ docker run --network=host nginx
+none: $ docker run --network=none nginx
+Bridge est le mode réseau par défaut qui est utilisé par conteneur exécuté.
+C’est le réseau privé interne créé par docker dans le Host.
+Tous les conteneurs sont attachés par défaut à ce réseau
+Chaque conteneur a une adresse souvent 172.17.0.x
+Chaque conteneur peut accéder à l'autre par cette adresse.
+Pour accéder à l'un des ces conteneur de I'extérieur, il faut mapper le port de
+ces conteneurs aux ports du docker host.
+Une autre manière pour accéder aux conteneurs de l'extérieur sans mapper les ports
+c'est de les attacher au réseau de type host.
+Dans ce cas le port de chaque conteneur est mappé automatiquement au
+même port au niveau du host.
+Ce qui fait qu'on ne pourra pas démarrer plusieurs instances du même
+conteneur, car on ne peut pas exposer plusieurs services avec le même port au
+niveau du host.
+Le troisième type de réseaux est none, signifie que le conteneur n'est attaché à
+aucun réseau. Il ne sera donc pas accessible ni localement ni de l'extérieur.
+
+===== PAGE 32 =====
+Networking dans Docker
+201
+Conteneurisation avec Docker
+Dans le cas du réseau de type Bridge, il est possible de connecter les
+conteneurs dans des réseaux internes différents :
+Pour cela créer un nouveau réseau :
+$ docker network create --driver bridge –subnet 182.18.0.0/16 custom-
+isolated-net
+Pour lister les réseaux disponibles :
+$ docker network ls
+Pour consulter la configuration réseau d'un conteneur
+$ docker inspect <<container_id or container name>>
+
+===== PAGE 33 =====
+Networking dans Docker
+202
+Conteneurisation avec Docker
+
+===== PAGE 34 =====
+Networking dans Docker
+203
+Conteneurisation avec Docker
+
+===== PAGE 35 =====
+Docker Name Spaces (DNS)
+204
+Conteneurisation avec Docker
+Un conteneur peut atteindre un autre conteneur par
+son nom
+Docker utiliser DNS (Docker Name Spaces ) pour
+associer I'adresse IP au nom du conteneur.
+DNS est un serveur qui est démarré par défaut en
+utilisant I'adresse IP 172.17.0.11
+Il est plus pratique de connecter les conteneurs en
+utilisant leurs noms, car les adresses IP peuvent
+changer au démarrage.
+
+===== PAGE 36 =====
+Stockage dans Docker
+205
+Conteneurisation avec Docker
+Quand vous installer Docker dans un système de fichier, il y
+crée son dossier dans :
+/var/lib/docker
+aufs
+containers
+image
+Volumes
+C'est dans ces dossiers où docker stocke, par défaut,
+toutes ses données. C'est à dire les fichiers relatifs aux
+images, conteneurs, volumes.
+
+===== PAGE 37 =====
+Architecture en couches
+206
+Conteneurisation avec Docker
+Pour comprendre comment docker gère ses données, considérant les deux
+exemples suivants de fichier docker.
+
+===== PAGE 38 =====
+Docker Compose
+207
+Conteneurisation avec Docker
+Compose est un outil permettant de définir et
+d'exécuter des applications Docker à conteneurs
+multiples.
+Avec Compose, vous utilisez un fichier au
+format
+YAML
+(docker-compose.yml)
+pour
+configurer les services de votre application.
+Ensuite, avec une seule commande, vous
+créez et démarrez tous les services de votre
+configuration.
+$ docker-compose up
+
+===== PAGE 39 =====
+Docker Compose: exemple d’application
+208
+Conteneurisation avec Docker
+Considérons un exemple fourni
+dans la documentation de Docker
+Cette application permet de voter
+chats
+ou chiens
+et
+d‘afficher
+les
+résultats du vote.
+L’appli se compose de 5 services :
+Voting-app : web application
+développée en python
+Redis : Cache mémoire
+Worker : développé en Java
+Postgresq| : pour stocker les
+données du vote
+Result-app : pour présenter
+les résultats.
+
+===== PAGE 40 =====
+Docker Compose: exemple d’application
+209
+Conteneurisation avec Docker
+On
+peut
+tenter
+de
+démarrer
+manuellement les services avec la
+commande run
+En utilisant l’option --link pour lier
+les services
+Cette manière est trop lourde
+Il est plus simple de faire la même
+chose avec docker-compose
+
+===== PAGE 41 =====
+Docker Compose: déploiement de l’application
+210
+Conteneurisation avec Docker
+Dans la version 2 de docker-compose
+L’option links n’est pas obligatoire
+Docker crée automatiquement un lien
+entre tous les services déclarés dans
+docker-compose
+
+===== PAGE 42 =====
+Docker Compose: si les images ne sont pas créées
+211
+Conteneurisation avec Docker
+
+===== PAGE 43 =====
+Docker Compose: si les images ne sont pas créées
+212
+Conteneurisation avec Docker
+
+===== PAGE 44 =====
+Docker Compose: si les images ne sont pas créées
+213
+Conteneurisation avec Docker
+
+===== PAGE 45 =====
+Docker Compose: Networking
+214
+Conteneurisation avec Docker
+
+===== PAGE 46 =====
+Docker Registry
+215
+Conteneurisation avec Docker
+Les images docker publiques sont stockées dans le cloud :
+Docker Hub (docker.io)
+Quand vous exécuter un conteneur nginx avec la commande :
+$ docker run nginx
+Nginx représente le nom de l'image dans un repository.
+Ici le repository est nginx qui représente le nom de l'utilisateur
+docker hub.
+$ docker run nginx/nginx
+$ docker run user_name/image_name
+
+===== PAGE 47 =====
+Docker Registry
+216
+Conteneurisation avec Docker
+Docker registry est lui-même une application exposée dans image
+docker disponible sur docker hub.
+Vous pouvez installer dans le host du docker un annuaire privé de
+docker :
+$ docker run -d -p 5000:5000 --name my-registry registry:2
+Pour pousser et récupérer une image docker dans ce nouveau
+registre interne
+$ docker image tag my-image localhost:5000/my-image
+$ docker push localhost:5000/my-image
+$ docker pull localhost:5000/my-image
+
+===== PAGE 48 =====
+Docker Registry
+217
+Conteneurisation avec Docker
+Les organisations peuvent créer leur annuaire interne
+Dans ce cas là, l’accès passe une opération d’authentification avec:
+$ docker login private-registry.io
+Pour accéder à une image:
+$ docker run private-registry.io/apps/internal-app
+
+===== PAGE 49 =====
+Restriction des ressources avec cgroups
+218
+Conteneurisation avec Docker
+Par défaut un conteneur
+peut utiliser toutes les ressources
+disponibles (CPUs et RAM) dans le host Linux
+Pour restreindre l’utilisation des ressources pour un conteneur:
+$ docker run --cpus=0.5 ngninx
+$ docker run --memory=100m mysql

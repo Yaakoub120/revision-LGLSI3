@@ -1,0 +1,412 @@
+
+===== PAGE 1 =====
+Administration des
+Systèmes
+MODULE 8: CONFIGURATION RÉSEAUX
+HÉDI NSIBI – FACULTÉ DES SCIENCES DE MONASTIR 2025 / 2026
+
+===== PAGE 2 =====
+Introduction au réseau
+
+Adresse IP
+Une adresse IP identifie une machine sur un réseau.
+Deux versions existent :
+-
+IPV4: format 192.168.1.10 (32bits)
+-
+IPV6: format 2001:db8::1:1 (128bits)
+Elle permet aux équipements de communiquer entre eux.
+Rôles principaux:
+-
+Identifier un hôte
+-
+Permettre l’acheminement des paquets
+-
+Définir le réseau auquel appartient la machine
+
+===== PAGE 3 =====
+Introduction au réseau
+
+Masque de réseaux (CIDR)
+Le masque ou CIDR détermine la partie “réseau” et la partie
+“hôte” d’une adresse IP.
+Exemples:
+-
+/24 →255.255.255.0 (256 adresses)
+-
+/16 →255.255.0.0
+-
+/32 →une seule adresse (host unique)
+Fonction : définir la taille du réseau et séparer les sous-réseaux.
+
+===== PAGE 4 =====
+Introduction au réseau
+
+Passerelle(Gateway)
+La gateway est l’adresse du routeur permettant de
+sortir du réseau local.
+Exemple:
+192.168.1.1
+Role:
+-
+Acheminer le trafic vers les réseaux externes
+-
+Nécessaire pour accéder à Internet
+Sans gateway →communication uniquement dans le
+réseau local.
+
+===== PAGE 5 =====
+Introduction au réseau
+
+DNS(Domain Name System)
+Système de traduction entre :
+-
+Nom de domaine(ex: google.com)
+-
+Adresse IP(ex: 142,250,184,238)
+Rôle:
+-
+Faciliter l’accès aux services
+-
+Fonctionne comme un « annuaire d’internet»
+Serveurs DNS courants:
+-
+8.8.8.8 (Google)
+-
+1.1.1.1 (cloudflare)
+-
+DNS du FAI
+
+===== PAGE 6 =====
+Introduction au réseau
+
+Adresse MAC
+Identifiant physique unique d’une carte réseau.
+Format: AA:BB:CC:DD:EE:FF
+Caractéristiques :
+-
+Gravée par le constructeur
+-
+Identifie une interface au niveau 2 (Ethernet)
+-
+Utilisée par ARP pour associer IP ↔MAC
+
+===== PAGE 7 =====
+Introduction au réseau
+
+Interface réseau
+Composant (physique ou virtuel) qui permet à une
+machine de communiquer.
+Types:
+-
+eth0, eth1 →interfaces Ethernet
+-
+Wlan0 →interface Wi-Fi
+-
+Lo →loopback (127.0.0.1)
+-
+ens33 / enp0s3 →nouvelles conventions systemd
+Rôle:
+Assurer l’envoi et la réception de paquets
+
+===== PAGE 8 =====
+Modèle OSI (Version Simplifiée)
+Le modèle OSI complet comporte 7 couches, mais en administration
+système Linux on utilise surtout 3 niveaux essentiels.
+
+Niveau 2 — Liaison (Data Link)
+-
+Adresse MAC →identifiant physique de l’interface réseau
+-
+ARP (Address Resolution Protocol) →traduit IP ↔MAC
+-
+Switches et communication locale
+Rôle:
+Assurer la communication locale dans le même réseau via Ethernet ou Wi-
+Fi.
+Fonctions
+-
+Détection d’erreurs
+-
+Encapsulation des trames
+-
+Transmission physique via une interface (eth0, wlan0..)
+
+===== PAGE 9 =====
+Modèle OSI (Version Simplifiée)
+
+Niveau 3 — Réseau (Network)
+Éléments clés:
+-
+Adresse IP
+-
+Routage
+-
+Passerelle (gateway)
+-
+ICMP (ping, traceroute)
+Rôle:
+Acheminer les paquets d’un réseau à un autre.
+Fonctions:
+-
+Choix du meilleur chemin
+-
+Découpage en sous réseaux (CIDR)
+-
+Passage par un routeur pour sortir du LAN
+Exemple: ip route show
+
+===== PAGE 10 =====
+Modèle OSI (Version Simplifiée)
+
+Niveau 4 — Transport
+Protocole clés:
+-
+TCP →fiable, orienté connexion
+-
+UDP →rapide, sans garantie
+Rôle:
+Gérer la communication application ↔réseau.
+TCP founit:
+-
+Contrôle d’erreur, Réémission, Ordre des paquets, Handshake (SYN,
+SYN/ACK, ACK)
+UDP utilisé pour:
+-
+DNS, VOIP, Streaming
+
+===== PAGE 11 =====
+Types d’adressage réseau
+
+IPV4
+-
+Format: 192.168.1.10
+-
+32 bits →environ 4,3 milliards d’adresses
+-
+Utilisé massivement dans tous les réseaux,
+-
+Notation CIDR: /24, /16..
+
+IPV6
+-
+Format: 2001:db8::1
+-
+128 bits →nombre quasi illimité d’adresses
+-
+Intègre nativement la sécurité (IPsec)
+-
+Meilleure gestion du multicast
+-
+Simplifie l’auto-configuration
+
+===== PAGE 12 =====
+Types d’adressage réseau
+
+DHCP vs Statique DHCP (Dynamic Host Configuration
+Protocol)
+Attribution automatique des paramètres :
+
+Adresse IP
+
+Masque
+
+Passerelle
+
+DNS
+-
+Utilisé sur la majorité des poste utilisateurs
+-
+Simplifie l’administration des postes utilisateurs
+-
+Commande utiles : dhclient, logs DHCP…
+
+===== PAGE 13 =====
+Types d’adressage réseau
+
+Adresse IP Statique
+Définie manuellement dans :
+
+/etc/network/interfaces
+
+Netplan (utilitaire de configuration réseau)
+
+ou ifcfg (fichiers de configuration réseau RHEL)
+Utilisé pour :
+-
+Serveurs
+-
+Routeurs / firewalls
+-
+Equipements critiques
+Stable et prévisible →indispensable pour les services
+
+===== PAGE 14 =====
+Types d’adressage réseau
+
+Réseaux privés vs publics
+Réseaux privés (non routés sur Internet) :
+-
+10.0.0.0/8
+-
+172.16.0.0/12
+-
+192.168.0.0/16
+Caractéristiques:
+-
+Utilisés dans les LAN
+-
+Nécessitent une NAT pour sortir vers Internet
+-
+Sécurisés, isolés
+Réseaux publics:
+-
+Routés directement sur Internet
+-
+Fournis par les FAI ou hébergeurs (OVH, AWS, GCP…)*
+-
+Exemple : 154.12.87.50
+
+===== PAGE 15 =====
+Configuration moderne avec
+iproute2
+L’outil iproute2 remplace les anciennes commandes
+(ifconfig, route, arp) et fournit une gestion moderne,
+complète et plus puissante du réseau sous Linux.
+Outils principaux iproute2
+-
+ip addr →gestion des adresses IP
+-
+ip link →gestion des interfaces
+-
+ip route →routage
+-
+ip neigh →table ARP (voisinage)
+
+===== PAGE 16 =====
+Configuration moderne avec
+iproute2
+
+Gestion des interfaces
+
+Lister les interfaces
+ip link
+
+Activer / désactiver une interface
+ip link set eth0 up
+ip link set eth0 down
+
+Ajouter une adresse IP
+ip addr add 192.168.1.10/24 dev eth0
+
+Supprimer une adresse IP
+ip addr del 192.168.1.10/24 dev eth0
+
+Voir toutes les adresses IP
+ip addr
+
+===== PAGE 17 =====
+Configuration moderne avec
+iproute2
+
+Routage
+
+Afficher la table de routage
+ip route show
+
+Ajouter une route statique
+ip route add 10.0.0.0/24 via 192.168.1.1
+
+Ajouter la passerelle par défaut
+ip route add default via 192.168.1.1
+
+Supprimer une route
+ip route del 10.0.0.0/24
+
+===== PAGE 18 =====
+Configuration moderne avec
+iproute2
+
+Voisinage (ARP)
+
+Afficher la table ARP
+ip neigh
+
+Vider / nettoyer la table ARP
+ip neigh flush all
+
+Ajouter une entrée ARP manuelle(optionnel, pour réseaux avancés)
+ip neigh add 192.168.1.20 lladdr AA:BB:CC:DD:EE:FF dev eth0
+
+===== PAGE 19 =====
+Configuration persistante du
+réseau
+Contrairement aux commandes ip, ces méthodes permettent une
+configuration permanente, appliquée à chaque redémarrage.
+
+Debian / Ubuntu (méthode classique)
+/etc/network/interfaces
+Exemple configuration statique :
+iface eth0 inet static
+address 192.168.1.10
+netmask 255.255.255.0
+gateway 192.168.1.1
+Pour activer une interface :
+sudo ifup eth0
+sudo ifdown eth0
+
+===== PAGE 20 =====
+Configuration persistante du
+réseau
+
+Ubuntu modernes (Netplan)
+Introduit à partir d’Ubuntu 17.10.
+/etc/netplan/*.yaml
+network:
+ethernets:
+eth0:
+dhcp4: no
+addresses: [192.168.1.10/24]
+gateway4: 192.168.1.1
+nameservers:
+addresses: [8.8.8.8, 1.1.1.1]
+version: 2
+Appliquer la configuration :
+sudo netplan apply
+
+===== PAGE 21 =====
+Configuration persistante du
+réseau
+
+RHEL / CentOS / Rocky / AlmaLinux
+Méthode traditionnelle ifcfg.
+Fichier:
+/etc/sysconfig/network-scripts/ifcfg-eth0
+Exemple:
+DEVICE=eth0
+BOOTPROTO=none
+ONBOOT=yes
+IPADDR=192.168.1.1
+0NETMASK=255.255.255.0
+GATEWAY=192.168.1.1
+DNS1=8.8.8.8
+Redémarrer le service réseau :
+sudo systemctl restart network
+
+===== PAGE 22 =====
+Configuration persistante du
+réseau
+
+Résolution DNS
+Fichier: /etc/resolv.conf
+Contient les serveurs DNS à utiliser .
+Exemple
+nameserver 8.8.8.8
+nameserver 1.1.1.1
+Fichier: /etc/hosts
+Exemple
+127.0.0.1
+localhost
+192.168.1.10
+serveur-web
+Priorité: /etc/hosts est consulté avant les DNS.

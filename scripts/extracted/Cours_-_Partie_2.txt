@@ -1,0 +1,566 @@
+
+===== PAGE 1 =====
+RAID : Redundant Array of Independent Disks
+Pour assurer des critères de qualité sur le stockage
+Tolérance aux pannes
+Disponibilité
+Fiabilité
+Performances
+En utilisant des outils techniques
+Redondance
+Répartition
+Contrôleur RAID: RAID0, RAID1, RAID5, RAID10, …
+82
+Virtualisation
+Types de virtualisation
+Virtualisation de stockage:
+Technique d’organisation des disques pour performance ou tolérance aux pannes: RAID
+
+===== PAGE 2 =====
+RAID ( initialement Redundant Array of Inexpensive Disks, puis Redundant Array of
+Independent Disks, « Ensemble redondant de disques indépendants ») est une technique
+qui consiste à utiliser plusieurs disques durs simultanément en les faisant apparaître
+comme un seul lecteur.
+Le but est d'accroître la vitesse des accès en traitant plus de données en parallèle et/ou
+de sécuriser les données des disques par l’ajout d’informations redondantes.
+83
+Virtualisation
+Types de virtualisation
+Virtualisation de stockage:
+Technique d’organisation des disques pour performance ou tolérance aux pannes: RAID
+
+===== PAGE 3 =====
+Le concept du RAID fut lancé en 1987 à l’université de Berkeley par un article qui
+décrivait six manières différentes de regrouper des disques. Ces configurations ont été
+numérotées de 0 à 5.
+On les désigne par des « niveaux RAID » ou « RAID levels » : RAID 0 à RAID 5.
+84
+Virtualisation
+Types de virtualisation
+Virtualisation de stockage:
+Technique d’organisation des disques pour performance ou tolérance aux pannes: RAID
+
+===== PAGE 4 =====
+D’autres architectures RAID sont apparues par la suite ( 6 et 7) et des constructeurs
+proposent des RAID à plusieurs niveaux : 0+1,1+0 ou 5+0 par exemple.
+La gestion d’un RAID se fait de manière logicielle ou matérielle.
+La solution logicielle dépend du système d’exploitation et utilise les ressources mémoire
+et CPU du système, il s’agit d’un driver qui combine plusieurs disques en un seul lecteur
+logique.
+85
+Virtualisation
+Types de virtualisation
+Virtualisation de stockage:
+Technique d’organisation des disques pour performance ou tolérance aux pannes: RAID
+
+===== PAGE 5 =====
+La solution matérielle est indépendante du système d’exploitation. Elle recourt à un
+circuit contrôleur RAID actuellement de plus en plus souvent intégré à la carte mère.
+Ce circuit contrôle les commandes envoyées à la grappe (cluster) de disque, ce qui allège
+le travail du processeur.
+Virtualisation
+Types de virtualisation
+Virtualisation de stockage:
+Technique d’organisation des disques pour performance ou tolérance aux pannes: RAID
+
+===== PAGE 6 =====
+87
+Virtualisation
+Types de virtualisation
+Virtualisation de stockage:
+Technique d’organisation des disques pour performance ou tolérance aux pannes: RAID
+
+===== PAGE 7 =====
+88
+Virtualisation
+Types de virtualisation
+Virtualisation de stockage:
+Technique d’organisation des disques pour performance ou tolérance aux pannes: RAID
+
+===== PAGE 8 =====
+RAID 0: Stripping-> Performant/Non sécurisé
+Cette technique, le « striping » implique un minimum de deux disques.
+En fait, au lieu de parler de RAID on devrait ici parler de «AID» puisque ici on n’ajoute
+pas de redondance pour être plus fiable.
+Les données sont découpées en bandes (en anglais : strips ) constituées d’un nombre
+fixe de secteurs.
+Ces bandes sont ensuite réparties entre les disques de manière à partager le travail lors
+d’accès à des données volumineuses. Une requête d’entrée sortie qui concerne
+plusieurs bandes consécutives sollicite donc plusieurs disques simultanément.
+89
+Virtualisation
+Types de virtualisation
+Virtualisation de stockage:
+Technique d’organisation des disques pour performance ou tolérance aux pannes: RAID
+
+===== PAGE 9 =====
+RAID 0: Stripping-> Performant/Non sécurisé
+Cette technique augmente la vitesse de transferts mais n’assure pas la sécurité des
+données.
+Si un disque tombe en panne, la totalité des données est perdue.
+90
+Virtualisation
+Types de virtualisation
+Virtualisation de stockage:
+Technique d’organisation des disques pour performance ou tolérance aux pannes: RAID
+
+===== PAGE 10 =====
+RAID 0: : Stripping-> Performant/Non sécurisé
+91
+Virtualisation
+Types de virtualisation
+Virtualisation de stockage:
+Technique d’organisation des disques pour performance ou tolérance aux pannes: RAID
+
+===== PAGE 11 =====
+RAID 1: Mirroring -> Tolérant aux pannes
+Le mirroring consiste à dupliquer les données sur deux disques, de ce fait, si un
+disque tombe en panne, l’autre disque contenant la copie de ses données prend alors
+le relais.
+Ce remplacement peut en plus se faire sans éteindre l’ordinateur, option avantageuse
+pour les serveurs qui ne peuvent pas être arrêtés. On parle dans ce cas de tolérance
+de pannes puisque ce système assure la continuité du service.
+92
+Virtualisation
+Types de virtualisation
+Virtualisation de stockage:
+Technique d’organisation des disques pour performance ou tolérance aux pannes: RAID
+
+===== PAGE 12 =====
+RAID 1
+Les performances en vitesse sont fort semblables à celle d’un disque unique.
+Lors des requêtes d’écriture, c’est du disque le plus lent que va dépendre la durée de
+l’opération.
+Pour les lectures, il est possible de répartir les requêtes de sorte à partager le travail et
+à améliorer ainsi la bande passante.
+93
+Virtualisation
+Types de virtualisation
+Virtualisation de stockage:
+Technique d’organisation des disques pour performance ou tolérance aux pannes: RAID
+
+===== PAGE 13 =====
+RAID 1
+Ex. : Enregistrement de quatre bandes
+sur deux disques en miroir
+94
+Virtualisation
+Types de virtualisation
+Virtualisation de stockage:
+Technique d’organisation des disques pour performance ou tolérance aux pannes: RAID
+
+===== PAGE 14 =====
+RAID 5: Sécurisé / Performant / Bas coût
+95
+Virtualisation
+Types de virtualisation
+Virtualisation de stockage:
+Technique d’organisation des disques pour performance ou tolérance aux pannes: RAID
+Sécurisé : utilise la parité répartie, ce qui
+permet de reconstruire les données si un
+disque tombe en panne.
+Performant : les lectures sont rapides car
+les données sont réparties sur plusieurs
+disques, mais les écritures sont légèrement
+plus lentes à cause du calcul de la parité.
+Bas coût : par rapport à RAID 1 (miroir),
+RAID 5 nécessite moins de disques pour la
+tolérance aux pannes, ce qui réduit le coût
+de stockage
+
+===== PAGE 15 =====
+RAID 10 et RAID 0+1
+Certains constructeurs proposent ces systèmes RAID à deux niveaux qui combinent le
+RAID 1 et le RAID 0 pour assurer simultanément sécurité (RAID1) et vitesse (RAID 0).
+96
+Virtualisation
+Types de virtualisation
+Virtualisation de stockage:
+Technique d’organisation des disques pour performance ou tolérance aux pannes: RAID
+
+===== PAGE 16 =====
+RAID 100
+97
+Virtualisation
+Types de virtualisation
+Virtualisation de stockage:
+Technique d’organisation des disques pour performance ou tolérance aux pannes: RAID
+
+===== PAGE 17 =====
+Virtualisation
+Types de virtualisation
+Virtualisation de stockage: Architectures
+98
+SAN (Storage Area Network)
+Un réseau de stockage (SAN) est un réseau
+dédié permettant de mutualiser les ressources
+de stockage
+Les VMs sont stockées sur la baie de stockage
+et sont accessibles par plusieurs serveurs
+Si un serveur tombe en panne, un autre serveur
+connecté au stockage peut accéder aux VM et
+les remettre rapidement et automatiquement en
+production sans avoir à attendre que le serveur
+en panne soit de nouveau opérationnel
+
+===== PAGE 18 =====
+Virtualisation
+Types de virtualisation
+Virtualisation de stockage: Architectures
+99
+SAN (Storage Area Network)
+Un réseau de stockage (SAN) est un réseau
+dédié permettant de mutualiser les ressources
+de stockage
+Les VMs sont stockées sur la baie de stockage
+et sont accessibles par plusieurs serveurs
+Si un serveur tombe en panne, un autre serveur
+connecté au stockage peut accéder aux VM et
+les remettre rapidement et automatiquement en
+production sans avoir à attendre que le serveur
+en panne soit de nouveau opérationnel
+
+===== PAGE 19 =====
+Virtualisation
+Types de virtualisation
+Virtualisation de stockage: Architectures
+100
+SAN (Storage Area Network)
+Contrairement à un système NAS où les fichiers sont accessibles via un
+réseau partagé, les baies de stockage dans un SAN n'apparaissent pas comme
+des volumes partagés sur le réseau.
+Chaque serveur accède à l’espace disque d'une baie SAN directement en
+mode bloc, c’est-à-dire au niveau des secteurs du disque, et non des fichiers.
+Cela signifie que le serveur traite l’espace de stockage distant comme s’il
+s’agissait de son propre disque dur local.
+Les deux principaux protocoles utilisés pour le transit des données sur le
+réseau SAN sont : Fibre Channel et iSCSI (Internet Small Computer System
+Interface
+
+===== PAGE 20 =====
+Virtualisation
+Types de virtualisation
+Virtualisation de stockage: Architectures
+101
+SAN (Storage Area Network)
+iSCSI
+est un protocole d’accès disque fonctionnant sur un réseau Ethernet, il permet
+d’implémenter un réseau de stockage en profitant de la connectique et des
+équipements de commutation standards.
+Comme le NFS, il peut être soit implémenté par une baie de stockage dédiée, ce
+qui
+assure
+les
+meilleures
+performances,
+soit
+par un serveur
+classique
+disposant du logiciel adéquat, par exemple IET ( iSCSI Entreprise Target) sous
+Linux.
+Fibre Channel
+la solution la plus haut de gamme pour implémenter un réseau de stockage est
+l’utilisation d’une baie dédiée et du protocole Fibre Channel. Basé sur des
+fibres optiques, il assure une latence et un débit bien meilleurs que iSCSI , à un
+prix bien sûr plus élevé. Son principe d’utilisation est le même qu’un SAN iSCSI
+
+===== PAGE 21 =====
+Virtualisation
+Datacenter
+Datacenter = Centre de traitement de données
+Ensemble d’équipements constituant le système d’information
+d’une structure/entreprise
+Mainframes (en tant qu'ordinateurs centraux conçus pour
+gérer des charges de travail importantes et critiques)
+Serveurs
+Baies de stockage
+Équipement réseaux et télécommunications
+102
+Pouvant aller du Local technique, salle machine, étage, bâtiment au complexe de plusieurs
+bâtiments
+Afin de mutualiser les coûts et de bénéficier des dernières avancées technologiques, la
+plupart des entreprises choisissent de déléguer à un Datacenter la prise en charge de leurs
+données virtuelles, en termes de stockage, ou encore de protocoles de transfert
+Afin d’assurer la disponibilité et la sécurité de données stockées, un Datacenter doit être en
+fonctionnement 24h/24 et 365 jours par an.
+
+===== PAGE 22 =====
+Virtualisation
+Datacenter
+Clusterning
+103
+Dans un centre de données, un certain nombre de serveurs configurés de manière
+similaire peuvent être regroupés avec des connexions au même réseau et au même
+stockage pour fournir un ensemble de ressources dans l'environnement virtuel, appelé
+cluster .
+Lorsqu'un serveur est ajouté à un cluster, ses ressources sont intégrées à celles du
+cluster.
+Ainsi, le cluster gère les ressources de tous les serveurs qu’il contient et agit comme une
+entité unique.
+Ceci est bénéfique car si l'un des serveurs tombe en panne, un autre serveur peut
+prendre sa place.
+
+===== PAGE 23 =====
+Virtualisation
+Datacenter
+104
+
+===== PAGE 24 =====
+Virtualisation
+Datacenter
+105
+
+===== PAGE 25 =====
+Virtualisation
+Datacenter
+106
+
+===== PAGE 26 =====
+Virtualisation
+Datacenter
+107
+
+===== PAGE 27 =====
+Virtualisation
+Datacenter
+108
+Avantages
+Ils offrent un environnement hyper sécurisé pour les données.
+Les équipements continuent à être utiles et efficaces dans leur contexte
+d'utilisation actuel
+Les données sont disponibles en permanence
+Ils visent à assurer
+Une haute qualité de service
+Une haute disponibilité
+
+===== PAGE 28 =====
+Virtualisation
+Datacenter
+109
+Les enjeux d’un Data Center
+Assurer la haute disponibilité
+Assurer la haute protection et sécurité
+Contraintes:
+Dimensions très vastes: des bâtiments
+Infrastructure gigantesque
+Plusieurs
+intervenants
+(administrateurs,
+clients,
+informaticiens,
+électriciens, fournisseurs de matériel, etc.)
+
+===== PAGE 29 =====
+Virtualisation
+Datacenter
+110
+Assurer la haute disponibilité: le service doit être toujours disponible malgré
+les risques
+Naturels (inondation, séisme, incendie, etc.) =>
+Etude géographique de l’emplacement,
+Sauvegardes régulières et duplication
+Surchauffage (système de climatisation indispensable)
+Coupure électrique (diversifier les sources d’alimentation)
+Humaines: mauvaise manipulation ou intention (contrôle d’accès, gestion
+des autorisations, suivi et journaux, les traces, etc.)
+Connexion réseau/internet point d’entré au cloud (dupliquée et sécurisée)
+
+===== PAGE 30 =====
+Virtualisation
+Datacenter
+111
+Assurer la haute protection et la sécurité:
+Contrôle d’accès: (badge, empreinte digitale, etc.)
+Verrouillage automatique des points d’accès.
+Une surveillance (capteurs vidéo, thermiques, de proximité)
+Identification du personnel avec un contrôle des accès.
+Mise en place de systèmes de détection/prévention d’intrusions, pare-
+feu, antivirus, etc.
+Chiffrement des données…
+
+===== PAGE 31 =====
+Virtualisation
+Exemple de solution de virtualisation
+VMWare ESXi
+Fondée en 1998, VMware a été la première entreprise à développer une
+solution de virtualisation x86 disponible dans le commerce.
+L'année suivante, la société publie son premier produit, Workstation 1.0, qui
+permet aux développeurs de créer et de travailler avec des machines virtuelles
+sur leurs postes de travail Windows ou Linux. Deux ans après cela,
+En 2001, ESX 1.0 et GSX 1.0 ont été publiés. ESX était un hyperviseur de type 1
+et GSX, un hyperviseur de type 2.
+L'architecture d'origine d'ESX était composée de deux parties, l'hyperviseur
+lui-même, et un module de console basé sur Linux.
+ESXi a été développé avec le même noyau d'hyperviseur, mais sans la console
+de service.
+VMware a publié deux versions, ESX classique et ESXi, de la version 3.5 en
+2007 à la version 4.1 en 2010.
+À compter de la version 5 de 2011, seule l'architecture ESXi est disponible. 112
+
+===== PAGE 32 =====
+Virtualisation
+Exemple de solution de virtualisation
+VMWare ESXi
+vCenter Server:
+gère tous les composants physiques et virtuels
+d’un centre de données virtualisé
+vSphere Client:
+pour se connecter au serveur vCenter afin de
+gérer le vCenter et les hôtes ESXi
+vMotion : Fonctionnalité permettant de migrer des
+VM d'un hôte ESXi à un autre sans temps d'arrêt.
+High Availability (HA) : Fonctionnalité assurant la
+disponibilité continue des VM en redémarrant
+automatiquement les VM sur d'autres hôtes en cas
+de défaillance.
+113
+
+===== PAGE 33 =====
+Virtualisation
+Exemple de solution de virtualisation
+Citrix Xen
+Le modèle Xen a un invité spécial appelé Domaine 0, également appelé Dom0.
+Cet invité est démarré lors du démarrage de l'hyperviseur
+Il dispose de privilèges de gestion différents de ceux des autres invités.
+Il a un accès direct au matériel
+Il gère toutes les E/S pour les invités individuels.
+114
+
+===== PAGE 34 =====
+Virtualisation
+Exemple de solution de virtualisation
+QEMU-KVM
+KVM (Kernel-based Virtual Machine) prend en
+charge à la fois la virtualisation complète (où les
+systèmes invités ne sont pas modifiés) et la
+paravirtualisation.
+C’est une solution open source intégrée au sein
+du noyau Linux depuis la version 2.6.20.
+KVM est un projet issu de QEMU (Quick Emulator)
+dont il utilise une version modifiée.
+Même si on fait souvent référence à l'hyperviseur
+KVM, il s'agit en réalité d'une combinaison QEMU-
+KVM.
+115
+
+===== PAGE 35 =====
+Virtualisation
+Exemple de solution de virtualisation
+Microsoft Hyper-V
+Microsoft a débuté dans l’espace de
+virtualisation avec Virtual Server en
+2005.
+Hyper-V a été publié en 2008 en tant
+que
+partie
+installable
+du
+système
+d'exploitation Windows Server 2008
+116
+
+===== PAGE 36 =====
+Virtualisation
+Exemple Pratique: virtualisation avec VirtualBox
+Création d’un réseau NAT (Network Address Translation)
+est la manière la plus simple d'accéder à un réseau
+externe à partir d'une machine virtuelle.
+Habituellement, cela n'exige aucune configuration sur le
+réseau hôte ou le système invité.
+C'est
+pourquoi
+c’est
+le
+mode
+réseau
+par
+défaut
+de
+VirtualBox.
+Une machine virtuelle dont NAT est activé agit exactement
+comme un vrai ordinateur qui se connecte à Internet par
+un routeur.
+Le “routeur”, dans ce cas, est le moteur réseau de
+VirtualBox, qui dirige le trafic depuis et vers la machine
+virtuelle de façon transparente.
+Ce routeur se place entre chaque machine virtuelle et
+l'hôte.
+Cette séparation maximise la sécurité puisque, par défaut,
+les machines virtuelles ne peuvent pas se parler et ne
+peuvent pas être contacté de l’extérieur.
+117
+
+===== PAGE 37 =====
+Virtualisation
+Exemple Pratique: virtualisation avec VirtualBox
+Création d’un réseau bridgé
+Avec le réseau bridgé, VirtualBox peut intercepter
+les données du réseau physique et d'y envoyer des
+données, ce qui crée de fait une nouvelle interface
+réseau logicielle.
+Quand un invité utilise une telle interface, cela se
+passe
+comme
+si
+l'invité
+était
+connecté
+physiquement à l'interface réseau en utilisant un
+câble réseau
+l'hôte peut envoyer des données à l'invité via cette
+interface et en reçoit des données.
+Avec ce mode, les VMs peuvent contacter l'hôte et
+l'extérieur et peuvent être contactées à partir de
+l'hôte
+118
+
+===== PAGE 38 =====
+Virtualisation
+Exemple Pratique: virtualisation avec VirtualBox
+Création d’un réseau bridgé
+En mode réseau bridgé, VirtualBox intercepte le
+trafic réseau de l’ordinateur hôte et permet à la VM
+d’y envoyer des données.
+Cela crée une interface réseau virtuelle qui relie la
+VM au réseau physique de l’hôte.
+Quand la VM utilise cette interface, c’est comme si
+elle était physiquement connectée au réseau via un
+câble réseau.
+L’hôte peut envoyer des données à la VM et en
+recevoir depuis la VM
+119
+
+===== PAGE 39 =====
+Virtualisation
+Exemple Pratique: virtualisation avec VirtualBox
+Création d’un réseau bridgé
+120
+
+===== PAGE 40 =====
+Virtualisation
+Exemple Pratique: virtualisation avec VirtualBox
+Création d’un réseau Host-Only
+Un
+réseau
+Host-Only
+est
+un
+mode
+de
+configuration
+de
+réseau
+dans
+lequel
+les
+machines
+virtuelles
+peuvent
+communiquer
+uniquement entre elles et avec l'hôte sur lequel
+elles sont exécutées.
+Cela signifie que les VMs ne sont pas autorisées
+à accéder au réseau externe ou à l'internet, ni à
+communiquer avec des machines physiques en
+dehors de l'hôte.
+121

@@ -1,0 +1,219 @@
+
+===== PAGE 1 =====
+219
+Orchestration des conteneurs
+Besoin de démarrer plusieurs instances pour des raisons de:
+scalabilité: répondre de manière efficace à une variation de
+la charge de travail
+tolérance aux pannes: capacité à continuer de fonctionner
+de manière fiable et à fournir des services même en
+présence de pannes matérielles, logicielles ou de réseau
+disponibilité:
+système
+est
+fonctionnel
+et
+répond
+aux
+demandes
+des
+utilisateurs
+de
+manière
+fiable
+et
+sans
+interruption pendant une période donnée
+monté en charge: augmentation de la quantité de travail
+sur le système
+Si une instance tombe en panne, il faut la remplacer
+Si Docker Engine tombe en panne, tous les conteneurs vont
+cracher.
+L’orchestration
+des
+conteneurs
+est
+une
+solution
+pour
+ce
+problème
+
+===== PAGE 2 =====
+220
+Consiste en un ensemble d’outils et de scripts qui permettent l’automatisation des opérations:
+Scalabilité des conteneurs (capacité d'adapter la taille d'un ensemble de conteneurs en
+fonction des besoins), réplication des conteneurs, haute disponibilité, bilan de santé des
+conteneurs etc.
+Exemples d’outils:
+Docker Swarm
+Kubernetes
+MESOS
+Orchestration des conteneurs
+
+===== PAGE 3 =====
+Docker Swarm
+221
+Docker Swarm permet de combiner plusieurs machines ensemble pour former un cluster.
+Il prend en charge la distribution et la réplication des instances de services des applications
+dans des hosts distribués pour la haute disponibilité et I'équilibrage de charges à travers différents
+systèmes et hardwares.
+Orchestration des conteneurs
+
+===== PAGE 4 =====
+Configuration de Docker Swarm
+222
+Pour configurer Swarm il faut:
+Démarrer plusieurs hosts docker
+Désigner un host en tant que manager et les autres en tant que workers
+Par la suite exécuter les commandes "docker service" sur le swarm manager node
+$ docker service create --replicate=4 -p 8080:80 may-app
+Orchestration des conteneurs
+
+===== PAGE 5 =====
+Exemple d’application Swarm
+223
+Démarrer 3 VM ubuntu avec Docker engine installé:
+Host 1 avec l’adresse IP 192.168.57.3
+Host 2 avec l’adresse IP 192.168.57.4
+Host 3 avec l’adresse IP 192.168.57.5
+Ensuite dans une machine (Machine Physique), connecter 3 terminaux avec SSH au 3 hosts
+Orchestration des conteneurs
+
+===== PAGE 6 =====
+Démarrer un Swarm Manager
+224
+Le port par défaut de Swarm est 2377
+Advertise-addr: adresse où swarm manager accepte les connexions à partir des autres nœuds
+Listen-addr: adresse d’écoute pour accéder au cluster swarm depuis l’extérieur
+Orchestration des conteneurs
+
+===== PAGE 7 =====
+Démarrer un nœud Swarm Worker
+225
+Orchestration des conteneurs
+
+===== PAGE 8 =====
+Démarrer un nœud Swarm Worker
+226
+On refait la même chose sur une autre machine
+Orchestration des conteneurs
+
+===== PAGE 9 =====
+Lister les nœuds du cluster Swarm
+227
+Orchestration des conteneurs
+
+===== PAGE 10 =====
+Créer et démarrer un service Swarm
+228
+Orchestration des conteneurs
+
+===== PAGE 11 =====
+Lister les services démarrés
+229
+Orchestration des conteneurs
+
+===== PAGE 12 =====
+Détails des services démarrés dans Swarm
+230
+Orchestration des conteneurs
+
+===== PAGE 13 =====
+Consulter le fichier logs d’un service
+231
+Orchestration des conteneurs
+
+===== PAGE 14 =====
+Créer un service: exemple d’application web
+232
+Orchestration des conteneurs
+
+===== PAGE 15 =====
+Supprimer le service web créé
+233
+Orchestration des conteneurs
+
+===== PAGE 16 =====
+Déployer une application avec trois services mongo, back et front: network sécurisé
+234
+--driver overlay : Les réseaux overlay sont utilisés dans des environnements distribués comme Docker
+Swarm pour permettre la communication entre les conteneurs sur différents hôtes.
+Orchestration des conteneurs
+
+===== PAGE 17 =====
+Déployer une application avec trois services mongo, back et front: network sécurisé
+235
+Orchestration des conteneurs
+
+===== PAGE 18 =====
+Déployer une application avec trois services mongo, back et front: network sécurisé
+236
+Orchestration des conteneurs
+
+===== PAGE 19 =====
+Déployer une application avec trois services mongo, back et front: network sécurisé
+237
+Orchestration des conteneurs
+
+===== PAGE 20 =====
+Déployer une application avec trois services mongo, back et front: network sécurisé
+238
+Orchestration des conteneurs
+
+===== PAGE 21 =====
+Mise à l’échelle d’un service (scaling back service: 15 instances)
+240
+Orchestration des conteneurs
+
+===== PAGE 22 =====
+Mise à l’échelle d’un service (scaling back service: 15 instances)
+241
+Orchestration des conteneurs
+
+===== PAGE 23 =====
+Mise à l’échelle d’un service (scaling front service: 2 instances)
+242
+Orchestration des conteneurs
+
+===== PAGE 24 =====
+Mise à l’échelle d’un service (scaling front service: 2 instances)
+243
+Orchestration des conteneurs
+
+===== PAGE 25 =====
+Déployer la mise à jour du service back
+244
+Orchestration des conteneurs
+
+===== PAGE 26 =====
+Déployer la mise à jour du service back
+245
+Orchestration des conteneurs
+
+===== PAGE 27 =====
+Déployer la mise à jour du service front
+246
+Orchestration des conteneurs
+
+===== PAGE 28 =====
+Déployer la mise à jour du service front
+247
+Conteneurisation avec Docker
+
+===== PAGE 29 =====
+Déployer la mise à jour du service front: Rollback
+248
+Orchestration des conteneurs
+
+===== PAGE 30 =====
+Suspendre un nœud worker
+249
+Conteneurisation avec Docker
+Toutes les instances des services déployées dans le nœud Host 3 vont migrer vers les
+autres nœuds du cluster
+
+===== PAGE 31 =====
+Conditionner le démarrage de services
+250
+Orchestration des conteneurs

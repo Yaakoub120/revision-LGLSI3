@@ -1,0 +1,223 @@
+
+===== PAGE 1 =====
+01/11/2025 
+1 
+ Big Data : Est-ce une innovation  
+C’est quoi le Big Data ? 
+ BIG DATA: Caractéristiques  
+
+===== PAGE 2 =====
+01/11/2025 
+2 
+ BIG DATA: Caractéristiques 
+ BIG DATA: Caractéristiques 
+3 Problématiques majeures pour les données massives  
+Volume  
+Vélocité  
+Variété 
+ BIG DATA: Caractéristiques 
+Volume stockage 
+Vélocité -Traitement 
+Variétécollecte 
+ BIG DATA: Caractéristiques 
+
+===== PAGE 3 =====
+01/11/2025 
+3 
+Le volume 
+
+===== PAGE 4 =====
+01/11/2025 
+4 
+Le volume 
+15 
+Les 5 V de Big Data 
+Volume 
+- Téraoctets 
+- Enreg. / Archives 
+- Transactions 
+- Tables, fichiers 
+La variété (Variety) 
+Variété 
+- Structurées 
+- Non structurées 
+- Probabilistes 
+Pour un stockage dans des bases de données 
+ou dans des entrepôts de données, les 
+données 
+doivent 
+respecter 
+un 
+format 
+prédéfini! 
+Mais! 
+La plupart des données existantes sont non-structurées ou semi structurées, 
+Les données sont sous plusieurs formats et types (fichiers xml, json, txt, base de 
+données relationnelle,  etc), 
+La variété (Variety) 
+
+===== PAGE 5 =====
+01/11/2025 
+5 
+Données structurées versus Données non structurées  
+La variété (Variety) 
+Données structurées: Exemple 
+
+===== PAGE 6 =====
+01/11/2025 
+6 
+Semi-structuré 
+Exemple: fichier XML 
+Données non structurées:  Exemple 
+
+===== PAGE 7 =====
+01/11/2025 
+7 
+26 
+C’est quoi le Big Data ? 
+Les 5 V de Big Data 
+La fréquence d’arrivée des données, 
+La vitesse de traitement des données, 
+Volume 
+- Téraoctets 
+- Enreg. / Archives 
+- Transactions 
+- Tables, fichiers 
+La vélocité /vitesse 
+(Velocity) 
+« Au cœur du Time to Market » 
+Variété 
+- Structurées 
+- Non structurées 
+- Probabilistes 
+Vélocité 
+- Batch 
+- Temps réel 
+- Processus 
+- Flot de données 
+Les données doivent être stockées à 
+l’arrivée, parfois même des 
+Teraoctets par jour!  
+
+Sinon, risque de les perdre! 
+Les entreprises se trouvent de plus en plus au milieu d’un flux continuel 
+de données 
+28 
+Les 5 V de Big Data 
+Fait référence à la fiabilité des données.   
+Si la quantité des données augmente alors 
+la qualité et précision sont moins vérifiées !  
+La véracité (Veracity) 
+Volume 
+- Téraoctets 
+- Enreg. / 
+Archives 
+- Transactions 
+- Tables, fichiers 
+Variété 
+- Structurées 
+- Non structurées 
+- Probabilistes 
+Vélocit
+é 
+- Batch 
+- Temps réél 
+- Processus 
+- Flot de données 
+Véracité 
+- Confiance 
+- Authenticité 
+- Origine, réputation 
+- Disponibilité 
+- Responsabilité 
+Exemple:  Twitter Les  twittes peuvent contenir: 
+Des abréviations, Les hashtags #, Langage familier, 
+L’alphabet de tchat arabe, fiabilité et exactitude de 
+données, etc. 
+Les solutions Big Data et l’analytique doivent 
+remédier à cela en se référant au volume des 
+données existantes, 
+La manque de qualité et d’exactitude 
+résultent souvent  des gros volumes! 
+
+===== PAGE 8 =====
+01/11/2025 
+8 
+29 
+Il faut transformer toutes les données en 
+valeurs exploitables: les données sans valeur 
+sont inutiles, 
+Volume 
+- Téraoctets 
+- Enreg. / 
+Archives 
+- Transactions 
+- Tables, 
+fichiers 
+La valeur (Value) 
+Variété 
+- Structurées 
+- Non 
+structurées 
+-Probabilistes 
+Véloci
+té 
+- Batch 
+- Temps réel 
+- Processus 
+- Flot de 
+données 
+Véraci
+té 
+- Confiance 
+- Authenticité 
+- Origine, 
+réputation 
+- Disponibilité 
+- Responsabilité 
+Valeur 
+- Statistiques 
+- Évènements 
+- Corrélations 
+- Hypothétiques 
+Un projet Big Data et son accès aux 
+utilisateurs n'a d'intérêt que s'il apporte de la 
+valeur à l'entreprise  Le V le plus 
+important! 
+Il est aussi primordial que les entreprises évaluent la 
+rentabilité d’une récolte de données par exemple. 
+Atteindre des objectifs stratégiques de création 
+de valeur pour les clients et pour l’entreprise 
+dans tous les domaines d’activité. 
+Résumé 
+  Problématique du Volume 
+ 
+ Auparavant, quand les systèmes d'application de gestion de base de données 
+ont été réalisés, ils ont été construits avec une échelle à l'esprit. Même les 
+organisations n'ont pas été préparées à l'échelle que nous produisons 
+aujourd'hui. 
+ 
+  Comme les exigences de ces organisations ont augmenté au fil du temps, ils 
+doivent repenser et réinvestir dans l'infrastructure. Actuellement, le coût des 
+ressources impliquées dans l'extension de l'infrastructure, s’augmente avec un 
+facteur exponentiel. 
+ 
+ De plus, il y aurait une limitation sur les différents facteurs tels que la taille de 
+la machine, CPU, RAM, etc. qui peuvent être mis à l'échelle (scaled up). Ces 
+systèmes traditionnels ne seraient pas en mesure de soutenir l'échelle requise 
+par la plupart des entreprises. 
+Problématique du Volume 
+ADAPTABILITE  
+
+===== PAGE 9 =====
+01/11/2025 
+9 
+ 
+Mais tout de même… 
+ Comment Gérer ces 
+
+===== PAGE 10 =====
+01/11/2025 
+10 
+ Comment le Big Data gère ces situations 
+complexes? 
