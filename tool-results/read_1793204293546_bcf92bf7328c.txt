@@ -1,0 +1,762 @@
+     1→  1420→Transfer Protocol)
+     2→  1421→Construction De La Requête
+     3→  1422→1. Le libellé de requête : La requête HTTP, comme son nom l'indique est une
+     4→  1423→demande à un serveur pour qu'il exécute un ordre (principalement d'obtenir
+     5→  1424→un document). Ces ordres sont symbolisés par des verbes.
+     6→  1425→Les verbes les plus connus sont :
+     7→  1426→• HEAD : "donne-moi les métas informations concernant un document" ;
+     8→  1427→• GET : "donne-moi le contenu du document (et ses méta informations par
+     9→  1428→la même occasion)" ;
+    10→  1429→• POST : "fais ce que tu veux (ou tu peux avec les données que je t'envoie)" ;
+    11→  1430→• PUT : "mets le document que je t'envoie où je te le dis".
+    12→  1431→108
+    13→  1432→
+    14→  1433→========== PAGE 109 ==========
+    15→  1434→La couche de Transport HTTP (Hypertext
+    16→  1435→Transfer Protocol)
+    17→  1436→2. La Cible : Elle est représentée par une URL absolue ou relative. Le
+    18→  1437→serveur est chargé de "consommer" cette cible, la traduire en une
+    19→  1438→réalité physique tangible (un fichier physique, un exécutable, un
+    20→  1439→répertoire).
+    21→  1440→La requête peut informer le serveur d'un certain nombre de
+    22→  1441→prédispositions de l'agent utilisateur.
+    23→  1442→Des mécanismes de gestion de préférences, convenues entre le client
+    24→  1443→et le serveur permettent d'améliorer le service rendu, sans faire appel à
+    25→  1444→des choix explicites de l'utilisateur.
+    26→  1445→109
+    27→  1446→
+    28→  1447→========== PAGE 110 ==========
+    29→  1448→La couche de Transport HTTP (Hypertext
+    30→  1449→Transfer Protocol)
+    31→  1450→Ces préférences sont, par exemple :
+    32→  1451→• Le choix de la langue la plus appropriée.
+    33→  1452→• Le choix d'un encodage acceptable du côté du client.
+    34→  1453→• Le choix d'une version suffisamment récente, ou au contraire de
+    35→  1454→versions plus anciennes.
+    36→  1455→Les champs de requête sont placés à la suite de la "ligne VERBE" sous la
+    37→  1456→syntaxe :
+    38→  1457→NomChamp : [ValeurChamp] LF
+    39→  1458→L'en-tête doit se terminer par une ligne vide, pour indiquer que ce qui
+    40→  1459→suit est un corps d'entité (ou que le message est fini).
+    41→  1460→110
+    42→  1461→
+    43→  1462→========== PAGE 111 ==========
+    44→  1463→La couche de Transport HTTP (Hypertext
+    45→  1464→Transfer Protocol)
+    46→  1465→3. Un corps de requête
+    47→  1466→• Certains
+    48→  1467→verbes
+    49→  1468→(PUT,
+    50→  1469→POST)
+    51→  1470→supposent
+    52→  1471→très
+    53→  1472→fortement
+    54→  1473→une
+    55→  1474→transmission de contenu du client vers le serveur.
+    56→  1475→• Ce contenu pouvant être a priori d'une taille quelconque, il s'agit bien
+    57→  1476→d'un corps d'entité.
+    58→  1477→• Dans ce cas, on doit considérer potentiellement une requête comme
+    59→  1478→étant une transmission d'un document à part entière.
+    60→  1479→• Le client pousse un document local vers le serveur.
+    61→  1480→111
+    62→  1481→
+    63→  1482→========== PAGE 112 ==========
+    64→  1483→La couche de Transport HTTP (Hypertext
+    65→  1484→Transfer Protocol)
+    66→  1485→4. Détermination de la longueur du corps d'entité
+    67→  1486→• Il n'existe pas en HTTP de bloc de fin de message identifiable.
+    68→  1487→• D'autre part, virtuellement, le corps de l'entité peut contenir n'importe
+    69→  1488→quelle séquence binaire, y compris une séquence qui pourrait se confondre
+    70→  1489→avec un tel bloc.
+    71→  1490→• La question de prévoir la fin du corps d'entité doit être réglée dès l'entête.
+    72→  1491→• Toute requête portant un contenu d'une certaine longueur doit informer le
+    73→  1492→serveur de cette longueur. On utilise le champ : Content-Length
+    74→  1493→112
+    75→  1494→
+    76→  1495→========== PAGE 113 ==========
+    77→  1496→La couche de Transport HTTP (Hypertext
+    78→  1497→Transfer Protocol)
+    79→  1498→Construction De La Réponse
+    80→  1499→Le schéma de réponse est symétrique à celui de la requête, à la
+    81→  1500→différence près que le corps d'entité est le plus souvent non vide.
+    82→  1501→113
+    83→  1502→
+    84→  1503→========== PAGE 114 ==========
+    85→  1504→La couche de Transport HTTP (Hypertext
+    86→  1505→Transfer Protocol)
+    87→  1506→114
+    88→  1507→• Une requête mono-entité, dans le cas général se construit ainsi :
+    89→  1508→
+    90→  1509→========== PAGE 115 ==========
+    91→  1510→La pile protocolaire simplifiée SOAP WS
+    92→  1511→115
+    93→  1512→Découverte / Publication (UDDI)
+    94→  1513→Description (WSDL)
+    95→  1514→Communication (SOAP)
+    96→  1515→Transport (HTTP)
+    97→  1516→Sécurité
+    98→  1517→Transaction
+    99→  1518→……….
+   100→  1519→Mécanismes fonctionnels
+   101→  1520→Mécanismes non fonctionnels
+   102→  1521→
+   103→  1522→========== PAGE 116 ==========
+   104→  1523→La couche de Communication SOAP (Simple
+   105→  1524→Object Access Protocol)
+   106→  1525→Définition:
+   107→  1526→• SOAP (Simple Object Access Protocol) est un protocole standardisé par
+   108→  1527→W3C, et qui assure le transfert des messages et les appels de procédures
+   109→  1528→RPC (Appels de procédures distants) indépendamment du transport.
+   110→  1529→• SOAP définit le cadre général pour l’échange de données structurées en
+   111→  1530→XML.
+   112→  1531→• Il permet d’échanger des structures de données complexes en XML avec les
+   113→  1532→espaces de nom, et la spécification XML Schéma.
+   114→  1533→• L'atout principal des protocoles SOAP et UDDI ainsi que du langage WSDL
+   115→  1534→est de se reposer sur le langage XML (eXtensible Markup Language).
+   116→  1535→116
+   117→  1536→
+   118→  1537→========== PAGE 117 ==========
+   119→  1538→C’est quoi XML ?
+   120→  1539→117
+   121→  1540→
+   122→  1541→========== PAGE 118 ==========
+   123→  1542→Le langage XML (eXtensible Markup Language)
+   124→  1543→• XML est un standard qui permet de décrire des documents structurés
+   125→  1544→transportables sur les protocoles d’Internet.
+   126→  1545→• Il apporte à l’architecture des services web l’extensibilité et la
+   127→  1546→neutralité
+   128→  1547→vis-à-vis
+   129→  1548→des
+   130→  1549→plateformes
+   131→  1550→et
+   132→  1551→des
+   133→  1552→langages
+   134→  1553→de
+   135→  1554→développement.
+   136→  1555→• De plus, grâce à la structuration, XML permet la distinction entre les
+   137→  1556→données des applications et les données des protocoles.
+   138→  1557→118
+   139→  1558→
+   140→  1559→========== PAGE 119 ==========
+   141→  1560→Le langage XML (eXtensible Markup Language)
+   142→  1561→• La technologie des services web a été conçue pour fonctionner dans
+   143→  1562→des environnements totalement hétérogènes.
+   144→  1563→• Cependant,
+   145→  1564→l’interopérabilité
+   146→  1565→entre
+   147→  1566→les
+   148→  1567→systèmes
+   149→  1568→hétérogènes
+   150→  1569→demande des mécanismes puissants de correspondance et de gestion
+   151→  1570→des types de données des messages entre les différents participants
+   152→  1571→(clients et fournisseurs).
+   153→  1572→• C’est une tâche où les schémas de type de données XML s’avèrent
+   154→  1573→bien adaptés. C’est pour cette raison que la technologie des services
+   155→  1574→web est essentiellement basée sur XML.
+   156→  1575→119
+   157→  1576→
+   158→  1577→========== PAGE 120 ==========
+   159→  1578→Le langage XML (eXtensible Markup Language)
+   160→  1579→Quelques spécifications de XML :
+   161→  1580→• XSD (XML Schema) : c’est un langage qui sert à décrire formellement
+   162→  1581→un vocabulaire
+   163→  1582→• XSLT (Extensible Stylesheet Language Transformations) : est utilisé
+   164→  1583→pour transformer un document XML basé sur un certain schéma en
+   165→  1584→un autre document XML qui peut être un document lui-même basé
+   166→  1585→sur un autre schéma.
+   167→  1586→• XPath (XML Path Language) : fournit une syntaxe d’expressions
+   168→  1587→utilisées pour créer des chemins de localisation.
+   169→  1588→120
+   170→  1589→
+   171→  1590→========== PAGE 121 ==========
+   172→  1591→Le langage XML (eXtensible Markup Language)
+   173→  1592→• Espaces de noms : Mécanismes permettant de partitionner les balises
+   174→  1593→XML (permet d’avoir deux fois le même nom de balise)
+   175→  1594→Un espace de nom est défini dans n’importe quelle balise par l’attribut
+   176→  1595→xmlns et par une URI.
+   177→  1596→Dans un document XML, un espace de noms est identifié par un nom
+   178→  1597→logique, les balises appartenant à cet espace doivent alors être préfixée
+   179→  1598→par ce nom logique.
+   180→  1599→Exemple :
+   181→  1600→<meta:body xmlns:meta="http://meta.lip6.fr/meta/"
+   182→  1601→121
+   183→  1602→
+   184→  1603→========== PAGE 122 ==========
+   185→  1604→Le langage XML (eXtensible Markup Language)
+   186→  1605→Exemple d’un fichier XML:
+   187→  1606→<livre>
+   188→  1607→<titre> le super livre </titre>
+   189→  1608→<chapitre>
+   190→  1609→<numero> 1 </numero>
+   191→  1610→<titre> titre du chapitre 1 </titre>
+   192→  1611→<contenu> xxxxxxxxx </contenu>
+   193→  1612→</chapitre>
+   194→  1613→<chapitre>
+   195→  1614→…
+   196→  1615→</chapitre>
+   197→  1616→</livre>
+   198→  1617→122
+   199→  1618→
+   200→  1619→========== PAGE 123 ==========
+   201→  1620→Le langage XML (eXtensible Markup Language)
+   202→  1621→Deux façons de définir une grammaire XML :
+   203→  1622→• DTD
+   204→  1623→• Langage de définition de grammaire XML
+   205→  1624→• Largement utilisé
+   206→  1625→• Expression faible (type, structure)
+   207→  1626→• XML Schéma
+   208→  1627→• Langage XML de définition de grammaire XML
+   209→  1628→• De plus en plus utilisé
+   210→  1629→• Expression puissante (type, structure, héritage)
+   211→  1630→Un document XML est dit valide lorsqu’il est conforme à une grammaire.
+   212→  1631→123
+   213→  1632→
+   214→  1633→========== PAGE 124 ==========
+   215→  1634→Le langage XML (eXtensible Markup Language)
+   216→  1635→Avantages du langage XML :
+   217→  1636→• Standard W3C
+   218→  1637→• La syntaxe XML ne contient que peu de mot clef: Simplicité
+   219→  1638→• XML est indépendant des plates-formes: Portabilité
+   220→  1639→• XML est un méta-langage, il est possible de créer ses propres balises:
+   221→  1640→Extensibilité
+   222→  1641→• Outils disponibles (et gratuits)
+   223→  1642→• Largement utilisé pour les échanges inter-applications
+   224→  1643→124
+   225→  1644→
+   226→  1645→========== PAGE 125 ==========
+   227→  1646→La couche de Communication SOAP (Simple
+   228→  1647→Object Access Protocol)
+   229→  1648→Définition:
+   230→  1649→• SOAP (Simple Object Access Protocol) est un protocole standardisé
+   231→  1650→par W3C, et qui assure le transfert des messages et les appels de
+   232→  1651→procédures RPC (Appels de procédures distants) indépendamment du
+   233→  1652→transport.
+   234→  1653→• SOAP définit le cadre général pour l’échange de données structurées
+   235→  1654→en XML.
+   236→  1655→• Il permet d’échanger des structures de données complexes en XML
+   237→  1656→avec
+   238→  1657→les espaces
+   239→  1658→de
+   240→  1659→nom,
+   241→  1660→et
+   242→  1661→la
+   243→  1662→spécification
+   244→  1663→XML
+   245→  1664→Schéma.
+   246→  1665→125
+   247→  1666→
+   248→  1667→========== PAGE 126 ==========
+   249→  1668→La couche de Communication SOAP (Simple
+   250→  1669→Object Access Protocol)
+   251→  1670→Objectif : permettre la normalisation des échanges de données.
+   252→  1671→Il définit un moyen uniforme d'échange de données encodées XML
+   253→  1672→sous forme d'appels de procédures à distance RPC, en utilisant souvent
+   254→  1673→le HTTP comme protocole de transport ainsi les protocoles SMTP, POP,
+   255→  1674→et FTP dans certains cas.
+   256→  1675→Il
+   257→  1676→assure
+   258→  1677→l'interopérabilité
+   259→  1678→entre
+   260→  1679→composants
+   261→  1680→tout
+   262→  1681→en
+   263→  1682→restant
+   264→  1683→indépendant des plates-formes et des langages de programmation.
+   265→  1684→126
+   266→  1685→
+   267→  1686→========== PAGE 127 ==========
+   268→  1687→La couche de Communication SOAP (Simple
+   269→  1688→Object Access Protocol)
+   270→  1689→Il repose sur deux standards :
+   271→  1690→• XML : pour la structuration des messages.
+   272→  1691→• http : pour le transport.
+   273→  1692→Il permet une interopérabilité avec divers environnements logiciels
+   274→  1693→(.NET, Java/RMI, CORBA, COM/DCOM …) quel que soit leur plate-forme
+   275→  1694→d'exécution.
+   276→  1695→127
+   277→  1696→
+   278→  1697→========== PAGE 128 ==========
+   279→  1698→La couche de Communication SOAP (Simple
+   280→  1699→Object Access Protocol)
+   281→  1700→• Les paquets de données circulent sous format XML, mais tous types
+   282→  1701→de données peuvent être transportés même si les données binaires
+   283→  1702→peuvent faire l'objet d'un encodage spécifique.
+   284→  1703→• Les données ayant un format binaire sont transportées sous forme de
+   285→  1704→pièces jointes avec le message SOAP principal.
+   286→  1705→• Les messages SOAP peuvent traverser les Proxy et les pare-feu.
+   287→  1706→• Il permet l'échange de données que ce soit en mode synchrone
+   288→  1707→(requête/réponse) ou asynchrone (accompagnement des processus).
+   289→  1708→128
+   290→  1709→
+   291→  1710→========== PAGE 129 ==========
+   292→  1711→La couche de Communication SOAP (Simple
+   293→  1712→Object Access Protocol)
+   294→  1713→PRINCIPES FONDAMENTAUX DU PROTOCOLE SOAP :
+   295→  1714→1. Framework de messagerie
+   296→  1715→2. Encodage et sérialisation standard pour les objets
+   297→  1716→3. Invocation de Service d'objets distants via SOAP RPC
+   298→  1717→4. Messages SOAP
+   299→  1718→5. Acheminement des messages
+   300→  1719→6. Nœud intermédiaire actif
+   301→  1720→7. Règles d'encodage
+   302→  1721→8. Liaison du SOAP avec les protocoles du transport
+   303→  1722→9. Sécurité du SOAP
+   304→  1723→129
+   305→  1724→
+   306→  1725→========== PAGE 130 ==========
+   307→  1726→La couche de Communication SOAP (Simple
+   308→  1727→Object Access Protocol)
+   309→  1728→1. Framework de messagerie :
+   310→  1729→Concepts relatifs spécifiquement à la manière avec laquelle les messages sont
+   311→  1730→manipulés.
+   312→  1731→Nœud SOAP (Nodes) : Un nœud SOAP (identifié par un URI) est l'infrastructure
+   313→  1732→technique qui alimente les différents scénarios de communication entre services. Il
+   314→  1733→peut être vu comme étant le processeur logique permettant de recevoir,
+   315→  1734→transmettre, et exécuter un ensemble d'opérations sur les messages SOAP.
+   316→  1735→Différents rôles joués par un nœud :
+   317→  1736→• Expéditeur initial (Demandeur de service)(Initial Sender) ou (Service Requestor).
+   318→  1737→• Récepteur Final (Fournisseur de service) (Ultimate Receiver) ou (Service Provider).
+   319→  1738→• Nœud intermédiaire (Intermediary)
+   320→  1739→130
+   321→  1740→
+   322→  1741→========== PAGE 131 ==========
+   323→  1742→La couche de Communication SOAP (Simple
+   324→  1743→Object Access Protocol)
+   325→  1744→2. Encodage et sérialisation standard pour les objets:
+   326→  1745→• Le protocole SOAP impose une spécification d'encodage/sérialisation
+   327→  1746→standard, qui doit être appliquée sur les données du message, que ce
+   328→  1747→soit du côté client ou bien fournisseur. Cette tâche est assurée par le
+   329→  1748→runtime SOAP implanté des deux côtés (client, fournisseur), et
+   330→  1749→essentiellement utilisée avec le RPC.
+   331→  1750→• Exemple: encodage d'un tableau d'entiers :
+   332→  1751→131
+   333→  1752→
+   334→  1753→========== PAGE 132 ==========
+   335→  1754→La couche de Communication SOAP (Simple
+   336→  1755→Object Access Protocol)
+   337→  1756→3. Invocation de Service d'objets distants via SOAP RPC :
+   338→  1757→Le
+   339→  1758→protocole
+   340→  1759→SOAP
+   341→  1760→permet
+   342→  1761→d'invoquer
+   343→  1762→un
+   344→  1763→objet
+   345→  1764→distant
+   346→  1765→en
+   347→  1766→communiquant les informations nécessaires à l'appel: nom de la
+   348→  1767→méthode, et sa signature numérique (ses arguments) dans un message
+   349→  1768→au format XML. La réponse à la requête est aussi renvoyée encapsulée
+   350→  1769→dans un message au format XML. La librairie SOAP assure l'envoi du
+   351→  1770→RPC à l'aide du protocole du transport choisi.
+   352→  1771→132
+   353→  1772→
+   354→  1773→========== PAGE 133 ==========
+   355→  1774→La couche de Communication SOAP (Simple
+   356→  1775→Object Access Protocol)
+   357→  1776→Les différentes étapes d'invocation des objets distants sont:
+   358→  1777→1. Le programme client SOAP crée le document XML contenant les
+   359→  1778→informations nécessaires à l'invocation d'un objet distant, et le transmet
+   360→  1779→au protocole HTTP (requête POST).
+   361→  1780→2.
+   362→  1781→Le message est transmis au serveur via une connexion HTTP.
+   363→  1782→3. Le serveur reçoit le message et fait appel à l'objet concerné.
+   364→  1783→4.
+   365→  1784→L'objet effectue le traitement demandé et renvoie les résultats au
+   366→  1785→serveur SOAP.
+   367→  1786→5. Le serveur SOAP encapsule les résultats et les envoie dans un document
+   368→  1787→XML au client via le protocole HTTP.
+   369→  1788→6.
+   370→  1789→Le client SOAP décode le message et envoie les résultats au demandeur
+   371→  1790→initial.
+   372→  1791→133
+   373→  1792→
+   374→  1793→========== PAGE 134 ==========
+   375→  1794→La couche de Communication SOAP (Simple
+   376→  1795→Object Access Protocol)
+   377→  1796→• Exemple: appel du service GetLastTradePrice:
+   378→  1797→134
+   379→  1798→
+   380→  1799→========== PAGE 135 ==========
+   381→  1800→La couche de Communication SOAP (Simple
+   382→  1801→Object Access Protocol)
+   383→  1802→4. Messages SOAP :
+   384→  1803→• Le framework de messagerie SOAP demande que les messages SOAP
+   385→  1804→soient composés d'une enveloppe (Envelope) contenant un entête
+   386→  1805→(Header) et un corps (Body). La partie entête du message qui sert à
+   387→  1806→véhiculer les méta-données du message est une partie optionnelle. Elle
+   388→  1807→est formée d'un ensemble de blocs appelés "entrées entête", dont
+   389→  1808→chacun peut contenir plusieurs attributs.
+   390→  1809→• La partie Body est la partie principale du message, elle contient les
+   391→  1810→données applicatives destinées au récepteur final.
+   392→  1811→• Cependant un message SOAP peut avoir des fichiers attachés au fichier
+   393→  1812→principal, ainsi tout fichier qui n'est pas au format xml doit apparaître
+   394→  1813→dans la partie attachement. Ainsi tous les fichiers attachés en pièces
+   395→  1814→jointes doivent être référencés par des URL dans le message principal.
+   396→  1815→135
+   397→  1816→
+   398→  1817→========== PAGE 136 ==========
+   399→  1818→La couche de Communication SOAP (Simple
+   400→  1819→Object Access Protocol)
+   401→  1820→• Exemple : (Squelette d'un message SOAP)
+   402→  1821→136
+   403→  1822→
+   404→  1823→========== PAGE 137 ==========
+   405→  1824→La couche de Communication SOAP (Simple
+   406→  1825→Object Access Protocol)
+   407→  1826→137
+   408→  1827→
+   409→  1828→========== PAGE 138 ==========
+   410→  1829→La couche de Communication SOAP (Simple
+   411→  1830→Object Access Protocol)
+   412→  1831→138
+   413→  1832→
+   414→  1833→========== PAGE 139 ==========
+   415→  1834→La couche de Communication SOAP (Simple
+   416→  1835→Object Access Protocol)
+   417→  1836→5. Acheminement des messages :
+   418→  1837→A l'arrivée d'un message chez un nœud SOAP, celui-ci doit :
+   419→  1838→1. Vérifier la structure du message: enveloppe, entête, et corps du message.
+   420→  1839→2. Déterminer les entrées d'entêtes destinées à lui-même, et l'ensemble des rôles à
+   421→  1840→en exécuter.
+   422→  1841→3. Sélectionner parmi ces entrées celles qui sont mandataires.
+   423→  1842→4. Si une de ces entrées n'est pas comprise ou bien qu'il n'a pas la capacité d'en
+   424→  1843→traiter, il envoie un message d'erreur à l'expéditeur initial.
+   425→  1844→5. Traiter toutes les entrées mandataires, ainsi que celles qui sont optionnelles et
+   426→  1845→dont il a la capacité d'en traiter.
+   427→  1846→6. Traiter le corps du message s'il s'agit du récepteur final.
+   428→  1847→7. Retransmettre le message au nœud suivant s'il s'agit d'un nœud intermédiaire.
+   429→  1848→139
+   430→  1849→
+   431→  1850→========== PAGE 140 ==========
+   432→  1851→La couche de Communication SOAP (Simple
+   433→  1852→Object Access Protocol)
+   434→  1853→6. Nœud intermédiaire actif :
+   435→  1854→En
+   436→  1855→plus
+   437→  1856→du
+   438→  1857→traitement
+   439→  1858→effectué
+   440→  1859→par
+   441→  1860→des
+   442→  1861→intermédiaires
+   443→  1862→de
+   444→  1863→réacheminement, les intermédiaires actifs entreprennent du traitement
+   445→  1864→supplémentaire pouvant modifier le message sortant selon des
+   446→  1865→manières non décrites dans le message entrant. C'est-à-dire qu'ils
+   447→  1866→peuvent entreprendre un traitement non décrit par un bloc d'en-tête
+   448→  1867→SOAP du message arrivé. L'ensemble potentiel de services fournis par
+   449→  1868→un intermédiaire actif inclut : des services de sécurité, des services
+   450→  1869→d'annotation et des services de manipulation de contenu.
+   451→  1870→140
+   452→  1871→
+   453→  1872→========== PAGE 141 ==========
+   454→  1873→La couche de Communication SOAP (Simple
+   455→  1874→Object Access Protocol)
+   456→  1875→7. Règles d'encodage:
+   457→  1876→Les règles d'encodage SOAP expriment les types de données définis pour
+   458→  1877→l'application en XML. Elles constituent un ensemble unique de règles
+   459→  1878→d'encodage défini par la spécification SOAP. Cet encodage est fondé sur les
+   460→  1879→schémas XML W3C. Il existe deux types de données :
+   461→  1880→a) Les types de données simples : Chaînes de caractères, Enumérations,
+   462→  1881→Tableaux d'octets
+   463→  1882→b) Les types composés :
+   464→  1883→- Struct (enregistrement) qui désigne une valeur composée dans laquelle le
+   465→  1884→nom d'accesseur seul permet de différencier les valeurs de membres, chaque
+   466→  1885→accesseur ayant un nom unique.
+   467→  1886→- Array qui désigne un tableau dont les éléments sont de même type.
+   468→  1887→141
+   469→  1888→
+   470→  1889→========== PAGE 142 ==========
+   471→  1890→La couche de Communication SOAP (Simple
+   472→  1891→Object Access Protocol)
+   473→  1892→8. Liaison du SOAP avec les protocoles du transport:
+   474→  1893→a) Modes de transport de message SOAP: Les messages sont véhiculés soit
+   475→  1894→en mode RPC ou bien en mode messagerie.
+   476→  1895→b) Utilisation de SOAP avec RPC:
+   477→  1896→Le protocole SOAP encapsule et permet d'échanger les appels RPC en
+   478→  1897→utilisant la flexibilité du XML. Les appels et réponses de méthodes RPC sont
+   479→  1898→transmis encapsulés dans l'élément Body du message. Pour effectuer une
+   480→  1899→invocation de méthode distante les informations suivantes sont nécessaires:
+   481→  1900→URI de l'objet cible, Nom de la méthode, Signature de la méthode
+   482→  1901→(facultative), Paramètres de la méthode et Données de l'entête (facultatives).
+   483→  1902→142
+   484→  1903→
+   485→  1904→========== PAGE 143 ==========
+   486→  1905→La couche de Communication SOAP (Simple
+   487→  1906→Object Access Protocol)
+   488→  1907→9. Sécurité du SOAP:
+   489→  1908→La structure de messages SOAP ne fournit pas directement de
+   490→  1909→mécanismes pour traiter le contrôle d'accès, la confidentialité,
+   491→  1910→l'intégrité et la non répudiation. De tels mécanismes peuvent être
+   492→  1911→fournis sous forme d'extensions SOAP grâce au modèle d'extensibilité.
+   493→  1912→Le concepteur et l'implémenteur du protocole SOAP doivent prendre
+   494→  1913→en considération différents types de risques qui peuvent être produits :
+   495→  1914→a) Risque dû au contenu du message (nœud SOAP)
+   496→  1915→b) Risque dû au transport (nœuds intermédiaires)
+   497→  1916→c) Risque dû aux spécifications (protocole de transport)
+   498→  1917→143
+   499→  1918→
+   500→  1919→========== PAGE 144 ==========
+   501→  1920→Exemple
+   502→  1921→144
+   503→  1922→
+   504→  1923→========== PAGE 145 ==========
+   505→  1924→145
+   506→  1925→
+   507→  1926→========== PAGE 146 ==========
+   508→  1927→146
+   509→  1928→
+   510→  1929→========== PAGE 147 ==========
+   511→  1930→147
+   512→  1931→
+   513→  1932→========== PAGE 148 ==========
+   514→  1933→La couche de Communication SOAP (Simple
+   515→  1934→Object Access Protocol)
+   516→  1935→IMPLEMENTATION SOAP (Voir TP1)
+   517→  1936→Une multitude d'implémentations du protocole SOAP et Toolkits existent
+   518→  1937→aujourd'hui, qui correspondent aux différents environnements et langages de
+   519→  1938→programmation (Java, C++, C, Perl, PHP, Python..) et qui peuvent répondre aux
+   520→  1939→différents besoins de l'utilisateur.
+   521→  1940→Ces outils peuvent implémenter de différentes fonctionnalités, au-delà des
+   522→  1941→fonctionnalités de base communes:
+   523→  1942→• Processus fondamental de création, déploiement et utilisation des services web.
+   524→  1943→• Comprendre et réaliser tous les traitements concernant les styles d'encodage et
+   525→  1944→la translation des types natifs de données dans XML et vice versa.
+   526→  1945→• Encodage, décodage et routage des messages SOAP à travers le protocole de
+   527→  1946→transport.
+   528→  1947→148
+   529→  1948→
+   530→  1949→========== PAGE 149 ==========
+   531→  1950→La couche de Communication SOAP (Simple
+   532→  1951→Object Access Protocol)
+   533→  1952→STRUCTURE DES MESSAGES SOAP
+   534→  1953→La structure d’un message SOAP diffère selon les types d’informations
+   535→  1954→transportées : Si ces informations sont tous textuelles, le format de
+   536→  1955→message simple suffit, par contre s’il y a des informations nécessitant
+   537→  1956→des formats de données binaires spécifique (image, vidéo, son, pdf,..) le
+   538→  1957→format simple en suffit plus, et l’ensemble de ces informations doivent
+   539→  1958→être encapsulées dans un format MIME qui sera indispensable.
+   540→  1959→149
+   541→  1960→
+   542→  1961→========== PAGE 150 ==========
+   543→  1962→La couche de Communication SOAP (Simple
+   544→  1963→Object Access Protocol)
+   545→  1964→1. Message simple :
+   546→  1965→Un message SOAP simple est message contenant uniquement du texte
+   547→  1966→(XML). Il est composé de :
+   548→  1967→a) L’enveloppe SOAP (Envelope) :
+   549→  1968→C'est l'élément récipient (conteneur) qui englobe tous les autres
+   550→  1969→éléments du message. Sa déclaration est strictement obligatoire
+   551→  1970→puisque c'est elle qui détermine le début et la fin de la partie SOAP
+   552→  1971→dans une requête. Le mot-clé Envelope (qui doit suivre le nom local de
+   553→  1972→l'enveloppe) est suivi d'un espace de nom contenant un URI qui pointe
+   554→  1973→vers un schéma XML. La valeur de cet URI (schéma XML) varie selon la
+   555→  1974→version du message SOAP.
+   556→  1975→150
+   557→  1976→
+   558→  1977→========== PAGE 151 ==========
+   559→  1978→La couche de Communication SOAP (Simple
+   560→  1979→Object Access Protocol)
+   561→  1980→Exemple : Déclaration de l’enveloppe d’un message SOAP écrit dans la
+   562→  1981→version 1.1 et contenant un attribut encodingStyle :
+   563→  1982→151
+   564→  1983→Un message SOAP peut commencer par une déclaration XML.
+   565→  1984→Exemple : Déclaration de l’enveloppe d’un message SOAP écrit dans la version
+   566→  1985→1.2 précédée d’une ligne XML (qui indique la version du langage XML utilisée) :
+   567→  1986→
+   568→  1987→========== PAGE 152 ==========
+   569→  1988→La couche de Communication SOAP (Simple
+   570→  1989→Object Access Protocol)
+   571→  1990→b) L’entête du message (Header) :
+   572→  1991→C’est une partie optionnelle (souvent) qui sert comme mécanisme
+   573→  1992→d’extension du protocole SOAP. Elle est composée d’une ou plusieurs
+   574→  1993→entrées (Header entry/ Header Block), chacune d’elles peut être
+   575→  1994→destinée à un ou plusieurs nœuds SOAP (nœuds intermédiaires et/ou
+   576→  1995→récepteur final du message).
+   577→  1996→Chaque entrée peut contenir des attributs, parmi ces attributs il y en a
+   578→  1997→quatre qui ont une importance dans le traitement du message:
+   579→  1998→encodingStyle, role (actor), mustUnderstand et relay :
+   580→  1999→152
+   581→  2000→
+   582→  2001→========== PAGE 153 ==========
+   583→  2002→La couche de Communication SOAP (Simple
+   584→  2003→Object Access Protocol)
+   585→  2004→• Attribut « encodingStyle » : Style d'encodage.
+   586→  2005→• Attribut « role » (actor pour la version 1.1) : désigne le destinataire
+   587→  2006→concerné par le traitement de cette entrée. Un destinataire peut être:
+   588→  2007→un émetteur, un récepteur final ou bien aucun ou plusieurs
+   589→  2008→intermédiaires.
+   590→  2009→Exemple :
+   591→  2010→153
+   592→  2011→
+   593→  2012→========== PAGE 154 ==========
+   594→  2013→La couche de Communication SOAP (Simple
+   595→  2014→Object Access Protocol)
+   596→  2015→Cet attribut peut prendre 3 valeurs particulières:
+   597→  2016→154
+   598→  2017→
+   599→  2018→========== PAGE 155 ==========
+   600→  2019→La couche de Communication SOAP (Simple
+   601→  2020→Object Access Protocol)
+   602→  2021→Dans le cas d'absence de cet attribut, tous les nœuds sont concernés.
+   603→  2022→Exemple :
+   604→  2023→155
+   605→  2024→
+   606→  2025→========== PAGE 156 ==========
+   607→  2026→La couche de Communication SOAP (Simple
+   608→  2027→Object Access Protocol)
+   609→  2028→• L'attribut « mustUnderstand » : détermine si la compréhension de
+   610→  2029→l'entrée par le nœud concerné est obligatoire ou non.
+   611→  2030→Exemple :
+   612→  2031→156
+   613→  2032→Dans cet exemple l’entrée « preferences » est
+   614→  2033→obligatoire (attribut soap:mustUnderstand à "1.").
+   615→  2034→Le service traitant ce message doit reconnaître ce
+   616→  2035→header et le traiter correctement. Si ce header ne
+   617→  2036→peut être traité correctement parce que le
+   618→  2037→récepteur n’en a pas la capacité, alors un message
+   619→  2038→d’erreur SOAP (SOAP fault message) doit être
+   620→  2039→renvoyé.
+   621→  2040→
+   622→  2041→========== PAGE 157 ==========
+   623→  2042→La couche de Communication SOAP (Simple
+   624→  2043→Object Access Protocol)
+   625→  2044→Exemple :
+   626→  2045→157
+   627→  2046→?
+   628→  2047→
+   629→  2048→========== PAGE 158 ==========
+   630→  2049→La couche de Communication SOAP (Simple
+   631→  2050→Object Access Protocol)
+   632→  2051→• L'attribut « relay » : Il détermine si une entrée dans l'entête d'un
+   633→  2052→message SOAP arrivé chez un intermédiaire doit être réacheminée ou
+   634→  2053→non lorsque le traitement de cette entrée est impossible par le nœud
+   635→  2054→actuel. Cet attribut ne prend effet que sur les entrées non obligatoires
+   636→  2055→destinées au nœud intermédiaire actuel.
+   637→  2056→Exemple :
+   638→  2057→158
+   639→  2058→
+   640→  2059→========== PAGE 159 ==========
+   641→  2060→La couche de Communication SOAP (Simple
+   642→  2061→Object Access Protocol)
+   643→  2062→Résumé du comportement du réacheminement :
+   644→  2063→159
+   645→  2064→
+   646→  2065→========== PAGE 160 ==========
+   647→  2066→La couche de Communication SOAP (Simple
+   648→  2067→Object Access Protocol)
+   649→  2068→c) Le corps du message (Body) :
+   650→  2069→C'est le bloc qui contient le corps du message. Il doit absolument être
+   651→  2070→présent de manière unique dans chaque message et être contenu dans
+   652→  2071→le bloc Envelope. Les entrées de cette partie sont destinées toutes au
+   653→  2072→récepteur final du message.
+   654→  2073→Chaque entrée peut contenir l'attribut encodingStyle.
+   655→  2074→Le protocole SOAP n’exige l’utilisation d’aucune entrée prédéfinie dans
+   656→  2075→le corps du message, sauf que pour le corps d’un message d’erreur qui
+   657→  2076→ne doit contenir que l’entrée « fault » qui sert à reporter et expliquer la
+   658→  2077→nature d’erreur rencontré.
+   659→  2078→160
+   660→  2079→
+   661→  2080→========== PAGE 161 ==========
+   662→  2081→La couche de Communication SOAP (Simple
+   663→  2082→Object Access Protocol)
+   664→  2083→Exemple :
+   665→  2084→161
+   666→  2085→
+   667→  2086→========== PAGE 162 ==========
+   668→  2087→La couche de Communication SOAP (Simple
+   669→  2088→Object Access Protocol)
+   670→  2089→2. Les messages d’erreur :
+   671→  2090→Les messages d’erreur sont des messages SOAP envoyés suite à une
+   672→  2091→erreur dans le traitement d’un message de requête, ils servent à
+   673→  2092→expliquer le type d’erreur à l’expéditeur du message requête.
+   674→  2093→Le corps d’un message d’erreur est constitué d’une entrée unique
+   675→  2094→appelée l’entrée "Fault". Cette entrée sert à définir le type du message
+   676→  2095→d’erreur, et à donner plus de détails sur cette erreur.
+   677→  2096→Selon le type d’erreur signalée, l’entête du message peut exister ou
+   678→  2097→non. S’il existe il doit contenir des entrées spécifiques définies par le
+   679→  2098→protocole SOAP.
+   680→  2099→162
+   681→  2100→
+   682→  2101→========== PAGE 163 ==========
+   683→  2102→La couche de Communication SOAP (Simple
+   684→  2103→Object Access Protocol)
+   685→  2104→163
+   686→  2105→a) Structure de l'entrée Fault:
+   687→  2106→
+   688→  2107→========== PAGE 164 ==========
+   689→  2108→La couche de Communication SOAP (Simple
+   690→  2109→Object Access Protocol)
+   691→  2110→Exemple :
+   692→  2111→164
+   693→  2112→
+   694→  2113→========== PAGE 165 ==========
+   695→  2114→La couche de Communication SOAP (Simple
+   696→  2115→Object Access Protocol)
+   697→  2116→165
+   698→  2117→b) Codes d'erreurs:
+   699→  2118→
+   700→  2119→========== PAGE 166 ==========
+   701→  2120→La couche de Communication SOAP (Simple
+   702→  2121→Object Access Protocol)
+   703→  2122→Exemple :
+   704→  2123→166
+   705→  2124→
+   706→  2125→========== PAGE 167 ==========
+   707→  2126→La couche de Communication SOAP (Simple
+   708→  2127→Object Access Protocol)
+   709→  2128→3. Message avec pièce jointe :
+   710→  2129→L'utilisation de SOAP avec des données non XML est parfois très utile, par
+   711→  2130→exemple si on désire transmettre des images à partir d'une caméra à travers
+   712→  2131→une liaison sans fil en utilisant SOAP vers un serveur client.
+   713→  2132→Le support des données non XML requiert un packaging complémentaire du
+   714→  2133→message qui peut être fourni par une structure MIME multipart et impacte
+   715→  2134→la liaison d'un message à son protocole de transport sous-jacent.
+   716→  2135→L'enveloppe MIME contient un ensemble de parties MIME individuelles, la
+   717→  2136→1ère contient le message SOAP qui doit comporter un bloc Manifest Header
+   718→  2137→crée par le Handler Message Manifest. La 2ème partie MIME contient les
+   719→  2138→payloads qui peuvent être des documents XML ou d'autres formats.
+   720→  2139→167
+   721→  2140→
+   722→  2141→========== PAGE 168 ==========
+   723→  2142→La couche de Communication SOAP (Simple
+   724→  2143→Object Access Protocol)
+   725→  2144→168
+   726→  2145→Un
+   727→  2146→message
+   728→  2147→avec
+   729→  2148→attachement
+   730→  2149→est
+   731→  2150→structuré comme suit:
+   732→  2151→
+   733→  2152→========== PAGE 169 ==========
+   734→  2153→La couche de Communication SOAP (Simple
+   735→  2154→Object Access Protocol)
+   736→  2155→Exemple :
+   737→  2156→169
+   738→  2157→Le Manifest Header peut
+   739→  2158→contenir les éléments qui
+   740→  2159→référencent
+   741→  2160→les
+   742→  2161→parties
+   743→  2162→MIME séparées en utilisant
+   744→  2163→leurs
+   745→  2164→identificateurs
+   746→  2165→de
+   747→  2166→contenu.
+   748→  2167→Ceci
+   749→  2168→peut
+   750→  2169→être
+   751→  2170→réalisé
+   752→  2171→en
+   753→  2172→utilisant
+   754→  2173→les
+   755→  2174→références XLink.
+   756→  2175→
+   757→  2176→========== PAGE 170 ==========
+   758→  2177→La couche de Communication SOAP (Simple
+   759→  2178→Object Access Protocol)
+   760→  2179→SOAP en 2026 : Pourquoi il est toujours vivant?
+   761→
+   762→[showing lines 1420-2179 of 3786; use offset=2180 with limit to continue reading]

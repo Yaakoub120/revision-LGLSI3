@@ -5,6 +5,9 @@ import { virtualisation } from "./virtualisation";
 import { android } from "./android";
 import { iot } from "./iot";
 import { bigdata } from "./bigdata";
+import { machineLearning } from "./machine-learning";
+import { securiteInformatique } from "./securite-informatique";
+import { soaServicesWeb } from "./soa-services-web";
 
 export const subjects: Subject[] = [
   adminSystemes,
@@ -13,6 +16,9 @@ export const subjects: Subject[] = [
   android,
   iot,
   bigdata,
+  machineLearning,
+  securiteInformatique,
+  soaServicesWeb,
 ];
 
 export const totalQuizQuestions = subjects.reduce(

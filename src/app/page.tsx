@@ -7,12 +7,12 @@ import { SubjectView } from "@/components/learn/subject-view";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import {
-  Terminal, Network, Cloud, Smartphone, Cpu, Database,
+  Terminal, Network, Cloud, Smartphone, Cpu, Database, BrainCircuit, ShieldCheck, Workflow,
   GraduationCap, ListChecks, BookOpen, Sparkles, Search,
 } from "lucide-react";
 
 const ICONS: Record<string, typeof Terminal> = {
-  Terminal, Network, Cloud, Smartphone, Cpu, Database,
+  Terminal, Network, Cloud, Smartphone, Cpu, Database, BrainCircuit, ShieldCheck, Workflow,
 };
 
 export default function Home() {
@@ -46,7 +46,7 @@ export default function Home() {
             Ma <span className="text-emerald-400">Bibliothèque</span> de Révision
           </h1>
           <p className="mt-4 max-w-2xl text-sm sm:text-base text-zinc-300 leading-relaxed">
-            Toute la matière des 6 sujets — chaque définition, chaque commande, chaque concept, sans rien omettre —
+            Toute la matière des 9 sujets — chaque définition, chaque commande, chaque concept, sans rien omettre —
             organisée en fiches, schémas explicatifs et boucles de maîtrise qui te re-testent jusqu&apos;au zéro erreur.
           </p>
           <div className="mt-6 flex flex-wrap gap-3 text-xs">
@@ -128,7 +128,7 @@ export default function Home() {
           </div>
           <div className="mt-4">
             <div className="flex justify-between text-[11px] text-zinc-400 mb-1">
-              <span>Sujets disponibles</span><span>{subjects.length}/6</span>
+              <span>Sujets disponibles</span><span>{subjects.length}/9</span>
             </div>
             <Progress value={100} className="h-1.5" />
           </div>

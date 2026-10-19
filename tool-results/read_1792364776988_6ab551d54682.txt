@@ -1,0 +1,527 @@
+     1→'use client'
+     2→
+     3→// ─── Site de révision — Développement d'applications réparties (GLSI3, Dr. Mouna KARAJA) ───
+     4→import { useEffect, useMemo, useState } from 'react'
+     5→import { dmodules, dglossary } from '@/data/dar'
+     6→import { dquestions } from '@/data/dar/quiz'
+     7→import { darDiagramRegistry, PacketJourney } from '@/components/dar/diagrams'
+     8→import { BlockRenderer } from '@/components/BlockRenderer'
+     9→import { QuizEngine } from '@/components/quiz/QuizEngine'
+    10→import { Button } from '@/components/ui/button'
+    11→import { Progress } from '@/components/ui/progress'
+    12→import { cn } from '@/lib/utils'
+    13→
+    14→const TABS = [
+    15→  { id: 'home', label: 'Accueil', icon: '🏠' },
+    16→  { id: 'modules', label: 'Modules', icon: '📚' },
+    17→  { id: 'code', label: 'Code', icon: '💻' },
+    18→  { id: 'glossary', label: 'Glossaire', icon: '📖' },
+    19→  { id: 'quiz', label: 'Quiz', icon: '🎯' },
+    20→] as const
+    21→
+    22→type TabId = (typeof TABS)[number]['id']
+    23→
+    24→const READ_KEY = 'dar-read-sections-v1'
+    25→
+    26→export default function DarSite() {
+    27→  const [tab, setTab] = useState<TabId>('home')
+    28→  const [activeModule, setActiveModule] = useState<string>('d1')
+    29→  const [readSections, setReadSections] = useState<string[]>([])
+    30→  const [search, setSearch] = useState('')
+    31→
+    32→  useEffect(() => {
+    33→    try {
+    34→      const raw = localStorage.getItem(READ_KEY)
+    35→      if (raw) {
+    36→        // eslint-disable-next-line react-hooks/set-state-in-effect -- one-time hydration from localStorage (external system)
+    37→        setReadSections(JSON.parse(raw))
+    38→      }
+    39→    } catch {}
+    40→  }, [])
+    41→
+    42→  const toggleRead = (id: string) => {
+    43→    setReadSections((prev) => {
+    44→      const next = prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]
+    45→      localStorage.setItem(READ_KEY, JSON.stringify(next))
+    46→      return next
+    47→    })
+    48→  }
+    49→
+    50→  const mod = dmodules.find((m) => m.id === activeModule) ?? dmodules[0]
+    51→  const allSections = dmodules.flatMap((m) => m.sections)
+    52→  const readPct = Math.round((readSections.length / allSections.length) * 100)
+    53→
+    54→  const filteredGlossary = useMemo(() => {
+    55→    const s = search.trim().toLowerCase()
+    56→    if (!s) return dglossary
+    57→    return dglossary.filter((g) => g.term.toLowerCase().includes(s) || g.def.toLowerCase().includes(s))
+    58→  }, [search])
+    59→
+    60→  return (
+    61→    <div className="min-h-screen bg-zinc-950 text-zinc-100">
+    62→      {/* ── Header ── */}
+    63→      <header className="sticky top-12 z-40 border-b border-zinc-800 bg-zinc-950/90 backdrop-blur">
+    64→        <div className="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
+    65→          <div className="flex items-center gap-2.5">
+    66→            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-sky-500/15 text-lg">🌐</span>
+    67→            <div>
+    68→              <h1 className="text-sm font-black leading-tight tracking-tight sm:text-base">
+    69→                Développement d’applications réparties <span className="text-sky-400">— GLSI3</span>
+    70→              </h1>
+    71→              <p className="text-[11px] text-zinc-500">Communication · Sockets · RPC · RMI · Architectures · Asynchronisme</p>
+    72→            </div>
+    73→          </div>
+    74→          <nav className="flex gap-1 overflow-x-auto" aria-label="Navigation principale">
+    75→            {TABS.map((t) => (
+    76→              <button
+    77→                key={t.id}
+    78→                onClick={() => setTab(t.id)}
+    79→                aria-current={tab === t.id ? 'page' : undefined}
+    80→                className={cn(
+    81→                  'whitespace-nowrap rounded-lg px-3 py-2 text-xs font-bold transition sm:text-sm',
+    82→                  tab === t.id ? 'bg-sky-500 text-zinc-950' : 'text-zinc-400 hover:bg-zinc-900 hover:text-zinc-200'
+    83→                )}
+    84→              >
+    85→                <span className="mr-1">{t.icon}</span>
+    86→                {t.label}
+    87→              </button>
+    88→            ))}
+    89→          </nav>
+    90→        </div>
+    91→      </header>
+    92→
+    93→      <main className="mx-auto max-w-6xl px-4 py-6">
+    94→        {/* ═══════════ HOME ═══════════ */}
+    95→        {tab === 'home' && (
+    96→          <div className="space-y-8">
+    97→            <section className="overflow-hidden rounded-3xl border border-zinc-800 bg-gradient-to-br from-sky-500/10 via-zinc-900 to-zinc-950 p-8 sm:p-12">
+    98→              <p className="text-xs font-black uppercase tracking-[0.2em] text-sky-400">Licence GLSI3 · Informatique · 2025-2026 · Dr. Mouna KARAJA</p>
+    99→              <h2 className="mt-3 text-3xl font-black leading-tight tracking-tight sm:text-5xl">
+   100→                Tout le cours Applications Réparties.<br />
+   101→                <span className="text-sky-400">Zéro information oubliée.</span>
+   102→              </h2>
+   103→              <p className="mt-4 max-w-2xl leading-relaxed text-zinc-400">
+   104→                Chaque définition, chaque port, chaque schéma et chaque ligne de code des 5 documents du cours
+   105→                — du contexte des systèmes répartis à la communication asynchrone — condensés en 14 modules,
+   106→                avec 22 schémas interactifs, la référence complète du code (sockets TCP/UDP, RMI, RPC)
+   107→                et un quiz en boucle de maîtrise : tu répètes jusqu’au sans-faute.
+   108→              </p>
+   109→              <div className="mt-6 flex flex-wrap gap-3">
+   110→                <Button onClick={() => setTab('modules')} className="bg-sky-500 font-bold text-zinc-950 hover:bg-sky-400">
+   111→                  📚 Commencer la révision
+   112→                </Button>
+   113→                <Button onClick={() => setTab('quiz')} variant="outline" className="border-sky-700 font-bold text-sky-400 hover:bg-sky-500/10">
+   114→                  🎯 Tester mes connaissances
+   115→                </Button>
+   116→              </div>
+   117→              <div className="mt-8 grid gap-3 sm:grid-cols-4">
+   118→                {[
+   119→                  { v: '14', l: 'modules complets' },
+   120→                  { v: `${allSections.length}`, l: 'sections de cours' },
+   121→                  { v: `${dquestions.length}`, l: 'questions de quiz' },
+   122→                  { v: `${dglossary.length}`, l: 'termes de glossaire' },
+   123→                ].map((s) => (
+   124→                  <div key={s.l} className="rounded-2xl border border-zinc-800 bg-zinc-950/60 p-4 text-center">
+   125→                    <p className="text-3xl font-black text-sky-400">{s.v}</p>
+   126→                    <p className="text-xs text-zinc-500">{s.l}</p>
+   127→                  </div>
+   128→                ))}
+   129→              </div>
+   130→            </section>
+   131→
+   132→            {/* Modules overview */}
+   133→            <section>
+   134→              <h3 className="mb-4 text-lg font-black">Les 14 modules</h3>
+   135→              <div className="grid gap-3 md:grid-cols-2">
+   136→                {dmodules.map((m) => {
+   137→                  const done = m.sections.filter((s) => readSections.includes(s.id)).length
+   138→                  return (
+   139→                    <button
+   140→                      key={m.id}
+   141→                      onClick={() => { setActiveModule(m.id); setTab('modules') }}
+   142→                      className="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-5 text-left transition hover:border-sky-600/60 hover:bg-zinc-900"
+   143→                    >
+   144→                      <div className="flex items-start justify-between gap-3">
+   145→                        <div className="flex items-center gap-3">
+   146→                          <span className="text-3xl">{m.icon}</span>
+   147→                          <div>
+   148→                            <p className="text-[11px] font-bold uppercase tracking-widest text-sky-500">Module {m.num}</p>
+   149→                            <h4 className="font-bold text-zinc-100">{m.title}</h4>
+   150→                          </div>
+   151→                        </div>
+   152→                        <span className="text-xs text-zinc-500">{done}/{m.sections.length} lus</span>
+   153→                      </div>
+   154→                      <p className="mt-2 text-sm text-zinc-400">{m.subtitle}</p>
+   155→                      <p className="mt-2 text-[11px] text-zinc-600">📄 {m.source}</p>
+   156→                      <Progress value={(done / m.sections.length) * 100} className="mt-3 h-1.5" />
+   157→                    </button>
+   158→                  )
+   159→                })}
+   160→              </div>
+   161→            </section>
+   162→
+   163→            {/* How to use */}
+   164→            <section className="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-6">
+   165→              <h3 className="text-lg font-black">Comment réviser efficacement ?</h3>
+   166→              <div className="mt-4 grid gap-3 sm:grid-cols-3">
+   167→                {[
+   168→                  { n: '1', t: 'Lis chaque module', d: 'Section par section, coche « lu » pour suivre ta progression. Les cartes 📌 sont les définitions exactes à restituer, les tableaux sont à connaître par cœur (ports !).' },
+   169→                  { n: '2', t: 'Joue avec les schémas', d: '22 diagrammes interactifs : le voyage d\u2019une requête HTTP (NAT, MAC), le handshake TCP, l\u2019architecture RMI, les modèles asynchrones… manipule-les pour ancrer les concepts.' },
+   170→                  { n: '3', t: 'Boucle de maîtrise', d: 'Le quiz renvoie tes erreurs jusqu\u2019à ce que TOUTES les questions soient réussies : objectif zéro erreur.' },
+   171→                ].map((x) => (
+   172→                  <div key={x.n} className="rounded-xl border border-zinc-800 bg-zinc-950 p-4">
+   173→                    <span className="flex h-7 w-7 items-center justify-center rounded-full bg-sky-500/20 text-sm font-black text-sky-400">{x.n}</span>
+   174→                    <p className="mt-2 font-bold text-zinc-100">{x.t}</p>
+   175→                    <p className="mt-1 text-sm leading-relaxed text-zinc-400">{x.d}</p>
+   176→                  </div>
+   177→                ))}
+   178→              </div>
+   179→            </section>
+   180→
+   181→            <section className="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-6">
+   182→              <h3 className="mb-4 text-lg font-black">Aperçu interactif : le voyage d’une requête HTTP (schéma illustratif du cours)</h3>
+   183→              <PacketJourney />
+   184→            </section>
+   185→          </div>
+   186→        )}
+   187→
+   188→        {/* ═══════════ MODULES ═══════════ */}
+   189→        {tab === 'modules' && (
+   190→          <div className="space-y-5">
+   191→            <div className="flex flex-wrap gap-2">
+   192→              {dmodules.map((m) => (
+   193→                <button
+   194→                  key={m.id}
+   195→                  onClick={() => setActiveModule(m.id)}
+   196→                  className={cn(
+   197→                    'rounded-full px-4 py-2 text-sm font-bold transition',
+   198→                    activeModule === m.id ? 'bg-sky-500 text-zinc-950' : 'border border-zinc-800 bg-zinc-900 text-zinc-400 hover:text-zinc-200'
+   199→                  )}
+   200→                >
+   201→                  {m.icon} M{m.num} · {m.title}
+   202→                </button>
+   203→              ))}
+   204→            </div>
+   205→
+   206→            <div className="rounded-2xl border border-zinc-800 bg-gradient-to-br from-zinc-900 to-zinc-950 p-6">
+   207→              <p className="text-xs font-black uppercase tracking-widest text-sky-500">Module {mod.num} / 14</p>
+   208→              <h2 className="mt-1 text-2xl font-black sm:text-3xl">{mod.icon} {mod.title}</h2>
+   209→              <p className="mt-1 text-zinc-400">{mod.subtitle}</p>
+   210→              <p className="mt-2 text-xs text-zinc-600">📄 Source : {mod.source}</p>
+   211→            </div>
+   212→
+   213→            <nav className="flex flex-wrap gap-2" aria-label="Sections du module">
+   214→              {mod.sections.map((s, i) => (
+   215→                <a
+   216→                  key={s.id}
+   217→                  href={`#${s.id}`}
+   218→                  className="rounded-lg border border-zinc-800 bg-zinc-900 px-3 py-1.5 text-xs text-zinc-400 transition hover:border-sky-700 hover:text-sky-400"
+   219→                >
+   220→                  {i + 1}. {s.title}
+   221→                </a>
+   222→              ))}
+   223→            </nav>
+   224→
+   225→            <div className="space-y-6">
+   226→              {mod.sections.map((s, i) => {
+   227→                const isRead = readSections.includes(s.id)
+   228→                return (
+   229→                  <article key={s.id} id={s.id} className="scroll-mt-28 rounded-2xl border border-zinc-800 bg-zinc-900/40 p-6">
+   230→                    <div className="flex items-start justify-between gap-3">
+   231→                      <h3 className="text-lg font-black text-zinc-100 sm:text-xl">
+   232→                        <span className="mr-2 rounded-lg bg-sky-500/15 px-2 py-0.5 text-sm text-sky-400">{mod.num}.{i + 1}</span>
+   233→                        {s.title}
+   234→                      </h3>
+   235→                      <button
+   236→                        onClick={() => toggleRead(s.id)}
+   237→                        aria-pressed={isRead}
+   238→                        className={cn(
+   239→                          'shrink-0 rounded-full px-3 py-1.5 text-xs font-bold transition',
+   240→                          isRead ? 'bg-emerald-500/20 text-emerald-400' : 'border border-zinc-700 text-zinc-500 hover:text-zinc-300'
+   241→                        )}
+   242→                      >
+   243→                        {isRead ? '✓ Lu' : 'Marquer lu'}
+   244→                      </button>
+   245→                    </div>
+   246→                    <div className="mt-3">
+   247→                      {s.blocks.map((b, j) => <BlockRenderer key={j} block={b} diagrams={darDiagramRegistry} />)}
+   248→                    </div>
+   249→                  </article>
+   250→                )
+   251→              })}
+   252→            </div>
+   253→
+   254→            <div className="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-5">
+   255→              <div className="flex items-center justify-between gap-4">
+   256→                <div>
+   257→                  <p className="font-bold text-zinc-100">Progression de lecture</p>
+   258→                  <p className="text-xs text-zinc-500">{readSections.length} / {allSections.length} sections marquées comme lues</p>
+   259→                </div>
+   260→                <span className="text-2xl font-black text-sky-400">{readPct}%</span>
+   261→              </div>
+   262→              <Progress value={readPct} className="mt-3 h-2" />
+   263→              {readPct === 100 && (
+   264→                <Button onClick={() => setTab('quiz')} className="mt-4 w-full bg-emerald-500 font-bold text-zinc-950 hover:bg-emerald-400">
+   265→                  🎯 100% lu ! Lance maintenant le quiz jusqu'au sans-faute
+   266→                </Button>
+   267→              )}
+   268→            </div>
+   269→          </div>
+   270→        )}
+   271→
+   272→        {/* ═══════════ CODE ═══════════ */}
+   273→        {tab === 'code' && (
+   274→          <div className="space-y-6">
+   275→            <div className="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-6">
+   276→              <h2 className="text-2xl font-black">💻 Référence du code</h2>
+   277→              <p className="mt-2 text-sm text-zinc-400">
+   278→                Tout le code pratique du cours : le tableau des ports, les sockets TCP et UDP en Java,
+   279→                le pseudocode RPC complet (IDL, skeleton, stub, runtime) et les 5 étapes RMI prêtes à exécuter.
+   280→              </p>
+   281→            </div>
+   282→
+   283→            <section className="rounded-2xl border border-amber-900/60 bg-zinc-900/40 p-6">
+   284→              <h3 className="text-lg font-black text-amber-300">Tableau des ports — à connaître par cœur</h3>
+   285→              <div className="mt-4 grid gap-2 sm:grid-cols-2">
+   286→                {[
+   287→                  ['HTTP / HTTPS — 80 / 443', 'Transfert de pages web'],
+   288→                  ['FTP — 21', 'Envoyer / recevoir des fichiers'],
+   289→                  ['SMTP — 25', 'Envoi de mails'],
+   290→                  ['POP3 / IMAP — 110 / 143', 'Récupérer les mails'],
+   291→                  ['DNS — 53', 'Convertir un nom de domaine en adresse IP'],
+   292→                  ['DHCP — 67-68', 'Donner dynamiquement une IP à un poste'],
+   293→                  ['SSH / Telnet — 22 / 23', 'Accès distant (avec / sans chiffrement)'],
+   294→                  ['SNMP — 161', 'Supervision du réseau (routeurs, commutateurs…)'],
+   295→                ].map(([cmd, role]) => (
+   296→                  <div key={cmd} className="flex flex-col gap-1 rounded-xl border border-zinc-800 bg-zinc-950 p-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+   297→                    <code className="font-mono text-[13px] text-amber-300">{cmd}</code>
+   298→                    <span className="text-xs text-zinc-500">{role}</span>
+   299→                  </div>
+   300→                ))}
+   301→              </div>
+   302→            </section>
+   303→
+   304→            <section className="rounded-2xl border border-sky-900/60 bg-zinc-900/40 p-6">
+   305→              <h3 className="text-lg font-black text-sky-300">Sockets TCP en Java — les classes du cours</h3>
+   306→              <div className="mt-4 space-y-4">
+   307→                <div className="rounded-xl border border-zinc-800 bg-zinc-950 p-4">
+   308→                  <p className="text-sm font-bold text-sky-400">Séquence complète (diagramme du cours)</p>
+   309→                  <pre className="mt-2 overflow-x-auto font-mono text-[13px] leading-relaxed text-emerald-200">{`# CÔTÉ SERVEUR — "Open Listen"
+   310→ServerSocket server = new ServerSocket(80);   // socket → bind → listen
+   311→Socket conn = server.accept();                // attend la connection request du client
+   312→                                              // → puis revient ici après chaque close
+   313→# CÔTÉ CLIENT — "Open Client"
+   314→Socket client = new Socket("serveur", 80);    // socket → connect (connection request)
+   315→
+   316→# SESSION Client/Serveur — échange par flux
+   317→InputStream  in  = conn.getInputStream();     // lire les données
+   318→OutputStream out = conn.getOutputStream();    // écrire les données
+   319→# write() ↔ read() ... puis :
+   320→client.close();                               // End Of File → le serveur lit, ferme, et retourne à accept()`}</pre>
+   321→                </div>
+   322→                <div className="rounded-xl border border-zinc-800 bg-zinc-950 p-4">
+   323→                  <p className="text-sm font-bold text-sky-400">Fonctionnement (4 étapes)</p>
+   324→                  <pre className="mt-2 overflow-x-auto font-mono text-[13px] leading-relaxed text-emerald-200">{`1. Le serveur crée un ServerSocket et se met en attente sur un port précis.
+   325→2. Le client crée un Socket et tente de se connecter à ce port.
+   326→3. Connexion acceptée → échange de données via des flux (InputStream / OutputStream).
+   327→4. À la fin, les sockets sont fermées.`}</pre>
+   328→                </div>
+   329→              </div>
+   330→            </section>
+   331→
+   332→            <section className="rounded-2xl border border-violet-900/60 bg-zinc-900/40 p-6">
+   333→              <h3 className="text-lg font-black text-violet-300">Sockets UDP en Java — les classes du cours</h3>
+   334→              <div className="mt-4 space-y-4">
+   335→                <div className="rounded-xl border border-zinc-800 bg-zinc-950 p-4">
+   336→                  <p className="text-sm font-bold text-violet-400">Séquence complète (diagramme du cours)</p>
+   337→                  <pre className="mt-2 overflow-x-auto font-mono text-[13px] leading-relaxed text-emerald-200">{`# SERVEUR                          # CLIENT
+   338→DatagramSocket server =            DatagramSocket client =
+   339→  new DatagramSocket(port);          new DatagramSocket();
+   340→# create a socket                  # create a socket
+   341→                                   # (bind implicite)
+   342→// receive request                 // send the request (data request)
+   343→byte[] buf = new byte[256];        byte[] buf = data.getBytes();
+   344→DatagramPacket req =               DatagramPacket req =
+   345→  new DatagramPacket(buf, 256);      new DatagramPacket(buf, len,
+   346→server.receive(req);                  serverIP, serverPort);
+   347→                                   client.send(req);
+   348→// send response (data reply)
+   349→DatagramPacket resp = new DatagramPacket(buf, len, req.getAddress(), req.getPort());
+   350→server.send(resp);                 // receive response (data reply)`}</pre>
+   351→                </div>
+   352→                <div className="rounded-xl border border-zinc-800 bg-zinc-950 p-4">
+   353→                  <p className="text-sm font-bold text-violet-400">Fonctionnement (4 étapes)</p>
+   354→                  <pre className="mt-2 overflow-x-auto font-mono text-[13px] leading-relaxed text-emerald-200">{`1. Le serveur UDP crée un DatagramSocket et attend la réception d'un paquet.
+   355→2. Le client UDP crée aussi un DatagramSocket et envoie un DatagramPacket
+   356→   vers l'adresse et le port du serveur.
+   357→3. Chaque message est indépendant → aucune session ni connexion persistante.
+   358→4. Après réception, le serveur peut répondre via un autre datagramme.`}</pre>
+   359→                </div>
+   360→              </div>
+   361→            </section>
+   362→
+   363→            <section className="rounded-2xl border border-emerald-900/60 bg-zinc-900/40 p-6">
+   364→              <h3 className="text-lg font-black text-emerald-300">Pseudocode RPC synchrone — vue logique complète</h3>
+   365→              <div className="mt-4 space-y-4">
+   366→                <div className="rounded-xl border border-zinc-800 bg-zinc-950 p-4">
+   367→                  <p className="text-sm font-bold text-emerald-400">1. IDL · 2. Implémentation · 3. Enregistrement</p>
+   368→                  <pre className="mt-2 overflow-x-auto font-mono text-[13px] leading-relaxed text-emerald-200">{`service Calculator {
+   369→  int add(int a, int b);
+   370→  int sub(int a, int b);
+   371→}
+   372→
+   373→public class CalculatorImpl implements Calculator {
+   374→  public int add(int a, int b) { return a + b; }
+   375→  public int sub(int a, int b) { return a - b; }
+   376→}
+   377→
+   378→public static void main(String[] args) {
+   379→  Calculator service = new CalculatorImpl();
+   380→  registerService("Calculator", service); // rendu disponible via RPC
+   381→}`}</pre>
+   382→                </div>
+   383→                <div className="rounded-xl border border-zinc-800 bg-zinc-950 p-4">
+   384→                  <p className="text-sm font-bold text-emerald-400">4. Skeleton côté serveur (reçoit → unmarshal → appelle)</p>
+   385→                  <pre className="mt-2 overflow-x-auto font-mono text-[13px] leading-relaxed text-emerald-200">{`public String handleRequest(String requestJson) {
+   386→  // requestJson = {"method":"add","args":[3,4]}
+   387→  JSONObject req = new JSONObject(requestJson);
+   388→  String method = req.getString("method");
+   389→  JSONArray args = req.getJSONArray("args");
+   390→  int result = switch (method) {
+   391→    case "add" -> impl.add(args.getInt(0), args.getInt(1));
+   392→    case "sub" -> impl.sub(args.getInt(0), args.getInt(1));
+   393→    default    -> throw new RuntimeException("Méthode inconnue");
+   394→  };
+   395→  return "{\\"result\\": " + result + "}";
+   396→}`}</pre>
+   397→                </div>
+   398→                <div className="rounded-xl border border-zinc-800 bg-zinc-950 p-4">
+   399→                  <p className="text-sm font-bold text-emerald-400">5. Stub client + RPC runtime + appel (semble local)</p>
+   400→                  <pre className="mt-2 overflow-x-auto font-mono text-[13px] leading-relaxed text-emerald-200">{`public class CalculatorClientStub implements Calculator {
+   401→  private NetworkChannel channel;
+   402→  public int add(int a, int b) {
+   403→    String req = "{\\"method\\":\\"add\\",\\"args\\":[" + a + "," + b + "]}";
+   404→    String resp = channel.sendRequest(req);   // envoie au serveur
+   405→    return new JSONObject(resp).getInt("result");
+   406→  }
+   407→}
+   408→
+   409→// RPC runtime — retourne le stub
+   410→calculator remoteService = getRemoteService("Calculator");
+   411→result = remoteService.add(3, 4)  // semble local
+   412→print(result)                     // 7
+   413→
+   414→// En coulisse : marshall(3,4) → send → skeleton.unmarshal → add(3,4)=7
+   415→//               → marshall(7) → send → stub.unmarshal → 7`}</pre>
+   416→                </div>
+   417→              </div>
+   418→            </section>
+   419→
+   420→            <section className="rounded-2xl border border-teal-900/60 bg-zinc-900/40 p-6">
+   421→              <h3 className="text-lg font-black text-teal-300">RMI — les 5 étapes prêtes à exécuter</h3>
+   422→              <div className="mt-4 space-y-4">
+   423→                <div className="rounded-xl border border-zinc-800 bg-zinc-950 p-4">
+   424→                  <p className="text-sm font-bold text-teal-400">Étape 1 — Hello.java (interface distante)</p>
+   425→                  <pre className="mt-2 overflow-x-auto font-mono text-[13px] leading-relaxed text-emerald-200">{`import java.rmi.Remote;
+   426→import java.rmi.RemoteException;
+   427→
+   428→public interface Hello extends Remote {
+   429→  String direBonjour(String nom) throws RemoteException;
+   430→}`}</pre>
+   431→                </div>
+   432→                <div className="rounded-xl border border-zinc-800 bg-zinc-950 p-4">
+   433→                  <p className="text-sm font-bold text-teal-400">Étape 2 — HelloImpl.java (implémentation)</p>
+   434→                  <pre className="mt-2 overflow-x-auto font-mono text-[13px] leading-relaxed text-emerald-200">{`import java.rmi.server.UnicastRemoteObject;
+   435→import java.rmi.RemoteException;
+   436→
+   437→public class HelloImpl extends UnicastRemoteObject implements Hello {
+   438→  public HelloImpl() throws RemoteException { super(); }
+   439→
+   440→  @Override
+   441→  public String direBonjour(String nom) throws RemoteException {
+   442→    return "Bonjour, " + nom + " !";
+   443→  }
+   444→}`}</pre>
+   445→                </div>
+   446→                <div className="rounded-xl border border-zinc-800 bg-zinc-950 p-4">
+   447→                  <p className="text-sm font-bold text-teal-400">Étape 3 — ServeurRMI.java (registre + rebind)</p>
+   448→                  <pre className="mt-2 overflow-x-auto font-mono text-[13px] leading-relaxed text-emerald-200">{`import java.rmi.Naming;
+   449→import java.rmi.registry.LocateRegistry;
+   450→
+   451→public class ServeurRMI {
+   452→  public static void main(String[] args) {
+   453→    try {
+   454→      LocateRegistry.createRegistry(1099);
+   455→      HelloImpl obj = new HelloImpl();
+   456→      Naming.rebind("rmi://localhost/HelloService", obj);
+   457→      System.out.println("Serveur RMI prêt et en attente des requêtes...");
+   458→    } catch (Exception e) { e.printStackTrace(); }
+   459→  }
+   460→}`}</pre>
+   461→                </div>
+   462→                <div className="rounded-xl border border-zinc-800 bg-zinc-950 p-4">
+   463→                  <p className="text-sm font-bold text-teal-400">Étape 4 — ClientRMI.java (lookup + invocation)</p>
+   464→                  <pre className="mt-2 overflow-x-auto font-mono text-[13px] leading-relaxed text-emerald-200">{`import java.rmi.Naming;
+   465→
+   466→public class ClientRMI {
+   467→  public static void main(String[] args) {
+   468→    try {
+   469→      Hello obj = (Hello) Naming.lookup("rmi://localhost/HelloService");
+   470→      String reponse = obj.direBonjour("Mouna");
+   471→      System.out.println("Réponse du serveur : " + reponse);
+   472→    } catch (Exception e) { e.printStackTrace(); }
+   473→  }
+   474→}`}</pre>
+   475→                </div>
+   476→                <div className="rounded-xl border border-zinc-800 bg-zinc-950 p-4">
+   477→                  <p className="text-sm font-bold text-teal-400">Étape 5 — Compilation et exécution</p>
+   478→                  <pre className="mt-2 overflow-x-auto font-mono text-[13px] leading-relaxed text-emerald-200">{`$ javac *.java
+   479→$ rmiregistry                    # port par défaut 1099 — même répertoire que les classes
+   480→$ java ServeurRMI                # → Serveur RMI prêt et en attente des requêtes...
+   481→$ java ClientRMI                 # → Réponse du serveur : Bonjour, Mouna !`}</pre>
+   482→                </div>
+   483→              </div>
+   484→            </section>
+   485→          </div>
+   486→        )}
+   487→
+   488→        {/* ═══════════ GLOSSAIRE ═══════════ */}
+   489→        {tab === 'glossary' && (
+   490→          <div className="space-y-4">
+   491→            <div className="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-6">
+   492→              <h2 className="text-2xl font-black">📖 Glossaire — {dglossary.length} termes</h2>
+   493→              <input
+   494→                type="text"
+   495→                value={search}
+   496→                onChange={(e) => setSearch(e.target.value)}
+   497→                placeholder="Rechercher un terme… (ex. : socket, NAT, handshake, idempotent)"
+   498→                className="mt-4 w-full rounded-xl border border-zinc-800 bg-zinc-950 px-4 py-3 text-sm text-zinc-100 outline-none placeholder:text-zinc-600 focus:border-sky-600"
+   499→              />
+   500→            </div>
+   501→            <div className="grid gap-2 md:grid-cols-2">
+   502→              {filteredGlossary.map((g) => (
+   503→                <div key={g.term} className="rounded-xl border border-zinc-800 bg-zinc-900/40 p-4">
+   504→                  <p className="font-bold text-sky-300">{g.term}</p>
+   505→                  <p className="mt-1 text-sm leading-relaxed text-zinc-300">{g.def}</p>
+   506→                </div>
+   507→              ))}
+   508→              {filteredGlossary.length === 0 && (
+   509→                <p className="col-span-2 py-8 text-center text-sm text-zinc-500">Aucun terme trouvé pour « {search} »</p>
+   510→              )}
+   511→            </div>
+   512→          </div>
+   513→        )}
+   514→
+   515→        {/* ═══════════ QUIZ ═══════════ */}
+   516→        {tab === 'quiz' && (
+   517→          <QuizEngine questions={dquestions} modules={dmodules} storageKey="dar-quiz-state-v1" />
+   518→        )}
+   519→      </main>
+   520→
+   521→      <footer className="border-t border-zinc-900 py-6 text-center text-xs text-zinc-600">
+   522→        Site de révision — Développement d’applications réparties · Dr. Mouna KARAJA · GLSI3 · 2025-2026
+   523→      </footer>
+   524→    </div>
+   525→  )
+   526→}
+   527→

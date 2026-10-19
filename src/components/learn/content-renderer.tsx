@@ -31,8 +31,8 @@ function Block({ block }: { block: ContentBlock }) {
           <table className="w-full text-xs border-collapse">
             <thead>
               <tr className="bg-zinc-100 dark:bg-zinc-900">
-                {block.headers.map((h) => (
-                  <th key={h} className="text-left px-3 py-2 font-semibold text-zinc-700 dark:text-zinc-200 border-b border-zinc-200 dark:border-zinc-800 whitespace-nowrap">{h}</th>
+                {block.headers.map((h, hi) => (
+                  <th key={hi} className="text-left px-3 py-2 font-semibold text-zinc-700 dark:text-zinc-200 border-b border-zinc-200 dark:border-zinc-800 whitespace-nowrap">{h}</th>
                 ))}
               </tr>
             </thead>

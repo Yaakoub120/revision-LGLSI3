@@ -1,0 +1,81 @@
+import type { QuizQuestion } from '@/types/course';
+
+export const bdQuiz5: QuizQuestion[] = [
+  {
+    id: 'bd5-q1', moduleId: 5, tag: 'NoSQL',
+    q: 'Depuis quand la BD relationnelle était-elle la référence incontournable ?',
+    choices: ['Depuis les années 70', 'Depuis les années 90', 'Depuis 2003', 'Depuis 2010'],
+    answer: 0,
+    explain: 'Depuis les années 70, la BD relationnelle était l’incontournable référence pour gérer les données d’un système d’information.',
+  },
+  {
+    id: 'bd5-q2', moduleId: 5, tag: 'NoSQL',
+    q: 'Quand se pose la question « comment gérer une énorme BD et l’interroger efficacement » ?',
+    choices: ['Dès que le volume devient ingérable et que répondre à de simples requêtes prend des heures', 'Dès la création de l’entreprise', 'Uniquement en cloud', 'Jamais'],
+    answer: 0,
+    explain: 'Ces questions se posent dès que le volume devient ingérable et que répondre à de simples requêtes prend des heures — les SGBD traditionnels peinent à passer à l’échelle.',
+  },
+  {
+    id: 'bd5-q3', moduleId: 5, tag: 'NoSQL',
+    q: 'Que signifie NoSQL ?',
+    choices: ['Not Only SQL — relâcher certaines contraintes lourdes du relationnel pour favoriser la distribution', 'No SQL — aucune requête possible', 'New SQL', 'Network SQL'],
+    answer: 0,
+    explain: 'NoSQL = « Not Only SQL ». Cette approche propose de relâcher certaines contraintes lourdes du relationnel pour favoriser la distribution.',
+  },
+  {
+    id: 'bd5-q4', moduleId: 5, tag: 'MongoDB',
+    q: 'Sous quelle forme MongoDB enregistre-t-il les données ?',
+    choices: ['Des documents, syntaxe JSON', 'Des tables SQL', 'Des fichiers XML uniquement', 'Des graphes'],
+    answer: 0,
+    explain: 'MongoDB est une base de données NoSQL ; elle enregistre les données sous forme de documents (syntaxe JSON) et est + rapide pour certaines opérations.',
+  },
+  {
+    id: 'bd5-q5', moduleId: 5, tag: 'MongoDB',
+    q: 'Quelle caractéristique de MongoDB est citée en cours ?',
+    choices: ['+ rapide pour certaines opérations', 'Elle est relationnelle', 'Elle utilise SQL strict', 'Elle ne supporte pas les index'],
+    answer: 0,
+    explain: 'Trois points du cours : base de données NoSQL ; enregistre les données sous forme de documents, syntaxe JSON ; + rapide pour certaines opérations.',
+  },
+  {
+    id: 'bd5-q6', moduleId: 5, tag: 'Mapping',
+    q: 'À quoi correspond une TABLE SQL dans MongoDB ?',
+    choices: ['Une Collection', 'Un Document', 'Un field', 'Une row'],
+    answer: 0,
+    explain: 'Table → Collection. Columns → field. rows → document.',
+  },
+  {
+    id: 'bd5-q7', moduleId: 5, tag: 'Mapping',
+    q: 'À quoi correspondent les COLUMNS SQL dans MongoDB ?',
+    choices: ['Un field (champ)', 'Une collection', 'Un index', 'Un shard'],
+    answer: 0,
+    explain: 'Columns → field.',
+  },
+  {
+    id: 'bd5-q8', moduleId: 5, tag: 'Mapping',
+    q: 'À quoi correspondent les ROWS SQL dans MongoDB ?',
+    choices: ['Un document', 'Un field', 'Une collection', 'Un chunk'],
+    answer: 0,
+    explain: 'rows → document : chaque ligne devient un document JSON de couples clé : valeur.',
+  },
+  {
+    id: 'bd5-q9', moduleId: 5, tag: 'Document',
+    q: 'Comment est représenté un document MongoDB ?',
+    choices: ['Un ensemble de couples key : value (key value paired)', 'Une liste ordonnée de nombres', 'Un arbre binaire', 'Un tableau de bytes'],
+    answer: 0,
+    explain: 'Document → Row ; il s’agit de key value paired : key : value, ex. { ’firstname’ : ’Ahmed’, ’lastname’ : ’salim’, ’mobile’ : 95656565, ’country’ : ’Oman’ }.',
+  },
+  {
+    id: 'bd5-q10', moduleId: 5, tag: 'Flexibilité',
+    q: 'Dans l’exemple students, que se passe-t-il quand un étudiant a un champ « Mobile » en plus ?',
+    choices: ['Le document possède simplement le champ en plus, sans modifier un schéma global', 'Il faut altérer toute la table', 'L’insertion échoue', 'MongoDB rejette le document'],
+    answer: 0,
+    explain: 'Le cours montre la table students enrichie de la colonne Mobile : en MongoDB, le document porte ses propres champs (Document → Row, key : value) — flexibilité du modèle documentaire.',
+  },
+  {
+    id: 'bd5-q11', moduleId: 5, tag: 'Contexte',
+    q: 'Quel lien entre le Big Data et le relationnel selon le cours ?',
+    choices: ['« Arrêter de réfléchir en relationnel » — le NoSQL/Hadoop répartit les données que le relationnel ne peut plus gérer', 'Le relationnel est obligatoire', 'Le relationnel est plus rapide que NoSQL', 'Aucun lien'],
+    answer: 0,
+    explain: 'Le cours martèle : « Arrêter de réfléchir en relationnel ! » et « Absolument TOUTES les données sont importantes ! » — le NoSQL décharge les SGBD relationnels.',
+  },
+];

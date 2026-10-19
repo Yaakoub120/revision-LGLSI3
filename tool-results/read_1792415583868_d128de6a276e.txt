@@ -1,0 +1,260 @@
+     1→import type { Subject } from "@/lib/learn-types";
+     2→
+     3→// ═══════════════════════════════════════════════════════════════════════════
+     4→// SUJET 4 — PROGRAMMATION MOBILE ANDROID (Cours Partie 3 — Soufen GDAIM, FSM)
+     5→// Section « 4. Interfaces graphiques » du cours (pages 78–150)
+     6→// ═══════════════════════════════════════════════════════════════════════════
+     7→
+     8→export const android: Subject = {
+     9→  id: "android",
+    10→  name: "Programmation Mobile Android",
+    11→  shortName: "Android",
+    12→  teacher: "Soufen GDAIM — FSM",
+    13→  icon: "Smartphone",
+    14→  gradient: "from-lime-500 via-green-500 to-emerald-600",
+    15→  accent: "#84cc16",
+    16→  description:
+    17→    "Interfaces graphiques Android : unités de mesure, View/ViewGroup, layouts, widgets, ressources et classe R, gestion des événements, ListView et composants avancés.",
+    18→  chapters: [
+    19→    {
+    20→      id: "ui",
+    21→      title: "Interfaces graphiques — Éléments de base",
+    22→      summary: "Unités de mesure (px, dp, sp…), View et ViewGroup, interfaces en XML ou Java, layouts (Absolute, Linear, Relative, Table, Grid, Frame), attributs communs.",
+    23→      sections: [
+    24→        {
+    25→          heading: "Unités de mesure",
+    26→          blocks: [
+    27→            {
+    28→              type: "kv",
+    29→              items: [
+    30→                { k: "pixel (px)", v: "correspond à un pixel de l'écran" },
+    31→                { k: "pouce (in)", v: "unité de longueur ; correspond à 2,54 cm, basé sur la taille physique de l'écran" },
+    32→                { k: "millimètre (mm)", v: "basé sur la taille physique de l'écran" },
+    33→                { k: "point (pt)", v: "1/72 in" },
+    34→                { k: "pixel à densité indépendante (dp ou dip)", v: "unité relative se basant sur une taille physique d'écran de 160 dpi. Avec cette unité, 1 dp est égal à 1 pixel sur un écran de 160 pixels. Si la taille de l'écran est différente de 160, les vues s'adaptent selon le ratio entre la taille en pixels de l'écran de l'utilisateur et la référence de 160 pixels par pouce. Avantage : gérer plus facilement une grande variété d'écrans." },
+    35→                { k: "pixel à taille indépendante (sp)", v: "fonctionne comme les dp, mais est aussi fonction de la taille de police spécifiée par l'utilisateur. Recommandé pour spécifier les tailles des polices." },
+    36→              ],
+    37→            },
+    38→            {
+    39→              type: "p",
+    40→              text: "Exemple d'adaptation : un téléphone de 320DP × 360DP vs une tablette de 962DP × 600DP (ou 1280DP × 800DP) — les dp permettent à l'interface de s'adapter aux différentes densités d'écran.",
+    41→            },
+    42→          ],
+    43→        },
+    44→        {
+    45→          heading: "View et ViewGroup",
+    46→          blocks: [
+    47→            {
+    48→              type: "kv",
+    49→              items: [
+    50→                { k: "View", v: "Classe de base pour la création d'une interface graphique en Android. Classe mère de tous les widgets (éléments graphiques). Une vue peut être ajoutée à une application : soit statiquement, dans le fichier de description de l'interface (Layout XML), soit dynamiquement dans le code Java de l'application." },
+    51→                { k: "ViewGroup", v: "Classe de base de tous les layouts (gestionnaire de dispositions). Layouts = conteneurs invisibles regroupant plusieurs View ou ViewGroup suivant une prédéposition des objets graphiques. Permet de définir l'emplacement de ses fils dans l'écran." },
+    52→                { k: "Hiérarchie", v: "View → ViewGroup (FrameLayout, LinearLayout, RelativeLayout…) et → widgets (TextView, EditText, Button, ImageView, ProgressBar…). Exemples : TextView → EditText, Button, CheckedTextView ; ImageView → ImageButton, QuickContactBadge ; ProgressBar → AbsSeekBar → RatingBar, SeekBar ; CompoundButton → CheckBox, RadioButton ; AdapterView → ListView, GridView, Spinner, Gallery." },
+    53→              ],
+    54→            },
+    55→            {
+    56→              type: "diagram",
+    57→              id: "android-view-tree",
+    58→              caption: "Hiérarchie View / ViewGroup : les layouts regroupent les widgets.",
+    59→            },
+    60→          ],
+    61→        },
+    62→        {
+    63→          heading: "Interfaces graphiques : XML vs Java",
+    64→          blocks: [
+    65→            {
+    66→              type: "p",
+    67→              text: "Les interfaces permettent de dessiner la vue telle qu'elle doit s'afficher à l'utilisateur. Deux possibilités de développer des interfaces : code Java ou fichier XML. Android recommande l'utilisation des fichiers XML pour définir les interfaces — séparer la vue du métier. Une interface XML peut être associée à une activité (vue) grâce à la méthode setContentView(identifiant_layout) ; exemple : setContentView(R.layout.login). Widget (View) = éléments graphiques constituant la vue : widgets simples (boutons, champs de saisie, radio, listes…), widgets complexes (datepicker, horloge, barre de progression…). Définition en XML, et implémentation du comportement en Java.",
+    68→            },
+    69→            {
+    70→              type: "kv",
+    71→              items: [
+    72→                { k: "Emplacement", v: "Placés dans le répertoire res/layout de l'arborescence du projet." },
+    73→                { k: "Visualisation dans Android Studio", v: "Sous forme de code XML (onglet Text) ou sous forme graphique (onglet Design) : palette de composants graphiques à glisser-déplacer vers l'emplacement désiré." },
+    74→                { k: "Règle", v: "Chaque composant graphique est représenté par un élément XML dont les attributs décrivent l'aspect ou le comportement." },
+    75→                { k: "Bonnes pratiques", v: "Utiliser wrap_content, match_parent ou les unités en dp quand on spécifie des dimensions dans un layout XML ; ne pas utiliser des valeurs en pixel ; ne pas utiliser l'AbsoluteLayout (deprecated) ; fournir des ressources alternatives (pour les bitmaps notamment) qui correspondent à des densités d'écran différentes." },
+    76→              ],
+    77→            },
+    78→          ],
+    79→        },
+    80→        {
+    81→          heading: "Les layouts",
+    82→          blocks: [
+    83→            {
+    84→              type: "table",
+    85→              headers: ["Layout", "Description"],
+    86→              rows: [
+    87→                ["AbsoluteLayout (deprecated)", "Position absolue (x et y) — composants placés par positionnement avec android:layout_x et android:layout_y"],
+    88→                ["LinearLayout", "Permet d'aligner de gauche à droite ou de haut en bas les éléments qui y sont intégrés (orientation = horizontal / vertical) ; position en colonnes ou en lignes ; deux orientations possibles via android:layout_orientation : vertical (les vues les unes au-dessus des autres) ou horizontal (côte à côte)"],
+    89→                ["RelativeLayout", "Les composants sont positionnés les uns par rapport aux autres, le premier composant servant de référence aux autres"],
+    90→                ["TableLayout", "Crée un tableau à deux dimensions organisées par colonne et par rangée ; construction ligne par ligne avec TableRow ; layout_span : un widget peut occuper plusieurs cellules ; layout_column : numéro de colonne où se place le widget (0+)"],
+    91→                ["GridLayout", "Grille flexible, liste d'éléments continus (de gauche à droite)"],
+    92→                ["FrameLayout", "Principalement utilisé pour l'affichage d'un élément (par exemple un cadre dans lequel on veut charger des images) ; utile généralement pour superposer des vues ensembles"],
+    93→                ["ScrollView / HorizontalScrollView", "Permet de défiler un contenu trop grand pour tenir sur l'écran"],
+    94→              ],
+    95→            },
+    96→            {
+    97→              type: "kv",
+    98→              items: [
+    99→                { k: "Identifiant", v: "android:id=\"@+id/mon_ident\"" },
+   100→                { k: "layout_width / layout_height", v: "\"match_parent\" : l'élément remplit tout l'élément parent ; \"wrap_content\" : prend la place nécessaire à l'affichage" },
+   101→                { k: "android:margin", v: "Définit la taille des marges sur les quatre côtés de l'élément (marginTop, marginRight, marginBottom, marginLeft)" },
+   102→                { k: "android:background", v: "\"@color/blue\" / \"#0000FF\"" },
+   103→                { k: "android:visibility", v: "visible / invisible" },
+   104→                { k: "android:layout_gravity", v: "La gravité EXTÉRIEURE de la vue : la direction dans laquelle la vue doit toucher la bordure de son parent. left | center_horizontal | top | bottom | right" },
+   105→                { k: "android:gravity", v: "La gravité INTÉRIEURE de la vue : spécifie dans quelle direction son contenu doit s'aligner. left | center_horizontal | top | bottom | right" },
+   106→                { k: "android:layout_Padding", v: "Espace entre le texte et les bords : Padding, paddingRight, paddingLeft, paddingTop, paddingBottom" },
+   107→                { k: "Android:layout_Margin", v: "Espace autour des bords : layout_margin, layout_marginRight, layout_marginLeft, layout_marginTop, layout_marginBottom" },
+   108→                { k: "layout_weight", v: "Change la taille de la zone occupée par chaque composant (distribution) : plus le poids est important, plus le composant prend de la place ; la somme des weights détermine la répartition (ex. somme 6, 5 ou 4)" },
+   109→                { k: "Gravity dans LinearLayout", v: "Gestion de l'espace vide : android:gravity organise le contenu à l'intérieur de la vue ; android:layout_gravity organise la position de la vue en dehors d'elle-même" },
+   110→              ],
+   111→            },
+   112→          ],
+   113→        },
+   114→        {
+   115→          heading: "Les ressources et la classe R",
+   116→          blocks: [
+   117→            {
+   118→              type: "p",
+   119→              text: "Les ressources sont dans le répertoire res. Elles sont organisées dans des répertoires qui contiennent : des images, des chaînes de caractères, des couleurs, des fichiers XML. Le framework Android génère et maintient à jour automatiquement une classe statique R.java qui contient les identifiants (valeurs entières) des ressources. La classe R se trouve dans le dossier app/build/generated mais n'apparaît pas dans l'arborescence de l'IDE. À chaque fois qu'on ajoute une ressource à l'application, un identifiant est généré automatiquement dans cette classe pour permettre de la référencer dans le code des activités. La classe R est final donc elle n'est pas héritable. Toutes les ressources de l'application sont utilisées dans le code à travers la classe statique R : déclarées dans le fichier XML, le fichier associé est déposé dans le répertoire adéquat.",
+   120→            },
+   121→            {
+   122→              type: "kv",
+   123→              items: [
+   124→                { k: "Identifiants générés", v: "Les identifiants sont générés automatiquement dans la classe R au moment où on les crée. Exemple : création d'un champ de saisie (EditText) avec identifiant prenom → un attribut constant public static final int prenom est défini automatiquement dans la classe id et une valeur lui est attribuée (numéro unique identifiant l'élément EditText ajouté). Cet identifiant permet de manipuler l'élément à partir du code Java avec R.id.prenom." },
+   125→                { k: "Syntaxe d'accès", v: "android.R.type_ressource.nom_ressource — par exemple R.layout.activity_main pour le fichier activity_main.xml." },
+   126→                { k: "R.drawables.nomImage", v: "Les images sont accessibles par R.drawables.nomImage et correspondent à des fichiers dans le répertoire res/drawable." },
+   127→                { k: "R.string.nom", v: "Les noms sont accessibles par R.string.nom et correspondent à des chaînes de caractères dans res/values/strings.xml. On récupère ces noms dans le code par getResources().getString(R.string.nom)." },
+   128→                { k: "Accès à un composant", v: "On récupère la valeur de l'attribut android:id = \"@+id/IdentifiantAttribut\". On référence le composant via cet identifiant : findViewById(R.id.IdentifiantAttribut). Exemple : accès à un bouton → Button btn = findViewById(R.id.btn1)." },
+   129→              ],
+   130→            },
+   131→            {
+   132→              type: "code",
+   133→              lang: "java",
+   134→              code: "// [JAVA] setContentView peut prendre l'identifiant d'un layout\npublic class MainActivity extends AppCompatActivity {\n  @Override\n  protected void onCreate(Bundle savedInstanceState) {\n    super.onCreate(savedInstanceState);\n    setContentView(R.layout.activity_main);\n  }\n}\n\n// Une méthode spécifique pour les objets graphiques permet de les récupérer\n// à partir de leur id, et d'agir sur ces instances même si elles ont été créées via XML :\nTextView txt = findViewById(R.id.textel);\ntxt.setText(\"Hello FSM!\");\n\n// Le layout reste modifiable à travers le code Java comme tous les objets graphiques\nLinearLayout l = (LinearLayout) findViewById(R.id.accueilId);\nl.setBackgroundColor(Color.BLACK);\n\n// Le fichier strings.xml (internationalisation)\n// <resources>\n//   <string name=\"app_name\">Application FSM</string>\n//   <string name=\"message\">Bonjour mes Amis!</string>\n// </resources>\nResources res = getResources();\nString hw = res.getString(R.string.message);   // en Java\n// @string/message                              // en XML",
+   135→            },
+   136→            {
+   137→              type: "kv",
+   138→              items: [
+   139→                { k: "Internationalisation", v: "Le système de ressources permet de gérer très facilement l'internationalisation : créer des répertoires values-XX où XX est le code de la langue (ex. values-es/strings.xml, values-fr/strings.xml) contenant les chaînes traduites associées aux mêmes clés que values/strings.xml. Android chargera le fichier de ressources approprié en fonction de la langue du système." },
+   140→                { k: "Autres ressources", v: "les menus (R.menu), les images (R.drawable), des couleurs (R.color) — ex. <color name=\"colorPrimary\">#3F51B5</color>, colorPrimaryDark, colorAccent." },
+   141→                { k: "Densités d'images", v: "drawable-hdpi : images pour haute résolution ; drawable-ldpi : basse résolution ; drawable-mdpi : moyenne résolution. icon.png : l'icône de l'application, affichée sur le bureau." },
+   142→                { k: "Utilisation des widgets", v: "Pour utiliser un composant graphique, il faut lui associer un id : représenté dans le layout XML par l'attribut android:id, en général sous la forme @+id/nom. « + » : variable particulière, doit être parsée par le parseur XML ; « + » : un identifiant avec la valeur nom_id sera généré et ajouté automatiquement à la classe R. Le fichier R.java contient un ensemble de classes générées automatiquement à partir du répertoire res ; chaque classe représente un ensemble de propriétés utilisables dans le code Java ; fichier généré, ne doit pas être modifié à la main." },
+   143→              ],
+   144→            },
+   145→          ],
+   146→        },
+   147→      ],
+   148→    },
+   149→    {
+   150→      id: "widgets",
+   151→      title: "Interfaces graphiques — Widgets et événements",
+   152→      summary: "TextView, EditText, ImageView, Button (3 façons de gérer le clic), listeners, CheckBox, RadioButton/RadioGroup, ListView/ArrayAdapter et composants avancés.",
+   153→      sections: [
+   154→        {
+   155→          heading: "TextView, EditText, ImageView",
+   156→          blocks: [
+   157→            {
+   158→              type: "kv",
+   159→              items: [
+   160→                { k: "TextView", v: "Les labels de texte, sert de zone de texte non éditable. Propriétés importantes : android:text (le texte du TextView), android:typeface (type de police : monospace…), android:textStyle (italique, gras, bold|italic…), android:textColor (couleur d'affichage du texte), android:textSize (taille du texte en « sp »). Les couleurs sont en hexadécimal RGB (#RedGreenBlue : #FF0000 = rouge)." },
+   161→                { k: "EditText", v: "Zone de texte éditable. Propriétés : android:text (le texte du EditText), android:inputType (type d'entrée attendu : numberDecimal, numberSigned, phone, date, textEmailAddress, textMultiLine, textPersonName), android:hint (texte à afficher lorsque le composant est vide)." },
+   162→                { k: "ImageView", v: "Affiche une image sans interaction. Propriétés : android:src (l'id du drawable), android:scaleType (contrôle comment l'image va être modifiée en fonction de la taille de la vue)." },
+   163→                { k: "Autres composants simples", v: "TextView (label), EditText (champ de texte de saisie Email, Number…), CheckBox / RadioButton, Button (gestion des clicks), Calendrier, Progress bar / Rate bar / Seek bar, Toggle Button, ImageView, VideoView, MapView…" },
+   164→              ],
+   165→            },
+   166→            {
+   167→              type: "code",
+   168→              lang: "xml",
+   169→              code: "<!-- TextView en XML -->\n<TextView\n    android:id=\"@+id/txt1\"\n    android:layout_width=\"wrap_content\"\n    android:layout_height=\"wrap_content\"\n    android:text=\"@string/mess\"\n    android:textSize=\"25sp\"\n    android:textColor=\"#990000\" />\n\n<!-- Par programmation [JAVA] -->\nLinearLayout cadre = new LinearLayout(this);\ncadre.setGravity(Gravity.CENTER);\ncadre.setOrientation(LinearLayout.VERTICAL);\nTextView txt = new TextView(this);\ntxt.setText(\"Test de Creation d'Interface\");\ncadre.addView(txt);\nsetContentView(cadre);\n\n<!-- EditText en XML -->\n<EditText\n    android:id=\"@+id/email_address\"\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"wrap_content\"\n    android:hint=\"@string/email_hint\"\n    android:inputType=\"textEmailAddress\" />\n\n<!-- ImageView en XML -->\n<ImageView\n    android:id=\"@+id/imageView\"\n    android:layout_width=\"wrap_content\"\n    android:layout_height=\"wrap_content\"\n    android:layout_gravity=\"center_horizontal\"\n    app:srcCompat=\"@drawable/image\" />",
+   170→            },
+   171→          ],
+   172→        },
+   173→        {
+   174→          heading: "Button et gestion des événements (3 façons)",
+   175→          blocks: [
+   176→            {
+   177→              type: "kv",
+   178→              items: [
+   179→                { k: "Button", v: "Un bouton qui renvoie un événement lors de l'appui. Peut contenir un texte, une image ou les deux. Propriétés : android:text (le texte du bouton), android:onClick (abonne un listener sur l'événement clic de l'utilisateur), android:drawableLeft (une image à afficher avec les textes à la position souhaitée : Top, Bottom, Left, Right), android:enable (actif ou inactif). ImageButton : bouton image (android:src, android:scaleType)." },
+   180→                { k: "Gestion des événements de clic", v: "La gestion des événements de click est réalisée par l'intermédiaire d'un listener. Trois manières de gérer le click d'un Button (définition du comportement) : 1) on associe un call-back sur l'événement CLICK ; 2) à travers l'interface OnClickListener (l'Activity courante s'engage à définir le contenu de la méthode OnClick) ; 3) à travers les attributs événementiels en XML." },
+   181→              ],
+   182→            },
+   183→            {
+   184→              type: "code",
+   185→              lang: "java",
+   186→              code: "// ── 1ère façon : call-back sur l'événement CLICK ──\n// 1. Définir un objet Java de type android.widget.Button\nprivate Button btn;\n// 2. Initialiser cet objet en l'associant à son équivalent dans le fichier XML\nbtn = findViewById(R.id.button1);\n// 3. Définir le comportement de ce bouton\nbtn.setOnClickListener(new View.OnClickListener() {\n  @Override\n  public void onClick(View v) {\n    // ...\n  }\n});\n\n// ── 2ème façon : implémenter l'interface View.OnClickListener ──\n// 1. Définir un objet Java de type android.widget.Button\n// 2. Initialiser cet objet en l'associant à son équivalent dans le fichier XML\n// 3. Implémenter l'interface View.OnClickListener\npublic class MainActivity extends AppCompatActivity implements View.OnClickListener {\n  // 4. Surcharger la méthode onClick (commune à tous les éléments cliquables :\n  //    distinguer le comportement selon l'identifiant de l'élément cliqué)\n  @Override\n  public void onClick(View v) {\n    if (v.getId() == R.id.button1) { /* comportement du bouton */ }\n  }\n  // 5. Définir la classe en cours comme étant le Listener du bouton\n  btn.setOnClickListener(this);\n}\n\n// ── 3ème façon : attribut événementiel en XML ──\n// 1. Dans le layout XML, associer au bouton le nom d'une méthode :\n//      android:onClick=\"onClickHello\"\n// 2. Dans la classe Java de l'activité, créer et implémenter la méthode :\n//    - elle doit retourner void\n//    - elle doit porter le nom défini dans le layout XML\n//    - elle doit définir un paramètre de type android.view.View\npublic void onClickHello(View v) {\n  // comportement du bouton\n}",
+   187→            },
+   188→            {
+   189→              type: "table",
+   190→              headers: ["Interface listener", "Événement"],
+   191→              rows: [
+   192→                ["OnClickListener", "clic"],
+   193→                ["OnLongClickListener", "clic long"],
+   194→                ["OnDragListener", "glissement"],
+   195→                ["OnTouchListener", "touché"],
+   196→                ["OnHoverListener", "survol"],
+   197→                ["OnKeyListener", "frappe de clavier"],
+   198→                ["OnAttachStateChangeListener", "changement de l'attachement"],
+   199→                ["OnLayoutChangeListener", "changement du layout"],
+   200→                ["OnCreateContextMenuListener", "création du menu contextuel"],
+   201→                ["OnFocusChangeListener", "changement du focus"],
+   202→                ["OnGenericMotionListener", "un mouvement (mouse, pen, finger…)"],
+   203→                ["OnSystemUiVisibilityChangeListener", "changement de la visibilité de la barre d'état"],
+   204→              ],
+   205→            },
+   206→          ],
+   207→        },
+   208→        {
+   209→          heading: "CheckBox, RadioButton et ListView",
+   210→          blocks: [
+   211→            {
+   212→              type: "kv",
+   213→              items: [
+   214→                { k: "Checkbox", v: "Une case à cocher. Propriétés : android:text (le texte de la case), android:checked (spécifie si le composant est coché par défaut). En Java : chk1.setOnClickListener(...) avec chk1.isChecked() pour tester l'état ; on peut aussi interroger plusieurs cases dans un listener commun avec Toast.makeText(MainActivity.this, \"…\", Toast.LENGTH_SHORT).show()." },
+   215→                { k: "RadioButton", v: "Un bouton d'option. Propriétés : android:text (le texte de l'option), android:checked (coché par défaut). Un RadioGroup est un groupe de boutons dépendants : pour que les RadioButton soient dépendants, il faut qu'ils soient contenus dans le même groupe." },
+   216→                { k: "RadioButton et événements", v: "Deux façons : créer un listener par RadioButton, ou utiliser la même méthode pour tous les RadioButton d'un même RadioGroup — dans la méthode, on sait quel RadioButton appelle grâce à l'attribut View (switch (v.getId()) { case R.id.idop1: … case R.id.idop2: … }). En XML : android:onClick=\"validerRadio\" sur chaque RadioButton." },
+   217→                { k: "ListView", v: "Au sein d'un Layout, on peut implanter une liste qu'on pourra dérouler si le nombre d'éléments est important. Pour afficher une liste d'items, il lui faut un adaptateur de données. Au niveau de l'activité principale, on récupère la ListView et lui affecte un adaptateur grâce à la méthode setAdapter ; on ajoute un objet de type ArrayAdapter contenant : une liste de String avec un layout générique de l'item fourni par la plateforme par défaut, et la liste des données. Les mises en page disponibles pour fonctionner avec ArrayAdapter : android.R.layout.simple_list_item_1 (layout simple avec un seul TextView), android.R.layout.simple_list_item_checked, android.R.layout.simple_list_item_multiple_choice." },
+   218→                { k: "Composants avancés", v: "VideoView, ProgressBar (barre de progression horizontale, circulaire ; variante avec étoiles de notation : RatingBar), SeekBar (barre de réglage), Rate bar, SearchView (champ de recherche avec proposition de suggestions), WebView, Calendrier, Toggle Button, MapView…" },
+   219→              ],
+   220→            },
+   221→            {
+   222→              type: "code",
+   223→              lang: "java",
+   224→              code: "// ListView + ArrayAdapter\nListView liste = findViewById(R.id.liste);\nString[] chaine = { \"Mahdia\", \"Sousse\", \"Monastir\", \"Sfax\" };\nArrayAdapter<String> arrayAdap = new ArrayAdapter<String>\n    (this, android.R.layout.simple_list_item_checked, chaine);\nliste.setAdapter(arrayAdap);\n\n// CheckBox avec listener\nchk1.setOnClickListener(new View.OnClickListener() {\n  public void onClick(View v) {\n    if (chk1.isChecked()) { /* ... */ } else { /* ... */ }\n  }\n});\n\n// Même méthode pour tous les RadioButton d'un RadioGroup\npublic void validerRadio(View v) {\n  switch (v.getId()) {\n    case R.id.idop1: /* ... */ break;\n    case R.id.idop2: /* ... */ break;\n    default: /* ... */\n  }\n}\n\n<!-- RadioGroup en XML -->\n<RadioGroup\n    android:layout_width=\"wrap_content\"\n    android:layout_height=\"wrap_content\">\n  <RadioButton android:id=\"@+id/id1\" android:text=\"Groupe 1\" ... />\n  <RadioButton android:id=\"@+id/id2\" android:text=\"Groupe 2\" ... />\n</RadioGroup>",
+   225→            },
+   226→          ],
+   227→        },
+   228→      ],
+   229→    },
+   230→  ],
+   231→
+   232→  quiz: [
+   233→    { id: "an1", chapter: "ui", question: "Quelle unité est recommandée pour spécifier les tailles des polices ?", options: ["px", "dp", "sp", "pt"], correct: 2, explanation: "Le sp (pixel à taille indépendante) fonctionne comme les dp mais est aussi fonction de la taille de police spécifiée par l'utilisateur — recommandé pour les polices." },
+   234→    { id: "an2", chapter: "ui", question: "À quoi correspond 1 dp ?", options: ["1 pixel sur un écran de 160 dpi", "1 centimètre", "1/72 in", "2,54 cm"], correct: 0, explanation: "Le dp (densité indépendante) se base sur un écran de 160 dpi : 1 dp = 1 pixel sur un écran de 160 pixels ; les vues s'adaptent sinon selon le ratio." },
+   235→    { id: "an3", chapter: "ui", question: "Qu'est-ce que la classe View en Android ?", options: ["Un gestionnaire de fichiers", "La classe de base pour la création d'une interface graphique, classe mère de tous les widgets", "Une base de données", "Un thread"], correct: 1, explanation: "View est la classe de base de toute interface graphique Android et la classe mère de tous les widgets. Une vue peut être ajoutée statiquement (XML) ou dynamiquement (Java)." },
+   236→    { id: "an4", chapter: "ui", question: "Qu'est-ce qu'un ViewGroup ?", options: ["Un widget simple", "La classe de base de tous les layouts : conteneurs invisibles regroupant des View/ViewGroup", "Une activité", "Un bouton"], correct: 1, explanation: "ViewGroup = classe de base des layouts (gestionnaires de dispositions) : conteneurs invisibles regroupant des vues selon une prédéposition, définissant l'emplacement des fils." },
+   237→    { id: "an5", chapter: "ui", question: "Quelle méthode associe une interface XML à une activité ?", options: ["setView()", "setContentView(identifiant_layout) — ex. setContentView(R.layout.login)", "attachLayout()", "renderLayout()"], correct: 1, explanation: "setContentView(R.layout.xxx) associe l'interface XML à l'activité. Android recommande le XML pour définir les interfaces (séparer la vue du métier)." },
+   238→    { id: "an6", chapter: "ui", question: "Quel layout est DEPRECATED ?", options: ["LinearLayout", "RelativeLayout", "AbsoluteLayout (position absolue x et y)", "FrameLayout"], correct: 2, explanation: "AbsoluteLayout (positionnement absolu android:layout_x/y) est deprecated — une des bonnes pratiques est de ne pas l'utiliser." },
+   239→    { id: "an7", chapter: "ui", question: "Quel layout aligne les éléments de gauche à droite ou de haut en bas ?", options: ["LinearLayout (orientation horizontal/vertical)", "TableLayout", "GridLayout", "FrameLayout"], correct: 0, explanation: "LinearLayout aligne les éléments via android:layout_orientation : vertical (les unes au-dessus des autres) ou horizontal (côte à côte)." },
+   240→    { id: "an8", chapter: "ui", question: "Quel layout superpose des vues ensembles ?", options: ["FrameLayout", "ScrollView", "TableLayout", "LinearLayout"], correct: 0, explanation: "FrameLayout est principalement utilisé pour l'affichage d'un élément (un cadre pour charger des images) et généralement pour superposer des vues." },
+   241→    { id: "an9", chapter: "ui", question: "Quelle est la différence entre android:gravity et android:layout_gravity ?", options: ["gravity = gravité INTÉRIEURE (alignement du contenu) ; layout_gravity = gravité EXTÉRIEURE (position de la vue dans son parent)", "C'est pareil", "gravity pour les images, layout_gravity pour le texte", "layout_gravity est deprecated"], correct: 0, explanation: "android:layout_gravity : direction dans laquelle la vue touche la bordure de son parent. android:gravity : direction d'alignement du contenu de la vue. Valeurs : left | center_horizontal | top | bottom | right." },
+   242→    { id: "an10", chapter: "ui", question: "Que fait l'attribut layout_weight ?", options: ["Change la taille de la zone occupée par chaque composant (distribution)", "Ajoute une marge", "Cache la vue", "Définit la police"], correct: 0, explanation: "layout_weight change la taille de la zone occupée par chaque composant : plus le poids est important, plus le composant prend de la place (somme des weights : 6, 5, 4…)." },
+   243→    { id: "an11", chapter: "ui", question: "Dans un layout XML, que signifie \"match_parent\" ?", options: ["L'élément prend la place nécessaire à l'affichage", "L'élément remplit tout l'élément parent", "L'élément est caché", "L'élément est centré"], correct: 1, explanation: "match_parent : l'élément remplit tout l'élément parent. wrap_content : prend la place nécessaire à l'affichage." },
+   244→    { id: "an12", chapter: "ui", question: "Où sont placés les fichiers de layout XML ?", options: ["res/layout", "src/layout", "assets/xml", "res/values"], correct: 0, explanation: "Les interfaces XML sont placées dans le répertoire res/layout de l'arborescence du projet." },
+   245→    { id: "an13", chapter: "ui", question: "Qu'est-ce que la classe R.java ?", options: ["Un fichier à modifier à la main", "Classe statique générée et maintenue automatiquement par le framework, contenant les identifiants (entiers) des ressources", "Une activité de base", "Le manifeste"], correct: 1, explanation: "R.java : classe statique générée automatiquement (dans app/build/generated), contient les identifiants de toutes les ressources ; final (non héritable) ; ne doit pas être modifiée à la main." },
+   246→    { id: "an14", chapter: "ui", question: "Comment accède-t-on au composant EditText d'identifiant prenom depuis le code Java ?", options: ["R.id.prenom via findViewById", "prenom.getText()", "R.java.prenom", "resource('prenom')"], correct: 0, explanation: "L'identifiant génère un attribut public static final int prenom dans la classe id : on manipule l'élément avec R.id.prenom via findViewById." },
+   247→    { id: "an15", chapter: "ui", question: "Comment gère-t-on l'internationalisation avec Android ?", options: ["Un fichier par application", "Des répertoires values-XX (ex. values-fr, values-es) contenant strings.xml avec les chaînes traduites, mêmes clés", "Un dictionnaire en ligne", "Impossible"], correct: 1, explanation: "On crée des répertoires values-XX où XX est le code de la langue, avec des fichiers strings.xml traduits (mêmes clés). Android charge le fichier approprié selon la langue du système." },
+   248→    { id: "an16", chapter: "ui", question: "À quoi servent les répertoires drawable-hdpi, drawable-ldpi, drawable-mdpi ?", options: ["Stockent les images pour les différentes résolutions (haute, basse, moyenne)", "Stockent les layouts", "Stockent les polices", "Stockent les tests"], correct: 0, explanation: "Ces répertoires contiennent les images/bitmaps pour chaque densité d'écran. Bonne pratique : fournir des ressources alternatives correspondant aux densités différentes." },
+   249→    { id: "an17", chapter: "ui", question: "Quelle est la signification de l'attribut android:hint sur un EditText ?", options: ["L'indice de tri", "Texte à afficher lorsque le composant est vide", "Le texte par défaut sauvegardé", "Un commentaire"], correct: 1, explanation: "android:hint : texte affiché lorsque le champ est vide. android:inputType définit le type d'entrée (textEmailAddress, numberDecimal, phone…) ; android:text le texte du champ." },
+   250→    { id: "an18", chapter: "widgets", question: "Quelle propriété définit la taille du texte d'un TextView ?", options: ["android:textSize (en sp)", "android:font", "android:size", "android:height"], correct: 0, explanation: "android:textSize définit la taille du texte en « sp ». android:textStyle (bold/italic), android:typeface (police), android:textColor (couleur hexadécimale RGB)." },
+   251→    { id: "an19", chapter: "widgets", question: "Quelles sont les 3 façons de gérer le clic d'un Button ?", options: ["Call-back sur l'événement CLICK ; implémenter l'interface OnClickListener ; attribut android:onClick en XML", "Uniquement via le XML", "Uniquement en Java", "Avec un thread"], correct: 0, explanation: "3 manières : 1) associer un call-back (setOnClickListener avec new View.OnClickListener), 2) implémenter View.OnClickListener dans l'activité (onClick + setOnClickListener(this)), 3) android:onClick=\"nomMethode\" en XML." },
+   252→    { id: "an20", chapter: "widgets", question: "Dans la 3ème façon (android:onClick), la méthode Java doit…", options: ["retourner void, porter le nom défini dans le XML, et définir un paramètre de type android.view.View", "être privée et statique", "retourner un String", "être dans le fichier XML"], correct: 0, explanation: "Contraintes : la méthode retourne void, porte le nom défini dans le layout XML, et prend un paramètre android.view.View." },
+   253→    { id: "an21", chapter: "widgets", question: "Quel listener correspond au « clic long » ?", options: ["OnClickListener", "OnLongClickListener", "OnTouchListener", "OnKeyListener"], correct: 1, explanation: "OnLongClickListener = clic long. Autres : OnDragListener (glissement), OnTouchListener (touché), OnHoverListener (survol), OnKeyListener (frappe clavier), OnFocusChangeListener (focus)…" },
+   254→    { id: "an22", chapter: "widgets", question: "Quelle est la différence entre CheckBox et RadioButton ?", options: ["Aucune", "CheckBox : case à cocher indépendante ; RadioButton : bouton d'option, dépendant au sein d'un même RadioGroup", "RadioButton est plus rapide", "CheckBox ne peut pas être cochée"], correct: 1, explanation: "Checkbox = case à cocher (android:text, android:checked). RadioButton = bouton d'option ; pour qu'ils soient dépendants (un seul choisi), ils doivent être dans le même RadioGroup." },
+   255→    { id: "an23", chapter: "widgets", question: "Que faut-il pour afficher une liste d'items dans une ListView ?", options: ["Rien", "Un adaptateur de données (ArrayAdapter) affecté avec setAdapter", "Un thread", "Une base SQLite obligatoire"], correct: 1, explanation: "La ListView a besoin d'un adaptateur de données : on crée un ArrayAdapter (liste de String + layout générique de l'item) et on l'affecte avec setAdapter." },
+   256→    { id: "an24", chapter: "widgets", question: "Quels layouts d'items prédéfinis fonctionnent avec ArrayAdapter ?", options: ["simple_list_item_1, simple_list_item_checked, simple_list_item_multiple_choice", "linear_layout_item", "grid_item", "card_view"], correct: 0, explanation: "Android fournit android.R.layout.simple_list_item_1 (un seul TextView), simple_list_item_checked et simple_list_item_multiple_choice pour ArrayAdapter." },
+   257→    { id: "an25", chapter: "widgets", question: "Quel composant affiche une barre de notation avec des étoiles ?", options: ["SeekBar", "RatingBar", "ProgressBar", "SearchView"], correct: 1, explanation: "RatingBar = variante de la ProgressBar avec étoiles de notation. SeekBar = barre de réglage. SearchView = champ de recherche avec suggestions." },
+   258→  ],
+   259→};
+   260→

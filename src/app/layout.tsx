@@ -14,12 +14,12 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Ma Bibliothèque de Révision — 6 sujets",
+  title: "Ma Bibliothèque de Révision — 9 sujets",
   description:
-    "Plateforme de révision complète : Administration des Systèmes Linux, Applications Réparties, Virtualisation & Cloud, Android, IoT et Big Data — cours intégral, schémas, référence de commandes et boucles de maîtrise (zéro erreur).",
-  keywords: ["révision", "cours", "Linux", "réparties", "virtualisation", "Docker", "Kubernetes", "Android", "IoT", "Big Data", "Hadoop", "MongoDB"],
+    "Plateforme de révision complète : Administration des Systèmes Linux, Applications Réparties, Virtualisation & Cloud, Android, IoT, Big Data et Machine Learning (K-Means, KNN, SVM) — cours intégral, schémas, référence de commandes et boucles de maîtrise (zéro erreur).",
+  keywords: ["révision", "cours", "Linux", "réparties", "virtualisation", "Docker", "Kubernetes", "Android", "IoT", "Big Data", "Hadoop", "MongoDB", "Machine Learning", "K-Means", "KNN", "SVM"],
   openGraph: {
-    title: "Ma Bibliothèque de Révision — 6 sujets",
+    title: "Ma Bibliothèque de Révision — 9 sujets",
     description: "Cours intégral + quiz en boucle de maîtrise : re-teste tes erreurs jusqu'au zéro erreur.",
     type: "website",
   },

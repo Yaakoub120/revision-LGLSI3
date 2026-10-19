@@ -59,7 +59,7 @@ export function SubjectView({ subject, onBack }: { subject: Subject; onBack: () 
             <button
               key={id}
               onClick={() => setTab(id)}
-              className={`flex-1 flex items-center justify-center gap-2 rounded-xl px-3 py-2.5 text-xs sm:text-sm font-semibold transition-all ${tab === id ? "text-white shadow" : "text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200"}`}
+              className={`flex-1 min-w-0 flex items-center justify-center gap-2 rounded-xl px-3 py-2.5 text-xs sm:text-sm font-semibold transition-all ${tab === id ? "text-white shadow" : "text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200"}`}
               style={tab === id ? { background: subject.accent } : undefined}
             >
               <Icon className="h-4 w-4 shrink-0" />
@@ -97,10 +97,10 @@ export function SubjectView({ subject, onBack }: { subject: Subject; onBack: () 
             <Accordion type="multiple" defaultValue={filteredChapters.map((c) => c.id)} className="space-y-3">
               {filteredChapters.map((ch, ci) => (
                 <AccordionItem key={ch.id} value={ch.id} className="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 px-4 sm:px-6 shadow-sm">
-                  <AccordionTrigger className="hover:no-underline py-4">
-                    <div className="flex flex-col items-start gap-1 text-left">
+                  <AccordionTrigger className="hover:no-underline py-4 min-w-0">
+                    <div className="flex flex-col items-start gap-1 text-left min-w-0">
                       <span className="text-sm sm:text-base font-bold text-zinc-900 dark:text-zinc-50">{ch.title}</span>
-                      <span className="text-xs font-normal text-zinc-500 leading-relaxed">{ch.summary}</span>
+                      <span className="text-xs font-normal text-zinc-500 leading-relaxed break-words [overflow-wrap:anywhere]">{ch.summary}</span>
                       <Badge variant="secondary" className="mt-1">{ch.sections.length} sections · {ci + 1}/{subject.chapters.length}</Badge>
                     </div>
                   </AccordionTrigger>

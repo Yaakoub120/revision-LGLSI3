@@ -1,0 +1,58 @@
+
+===== PAGE 1 =====
+TP Android n°3 – Calcul de la Moyenne 
+Générale
+Université de Monastir – Faculté des Sciences – Département d’Informatique – LGLSI3 – 
+Octobre 2025
+ Enseignant : Soufien GDAIM — Encadrement TP : Amen Allah Jouila
+Objectif du TP
+Apprendre à créer une application Android permettant de calculer la moyenne générale d’un 
+étudiant à partir de ses notes, de sélectionner sa spécialité et le type d’évaluation, puis d’afficher 
+le résultat avec une mention correspondante. Ce TP permet de pratiquer :
+La récupération de valeurs saisies dans des EditText.
+L’utilisation d’un Spinner pour sélectionner une option.
+L’utilisation d’un RadioGroup et des RadioButton pour choisir un type.
+L’affichage dynamique dans un TextView.
+La gestion des boutons (Calculer, Effacer, Quitter) et des Toast.
+Consignes
+1.  Interface graphique
+Créer une interface comprenant :
+Trois champs EditText pour saisir les notes (Note 1, Note 2, Note 3).
+Un Spinner pour choisir la spécialité (GLSI, CHIM, PHY).
+Un RadioGroup avec deux RadioButton pour le type d’évaluation (Normal ou 
+Rattrapage).
+Trois boutons : Calculer, Effacer et Quitter.
+Un TextView pour afficher le résultat.
+Ajouter un titre et un séparateur graphique pour améliorer l’interface.
+2.  Fonctionnalités à implémenter
+Calculer la moyenne :
+Lire les trois notes saisies.
+Calculer la moyenne arithmétique.
+Déterminer la mention selon la moyenne :
+< 10 : Insuffisant ❌
+10 ≤ moyenne < 12 : Passable
+12 ≤ moyenne < 14 : Assez Bien
+14 ≤ moyenne < 16 : Bien
+≥ 16 : Très Bien 🌟
+Ajouter le statut Admis/Refusé selon si la moyenne est ≥ 10 ou non.
+Afficher dans le TextView le résultat complet : spécialité, type d’évaluation, moyenne, 
+mention et statut.
+Effacer :
+Réinitialiser tous les champs et le TextView.
+
+===== PAGE 2 =====
+Afficher un Toast confirmant la réinitialisation.
+Quitter :
+Fermer l’application.
+3.  Gestion des erreurs
+Vérifier que toutes les notes sont saisies et numériques.
+Afficher un Toast si une note est manquante ou incorrecte.
+Étapes suggérées
+1.  Définir le layout XML avec ScrollView et LinearLayout.
+
+===== PAGE 3 =====
+2.  Ajouter les composants (EditText, Spinner, RadioGroup, Buttons, TextView).
+3.  Lier les composants dans MainActivity.java avec findViewById.
+4.  Implémenter les listeners pour chaque bouton : OnClickListener.
+5.  Implémenter les méthodes calculerMoyenne() et effacerChamps().
+6.  Tester l’application sur un émulateur ou un vrai appareil.

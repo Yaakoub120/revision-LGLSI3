@@ -1,0 +1,591 @@
+     1→'use client'
+     2→
+     3→// ─── Site de révision — Virtualisation & Cloud (LGLSI3, Leila GHORBEL) ───
+     4→import { useEffect, useMemo, useState } from 'react'
+     5→import { vmodules, vglossary } from '@/data/vcloud'
+     6→import { vquestions } from '@/data/vcloud/quiz'
+     7→import { vcloudDiagramRegistry } from '@/components/vcloud/diagrams'
+     8→import { BlockRenderer } from '@/components/BlockRenderer'
+     9→import { QuizEngine } from '@/components/quiz/QuizEngine'
+    10→import { SwarmCluster } from '@/components/vcloud/diagrams'
+    11→import { Button } from '@/components/ui/button'
+    12→import { Progress } from '@/components/ui/progress'
+    13→import { cn } from '@/lib/utils'
+    14→
+    15→const TABS = [
+    16→  { id: 'home', label: 'Accueil', icon: '🏠' },
+    17→  { id: 'modules', label: 'Modules', icon: '📚' },
+    18→  { id: 'commands', label: 'Commandes', icon: '⌨️' },
+    19→  { id: 'glossary', label: 'Glossaire', icon: '📖' },
+    20→  { id: 'quiz', label: 'Quiz', icon: '🎯' },
+    21→] as const
+    22→
+    23→type TabId = (typeof TABS)[number]['id']
+    24→
+    25→const READ_KEY = 'vcloud-read-sections-v1'
+    26→
+    27→export default function VCloudSite() {
+    28→  const [tab, setTab] = useState<TabId>('home')
+    29→  const [activeModule, setActiveModule] = useState<string>('v1')
+    30→  const [readSections, setReadSections] = useState<string[]>([])
+    31→  const [search, setSearch] = useState('')
+    32→
+    33→  useEffect(() => {
+    34→    try {
+    35→      const raw = localStorage.getItem(READ_KEY)
+    36→      if (raw) {
+    37→        // eslint-disable-next-line react-hooks/set-state-in-effect -- one-time hydration from localStorage (external system)
+    38→        setReadSections(JSON.parse(raw))
+    39→      }
+    40→    } catch {}
+    41→  }, [])
+    42→
+    43→  const toggleRead = (id: string) => {
+    44→    setReadSections((prev) => {
+    45→      const next = prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]
+    46→      localStorage.setItem(READ_KEY, JSON.stringify(next))
+    47→      return next
+    48→    })
+    49→  }
+    50→
+    51→  const mod = vmodules.find((m) => m.id === activeModule) ?? vmodules[0]
+    52→  const allSections = vmodules.flatMap((m) => m.sections)
+    53→  const readPct = Math.round((readSections.length / allSections.length) * 100)
+    54→
+    55→  const filteredGlossary = useMemo(() => {
+    56→    const s = search.trim().toLowerCase()
+    57→    if (!s) return vglossary
+    58→    return vglossary.filter((g) => g.term.toLowerCase().includes(s) || g.def.toLowerCase().includes(s))
+    59→  }, [search])
+    60→
+    61→  return (
+    62→    <div className="min-h-screen bg-zinc-950 text-zinc-100">
+    63→      {/* ── Header ── */}
+    64→      <header className="sticky top-12 z-40 border-b border-zinc-800 bg-zinc-950/90 backdrop-blur">
+    65→        <div className="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
+    66→          <div className="flex items-center gap-2.5">
+    67→            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-violet-500/15 text-lg">☁️</span>
+    68→            <div>
+    69→              <h1 className="text-sm font-black leading-tight tracking-tight sm:text-base">
+    70→                Virtualisation &amp; Cloud <span className="text-violet-400">— LGLSI3</span>
+    71→              </h1>
+    72→              <p className="text-[11px] text-zinc-500">Virtualisation · Stockage · RAID · Docker · Swarm · Kubernetes</p>
+    73→            </div>
+    74→          </div>
+    75→          <nav className="flex gap-1 overflow-x-auto" aria-label="Navigation principale">
+    76→            {TABS.map((t) => (
+    77→              <button
+    78→                key={t.id}
+    79→                onClick={() => setTab(t.id)}
+    80→                aria-current={tab === t.id ? 'page' : undefined}
+    81→                className={cn(
+    82→                  'whitespace-nowrap rounded-lg px-3 py-2 text-xs font-bold transition sm:text-sm',
+    83→                  tab === t.id ? 'bg-violet-500 text-zinc-950' : 'text-zinc-400 hover:bg-zinc-900 hover:text-zinc-200'
+    84→                )}
+    85→              >
+    86→                <span className="mr-1">{t.icon}</span>
+    87→                {t.label}
+    88→              </button>
+    89→            ))}
+    90→          </nav>
+    91→        </div>
+    92→      </header>
+    93→
+    94→      <main className="mx-auto max-w-6xl px-4 py-6">
+    95→        {/* ═══════════ HOME ═══════════ */}
+    96→        {tab === 'home' && (
+    97→          <div className="space-y-8">
+    98→            <section className="overflow-hidden rounded-3xl border border-zinc-800 bg-gradient-to-br from-violet-500/10 via-zinc-900 to-zinc-950 p-8 sm:p-12">
+    99→              <p className="text-xs font-black uppercase tracking-[0.2em] text-violet-400">Licence LGLSI3 · Informatique · 2025-2026 · Leila GHORBEL</p>
+   100→              <h2 className="mt-3 text-3xl font-black leading-tight tracking-tight sm:text-5xl">
+   101→                Tout le cours Virtualisation &amp; Cloud.<br />
+   102→                <span className="text-violet-400">Zéro information oubliée.</span>
+   103→              </h2>
+   104→              <p className="mt-4 max-w-2xl leading-relaxed text-zinc-400">
+   105→                Chaque définition, chaque chiffre, chaque commande et chaque capture des 6 documents du cours
+   106→                — de l’histoire des systèmes distribués au cluster Kubernetes — condensés en 14 modules,
+   107→                avec 15 schémas interactifs, la référence complète des commandes et un quiz en boucle de maîtrise :
+   108→                tu répètes jusqu’au sans-faute.
+   109→              </p>
+   110→              <div className="mt-6 flex flex-wrap gap-3">
+   111→                <Button onClick={() => setTab('modules')} className="bg-violet-500 font-bold text-zinc-950 hover:bg-violet-400">
+   112→                  📚 Commencer la révision
+   113→                </Button>
+   114→                <Button onClick={() => setTab('quiz')} variant="outline" className="border-violet-700 font-bold text-violet-400 hover:bg-violet-500/10">
+   115→                  🎯 Tester mes connaissances
+   116→                </Button>
+   117→              </div>
+   118→              <div className="mt-8 grid gap-3 sm:grid-cols-4">
+   119→                {[
+   120→                  { v: '14', l: 'modules complets' },
+   121→                  { v: `${allSections.length}`, l: 'sections de cours' },
+   122→                  { v: `${vquestions.length}`, l: 'questions de quiz' },
+   123→                  { v: `${vglossary.length}`, l: 'termes de glossaire' },
+   124→                ].map((s) => (
+   125→                  <div key={s.l} className="rounded-2xl border border-zinc-800 bg-zinc-950/60 p-4 text-center">
+   126→                    <p className="text-3xl font-black text-violet-400">{s.v}</p>
+   127→                    <p className="text-xs text-zinc-500">{s.l}</p>
+   128→                  </div>
+   129→                ))}
+   130→              </div>
+   131→            </section>
+   132→
+   133→            {/* Modules overview */}
+   134→            <section>
+   135→              <h3 className="mb-4 text-lg font-black">Les 14 modules</h3>
+   136→              <div className="grid gap-3 md:grid-cols-2">
+   137→                {vmodules.map((m) => {
+   138→                  const done = m.sections.filter((s) => readSections.includes(s.id)).length
+   139→                  return (
+   140→                    <button
+   141→                      key={m.id}
+   142→                      onClick={() => { setActiveModule(m.id); setTab('modules') }}
+   143→                      className="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-5 text-left transition hover:border-violet-600/60 hover:bg-zinc-900"
+   144→                    >
+   145→                      <div className="flex items-start justify-between gap-3">
+   146→                        <div className="flex items-center gap-3">
+   147→                          <span className="text-3xl">{m.icon}</span>
+   148→                          <div>
+   149→                            <p className="text-[11px] font-bold uppercase tracking-widest text-violet-500">Module {m.num}</p>
+   150→                            <h4 className="font-bold text-zinc-100">{m.title}</h4>
+   151→                          </div>
+   152→                        </div>
+   153→                        <span className="text-xs text-zinc-500">{done}/{m.sections.length} lus</span>
+   154→                      </div>
+   155→                      <p className="mt-2 text-sm text-zinc-400">{m.subtitle}</p>
+   156→                      <p className="mt-2 text-[11px] text-zinc-600">📄 {m.source}</p>
+   157→                      <Progress value={(done / m.sections.length) * 100} className="mt-3 h-1.5" />
+   158→                    </button>
+   159→                  )
+   160→                })}
+   161→              </div>
+   162→            </section>
+   163→
+   164→            {/* How to use */}
+   165→            <section className="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-6">
+   166→              <h3 className="text-lg font-black">Comment réviser efficacement ?</h3>
+   167→              <div className="mt-4 grid gap-3 sm:grid-cols-3">
+   168→                {[
+   169→                  { n: '1', t: 'Lis chaque module', d: 'Section par section, coche « lu » pour suivre ta progression. Les cartes 📌 sont les définitions exactes à restituer.' },
+   170→                  { n: '2', t: 'Joue avec les schémas', d: '15 diagrammes interactifs : RAID, réseaux Docker, Swarm, architecture K8s… manipule-les pour ancrer les concepts.' },
+   171→                  { n: '3', t: 'Boucle de maîtrise', d: 'Le quiz renvoie tes erreurs jusqu\u2019à ce que TOUTES les questions soient réussies : objectif zéro erreur.' },
+   172→                ].map((x) => (
+   173→                  <div key={x.n} className="rounded-xl border border-zinc-800 bg-zinc-950 p-4">
+   174→                    <span className="flex h-7 w-7 items-center justify-center rounded-full bg-violet-500/20 text-sm font-black text-violet-400">{x.n}</span>
+   175→                    <p className="mt-2 font-bold text-zinc-100">{x.t}</p>
+   176→                    <p className="mt-1 text-sm leading-relaxed text-zinc-400">{x.d}</p>
+   177→                  </div>
+   178→                ))}
+   179→              </div>
+   180→            </section>
+   181→
+   182→            <section className="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-6">
+   183→              <h3 className="mb-4 text-lg font-black">Aperçu interactif : le cluster Swarm</h3>
+   184→              <SwarmCluster />
+   185→            </section>
+   186→          </div>
+   187→        )}
+   188→
+   189→        {/* ═══════════ MODULES ═══════════ */}
+   190→        {tab === 'modules' && (
+   191→          <div className="space-y-5">
+   192→            <div className="flex flex-wrap gap-2">
+   193→              {vmodules.map((m) => (
+   194→                <button
+   195→                  key={m.id}
+   196→                  onClick={() => setActiveModule(m.id)}
+   197→                  className={cn(
+   198→                    'rounded-full px-4 py-2 text-sm font-bold transition',
+   199→                    activeModule === m.id ? 'bg-violet-500 text-zinc-950' : 'border border-zinc-800 bg-zinc-900 text-zinc-400 hover:text-zinc-200'
+   200→                  )}
+   201→                >
+   202→                  {m.icon} M{m.num} · {m.title}
+   203→                </button>
+   204→              ))}
+   205→            </div>
+   206→
+   207→            <div className="rounded-2xl border border-zinc-800 bg-gradient-to-br from-zinc-900 to-zinc-950 p-6">
+   208→              <p className="text-xs font-black uppercase tracking-widest text-violet-500">Module {mod.num} / 14</p>
+   209→              <h2 className="mt-1 text-2xl font-black sm:text-3xl">{mod.icon} {mod.title}</h2>
+   210→              <p className="mt-1 text-zinc-400">{mod.subtitle}</p>
+   211→              <p className="mt-2 text-xs text-zinc-600">📄 Source : {mod.source}</p>
+   212→            </div>
+   213→
+   214→            <nav className="flex flex-wrap gap-2" aria-label="Sections du module">
+   215→              {mod.sections.map((s, i) => (
+   216→                <a
+   217→                  key={s.id}
+   218→                  href={`#${s.id}`}
+   219→                  className="rounded-lg border border-zinc-800 bg-zinc-900 px-3 py-1.5 text-xs text-zinc-400 transition hover:border-violet-700 hover:text-violet-400"
+   220→                >
+   221→                  {i + 1}. {s.title}
+   222→                </a>
+   223→              ))}
+   224→            </nav>
+   225→
+   226→            <div className="space-y-6">
+   227→              {mod.sections.map((s, i) => {
+   228→                const isRead = readSections.includes(s.id)
+   229→                return (
+   230→                  <article key={s.id} id={s.id} className="scroll-mt-28 rounded-2xl border border-zinc-800 bg-zinc-900/40 p-6">
+   231→                    <div className="flex items-start justify-between gap-3">
+   232→                      <h3 className="text-lg font-black text-zinc-100 sm:text-xl">
+   233→                        <span className="mr-2 rounded-lg bg-violet-500/15 px-2 py-0.5 text-sm text-violet-400">{mod.num}.{i + 1}</span>
+   234→                        {s.title}
+   235→                      </h3>
+   236→                      <button
+   237→                        onClick={() => toggleRead(s.id)}
+   238→                        aria-pressed={isRead}
+   239→                        className={cn(
+   240→                          'shrink-0 rounded-full px-3 py-1.5 text-xs font-bold transition',
+   241→                          isRead ? 'bg-emerald-500/20 text-emerald-400' : 'border border-zinc-700 text-zinc-500 hover:text-zinc-300'
+   242→                        )}
+   243→                      >
+   244→                        {isRead ? '✓ Lu' : 'Marquer lu'}
+   245→                      </button>
+   246→                    </div>
+   247→                    <div className="mt-3">
+   248→                      {s.blocks.map((b, j) => <BlockRenderer key={j} block={b} diagrams={vcloudDiagramRegistry} />)}
+   249→                    </div>
+   250→                  </article>
+   251→                )
+   252→              })}
+   253→            </div>
+   254→
+   255→            <div className="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-5">
+   256→              <div className="flex items-center justify-between gap-4">
+   257→                <div>
+   258→                  <p className="font-bold text-zinc-100">Progression de lecture</p>
+   259→                  <p className="text-xs text-zinc-500">{readSections.length} / {allSections.length} sections marquées comme lues</p>
+   260→                </div>
+   261→                <span className="text-2xl font-black text-violet-400">{readPct}%</span>
+   262→              </div>
+   263→              <Progress value={readPct} className="mt-3 h-2" />
+   264→              {readPct === 100 && (
+   265→                <Button onClick={() => setTab('quiz')} className="mt-4 w-full bg-emerald-500 font-bold text-zinc-950 hover:bg-emerald-400">
+   266→                  🎯 100% lu ! Lance maintenant le quiz jusqu'au sans-faute
+   267→                </Button>
+   268→              )}
+   269→            </div>
+   270→          </div>
+   271→        )}
+   272→
+   273→        {/* ═══════════ COMMANDS ═══════════ */}
+   274→        {tab === 'commands' && (
+   275→          <div className="space-y-6">
+   276→            <div className="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-6">
+   277→              <h2 className="text-2xl font-black">⌨️ Référence des commandes</h2>
+   278→              <p className="mt-2 text-sm text-zinc-400">
+   279→                Toutes les commandes du cours : Docker (base, volumes, réseau, Dockerfile, Compose, Registry, cgroups),
+   280→                Docker Swarm (cluster, services, scaling, update/rollback, drain) et Kubernetes (kubectl + minikube, démo complète).
+   281→              </p>
+   282→            </div>
+   283→
+   284→            <section className="rounded-2xl border border-violet-900/60 bg-zinc-900/40 p-6">
+   285→              <h3 className="text-lg font-black text-violet-300">Docker — commandes de base</h3>
+   286→              <div className="mt-4 grid gap-2">
+   287→                {[
+   288→                  ['docker run image_name', 'Créer et démarrer un conteneur (télécharge l\u2019image si absente)'],
+   289→                  ['docker run -d image_name', 'Démarrer le conteneur comme service de fond'],
+   290→                  ['docker run image_name:tag', 'Spécifier la version (défaut : latest) — ex. docker run redis:4.0'],
+   291→                  ['docker ps', 'Lister les conteneurs en cours d\u2019exécution'],
+   292→                  ['docker ps -a', 'Lister TOUS les conteneurs avec leur statut (Up, Exited, Created)'],
+   293→                  ['docker run -d -p 8082:80 nginx', 'Mapper port externe:port interne (accès externe)'],
+   294→                  ['docker images', 'Lister les images présentes dans le host docker'],
+   295→                  ['docker rmi <nom-image>', 'Supprimer une image (stopper/supprimer ses conteneurs d\u2019abord)'],
+   296→                  ['docker stop <containerID|name>', 'Stopper un conteneur'],
+   297→                  ['docker rm <containerID|name>', 'Supprimer un conteneur de manière permanente'],
+   298→                  ['docker exec -it my2 mysql --password', 'Exécuter une commande dans un conteneur DÉMARRÉ (mode interactif)'],
+   299→                  ['docker attach containerID', 'Attacher la console du terminal au conteneur de fond'],
+   300→                  ['docker inspect <name|id>', 'Détails du conteneur au format JSON'],
+   301→                  ['docker run -v /opt/dataDir:/var/lib/mysql mysql', 'Mapper un volume (persistance des données)'],
+   302→                  ['docker logs container_ID', 'Afficher le fichier log d\u2019un conteneur'],
+   303→                ].map(([cmd, role]) => (
+   304→                  <div key={cmd} className="flex flex-col gap-1 rounded-xl border border-zinc-800 bg-zinc-950 p-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+   305→                    <code className="font-mono text-[13px] text-emerald-300">{cmd}</code>
+   306→                    <span className="text-xs text-zinc-500">{role}</span>
+   307→                  </div>
+   308→                ))}
+   309→              </div>
+   310→            </section>
+   311→
+   312→            <section className="rounded-2xl border border-teal-900/60 bg-zinc-900/40 p-6">
+   313→              <h3 className="text-lg font-black text-teal-300">Dockerfile — les 12 instructions</h3>
+   314→              <div className="mt-4 grid gap-2">
+   315→                {[
+   316→                  ['FROM', 'Définir l\u2019image de base du build'],
+   317→                  ['MAINTAINER / LABEL', 'Nom complet + email du créateur de l\u2019image'],
+   318→                  ['ENV', 'Définir des variables d\u2019environnement'],
+   319→                  ['RUN', 'Directive d\u2019exécution centrale (au build)'],
+   320→                  ['CMD', 'Exécuter une commande spécifique dans le conteneur'],
+   321→                  ['ENTRYPOINT', 'Programme/script TOUJOURS exécuté au démarrage (+ arguments)'],
+   322→                  ['COPY', 'Copier fichiers/dossiers locaux (contexte de build) vers l\u2019image'],
+   323→                  ['ADD', 'Comme COPY + extraction d\u2019archives + téléchargement URL'],
+   324→                  ['EXPOSE', 'Exposer un port (mise en réseau avec l\u2019extérieur)'],
+   325→                  ['USER', 'Définir l\u2019UID qui exécutera le conteneur'],
+   326→                  ['VOLUME', 'Déclarer un dossier stocké de façon persistante'],
+   327→                  ['WORKDIR', 'Définir le chemin où la commande CMD est exécutée'],
+   328→                ].map(([cmd, role]) => (
+   329→                  <div key={cmd} className="flex flex-col gap-1 rounded-xl border border-zinc-800 bg-zinc-950 p-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+   330→                    <code className="font-mono text-[13px] text-emerald-300">{cmd}</code>
+   331→                    <span className="text-xs text-zinc-500">{role}</span>
+   332→                  </div>
+   333→                ))}
+   334→              </div>
+   335→              <div className="mt-4 rounded-xl border border-zinc-800 bg-zinc-950 p-4">
+   336→                <p className="text-sm font-bold text-amber-400">Exemple complet du cours (webApp)</p>
+   337→                <pre className="mt-2 overflow-x-auto font-mono text-[13px] leading-relaxed text-emerald-200">{`FROM nginx
+   338→COPY index.html /usr/share/nginx/html
+   339→EXPOSE 80
+   340→
+   341→# build + run :
+   342→docker build -t myapp .
+   343→docker run -d -p 8089:80 myapp`}</pre>
+   344→              </div>
+   345→            </section>
+   346→
+   347→            <section className="rounded-2xl border border-sky-900/60 bg-zinc-900/40 p-6">
+   348→              <h3 className="text-lg font-black text-sky-300">Docker — réseau &amp; stockage</h3>
+   349→              <div className="mt-4 grid gap-2">
+   350→                {[
+   351→                  ['docker run nginx', 'Mode réseau bridge (par défaut) — 172.17.0.x'],
+   352→                  ['docker run --network=host nginx', 'Mode host : ports partagés directement avec le host'],
+   353→                  ['docker run --network=none nginx', 'Mode none : aucun réseau'],
+   354→                  ['docker network create --driver bridge --subnet 182.18.0.0/16 custom-isolated-net', 'Créer un réseau bridge personnalisé'],
+   355→                  ['docker network ls', 'Lister les réseaux (bridge, host, none)'],
+   356→                  ['docker inspect <container_id|name>', 'Consulter la configuration réseau d\u2019un conteneur'],
+   357→                  ['docker run --network=myNet nginx', 'Démarrer sur un réseau personnalisé (IP ex. 172.19.0.2)'],
+   358→                ].map(([cmd, role]) => (
+   359→                  <div key={cmd} className="flex flex-col gap-1 rounded-xl border border-zinc-800 bg-zinc-950 p-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+   360→                    <code className="font-mono text-[13px] text-emerald-300">{cmd}</code>
+   361→                    <span className="text-xs text-zinc-500">{role}</span>
+   362→                  </div>
+   363→                ))}
+   364→              </div>
+   365→            </section>
+   366→
+   367→            <section className="rounded-2xl border border-amber-900/60 bg-zinc-900/40 p-6">
+   368→              <h3 className="text-lg font-black text-amber-300">Docker Compose, Registry &amp; cgroups</h3>
+   369→              <div className="mt-4 space-y-4">
+   370→                <div className="rounded-xl border border-zinc-800 bg-zinc-950 p-4">
+   371→                  <p className="text-sm font-bold text-amber-400">docker-compose.yml (version "2" — voting-app)</p>
+   372→                  <pre className="mt-2 overflow-x-auto font-mono text-[13px] leading-relaxed text-emerald-200">{`version: "2"
+   373→services:
+   374→  vote:
+   375→    image: eesprit/voting-app-vote
+   376→    ports: ["5000:80"]
+   377→    links: [redis]
+   378→  redis:
+   379→    image: redis:alpine
+   380→  worker:
+   381→    image: eesprit/voting-app-worker
+   382→    links: [redis, db]
+   383→  db:
+   384→    image: postgres:9.4
+   385→  result:
+   386→    image: eesprit/voting-app-result
+   387→    links: [db]
+   388→    ports: ["5001:80"]
+   389→
+   390→# links non obligatoire en v2 : liens automatiques entre services
+   391→$ docker-compose up`}</pre>
+   392→                </div>
+   393→                <div className="rounded-xl border border-zinc-800 bg-zinc-950 p-4">
+   394→                  <p className="text-sm font-bold text-amber-400">Démarrage manuel (avec --link) vs compose</p>
+   395→                  <pre className="mt-2 overflow-x-auto font-mono text-[13px] leading-relaxed text-emerald-200">{`$ docker run -d --name=redis redis
+   396→$ docker run -d --name=db postgres:9.4
+   397→$ docker run -d --name=vote -p 5000:80 --link=redis:redis eesprit/voting-app-vote
+   398→$ docker run -d --name=result -p 5001:80 --link=db:db result-app
+   399→$ docker run -d --name=worker --link=redis:redis --link=db:db worker`}</pre>
+   400→                </div>
+   401→                <div className="rounded-xl border border-zinc-800 bg-zinc-950 p-4">
+   402→                  <p className="text-sm font-bold text-amber-400">Registry privé &amp; limites de ressources</p>
+   403→                  <pre className="mt-2 overflow-x-auto font-mono text-[13px] leading-relaxed text-emerald-200">{`$ docker run -d -p 5000:5000 --name my-registry registry:2
+   404→$ docker image tag my-image localhost:5000/my-image
+   405→$ docker push localhost:5000/my-image
+   406→$ docker pull localhost:5000/my-image
+   407→$ docker login private-registry.io        # registre d'organisation
+   408→$ docker run private-registry.io/apps/internal-app
+   409→
+   410→$ docker run --cpus=0.5 nginx             # limite CPU (cgroups)
+   411→$ docker run --memory=100m mysql          # limite mémoire`}</pre>
+   412→                </div>
+   413→              </div>
+   414→            </section>
+   415→
+   416→            <section className="rounded-2xl border border-emerald-900/60 bg-zinc-900/40 p-6">
+   417→              <h3 className="text-lg font-black text-emerald-300">Docker Swarm — le cluster complet du cours</h3>
+   418→              <div className="mt-4 space-y-4">
+   419→                <div className="rounded-xl border border-zinc-800 bg-zinc-950 p-4">
+   420→                  <p className="text-sm font-bold text-emerald-400">1. Initialiser le cluster (Host 1 : 192.168.57.3)</p>
+   421→                  <pre className="mt-2 overflow-x-auto font-mono text-[13px] leading-relaxed text-emerald-200">{`$ sudo docker swarm init --advertise-addr 192.168.57.3 --listen-addr 192.168.57.3
+   422→# → token : SWMTKN-1-…  port par défaut de Swarm : 2377
+   423→
+   424→# 2. Ajouter les workers (Host 2 et Host 3) :
+   425→$ sudo docker swarm join --token SWMTKN-1-… 192.168.57.3:2377
+   426→This node joined a swarm as a worker.
+   427→
+   428→# 3. Lister les nœuds :
+   429→$ sudo docker node ls
+   430→# ID · HOSTNAME · STATUS(Ready) · AVAILABILITY(Active) · MANAGER STATUS(Leader) · ENGINE VERSION`}</pre>
+   431→                </div>
+   432→                <div className="rounded-xl border border-zinc-800 bg-zinc-950 p-4">
+   433→                  <p className="text-sm font-bold text-emerald-400">2. Services : créer, lister, inspecter, logs, supprimer</p>
+   434→                  <pre className="mt-2 overflow-x-auto font-mono text-[13px] leading-relaxed text-emerald-200">{`$ sudo docker service create --name foo alpine ping 8.8.8.8
+   435→$ sudo docker service ls              # MODE replicated · REPLICAS 1/1 · IMAGE
+   436→$ sudo docker service ps foo          # NAME foo.1 · NODE host1 · DESIRED/CURRENT STATE
+   437→$ sudo docker service logs foo
+   438→$ sudo docker service create --name web -p 80:80 emilevauge/whoami
+   439→$ sudo docker service rm web`}</pre>
+   440→                </div>
+   441→                <div className="rounded-xl border border-zinc-800 bg-zinc-950 p-4">
+   442→                  <p className="text-sm font-bold text-emerald-400">3. Application 3 services sur réseau overlay chiffré</p>
+   443→                  <pre className="mt-2 overflow-x-auto font-mono text-[13px] leading-relaxed text-emerald-200">{`$ sudo docker network create --driver overlay --opt encrypted exquisite
+   444→$ sudo docker service create --name back --network exquisite --limit-memory 64M \\
+   445→    --reserve-memory 64M vdemeeester/exquisite-words-java:v1
+   446→$ sudo docker service create --name mongo --network exquisite mongo:3.3.8
+   447→$ sudo docker service create --name front --network exquisite -p 808:80 \\
+   448→    vdemeeester/exquisite-web:v1`}</pre>
+   449→                </div>
+   450→                <div className="rounded-xl border border-zinc-800 bg-zinc-950 p-4">
+   451→                  <p className="text-sm font-bold text-emerald-400">4. Scaling, mise à jour, rollback, drain, contraintes</p>
+   452→                  <pre className="mt-2 overflow-x-auto font-mono text-[13px] leading-relaxed text-emerald-200">{`$ sudo docker service scale back=15        # mise à l'échelle
+   453→$ sudo docker service scale front=2
+   454→
+   455→$ sudo docker service update --update-parallelism 2 --update-delay 10s back
+   456→$ sudo docker service update --image vdemeeester/exquisite-web:v2 front
+   457→$ sudo docker service update --rollback front        # rollback demandé
+   458→
+   459→$ sudo docker node update --availability drain host3 # les instances migrent
+   460→$ sudo docker service create --name svc1 --constraint engine.label==ssd nginx
+   461→$ sudo docker service create --mode global alpine ping 8.8.8.8`}</pre>
+   462→                </div>
+   463→              </div>
+   464→            </section>
+   465→
+   466→            <section className="rounded-2xl border border-indigo-900/60 bg-zinc-900/40 p-6">
+   467→              <h3 className="text-lg font-black text-indigo-300">Kubernetes — kubectl &amp; minikube (démo Hello World)</h3>
+   468→              <div className="mt-4 space-y-4">
+   469→                <div className="rounded-xl border border-zinc-800 bg-zinc-950 p-4">
+   470→                  <p className="text-sm font-bold text-indigo-400">1. Installer &amp; démarrer minikube</p>
+   471→                  <pre className="mt-2 overflow-x-auto font-mono text-[13px] leading-relaxed text-emerald-200">{`> choco install minikube kubernetes-cli   # Chocolatey (admin, Windows)
+   472→> systeminfo                              # vérifier le support Hyper-V
+   473→C:\\Users\\med> minikube start
+   474→# → Preparing Kubernetes v1.15.2 on Docker 18.09.8 ...
+   475→# → Done! kubectl is now configured to use "minikube"
+   476→
+   477→# Hyperviseurs : macOS → VirtualBox/VMware Fusion/HyperKit
+   478→#               Linux → VirtualBox/KVM · Windows → VirtualBox/Hyper-V`}</pre>
+   479→                </div>
+   480→                <div className="rounded-xl border border-zinc-800 bg-zinc-950 p-4">
+   481→                  <p className="text-sm font-bold text-indigo-400">2. Connecter le client docker au daemon de minikube</p>
+   482→                  <pre className="mt-2 overflow-x-auto font-mono text-[13px] leading-relaxed text-emerald-200">{`$ echo $(minikube docker-env)
+   483→# export DOCKER_TLS_VERIFY="1" export DOCKER_HOST="tcp://192.168.99.100:2376"
+   484→# export DOCKER_CERT_PATH="...\\.minikube\\certs"
+   485→$ eval $(minikube docker-env)
+   486→$ echo $DOCKER_HOST        # tcp://192.168.99.100:2376`}</pre>
+   487→                </div>
+   488→                <div className="rounded-xl border border-zinc-800 bg-zinc-950 p-4">
+   489→                  <p className="text-sm font-bold text-indigo-400">3. Build, déploiement, exposition (démo complète)</p>
+   490→                  <pre className="mt-2 overflow-x-auto font-mono text-[13px] leading-relaxed text-emerald-200">{`$ docker build . -t app-test:v1        # FROM node:6.14.2 · EXPOSE 8080 …
+   491→
+   492→$ kubectl create deployment app-test --image=app-test:v1
+   493→deployment.apps/app-test created
+   494→$ kubectl get deployments
+   495→$ kubectl get pods
+   496→
+   497→$ kubectl expose deployment app-test --type=NodePort --port=8080
+   498→service/app-test exposed
+   499→$ kubectl describe service app-test
+   500→# Type: NodePort · IP: 10.108.16.123 · Port: 8080/TCP · NodePort: 31708/TCP
+   501→
+   502→$ minikube service app-test            # http://192.168.99.100:31708
+   503→$ winpty kubectl exec -ti app-test-5f78dcf7f8-2ts2w bash
+   504→# curl http://localhost:8080 → Hello World!`}</pre>
+   505→                </div>
+   506→                <div className="rounded-xl border border-zinc-800 bg-zinc-950 p-4">
+   507→                  <p className="text-sm font-bold text-indigo-400">4. Pods par fichier &amp; nettoyage</p>
+   508→                  <pre className="mt-2 overflow-x-auto font-mono text-[13px] leading-relaxed text-emerald-200">{`$ kubectl create -f mypod.yml          # créer un pod
+   509→$ kubectl get pods                     # lister tous les pods
+   510→$ kubectl delete Pod_ID                # supprimer un pod
+   511→$ kubectl create -f myDeployment.yaml  # deployment nginx:1.7.9 × 3
+   512→
+   513→# Nettoyage :
+   514→$ kubectl delete service app-test      # service "app-test" deleted
+   515→$ minikube stop                        # "minikube" stopped
+   516→$ minikube delete                      # cluster supprimé`}</pre>
+   517→                </div>
+   518→              </div>
+   519→            </section>
+   520→          </div>
+   521→        )}
+   522→
+   523→        {/* ═══════════ GLOSSARY ═══════════ */}
+   524→        {tab === 'glossary' && (
+   525→          <div className="space-y-5">
+   526→            <div className="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-6">
+   527→              <h2 className="text-2xl font-black">📖 Glossaire — {vglossary.length} termes</h2>
+   528→              <input
+   529→                type="search"
+   530→                value={search}
+   531→                onChange={(e) => setSearch(e.target.value)}
+   532→                placeholder="Rechercher un terme (ex. hyperviseur, overlay, kubelet, RAID 5…)"
+   533→                aria-label="Rechercher dans le glossaire"
+   534→                className="mt-4 w-full rounded-xl border border-zinc-800 bg-zinc-950 px-4 py-3 text-sm text-zinc-100 placeholder:text-zinc-600 focus:border-violet-600 focus:outline-none"
+   535→              />
+   536→            </div>
+   537→            <div className="grid gap-2.5 md:grid-cols-2">
+   538→              {filteredGlossary.map((g) => {
+   539→                const m = vmodules.find((x) => x.id === g.module)
+   540→                return (
+   541→                  <div key={g.term} className="rounded-xl border border-zinc-800 bg-zinc-900/50 p-4">
+   542→                    <div className="flex items-center justify-between gap-2">
+   543→                      <p className="font-bold text-violet-400">{g.term}</p>
+   544→                      {m && <span className="rounded-full bg-zinc-800 px-2 py-0.5 text-[10px] text-zinc-400">{m.icon} M{m.num}</span>}
+   545→                    </div>
+   546→                    <p className="mt-1.5 text-sm leading-relaxed text-zinc-300">{g.def}</p>
+   547→                  </div>
+   548→                )
+   549→              })}
+   550→              {filteredGlossary.length === 0 && (
+   551→                <p className="col-span-2 py-10 text-center text-zinc-500">Aucun terme trouvé pour « {search} »</p>
+   552→              )}
+   553→            </div>
+   554→          </div>
+   555→        )}
+   556→
+   557→        {/* ═══════════ QUIZ ═══════════ */}
+   558→        {tab === 'quiz' && (
+   559→          <div className="space-y-5">
+   560→            <div className="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-6">
+   561→              <h2 className="text-2xl font-black">🎯 Quiz — jusqu'au ZÉRO erreur</h2>
+   562→              <p className="mt-2 text-sm text-zinc-400">
+   563→                Le moteur de maîtrise : chaque erreur est remise dans la file. Continue jusqu'à ce que chaque question soit marquée MAÎTRISÉE.
+   564→              </p>
+   565→            </div>
+   566→            <QuizEngine questions={vquestions} modules={vmodules} storageKey="vcloud-quiz-state-v1" />
+   567→            <div className="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-6">
+   568→              <h3 className="mb-3 font-bold text-zinc-100">Besoin de réviser avant ?</h3>
+   569→              <div className="flex flex-wrap gap-2">
+   570→                <Button variant="outline" size="sm" onClick={() => setTab('modules')} className="border-zinc-700 text-zinc-300">📚 Relire les modules</Button>
+   571→                <Button variant="outline" size="sm" onClick={() => setTab('commands')} className="border-zinc-700 text-zinc-300">⌨️ Revoir les commandes</Button>
+   572→                <Button variant="outline" size="sm" onClick={() => setTab('glossary')} className="border-zinc-700 text-zinc-300">📖 Glossaire</Button>
+   573→              </div>
+   574→            </div>
+   575→          </div>
+   576→        )}
+   577→      </main>
+   578→
+   579→      <footer className="mt-auto border-t border-zinc-800 bg-zinc-950">
+   580→        <div className="mx-auto max-w-6xl px-4 py-6 text-center text-xs leading-relaxed text-zinc-600">
+   581→          <p>
+   582→            Site de révision — <b className="text-zinc-400">Virtualisation &amp; Cloud</b> (Licence LGLSI3 · Leila GHORBEL · 2025-2026) ·
+   583→            Contenu intégral : Partie 1 · Partie 2 · Partie 4 (Docker) · Partie 5 (Swarm) · Partie 6 (Kubernetes) + module Cloud complémentaire
+   584→          </p>
+   585→          <p className="mt-1">Bon courage pour l’examen ! 💪</p>
+   586→        </div>
+   587→      </footer>
+   588→    </div>
+   589→  )
+   590→}
+   591→

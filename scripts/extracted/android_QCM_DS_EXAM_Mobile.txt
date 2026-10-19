@@ -1,0 +1,297 @@
+
+===== PAGE 1 =====
+​Cycle de Vie des Activités​
+​1.​ ​Lorsqu'un appel téléphonique survient alors que l'application Android tourne,​
+​quelles méthodes sont appelées ?​
+​a. onPhoneBreak() et onResume()​
+​b. onStart() et onPause()​
+​c. onPause() et onResume()​
+​d. Aucune bonne réponse​
+​2.​ ​Quel est le cycle de vie d'une Activity au regard des différentes méthodes que le​
+​système Android appelle de manière séquentielle lorsqu'elle est lancée, puis​
+​qu'elle est effacée ?​
+​a. onCreate() > onResume() > onStart() puis onStop() > onPause() > onDestroy()​
+​b. onCreate() > onStart() > onResume() puis onPause() > onStop() > onDestroy()​
+​c. onCreate() > onStart() > onResume() puis onPause() > onDestroy()​
+​d. Aucune réponse correcte​
+​3.​ ​À quel moment onStart() est appelée pour une activité ?​
+​a. Au premier lancement de l'Activity​
+​b. Juste avant que l'Activity ne devienne visible​
+​c. Juste avant un appel téléphonique​
+​d. Uniquement si un bundle est à gérer​
+​4.​ ​Quelle est la méthode qui doit être obligatoirement implémentée dans une​
+​Activity ?​
+​a. onStart()​
+​b. onPause()​
+​c. onDestroy()​
+​d. onCreate()​
+​5.​ ​Choisissez la bonne réponse : une activité « A » lance une activité « B », on clique​
+​sur la touche « retour ». « B » est détruite et dépilée.​
+​a. Faux​
+​b. Vrai​
+​c. Suivant la version d'Android​
+​d. Aucune bonne réponse​
+​Layout et Vues​
+​6.​ ​L'attribut "android:gravity" signifie la :​
+​a. Gravité intérieure de la vue​
+
+===== PAGE 2 =====
+​b. Gravité extérieure de la vue​
+​c. Gravité du parent​
+​d. Aucune bonne réponse​
+​7.​ ​L'attribut "android:layout_width="wrap_content"" signifie :​
+​a. Prend la place nécessaire à l'affichage​
+​b. L'élément remplit tout l'élément parent​
+​c. L'élément remplit la moitié de l'écran​
+​d. Aucune bonne réponse​
+​8.​ ​Quel est le type de fichier le plus simple pour définir l'interface graphique ?​
+​a. JAVA​
+​b. XML​
+​c. Visual​
+​d. Aucune bonne réponse​
+​9.​ ​Les interfaces graphiques sont développées par :​
+​a. Java et/ou XML​
+​b. Seulement Java​
+​c. Seulement XML​
+​d. Aucune bonne réponse​
+​10.​​Quels Layouts existent sous Android ?​
+​a. LinearLayout​
+​b. RelativeLayout​
+​c. GridLayout​
+​d. Sequential Layout (Note : pas un layout standard)​
+​Initialisation des Vues et Classe Activity​
+​11.​​Vous avez créé un attribut​​private Button btn;​​. Dans​​quelle méthode peut-on​
+​l'attribuer à un bouton de layout ?​
+​12.​​Quelle est la ligne de code nécessaire pour initialiser un attribut​​btn​à un bouton​
+​du layout ?​
+​13.​​Quelle est la ligne de code nécessaire pour associer l'interface définie avec la​
+​classe​​MainActivity​?​
+​a. findViewById(R.layout.activityMain)​
+​b. setContentView(R.layout.activityMain)​
+​c. setContentView(R.id.activityMain)​
+​d. Aucune bonne réponse​
+​14.​​Vous avez créé deux attributs :​
+
+===== PAGE 3 =====
+​15.​​java​
+​○​ ​private​​EditText​​edt1;​
+​○​ ​private​​EditText​​edt2;​
+​16.​
+​17.​​Vous voulez que​​edt1​soit associé à la zone de texte​​edtName​et​​edt2​à​
+​edtLastName​​.​
+​●​ ​Dans quelle méthode faut-il faire ces initialisations ?​
+​a. onStop()​
+​b. onStart()​
+​c. onPause()​
+​d. Aucune bonne réponse​
+​●​ ​Donner les lignes de code nécessaires pour cette initialisation :​
+​a.​​edt1 = EditText(edtName); edt2 = EditText(edtLastName);​
+​b.​​edt1 = findViewById(R.id.edtName); edt2 =​
+​findViewById(R.id.edtLastName);​
+​c.​​edt1 = setContentView(R.id.edtName); edt2 =​
+​setContentView(R.id.edtLastName);​
+​d. Aucune bonne réponse​
+​Structure et Configuration du Projet​
+​15.​​Dans quel dossier trouve-t-on les ressources du projet ?​
+​16.​​La classe​​R​est une :​
+​a. Classe statique générée par le système​
+​b. Classe dynamique générée par le système​
+​c. Classe développée par le développeur​
+​d. Aucune bonne réponse​
+​17.​​Laquelle, parmi ces propositions, n'est pas incluse dans le fichier​
+​AndroidManifest.xml​?​
+​a. Les activités composant l'application​
+​b. Les permissions requises pour l'application​
+​c. La version minimale du SDK requise​
+​d. Le modèle compatible avec votre application​
+​18.​​Chaque activité utilisée par une application doit être enregistrée dans le fichier​
+​AndroidManifest.xml​​.​
+​a. Faux​
+​b. Vrai​
+
+===== PAGE 4 =====
+​c. Suivant la version d'Android​
+​d. Aucune bonne réponse​
+​19.​​La classe statique du système Android est la classe : (réponse ouverte)​
+​20.​​Dans quel fichier faut-il fixer les permissions lors du développement de votre​
+​application ? (réponse ouverte)​
+​Composants et Architecture Android​
+​21.​​Quels sont les composants ci-dessous qui existent sous Android ?​
+​a. Activity​
+​b. Service​
+​c. Content Provider​
+​d. Wave Provider (Note : le dernier n’est pas un composant Android standard)​
+​Questions Générales et Théoriques​
+​22.​​Avec le code de couleur RGB, quelle est la couleur bleue ? (réponse ouverte)​
+​23.​​Citer deux avantages du développement natif des applications mobiles :​
+​a. …​
+​b. …​
+​24.​​Citer deux inconvénients du développement natif des applications mobiles :​
+​a. …​
+​b. …​
+​25.​​Durant la phase de développement, comment peut-on tester son application sur​
+​plusieurs devices Android ?​
+​a. En achetant chacun de ces devices​
+​b. En utilisant Android Device Monitor​
+​c. Avec Chrome et son émulateur​
+​d. En utilisant Android Virtual Device et en configurant plusieurs devices virtuels​
+​26.​​La classe Android considérée généralement comme :​
+​a. Classe statique​
+​b. Classe dynamique​
+​c. Classe développée​
+​d. Aucune bonne réponse​
+
+===== PAGE 5 =====
+​<?​xml version​="1.0"​​encoding​="utf-8"​?>​
+​<LinearLayout​
+​xmlns:​android​="http://schemas.android.com/apk/res/android"​
+​xmlns:​tools​="http://schemas.android.com/tools"​
+​android​:layout_width​="match_parent"​
+​android​:layout_height​="match_parent"​
+​android​:orientation​="vertical"​
+​tools​:context​=".MainActivity"​>​
+​<LinearLayout​
+​android​:layout_width​="match_parent"​
+​android​:layout_height​="0dp"​
+​android​:layout_weight​="1"​
+​android​:orientation​="horizontal"​>​
+​<TextView​
+​android​:id​="@+id/textView"​
+​android​:layout_width​="wrap_content"​
+​android​:layout_height​="wrap_content"​
+​android​:layout_gravity​="center"​
+​android​:gravity​="center"​
+​android​:text​="Nom Etudiant"​​/>​
+​<EditText​
+​android​:id​="@+id/edtNom"​
+​android​:layout_width​="match_parent"​
+​android​:layout_height​="wrap_content"​
+​android​:layout_gravity​="center"​
+​android​:hint​="Tapez votre nom ici"​
+​android​:inputType​="textPersonName"​​/>​
+​</LinearLayout>​
+​<LinearLayout​
+​android​:layout_width​="match_parent"​
+​android​:layout_height​="0dp"​
+​android​:layout_weight​="1"​
+​android​:orientation​="vertical"​>​
+​<TextView​
+​android​:id​="@+id/textView2"​
+​android​:layout_width​="match_parent"​
+​android​:layout_height​="wrap_content"​
+​android​:layout_gravity​="center"​
+​android​:gravity​="center"​
+​android​:text​="Note 1"​​/>​
+​<EditText​
+​android​:id​="@+id/edtNote1"​
+​android​:layout_width​="match_parent"​
+
+===== PAGE 6 =====
+​android​:layout_height​="wrap_content"​
+​android​:layout_gravity​="center"​
+​android​:hint​="Tapez note 1 ici"​
+​android​:inputType​="textPersonName"​​/>​
+​</LinearLayout>​
+​<LinearLayout​
+​android​:layout_width​="match_parent"​
+​android​:layout_height​="0dp"​
+​android​:layout_weight​="1"​
+​android​:orientation​="vertical"​>​
+​<TextView​
+​android​:id​="@+id/textView3"​
+​android​:layout_width​="match_parent"​
+​android​:layout_height​="wrap_content"​
+​android​:layout_gravity​="center"​
+​android​:gravity​="center"​
+​android​:text​="Coef 1"​​/>​
+​<EditText​
+​android​:id​="@+id/edtCoef1"​
+​android​:layout_width​="match_parent"​
+​android​:layout_height​="wrap_content"​
+​android​:layout_gravity​="center"​
+​android​:hint​="Tapez coef 1 ici"​
+​android​:inputType​="textPersonName"​​/>​
+​</LinearLayout>​
+​<LinearLayout​
+​android​:layout_width​="match_parent"​
+​android​:layout_height​="0dp"​
+​android​:layout_weight​="1"​
+​android​:orientation​="vertical"​>​
+​<TextView​
+​android​:id​="@+id/textView4"​
+​android​:layout_width​="match_parent"​
+​android​:layout_height​="wrap_content"​
+​android​:layout_gravity​="center"​
+​android​:gravity​="center"​
+​android​:text​="Note 2"​​/>​
+​<EditText​
+​android​:id​="@+id/edtNote2"​
+​android​:layout_width​="match_parent"​
+​android​:layout_height​="wrap_content"​
+​android​:layout_gravity​="center"​
+​android​:hint​="Tapez note 2 ici"​
+
+===== PAGE 7 =====
+​android​:inputType​="textPersonName"​​/>​
+​</LinearLayout>​
+​<LinearLayout​
+​android​:layout_width​="match_parent"​
+​android​:layout_height​="0dp"​
+​android​:layout_weight​="1"​
+​android​:orientation​="vertical"​>​
+​<TextView​
+​android​:id​="@+id/textView5"​
+​android​:layout_width​="match_parent"​
+​android​:layout_height​="wrap_content"​
+​android​:layout_gravity​="center"​
+​android​:gravity​="center"​
+​android​:text​="Coef 2"​​/>​
+​<EditText​
+​android​:id​="@+id/edtCoef2"​
+​android​:layout_width​="match_parent"​
+​android​:layout_height​="wrap_content"​
+​android​:layout_gravity​="center"​
+​android​:hint​="Tapez coef 2 ici"​
+​android​:inputType​="textPersonName"​​/>​
+​</LinearLayout>​
+​<LinearLayout​
+​android​:layout_width​="match_parent"​
+​android​:layout_height​="0dp"​
+​android​:layout_weight​="1"​
+​android​:orientation​="horizontal"​>​
+​<TextView​
+​android​:id​="@+id/textMoyenne"​
+​android​:layout_width​="wrap_content"​
+​android​:layout_height​="wrap_content"​
+​android​:layout_gravity​="center"​
+​android​:text​="Moyenne"​​/>​
+​<TextView​
+​android​:id​="@+id/valMoyenne"​
+​android​:layout_width​="wrap_content"​
+​android​:layout_height​="wrap_content"​
+​android​:layout_gravity​="center"​
+​android​:textSize​="20sp"​
+​android​:text​=""​​/>​
+​</LinearLayout>​
+​<LinearLayout​
+
+===== PAGE 8 =====
+​android​:layout_width​="match_parent"​
+​android​:layout_height​="wrap_content"​
+​android​:orientation​="horizontal"​>​
+​<Button​
+​android​:id​="@+id/btnCalculer"​
+​android​:layout_width​="0dp"​
+​android​:layout_height​="wrap_content"​
+​android​:layout_weight​="1"​
+​android​:layout_gravity​="center"​
+​android​:text​="Calculer"​​/>​
+​<Button​
+​android​:id​="@+id/btnFermer"​
+​android​:layout_width​="0dp"​
+​android​:layout_height​="wrap_content"​
+​android​:layout_weight​="1"​
+​android​:layout_gravity​="center"​
+​android​:text​="Fermer"​​/>​
+​</LinearLayout>​
+​</LinearLayout>​
