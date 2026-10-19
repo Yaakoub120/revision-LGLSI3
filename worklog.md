@@ -21,3 +21,17 @@ Stage Summary:
 - Deliverable: single Next.js app at route "/" — 6 subjects, complete course content, 274-question mastery-loop quiz engine with localStorage persistence, 12 SVG diagrams, command references.
 - Key files: src/app/page.tsx, src/components/learn/{diagrams,content-renderer,quiz-engine,subject-view}.tsx, src/data/subjects/*.ts, src/lib/learn-types.ts.
 - Extraction artifacts kept in /home/z/my-project/scripts/ (extract_pdfs.py, render_pages.py, extracted/, pdf_images/).
+
+---
+Task ID: 2
+Agent: main (Z.ai)
+Task: User praised the platform ("i loved what u did keep it like that") and announced more subjects will be dropped. Check for new uploaded materials; verify platform health and readiness.
+
+Work Log:
+- Re-listed /home/z/my-project/upload/: 28 PDFs, newest = InternetDesObjets-1/2/3.pdf (Oct 18 23:05) — all already integrated into the 6 subjects. No new files arrived.
+- Verified platform health: dev server running, GET / → HTTP 200 in 0.03s, recent dev.log shows consistent 200s.
+- No code changes made (user explicitly asked to keep the platform as-is).
+
+Stage Summary:
+- Platform state: READY for new subjects. Waiting on user to drop next subject files.
+- Integration recipe for each new subject (unchanged): extract all PDFs (PyMuPDF text + page rendering for image-based slides) → build complete subject data file (every definition/command/concept, zero omission) → mastery-loop quiz questions with explanations → add SVG diagrams as needed → register in src/data/subjects/index.ts → verify with browser + lint.
